@@ -1,5 +1,5 @@
 var options = {
-    element: document.getElementById('container'),
+    element: document.getElementById('map-container'),
     scope: 'world', // currently supports 'usa' and 'world', however with custom map data you can specify your own
     //  setProjection: setProjection, // returns a d3 path and projection functions
     projection: 'equirectangular', // style of projection to be used. try "mercator"
@@ -21,7 +21,7 @@ var options = {
         popupTemplate: function(geography, data) { // this function should just return a string
           return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
         },
-        popupOnHover: true, // disable the popup while hovering
+        popupOnHover: false, // disable the popup while hovering
         highlightOnHover: true,
         highlightFillColor: '#FC8D59',
         highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
