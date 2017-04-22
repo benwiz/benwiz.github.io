@@ -1,60 +1,54 @@
-var options = {
+// http://datamaps.github.io/
+
+var map = new Datamap({
     element: document.getElementById('map-container'),
-    scope: 'world', // currently supports 'usa' and 'world', however with custom map data you can specify your own
-    //  setProjection: setProjection, // returns a d3 path and projection functions
-    projection: 'equirectangular', // style of projection to be used. try "mercator"
-    height: null, // if not null, datamaps will grab the height of 'element'
-    width: null, // if not null, datamaps will grab the width of 'element'
-    responsive: false, // if true, call `resize()` on the map object when it should adjust it's size
-    done: function() {}, // callback when the map is done drawing
-    fills: {
-      defaultFill: '#000000' // the keys in this object map to the "fillKey" of [data] or [bubbles]
-    },
-    dataType: 'json', // for use with dataUrl, currently 'json' or 'csv'. CSV should have an `id` column
-    dataUrl: null, // if not null, datamaps will attempt to fetch this based on dataType ( default: json )
     geographyConfig: {
         dataUrl: null, // if not null, datamaps will fetch the map JSON (currently only supports topojson)
         hideAntarctica: true,
         borderWidth: 1,
-        borderOpacity: 1,
-        borderColor: '#FDFDFD',
+        borderOpacity: 0.6,
+        borderColor: '#63b6ff',
         popupTemplate: function(geography, data) { // this function should just return a string
           return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
         },
-        popupOnHover: false, // disable the popup while hovering
-        highlightOnHover: true,
-        highlightFillColor: '#FC8D59',
-        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
-        highlightBorderWidth: 2,
-        highlightBorderOpacity: 1
+        popupOnHover: false,
+        highlightOnHover: false
     },
-    bubblesConfig: {
-        borderWidth: 2,
-        borderOpacity: 1,
-        borderColor: '#FFFFFF',
-        popupOnHover: true,
-        radius: null,
-        popupTemplate: function(geography, data) {
-          return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
-        },
-        fillOpacity: 0.75,
-        animate: true,
-        highlightOnHover: true,
-        highlightFillColor: '#FC8D59',
-        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
-        highlightBorderWidth: 2,
-        highlightBorderOpacity: 1,
-        highlightFillOpacity: 0.85,
-        exitDelay: 100,
-        key: JSON.stringify
-    },
-    arcConfig: {
-      strokeColor: '#DD1C77',
-      strokeWidth: 1,
-      arcSharpness: 1,
-      animationSpeed: 600
+    fills: {
+        defaultFill: '#000000',
+        USA: 'blue',
+        RUS: 'red'
     }
-  };
+});
 
-
-var map = new Datamap(options);
+map.bubbles([
+    {
+        name: 'Not a bomb, but centered on Brazil',
+        radius: 5,
+        fillKey: 'USA',
+        centered: 'BRA'
+    },
+    {
+        name: 'Not a bomb',
+        radius: 5,
+        fillKey: 'USA',
+        centered: 'USA'
+    },
+    {
+        name: 'Castle Bravo',
+        radius: 5,
+        date: '1954-03-01',
+        latitude: 11.415,
+        longitude: 165.1619
+    },{
+        name: 'Tsar Bomba',
+        radius: 10,
+        fillKey: 'RUS',
+        latitude: 73.482,
+        longitude: 54.5854
+    }
+], {
+    popupTemplate: function(geo, data) {
+        return '<div class="hoverinfo">Yield:' + data.yeild + ' Exploded on ' + data.date + ' by the '  + data.country + '';
+    }
+});
