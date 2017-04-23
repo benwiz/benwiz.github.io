@@ -61,5 +61,5 @@ function populateInfo(data) {
 }
 
 $.getJSON('./assets/entries/bragon.json', function(data) {
-    alert(data);
+    console.log(data);
 });
