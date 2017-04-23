@@ -7,6 +7,7 @@ body {
     overflow: hidden;
     color: white;
     background-color: black;
+    font-family: 'Inconsolata', monospace;
 }
 
 .main-container {
@@ -18,6 +19,7 @@ body {
 
 .info-container {
     border-right: 1px solid #444444;
+    padding: 35px 35px 35px 35px;
 }
 
 .demo-container {
@@ -29,10 +31,13 @@ body {
     height: 50%;
 }
 
+/* helpers */
+
 .gutter-0.row {
   margin-right: 0;
   margin-left: 0;
 }
+
 .gutter-0 > [class^="col-"], .gutter-0 > [class^=" col-"]{
   padding-right: 0;
   padding-left: 0;
