@@ -6,16 +6,13 @@ var map = new Datamap({
         dataUrl: null, // if not null, datamaps will fetch the map JSON (currently only supports topojson)
         hideAntarctica: true,
         borderWidth: 1,
-        borderOpacity: 0.6,
-        borderColor: '#63b6ff',
-        popupTemplate: function(geography, data) { // this function should just return a string
-          return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
-        },
+        borderOpacity: 1,
+        borderColor: '#444444',
         popupOnHover: false,
         highlightOnHover: false
     },
     fills: {
-        defaultFill: '#000000',
+        defaultFill: '#444444',
         USA: 'blue',
         RUS: 'red'
     }
@@ -32,12 +29,12 @@ map.bubbles([
         name: 'Not a bomb',
         radius: 5,
         fillKey: 'USA',
-        centered: 'USA'
+        latitude: 29.926596,
+        longitude: -90.081299
     },
     {
         name: 'Castle Bravo',
         radius: 5,
-        date: '1954-03-01',
         latitude: 11.415,
         longitude: 165.1619
     },{
@@ -49,6 +46,6 @@ map.bubbles([
     }
 ], {
     popupTemplate: function(geo, data) {
-        return '<div class="hoverinfo">Yield:' + data.yeild + ' Exploded on ' + data.date + ' by the '  + data.country + '';
+        return null; // '<div>' + data + '</div>';
     }
 });
