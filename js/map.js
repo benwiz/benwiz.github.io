@@ -1,7 +1,7 @@
 // http://datamaps.github.io/
 
 var map = new Datamap({
-    element: document.getElementById('map-container'),
+    element: document.getElementById('map'),
     responsive: true,
     // dataUrl: 'https://code.highcharts.com/mapdata/custom/world-continents.geo.json',
     geographyConfig: {

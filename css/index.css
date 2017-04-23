@@ -19,17 +19,34 @@ body {
 
 .info-container {
     border-right: 1px solid #444444;
-    padding: 35px 35px 35px 35px;
+    padding: 15px 35px 15px 35px;
 }
 
 .demo-container {
     border-bottom: 1px solid #444444;
     height: 50%;
+    padding: 15px 35px 15px 35px;
 }
 
 .map-container {
     height: 50%;
+    /*padding-bottom: 50px;*/
 }
+
+/* info container */
+
+.info-container .title {
+    margin-bottom: 50px;
+}
+
+.info-container ul {
+    margin-bottom: 50px;
+}
+
+.info-container li {
+    margin: -15px 0px;
+}
+
 
 /* helpers */
 
