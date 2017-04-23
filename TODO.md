@@ -12,7 +12,7 @@
         - scan contents of `/entries` directory
         - when highlighting a city dot, populate side bar
         - when dot is clicked, dim all the non-connected city dots, draw airlines between city dots
-        -
+        - blur media field until a point is selected or hovered over long enough
 
 - entry writer
     - tool to make it easy to add a new entry

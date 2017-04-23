@@ -47,37 +47,16 @@ map.bubbles([
         radius: 5,
         fillKey: 'light',
         centered: 'BRA'
-    },
-    {
-        name: 'New Orleans',
-        radius: 10,
-        fillKey: 'magenta',
-        latitude: 29.926596,
-        longitude: -90.081299
-    },
-    {
-        name: 'idk1',
-        radius: 5,
-        fillKey: 'light',
-        latitude: 11.415,
-        longitude: 165.1619
-    },
-    {
-        name: 'idk2',
-        radius: 5,
-        fillKey: 'light',
-        latitude: 73.482,
-        longitude: 54.5854
     }
 ], {
     popupTemplate: function(data) {
 
-        // fillSideBar(data);
+        // populateInfo(data);
         return null; // '<div>' + data + '</div>';
     }
 });
 
-function fillSideBar(data) {
+function populateInfo(data) {
 
 
 }

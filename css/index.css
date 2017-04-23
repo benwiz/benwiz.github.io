@@ -47,6 +47,11 @@ body {
     margin: -15px 0px;
 }
 
+/* demo container */
+
+.demo-container img {
+    height: 50%;
+}
 
 /* helpers */
 
