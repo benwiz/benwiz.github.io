@@ -60,6 +60,6 @@ function populateInfo(data) {
     return null;
 }
 
-$.getJSON('../assets/entries/bragon.json', function(data) {
+$.getJSON('./assets/entries/bragon.json', function(data) {
     alert(data);
 });
