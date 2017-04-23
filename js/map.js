@@ -45,7 +45,7 @@ map.bubbles([
         name: 'Brazil',
         radius: 5,
         fillKey: 'light',
-        centered: 'BRA'
+        centered: 'USA'
     }
 ], {
     popupTemplate: function(data) {
@@ -60,6 +60,6 @@ function populateInfo(data) {
     return null;
 }
 
-$.getJSON('./assets/entries/bragon.json', function(data) {
+$.getJSON('assets/entries/bragon.json', function(data) {
     console.log(data);
 });
