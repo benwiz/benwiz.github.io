@@ -2,10 +2,12 @@
 
 var map = new Datamap({
     element: document.getElementById('map-container'),
+    responsive: true,
+    // dataUrl: 'https://code.highcharts.com/mapdata/custom/world-continents.geo.json',
     geographyConfig: {
-        dataUrl: null, // if not null, datamaps will fetch the map JSON (currently only supports topojson)
+        // dataUrl: 'world-continents.geo.json',
         hideAntarctica: true,
-        borderWidth: 1,
+        borderWidth: 1.0,
         borderOpacity: 1,
         borderColor: '#444444',
         popupOnHover: false,
@@ -34,7 +36,8 @@ var map = new Datamap({
     fills: {
         defaultFill: '#444444',
         light: '#FFFFFF',
-        dark: '#777777'
+        dark: '#777777',
+        magenta: 'magenta'
     }
 });
 
@@ -48,7 +51,7 @@ map.bubbles([
     {
         name: 'New Orleans',
         radius: 10,
-        fillKey: 'light',
+        fillKey: 'magenta',
         latitude: 29.926596,
         longitude: -90.081299
     },
@@ -65,15 +68,16 @@ map.bubbles([
         fillKey: 'light',
         latitude: 73.482,
         longitude: 54.5854
-    },
-    {
-        name: 'idk3',
-        radius: 5,
-        fillKey: 'dark',
-        centered: 'USA'
     }
 ], {
-    popupTemplate: function(geo, data) {
+    popupTemplate: function(data) {
+
+        // fillSideBar(data);
         return null; // '<div>' + data + '</div>';
     }
 });
+
+function fillSideBar(data) {
+
+
+}

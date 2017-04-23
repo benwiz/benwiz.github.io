@@ -10,7 +10,9 @@
         - contact me
     - interactive map acts as portfolio, blog, contact me all in one
         - scan contents of `/entries` directory
-        - for portfolio draw route like plane lines
+        - when highlighting a city dot, populate side bar
+        - when dot is clicked, dim all the non-connected city dots, draw airlines between city dots
+        -
 
 - entry writer
     - tool to make it easy to add a new entry
