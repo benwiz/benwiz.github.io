@@ -17,18 +17,16 @@ body {
 }
 
 .info-container {
-    background-color: #444444;
-}
-
-.col2-row {
-    height: 50%;
+    border-right: 1px solid #444444;
 }
 
 .demo-container {
-    background-color: #444444;
+    border-bottom: 1px solid #444444;
+    height: 50%;
 }
 
 .map-container {
+    height: 50%;
 }
 
 .gutter-0.row {
