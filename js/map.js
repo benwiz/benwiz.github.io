@@ -3,9 +3,8 @@
 var map = new Datamap({
     element: document.getElementById('map'),
     responsive: true,
-    // dataUrl: 'https://code.highcharts.com/mapdata/custom/world-continents.geo.json',
     geographyConfig: {
-        // dataUrl: 'world-continents.geo.json',
+        dataUrl: null,
         hideAntarctica: true,
         borderWidth: 1.0,
         borderOpacity: 1,
@@ -58,5 +57,9 @@ map.bubbles([
 
 function populateInfo(data) {
 
-
+    return null;
 }
+
+$.getJSON('../../assets/entries/bragon.json', function(data) {
+    alert(data);
+});
