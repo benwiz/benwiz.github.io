@@ -3,12 +3,13 @@
 $(document).ready(function() {
 
     // get elements
+    var $map = $('#map');
     var $name = $('#name');
     var $details = $('#details');
     var $summary = $('#summary');
 
-    // create map with default settings
-    var map = new Datamap({
+    // map options
+    var map_options = {
         element: document.getElementById('map'),
         responsive: true,
         geographyConfig: {
@@ -46,7 +47,10 @@ $(document).ready(function() {
             dark: '#777777',
             magenta: 'magenta'
         }
-    });
+    };
+
+    // create map with default settings
+    var map = new Datamap(map_options);
 
     function getEntries() {
 
@@ -100,11 +104,11 @@ $(document).ready(function() {
 
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: populateInfo});
-    }
 
-    function populateMapPromiseError(err) {
-
-        console.log('promise chain error:', err);
+        // // add click listener to all bubbles
+        // map.svg.selectAll('.bubbles').on('click', function(b) {
+        //     console.log(b);
+        // });
     }
 
     function populateMap() {
@@ -112,7 +116,7 @@ $(document).ready(function() {
         getEntries()
             .then(createBubbles)
             .then(updateMap)
-            .catch(populateMapPromiseError);
+            .catch((err) => console.log('promise chain error:', err));
     }
 
     function populateName(name) {
@@ -154,5 +158,30 @@ $(document).ready(function() {
         populateSummary(bubble.summary);
     }
 
-    populateMap();
+    populateMap(); // TODO: don't run this, instread run a function returning bubbles in the inital obkect
+
+    $(map.svg[0][0]).on('click', '.bubbles', function(e) {
+
+        var data = e.target.__data__;
+        console.log(data);
+
+        // clear map
+        $map.html('');
+
+        // TODO: update setProjection property in map_options
+        map_options.setProjection = function(element, options) {
+            var projection, path;
+            console.log(d3.geo);
+            projection = d3.geo.equirectangular()
+                .center([data.longitude, data.latitude])
+                .scale(element.offsetWidth)
+                .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+
+            path = d3.geo.path().projection(projection);
+            return {path: path, projection: projection};
+        }
+
+        // redraw map
+        var map = new Datamap(map_options);
+    });
 });
