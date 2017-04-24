@@ -158,20 +158,19 @@ $(document).ready(function() {
         populateSummary(bubble.summary);
     }
 
-    populateMap(); // TODO: don't run this, instread run a function returning bubbles in the inital obkect
+    populateMap();
 
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
-        console.log(data);
 
         // clear map
         $map.html('');
 
         // TODO: update setProjection property in map_options
         map_options.setProjection = function(element, options) {
+
             var projection, path;
-            console.log(d3.geo);
             projection = d3.geo.equirectangular()
                 .center([data.longitude, data.latitude])
                 .scale(element.offsetWidth)
@@ -183,5 +182,6 @@ $(document).ready(function() {
 
         // redraw map
         var map = new Datamap(map_options);
+        populateMap();
     });
 });
