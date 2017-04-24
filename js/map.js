@@ -71,12 +71,9 @@ function createBubble(file) {
                 name: data.title,
                 radius: 5,
                 fillKey: 'light',
-                // centered: 'USA',
                 latitude: data.location.latitude,
                 longitude: data.location.longitude
             };
-            // bubbles.push(bubble);
-
             resolve(bubble);
         });
     });
