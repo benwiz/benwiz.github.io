@@ -158,8 +158,6 @@ $(document).ready(function() {
         populateSummary(bubble.summary);
     }
 
-    populateMap(); // TODO: don't run this, instread run a function returning bubbles in the inital obkect
-
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
@@ -184,4 +182,7 @@ $(document).ready(function() {
         // redraw map
         var map = new Datamap(map_options);
     });
+
+    populateMap(); // TODO: don't run this, instread run a function returning bubbles in the inital obkect
+
 });
