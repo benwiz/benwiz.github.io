@@ -3,7 +3,6 @@
 $(document).ready(function() {
 
     // get elements
-    var $map = $('#map');
     var $name = $('#name');
     var $details = $('#details');
     var $summary = $('#summary');
@@ -15,7 +14,7 @@ $(document).ready(function() {
         geographyConfig: {
             dataUrl: null,
             hideAntarctica: true,
-            borderWidth: 1.0,
+            borderWidth: 1,
             borderOpacity: 1,
             borderColor: '#003f3f',
             popupOnHover: false,
@@ -46,8 +45,25 @@ $(document).ready(function() {
             light: '#FFFFFF',
             dark: '#777777',
             magenta: 'magenta'
-        }
+        },
+        // done: function(datamap) {
+        //     datamap.svg.selectAll('.datamaps-bubble').on('click', function(e) {
+        //         console.log('bub:::',e);
+        //     });
+        // }
     };
+
+    // map_options.setProjection = function(element, options) {
+
+    //     var projection, path;
+    //     projection = d3.geo.equirectangular()
+    //         .center([-95, 30])
+    //         .scale(/*element.offsetWidth*/400)
+    //         .translate([/*element.offsetWidth / 2, element.offsetHeight / 2*/ 200,200 ]);
+
+    //     path = d3.geo.path().projection(projection);
+    //     return {path: path, projection: projection};
+    // };
 
     // create map with default settings
     var map = new Datamap(map_options);
@@ -102,13 +118,9 @@ $(document).ready(function() {
 
     function updateMap(bubbles) {
 
+        console.log('bubs:', bubbles);
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: populateInfo});
-
-        // // add click listener to all bubbles
-        // map.svg.selectAll('.bubbles').on('click', function(b) {
-        //     console.log(b);
-        // });
     }
 
     function populateMap() {
@@ -162,26 +174,45 @@ $(document).ready(function() {
 
         var data = e.target.__data__;
 
-        // clear map
-        $map.html('');
+        // clear map div
+        var map_div = document.getElementById('map');
+        map_div_id = map_div.id;
+        map_div_class = map_div.className;
+        map_div.parentNode.removeChild(map_div);
 
-        // TODO: update setProjection property in map_options
-        map_options.setProjection = function(element, options) {
+        // replace map div
+        map_div = document.createElement('div');
+        map_div.id = map_div.id;
+        map_div.className = map_div_class;
+        var map_container_div = document.getElementById('map-container');
+        map_container_div.appendChild(map_div);
 
-            var projection, path;
-            projection = d3.geo.equirectangular()
-                .center([data.longitude, data.latitude])
-                .scale(element.offsetWidth)
-                .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+        // // update setProjection property in map_options
+        // map_options.setProjection = function(element, options) {
 
-            path = d3.geo.path().projection(projection);
-            return {path: path, projection: projection};
-        }
+        //     var projection, path;
+        //     projection = d3.geo.equirectangular()
+        //         .center([data.longitude, data.latitude])
+        //         .scale(element.offsetWidth)
+        //         .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+
+        //     path = d3.geo.path().projection(projection);
+        //     return {path: path, projection: projection};
+        // }
+
+        // reset element options
+        map_options.element = map_div;
 
         // redraw map
-        var map = new Datamap(map_options);
-        populateMap();
+        map = null;
+        map = new Datamap(map_options);
+        // populateMap();
     });
+
+    // map.svg.selectAll('.datamaps-bubble').on('click', function(e) {
+
+    //     console.log('bub:::',e);
+    // });
 
     // running this here is probably not the best approach
     populateMap();
