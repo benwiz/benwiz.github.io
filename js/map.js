@@ -158,8 +158,6 @@ $(document).ready(function() {
         populateSummary(bubble.summary);
     }
 
-    populateMap();
-
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
@@ -184,4 +182,8 @@ $(document).ready(function() {
         var map = new Datamap(map_options);
         populateMap();
     });
+
+    // running this here is probably not the best approach
+    populateMap();
+
 });
