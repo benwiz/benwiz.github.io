@@ -183,6 +183,7 @@ $(document).ready(function() {
         var map = new Datamap(map_options);
     });
 
-    populateMap(); // TODO: don't run this, instread run a function returning bubbles in the inital obkect
+    // running this here is probably not the best approach
+    populateMap();
 
 });
