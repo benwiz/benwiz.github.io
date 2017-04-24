@@ -1,5 +1,6 @@
 // http://datamaps.github.io/
 
+// create map with default settings
 var map = new Datamap({
     element: document.getElementById('map'),
     responsive: true,
@@ -40,26 +41,73 @@ var map = new Datamap({
     }
 });
 
-map.bubbles([
-    {
-        name: 'Brazil',
-        radius: 5,
-        fillKey: 'light',
-        centered: 'USA'
-    }
-], {
-    popupTemplate: function(data) {
+function getEntries() {
 
-        // populateInfo(data);
-        return null; // '<div>' + data + '</div>';
-    }
-});
+    return new Promise(function(resolve, reject) {
+
+
+        // get list of entry files
+        $.getJSON('assets/entries/entries.json', function(files) {
+
+            resolve(files);
+        });
+    });
+}
 
 function populateInfo(data) {
 
     return null;
 }
 
-$.getJSON('assets/entries/bragon.json', function(data) {
-    console.log(data);
-});
+function createBubble(file) {
+
+    return new Promise(function(resolve, reject) {
+
+        var filename = 'assets/entries/' + file;
+        $.getJSON(filename, function(data) {
+
+            // create bubble
+            var bubble = {
+                name: data.title,
+                radius: 5,
+                fillKey: 'light',
+                centered: 'USA',
+                // latitude: data.location.latitude,
+                // longitude: data.location.longitude
+            };
+            bubbles.push(bubble);
+
+            resolve(bubble);
+        });
+    });
+};
+
+var bubbles = [
+    {
+        name: 'Brazil',
+        radius: 5,
+        fillKey: 'light',
+        centered: 'BRA'
+    }
+];
+getEntries()
+    .then(function(entry_files) {
+
+        return Promise.each(entry_files, createBubble);
+    })
+    .then(function(res) {
+
+        // put bubbles onto map
+        map.bubbles(bubbles, {
+            popupTemplate: function(data) {
+
+                // populateInfo(data);
+                return null; // '<div>' + data + '</div>';
+            }
+        });
+    })
+    .catch(function(err) {
+
+        console.log('promise chain error:', err);
+    });
+

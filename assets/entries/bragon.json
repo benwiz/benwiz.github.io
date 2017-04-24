@@ -1,5 +1,9 @@
 {
     "title": "BragOn",
+    "location": {
+        "latitude": 29.9419642,
+        "longitude": -90.1196752
+    },
     "details": {
         "role": "Founder, IOS Developer",
         "start": "March 2014",
