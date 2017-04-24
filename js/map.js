@@ -2,6 +2,11 @@
 
 $(document).ready(function() {
 
+    // get elements
+    var $name = $('#name');
+    var $details = $('#details');
+    var $summary = $('#summary');
+
     // create map with default settings
     var map = new Datamap({
         element: document.getElementById('map'),
@@ -70,11 +75,15 @@ $(document).ready(function() {
 
                 // create bubble
                 var bubble = {
-                    name: data.title,
+                    // formatting
+                    name: data.name,
                     radius: 5,
                     fillKey: 'light',
                     latitude: data.location.latitude,
-                    longitude: data.location.longitude
+                    longitude: data.location.longitude,
+                    // data
+                    details: data.details,
+                    summary: data.summary
                 };
                 resolve(bubble);
             });
@@ -89,13 +98,7 @@ $(document).ready(function() {
     function updateMap(bubbles) {
 
         // put bubbles onto map
-        map.bubbles(bubbles, {
-            popupTemplate: function(data) {
-
-                // populateInfo(data);
-                return null; // '<div>' + data + '</div>';
-            }
-        });
+        map.bubbles(bubbles, {popupTemplate: populateInfo});
     }
 
     function populateMapPromiseError(err) {
@@ -109,6 +112,28 @@ $(document).ready(function() {
             .then(createBubbles)
             .then(updateMap)
             .catch(populateMapPromiseError);
+    }
+
+    function populateName(name) {
+
+        console.log(name);
+        $name.text(name);
+    }
+
+    function populateSummary(paragraphs) {
+
+        var html = '';
+        for (var i=0; i<paragraphs.length; i++) {
+            html = html + '<p>' + paragraphs[i] + '</p>';
+        }
+        $summary.html(html);
+    }
+
+    function populateInfo(data) {
+
+        console.log(data);
+        populateName(data.name);
+        populateSummary(data.summary);
     }
 
     populateMap();
