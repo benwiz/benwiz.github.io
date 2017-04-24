@@ -35,16 +35,12 @@ body {
 
 /* info container */
 
-.info-container .name {
+.info-container .row {
     margin-bottom: 50px;
 }
 
-.info-container ul {
+.info-container .details {
     margin-bottom: 50px;
-}
-
-.info-container li {
-    margin: -15px 0px;
 }
 
 /* demo container */
