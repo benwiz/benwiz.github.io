@@ -82,6 +82,7 @@ $(document).ready(function() {
                     latitude: data.location.latitude,
                     longitude: data.location.longitude,
                     // data
+                    city: data.location.city,
                     details: data.details,
                     summary: data.summary
                 };
@@ -119,11 +120,14 @@ $(document).ready(function() {
         $name.text(name);
     }
 
-    function populateDetails(details) {
+    function populateDetails(details, options) {
 
         var html = '<table>';
         for (var i=0; i<details.length; i++) {
             html += '<tr><th style="text-align:right; padding:0 5px 0 5px;">' + details[i][0] + '</th><td style="text-align:left; padding:0 5px 0 5px;">' + details[i][1] + '</td></tr>';
+        }
+        for (var i=0; i<options.length; i++) {
+            html += '<tr><th style="text-align:right; padding:0 5px 0 5px;">' + options[i][0] + '</th><td style="text-align:left; padding:0 5px 0 5px;">' + options[i][1] + '</td></tr>';
         }
         html += '</table>'
 
@@ -139,11 +143,15 @@ $(document).ready(function() {
         $summary.html(html);
     }
 
-    function populateInfo(data) {
+    function populateInfo(bubble) {
 
-        populateName(data.name);
-        populateDetails(data.details);
-        populateSummary(data.summary);
+        const detail_options = [
+            ['City', bubble.city]
+        ];
+
+        populateName(bubble.name);
+        populateDetails(bubble.details, detail_options);
+        populateSummary(bubble.summary);
     }
 
     populateMap();
