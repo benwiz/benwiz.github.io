@@ -71,43 +71,45 @@ function createBubble(file) {
                 name: data.title,
                 radius: 5,
                 fillKey: 'light',
-                centered: 'USA',
-                // latitude: data.location.latitude,
-                // longitude: data.location.longitude
+                // centered: 'USA',
+                latitude: data.location.latitude,
+                longitude: data.location.longitude
             };
-            bubbles.push(bubble);
+            // bubbles.push(bubble);
 
             resolve(bubble);
         });
     });
 };
 
-var bubbles = [
-    {
-        name: 'Brazil',
-        radius: 5,
-        fillKey: 'light',
-        centered: 'BRA'
-    }
-];
-getEntries()
-    .then(function(entry_files) {
+function createBubbles(entry_files) {
 
-        return Promise.each(entry_files, createBubble);
-    })
-    .then(function(res) {
+    return Promise.map(entry_files, createBubble);
+}
 
-        // put bubbles onto map
-        map.bubbles(bubbles, {
-            popupTemplate: function(data) {
+function updateMap(bubbles) {
 
-                // populateInfo(data);
-                return null; // '<div>' + data + '</div>';
-            }
-        });
-    })
-    .catch(function(err) {
+    // put bubbles onto map
+    map.bubbles(bubbles, {
+        popupTemplate: function(data) {
 
-        console.log('promise chain error:', err);
+            // populateInfo(data);
+            return null; // '<div>' + data + '</div>';
+        }
     });
+}
 
+function populateMapPromiseError(err) {
+
+    console.log('promise chain error:', err);
+}
+
+function populateMap() {
+
+    getEntries()
+        .then(createBubbles)
+        .then(updateMap)
+        .catch(populateMapPromiseError);
+}
+
+populateMap();
