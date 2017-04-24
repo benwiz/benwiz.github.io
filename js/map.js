@@ -116,23 +116,33 @@ $(document).ready(function() {
 
     function populateName(name) {
 
-        console.log(name);
         $name.text(name);
     }
+
+    function populateDetails(details) {
+
+        var html = '<table>';
+        for (var i=0; i<details.length; i++) {
+            html += '<tr><th>' + details[i][0] + '</th><td>' + details[i][1] + '</td></tr>';
+        }
+        html += '</table>'
+
+        $details.html(html);
+    };
 
     function populateSummary(paragraphs) {
 
         var html = '';
         for (var i=0; i<paragraphs.length; i++) {
-            html = html + '<p>' + paragraphs[i] + '</p>';
+            html += '<p>' + paragraphs[i] + '</p>';
         }
         $summary.html(html);
     }
 
     function populateInfo(data) {
 
-        console.log(data);
         populateName(data.name);
+        populateDetails(data.details);
         populateSummary(data.summary);
     }
 

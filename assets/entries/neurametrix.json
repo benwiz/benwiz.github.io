@@ -4,12 +4,12 @@
         "latitude": 37.562993,
         "longitude": -122.361501
     },
-    "details": {
-        "role": "Contracted UX Designer",
-        "start": "October 2016",
-        "end": "December 2016",
-        "language": "JavaScript"
-    },
+    "details": [
+        ["Role", "Contracted UX Designer"],
+        ["Start", "October 2016"],
+        ["End", "December 2016"],
+        ["Language", "JavaScript"]
+    ],
     "summary": [
         "Created simple data visualizations to bring life to NeuraMetric's acquired data."
     ]
