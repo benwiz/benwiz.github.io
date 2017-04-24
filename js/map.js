@@ -16,7 +16,7 @@ $(document).ready(function() {
             hideAntarctica: true,
             borderWidth: 1.0,
             borderOpacity: 1,
-            borderColor: '#444444',
+            borderColor: '#003f3f',
             popupOnHover: false,
             highlightOnHover: false
         },
@@ -41,7 +41,7 @@ $(document).ready(function() {
             // key: JSON.stringify
         },
         fills: {
-            defaultFill: '#444444',
+            defaultFill: '#003f3f',
             light: '#FFFFFF',
             dark: '#777777',
             magenta: 'magenta'
@@ -123,7 +123,7 @@ $(document).ready(function() {
 
         var html = '<table>';
         for (var i=0; i<details.length; i++) {
-            html += '<tr><th>' + details[i][0] + '</th><td>' + details[i][1] + '</td></tr>';
+            html += '<tr><th style="text-align:right; padding:0 5px 0 5px;">' + details[i][0] + '</th><td style="text-align:left; padding:0 5px 0 5px;">' + details[i][1] + '</td></tr>';
         }
         html += '</table>'
 
