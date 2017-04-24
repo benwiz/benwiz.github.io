@@ -1,5 +1,6 @@
 // http://datamaps.github.io/
 
+
 $(document).ready(function() {
 
     // get elements
@@ -81,11 +82,6 @@ $(document).ready(function() {
         });
     }
 
-    function populateInfo(data) {
-
-        return null;
-    }
-
     function createBubble(file) {
 
         return new Promise(function(resolve, reject) {
@@ -120,7 +116,7 @@ $(document).ready(function() {
 
         console.log('bubs:', bubbles);
         // put bubbles onto map
-        map.bubbles(bubbles, {popupTemplate: populateInfo});
+        map.bubbles(bubbles, {popupTemplate: function() {}});
     }
 
     function populateMap() {
@@ -206,7 +202,7 @@ $(document).ready(function() {
         // redraw map
         map = null;
         map = new Datamap(map_options);
-        // populateMap();
+        populateMap();
     });
 
     // map.svg.selectAll('.datamaps-bubble').on('click', function(e) {
