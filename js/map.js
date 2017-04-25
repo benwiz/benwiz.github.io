@@ -148,12 +148,34 @@ $(document).ready(function() {
             dark: '#777777',
             magenta: 'magenta'
         },
-        // done: function(datamap) {
-        //     datamap.svg.selectAll('.datamaps-bubble').on('click', function(e) {
-        //         console.log('bub:::',e);
-        //     });
-        // }
+        done: function(datamap) {
+
+            datamap.svg.call(d3.behavior.zoom().on('zoom', redraw));
+
+            function redraw() {
+                datamap.svg.select('g')
+                    .selectAll('path')
+                    .style('vector-effect', 'non-scaling-stroke');
+
+                // rescale world
+                datamap.svg
+                    .selectAll('g')
+                    .attr('transform', 'translate(' + d3.event.translate + ') scale(' + d3.event.scale + ')');
+
+                // rescale bubbles
+                var bubbleRadius = 4;
+                var bubbleBorder = 15;
+                datamap.svg
+                    .selectAll('.datamaps-bubble')
+                    .attr('r', bubbleRadius / d3.event.scale)
+                    .style('stroke-width', (bubbleBorder / d3.event.scale) + 'px');
+            }
+        }
     };
+
+    function rescaleWorld(datamap) {
+
+    }
 
     // create map with default settings
     var map = new Datamap(map_options);
@@ -162,38 +184,57 @@ $(document).ready(function() {
 
         var data = e.target.__data__;
 
-        // clear map div
-        var map_div = document.getElementById('map');
-        map_div_id = map_div.id;
-        map_div_class = map_div.className;
-        map_div.parentNode.removeChild(map_div);
+        // // clear map div
+        // var map_div = document.getElementById('map');
+        // map_div_id = map_div.id;
+        // map_div_class = map_div.className;
+        // map_div.parentNode.removeChild(map_div);
 
-        // replace map div
-        map_div = document.createElement('div');
-        map_div.id = map_div.id;
-        map_div.className = map_div_class;
-        var map_container_div = document.getElementById('map-container');
-        map_container_div.appendChild(map_div);
+        // // replace map div
+        // map_div = document.createElement('div');
+        // map_div.id = 'map';
+        // map_div.className = map_div_class;
+        // var map_container_div = document.getElementById('map-container');
+        // map_container_div.appendChild(map_div);
 
         // // update setProjection property in map_options
         // map_options.setProjection = function(element, options) {
 
         //     var projection, path;
         //     projection = d3.geo.equirectangular()
-        //         .center([data.longitude, data.latitude])
-        //         .scale(element.offsetWidth)
-        //         .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+        //         .center([/*data.longitude, data.latitude*/-90,30])
+        //         .scale(/*element.offsetWidth*/400)
+        //         .translate([/*element.offsetWidth / 2, element.offsetHeight / 2*/200,200]);
 
         //     path = d3.geo.path().projection(projection);
         //     return {path: path, projection: projection};
         // }
 
-        // reset element options
-        map_options.element = map_div;
-
         // redraw map
-        var new_map = new Datamap(map_options);
-        populateMap(new_map);
+        // map = new Datamap(map_options);
+
+        console.log('click');
+
+        var map_div = document.getElementById('map');
+
+        // var projection = d3.geo.equirectangular()
+        //         .center([data.longitude, data.latitude])
+        //         .scale(map_div.offsetWidth);
+        // var path = d3.geo.path().projection(projection);
+
+        var g = map.svg.select('g');
+
+        g.selectAll("path").classed("active", true );
+
+        g.transition()
+            .duration(750)
+            .attr("transform", "scale(4) translate(3,-100)")
+            // .style("stroke-width", 1.5 / k + "px");
+
+        // // map.svg.select('g').selectAll('path').attr('d', path);
+        // map.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        // map.svg.select("g").selectAll("circle").attr("d", map.path.projection(projection));
+        // map.svg.select("g").selectAll("path").attr("d", map.path.projection(projection));
     });
 
     // running this here is probably not the best approach
