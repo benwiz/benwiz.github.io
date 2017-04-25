@@ -157,24 +157,27 @@ $(document).ready(function() {
                     .selectAll('path')
                     .style('vector-effect', 'non-scaling-stroke');
 
-                // rescale world
-                datamap.svg
-                    .selectAll('g')
-                    .attr('transform', 'translate(' + d3.event.translate + ') scale(' + d3.event.scale + ')');
-
-                // rescale bubbles
-                var bubbleRadius = 4;
-                var bubbleBorder = 15;
-                datamap.svg
-                    .selectAll('.datamaps-bubble')
-                    .attr('r', bubbleRadius / d3.event.scale)
-                    .style('stroke-width', (bubbleBorder / d3.event.scale) + 'px');
+                rescale(datamap, d3.event.translate, d3.event.scale);
             }
         }
     };
 
-    function rescaleWorld(datamap) {
+    function rescale(datamap, translate, scale) {
 
+        // console.log(translate, scale);
+
+        // rescale world
+        datamap.svg
+            .selectAll('g')
+            .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
+
+        // rescale bubbles
+        var bubbleRadius = 5;
+        var bubbleBorder = 5;
+        datamap.svg
+            .selectAll('.datamaps-bubble')
+            .attr('r', bubbleRadius / scale)
+            .style('stroke-width', (bubbleBorder / scale) + 'px');
     }
 
     // create map with default settings
@@ -183,6 +186,21 @@ $(document).ready(function() {
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
+        var map_div = document.getElementById('map');
+
+        var projection = d3.geo.equirectangular()
+                            .center([data.longitude, data.latitude])
+                            // .scale(4)
+                            // .translate([2,2])//([map_div.offsetWidth / 2, map_div.offsetHeight / 2]);
+        var path = d3.geo.path().projection(projection);
+
+        // var coords = data.longitude + ',' + data.latitude;
+        var coords = '90,-30'
+
+        map.svg.transition()
+            .duration(750)
+            .selectAll('g')
+            .attr('transform', 'translate( ' + coords + ' ) scale(1)');
 
         // // clear map div
         // var map_div = document.getElementById('map');
@@ -213,22 +231,20 @@ $(document).ready(function() {
         // redraw map
         // map = new Datamap(map_options);
 
-        console.log('click');
-
-        var map_div = document.getElementById('map');
+        // var map_div = document.getElementById('map');
 
         // var projection = d3.geo.equirectangular()
         //         .center([data.longitude, data.latitude])
         //         .scale(map_div.offsetWidth);
         // var path = d3.geo.path().projection(projection);
 
-        var g = map.svg.select('g');
+        // var g = map.svg.select('g');
 
-        g.selectAll("path").classed("active", true );
+        // g.selectAll("path").classed("active", true );
 
-        g.transition()
-            .duration(750)
-            .attr("transform", "scale(4) translate(3,-100)")
+        // g.transition()
+        //     .duration(750)
+        //     .attr("transform", "scale(4) translate(3,-100)")
             // .style("stroke-width", 1.5 / k + "px");
 
         // // map.svg.select('g').selectAll('path').attr('d', path);
