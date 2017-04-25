@@ -188,19 +188,20 @@ $(document).ready(function() {
         var data = e.target.__data__;
         var map_div = document.getElementById('map');
 
-        var projection = d3.geo.equirectangular()
-                            .center([data.longitude, data.latitude])
-                            // .scale(4)
-                            // .translate([2,2])//([map_div.offsetWidth / 2, map_div.offsetHeight / 2]);
-        var path = d3.geo.path().projection(projection);
+        // var projection = d3.geo.equirectangular()
+        //                     // .center([data.longitude, data.latitude])
+        //                     // .scale(4)
+        //                     // .translate([2,2])//([map_div.offsetWidth / 2, map_div.offsetHeight / 2]);
+        // var path = d3.geo.path().projection(projection);
 
-        // var coords = data.longitude + ',' + data.latitude;
-        var coords = '90,-30'
+        var long = data.longitude / 180 * map_div.clientWidth;
+        var lat = data.latitude / 180 * map_div.clientHeight;
+        var coords = long + ',' + lat;
 
         map.svg.transition()
             .duration(750)
             .selectAll('g')
-            .attr('transform', 'translate( ' + coords + ' ) scale(1)');
+            .attr('transform', 'translate( ' + coords + ' ) scale(1.0)');
 
         // // clear map div
         // var map_div = document.getElementById('map');
