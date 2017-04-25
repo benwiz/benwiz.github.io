@@ -8,67 +8,6 @@ $(document).ready(function() {
     var $details = $('#details');
     var $summary = $('#summary');
 
-    // map options
-    var map_options = {
-        element: document.getElementById('map'),
-        responsive: true,
-        geographyConfig: {
-            dataUrl: null,
-            hideAntarctica: true,
-            borderWidth: 1,
-            borderOpacity: 1,
-            borderColor: '#003f3f',
-            popupOnHover: false,
-            highlightOnHover: false
-        },
-        bubblesConfig: {
-            borderWidth: 0,
-            // borderOpacity: 1,
-            // borderColor: '#FFFFFF',
-            // popupOnHover: true,
-            // radius: null,
-            // popupTemplate: function(geography, data) {
-            //   return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
-            // },
-            // fillOpacity: 0.75,
-            // animate: true,
-            // highlightOnHover: true,
-            highlightFillColor: 'cyan',
-            // highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
-            // highlightBorderWidth: 2,
-            // highlightBorderOpacity: 1,
-            // highlightFillOpacity: 0.85,
-            // exitDelay: 100,
-            // key: JSON.stringify
-        },
-        fills: {
-            defaultFill: '#003f3f',
-            light: '#FFFFFF',
-            dark: '#777777',
-            magenta: 'magenta'
-        },
-        // done: function(datamap) {
-        //     datamap.svg.selectAll('.datamaps-bubble').on('click', function(e) {
-        //         console.log('bub:::',e);
-        //     });
-        // }
-    };
-
-    // map_options.setProjection = function(element, options) {
-
-    //     var projection, path;
-    //     projection = d3.geo.equirectangular()
-    //         .center([-95, 30])
-    //         .scale(/*element.offsetWidth*/400)
-    //         .translate([/*element.offsetWidth / 2, element.offsetHeight / 2*/ 200,200 ]);
-
-    //     path = d3.geo.path().projection(projection);
-    //     return {path: path, projection: projection};
-    // };
-
-    // create map with default settings
-    var map = new Datamap(map_options);
-
     function getEntries() {
 
         return new Promise(function(resolve, reject) {
@@ -112,18 +51,17 @@ $(document).ready(function() {
         return Promise.map(entry_files, createBubble);
     }
 
-    function updateMap(bubbles) {
+    function updateMap(map, bubbles) {
 
-        console.log('bubs:', bubbles);
         // put bubbles onto map
-        map.bubbles(bubbles, {popupTemplate: function() {}});
+        map.bubbles(bubbles, {popupTemplate: populateInfo});
     }
 
-    function populateMap() {
+    function populateMap(map) {
 
         getEntries()
             .then(createBubbles)
-            .then(updateMap)
+            .then((bubbles) => updateMap(map, bubbles))
             .catch((err) => console.log('promise chain error:', err));
     }
 
@@ -166,6 +104,60 @@ $(document).ready(function() {
         populateSummary(bubble.summary);
     }
 
+    //
+    // scripting below
+    //
+
+    // map options
+    var map_options = {
+        element: document.getElementById('map'),
+        responsive: true,
+        // TODO: set projection to exclude north pole
+        geographyConfig: {
+            dataUrl: null,
+            hideAntarctica: true,
+            borderWidth: 1,
+            borderOpacity: 1,
+            borderColor: '#003f3f',
+            popupOnHover: false,
+            highlightOnHover: false
+        },
+        bubblesConfig: {
+            borderWidth: 0,
+            // borderOpacity: 1,
+            // borderColor: '#FFFFFF',
+            // popupOnHover: true,
+            // radius: null,
+            // popupTemplate: function(geography, data) {
+            //   return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+            // },
+            // fillOpacity: 0.75,
+            // animate: true,
+            // highlightOnHover: true,
+            highlightFillColor: 'cyan',
+            // highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+            // highlightBorderWidth: 2,
+            // highlightBorderOpacity: 1,
+            // highlightFillOpacity: 0.85,
+            // exitDelay: 100,
+            // key: JSON.stringify
+        },
+        fills: {
+            defaultFill: '#003f3f',
+            light: '#FFFFFF',
+            dark: '#777777',
+            magenta: 'magenta'
+        },
+        // done: function(datamap) {
+        //     datamap.svg.selectAll('.datamaps-bubble').on('click', function(e) {
+        //         console.log('bub:::',e);
+        //     });
+        // }
+    };
+
+    // create map with default settings
+    var map = new Datamap(map_options);
+
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
@@ -200,17 +192,11 @@ $(document).ready(function() {
         map_options.element = map_div;
 
         // redraw map
-        map = null;
-        map = new Datamap(map_options);
-        populateMap();
+        var new_map = new Datamap(map_options);
+        populateMap(new_map);
     });
 
-    // map.svg.selectAll('.datamaps-bubble').on('click', function(e) {
-
-    //     console.log('bub:::',e);
-    // });
-
     // running this here is probably not the best approach
-    populateMap();
+    populateMap(map);
 
 });
