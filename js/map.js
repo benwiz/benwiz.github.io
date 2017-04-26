@@ -194,14 +194,20 @@ $(document).ready(function() {
         //                     // .translate([2,2])//([map_div.offsetWidth / 2, map_div.offsetHeight / 2]);
         // var path = d3.geo.path().projection(projection);
 
-        var long = data.longitude / 180 * map_div.clientWidth;
-        var lat = data.latitude / 180 * map_div.clientHeight;
+        var long = -data.longitude; // invert for direction
+        var lat = data.latitude;
         var coords = long + ',' + lat;
+        var scale = 4;
+        console.log(long, lat);
+
+        // console.log(d3);
+
+        // NOTE: the solution has to do with a radio of the scale!
 
         map.svg.transition()
             .duration(750)
             .selectAll('g')
-            .attr('transform', 'translate( ' + coords + ' ) scale(1.0)');
+            .attr('transform', 'translate( ' + long + ',' + lat + ' ) scale(' + scale + ')translate(' + -long + ',' + -4*lat + ')');
 
         // // clear map div
         // var map_div = document.getElementById('map');
