@@ -112,7 +112,7 @@ $(document).ready(function() {
     var map_options = {
         element: document.getElementById('map'),
         responsive: true,
-        // TODO: set projection to exclude north pole
+        projection: 'mercator',
         geographyConfig: {
             dataUrl: null,
             hideAntarctica: true,
@@ -164,7 +164,8 @@ $(document).ready(function() {
 
     function rescale(datamap, translate, scale) {
 
-        // console.log(translate, scale);
+        // scale = 2;
+        console.log(translate, scale);
 
         // rescale world
         datamap.svg
@@ -186,78 +187,22 @@ $(document).ready(function() {
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
+
         var map_div = document.getElementById('map');
 
-        // var projection = d3.geo.equirectangular()
-        //                     // .center([data.longitude, data.latitude])
-        //                     // .scale(4)
-        //                     // .translate([2,2])//([map_div.offsetWidth / 2, map_div.offsetHeight / 2]);
-        // var path = d3.geo.path().projection(projection);
-
-        var long = -data.longitude;
+        var long = -data.longitude; // inverse longitude bc need to move opposite direction
         var lat = data.latitude;
-        var coords = long + ',' + lat;
-        var scale = 1;
-        console.log(long, lat);
+        var scale = 2;
+        console.log(long, lat, scale);
 
-        // console.log(d3);
-
-        // NOTE: the solution has to do with a radio of the scale!
+        console.log(map_div.offsetWidth, map_div.offsetHeight);
 
         map.svg.transition()
             .duration(750)
             .selectAll('g')
-            .attr('transform', 'translate( ' + long * 2*scale + ',' + 0 + ' ) scale(' + scale + ')translate(' + 0 + ',' + 0 + ')');
-
-        // // clear map div
-        // var map_div = document.getElementById('map');
-        // map_div_id = map_div.id;
-        // map_div_class = map_div.className;
-        // map_div.parentNode.removeChild(map_div);
-
-        // // replace map div
-        // map_div = document.createElement('div');
-        // map_div.id = 'map';
-        // map_div.className = map_div_class;
-        // var map_container_div = document.getElementById('map-container');
-        // map_container_div.appendChild(map_div);
-
-        // // update setProjection property in map_options
-        // map_options.setProjection = function(element, options) {
-
-        //     var projection, path;
-        //     projection = d3.geo.equirectangular()1
-        //         .center([/*data.longitude, data.latitude*/-90,30])
-        //         .scale(/*element.offsetWidth*/400)
-        //         .translate([/*element.offsetWidth / 2, element.offsetHeight / 2*/200,200]);
-
-        //     path = d3.geo.path().projection(projection);
-        //     return {path: path, projection: projection};
-        // }
-
-        // redraw map
-        // map = new Datamap(map_options);
-
-        // var map_div = document.getElementById('map');
-
-        // var projection = d3.geo.equirectangular()
-        //         .center([data.longitude, data.latitude])
-        //         .scale(map_div.offsetWidth);
-        // var path = d3.geo.path().projection(projection);
-
-        // var g = map.svg.select('g');
-
-        // g.selectAll("path").classed("active", true );
-
-        // g.transition()
-        //     .duration(750)
-        //     .attr("transform", "scale(4) translate(3,-100)")
-            // .style("stroke-width", 1.5 / k + "px");
-
-        // // map.svg.select('g').selectAll('path').attr('d', path);
-        // map.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-        // map.svg.select("g").selectAll("circle").attr("d", map.path.projection(projection));
-        // map.svg.select("g").selectAll("path").attr("d", map.path.projection(projection));
+            .attr('transform', 'translate( ' + -map_div.offsetWidth/2 + ',' + -map_div.offsetHeight/1.2 + ' )'
+                                + 'scale(' + scale + ')'
+                                + 'translate(' + 2*long + ',' + 2*lat + ')'  );
     });
 
     // running this here is probably not the best approach

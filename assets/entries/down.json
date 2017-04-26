@@ -1,12 +1,12 @@
 {
     "name": "BragOn",
     "location": {
-        "latitude": -90,
+        "latitude": -45,
         "longitude": 0
     },
     "details": [
         ["Dot", "Down"],
-        ["Lat", "-90"],
+        ["Lat", "-45"],
         ["Long", "0"]
     ],
     "summary": [
