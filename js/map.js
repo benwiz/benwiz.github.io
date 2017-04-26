@@ -194,10 +194,10 @@ $(document).ready(function() {
         //                     // .translate([2,2])//([map_div.offsetWidth / 2, map_div.offsetHeight / 2]);
         // var path = d3.geo.path().projection(projection);
 
-        var long = -data.longitude; // invert for direction
+        var long = -data.longitude;
         var lat = data.latitude;
         var coords = long + ',' + lat;
-        var scale = 4;
+        var scale = 1;
         console.log(long, lat);
 
         // console.log(d3);
@@ -207,7 +207,7 @@ $(document).ready(function() {
         map.svg.transition()
             .duration(750)
             .selectAll('g')
-            .attr('transform', 'translate( ' + long + ',' + lat + ' ) scale(' + scale + ')translate(' + -long + ',' + -4*lat + ')');
+            .attr('transform', 'translate( ' + long * 2*scale + ',' + 0 + ' ) scale(' + scale + ')translate(' + 0 + ',' + 0 + ')');
 
         // // clear map div
         // var map_div = document.getElementById('map');
@@ -226,7 +226,7 @@ $(document).ready(function() {
         // map_options.setProjection = function(element, options) {
 
         //     var projection, path;
-        //     projection = d3.geo.equirectangular()
+        //     projection = d3.geo.equirectangular()1
         //         .center([/*data.longitude, data.latitude*/-90,30])
         //         .scale(/*element.offsetWidth*/400)
         //         .translate([/*element.offsetWidth / 2, element.offsetHeight / 2*/200,200]);

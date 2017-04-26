@@ -1,0 +1,14 @@
+{
+    "name": "BragOn",
+    "location": {
+        "latitude": -90,
+        "longitude": 0
+    },
+    "details": [
+        ["Dot", "Down"],
+        ["Lat", "-90"],
+        ["Long", "0"]
+    ],
+    "summary": [
+    ]
+}

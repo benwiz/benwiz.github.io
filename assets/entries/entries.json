@@ -1,4 +1,9 @@
 [
     "bragon.json",
-    "neurametrix.json"
+    "neurametrix.json",
+    "up.json",
+    "center.json",
+    "down.json",
+    "left.json",
+    "right.json"
 ]
