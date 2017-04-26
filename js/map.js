@@ -150,15 +150,15 @@ $(document).ready(function() {
         },
         done: function(datamap) {
 
-            datamap.svg.call(d3.behavior.zoom().on('zoom', redraw));
+            // datamap.svg.call(d3.behavior.zoom().on('zoom', redraw));
 
-            function redraw() {
-                datamap.svg.select('g')
-                    .selectAll('path')
-                    .style('vector-effect', 'non-scaling-stroke');
+            // function redraw() {
+            //     datamap.svg.select('g')
+            //         .selectAll('path')
+            //         .style('vector-effect', 'non-scaling-stroke');
 
-                rescale(datamap, d3.event.translate, d3.event.scale);
-            }
+            //     rescale(datamap, d3.event.translate, d3.event.scale);
+            // }
         }
     };
 
@@ -181,52 +181,59 @@ $(document).ready(function() {
             .style('stroke-width', (bubbleBorder / scale) + 'px');
     }
 
-    // create map with default settings
-    var map = new Datamap(map_options);
-
-    $(map.svg[0][0]).on('click', '.bubbles', function(e) {
-
-        var data = e.target.__data__;
-
-        var map_div = document.getElementById('map');
-
-        var long = -data.longitude; // inverse longitude bc need to move opposite direction
-        var lat = data.latitude;
-        var scale = 3;
-        console.log(long, lat, scale);
-
-        // console.log(map_div.offsetWidth, map_div.offsetHeight);
-
-        // map.svg.transition()
-        //     .duration(750)
-        //     .selectAll('g')
-        //     .attr('transform', 'translate( ' + -map_div.offsetWidth/scale + ',' + -map_div.offsetHeight/(.6*scale) + ' )'
-        //                         + 'scale(' + scale + ')'
-        //                         + 'translate(' + 0 + ',' + 0 + ')'  );
+    function zoom(map, lng, lat, scale) {
 
         // Setup the options for the zoom (defaults given)
-        var zoomOpts = {
-            scaleFactor: 2, // The amount to zoom
+        var zoom_opts = {
+            scaleFactor: scale,
             center: {
-                lat: data.latitude, // latitude of the point to which you wish to zoom
-                lng: data.longitude, // longitude of the point to which you wish to zoom
+                lng: lng,
+                lat: lat
             },
             transition: {
-                duration: 1000 // milliseconds
+                duration: 750 // milliseconds
             },
             onZoomComplete: function (zoomData) {
-            // Called after zoomto completes.  Bound to the Datamaps instance.
-            // Passes one argument, zoomData.
-            // zoomData = {
-            //   translate: { x: <number>, y: <number> },
-            //   scale: <number>
-            // }
-            // no-op by default
+                // Called after zoomto completes.  Bound to the Datamaps instance.
+                // Passes one argument, zoomData.
+                // zoomData = {
+                //   translate: { x: <number>, y: <number> },
+                //   scale: <number>
+                // }
+                // no-op by default
             }
         };
 
         // perform the zoom
-        map.zoomto(zoomOpts);
+        map.zoomto(zoom_opts);
+
+        console.log(scale);
+        if (scale === 1) {
+            is_zoomed = false;
+        } else {
+            is_zoomed = true;
+        }
+    }
+
+    // create map with default settings
+    var map = new Datamap(map_options);
+    var is_zoomed = false;
+    console.log('0. is zoomed', is_zoomed);
+
+    $(map.svg[0][0]).on('click', function(e) {
+
+        if (e.target.tagName !== 'circle') {
+            if (is_zoomed) {
+                zoom(map, 0, 0, 1);
+            }
+        }
+    });
+
+    $(map.svg[0][0]).on('click', '.bubbles', function(e) {
+
+        console.log('2. is zoomed', is_zoomed);
+        var data = e.target.__data__;
+        zoom(map, data.longitude, data.latitude, 10);
     });
 
     // running this here is probably not the best approach
