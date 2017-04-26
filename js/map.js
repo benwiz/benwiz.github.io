@@ -112,7 +112,7 @@ $(document).ready(function() {
     var map_options = {
         element: document.getElementById('map'),
         responsive: true,
-        projection: 'mercator',
+        projection: 'equirectangular', // mercator, equirectangular
         geographyConfig: {
             dataUrl: null,
             hideAntarctica: true,
@@ -162,24 +162,21 @@ $(document).ready(function() {
         }
     };
 
-    function rescale(datamap, translate, scale) {
+    // function rescale(datamap, translate, scale) {
 
-        // scale = 2;
-        console.log(translate, scale);
+    //     // rescale world
+    //     datamap.svg
+    //         .selectAll('g')
+    //         .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
 
-        // rescale world
-        datamap.svg
-            .selectAll('g')
-            .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
-
-        // rescale bubbles
-        var bubbleRadius = 5;
-        var bubbleBorder = 5;
-        datamap.svg
-            .selectAll('.datamaps-bubble')
-            .attr('r', bubbleRadius / scale)
-            .style('stroke-width', (bubbleBorder / scale) + 'px');
-    }
+    //     // rescale bubbles
+    //     var bubbleRadius = 5;
+    //     var bubbleBorder = 5;
+    //     datamap.svg
+    //         .selectAll('.datamaps-bubble')
+    //         .attr('r', bubbleRadius / scale)
+    //         .style('stroke-width', (bubbleBorder / scale) + 'px');
+    // }
 
     function zoom(map, lng, lat, scale) {
 
@@ -207,7 +204,6 @@ $(document).ready(function() {
         // perform the zoom
         map.zoomto(zoom_opts);
 
-        console.log(scale);
         if (scale === 1) {
             is_zoomed = false;
         } else {
@@ -218,7 +214,6 @@ $(document).ready(function() {
     // create map with default settings
     var map = new Datamap(map_options);
     var is_zoomed = false;
-    console.log('0. is zoomed', is_zoomed);
 
     $(map.svg[0][0]).on('click', function(e) {
 
@@ -231,7 +226,6 @@ $(document).ready(function() {
 
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
-        console.log('2. is zoomed', is_zoomed);
         var data = e.target.__data__;
         zoom(map, data.longitude, data.latitude, 10);
     });
