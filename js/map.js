@@ -192,17 +192,41 @@ $(document).ready(function() {
 
         var long = -data.longitude; // inverse longitude bc need to move opposite direction
         var lat = data.latitude;
-        var scale = 2;
+        var scale = 3;
         console.log(long, lat, scale);
 
-        console.log(map_div.offsetWidth, map_div.offsetHeight);
+        // console.log(map_div.offsetWidth, map_div.offsetHeight);
 
-        map.svg.transition()
-            .duration(750)
-            .selectAll('g')
-            .attr('transform', 'translate( ' + -map_div.offsetWidth/2 + ',' + -map_div.offsetHeight/1.2 + ' )'
-                                + 'scale(' + scale + ')'
-                                + 'translate(' + 2*long + ',' + 2*lat + ')'  );
+        // map.svg.transition()
+        //     .duration(750)
+        //     .selectAll('g')
+        //     .attr('transform', 'translate( ' + -map_div.offsetWidth/scale + ',' + -map_div.offsetHeight/(.6*scale) + ' )'
+        //                         + 'scale(' + scale + ')'
+        //                         + 'translate(' + 0 + ',' + 0 + ')'  );
+
+        // Setup the options for the zoom (defaults given)
+        var zoomOpts = {
+            scaleFactor: 2, // The amount to zoom
+            center: {
+                lat: data.latitude, // latitude of the point to which you wish to zoom
+                lng: data.longitude, // longitude of the point to which you wish to zoom
+            },
+            transition: {
+                duration: 1000 // milliseconds
+            },
+            onZoomComplete: function (zoomData) {
+            // Called after zoomto completes.  Bound to the Datamaps instance.
+            // Passes one argument, zoomData.
+            // zoomData = {
+            //   translate: { x: <number>, y: <number> },
+            //   scale: <number>
+            // }
+            // no-op by default
+            }
+        };
+
+        // perform the zoom
+        map.zoomto(zoomOpts);
     });
 
     // running this here is probably not the best approach
