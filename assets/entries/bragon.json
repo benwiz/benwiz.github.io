@@ -2,8 +2,8 @@
     "name": "BragOn",
     "location": {
         "city": "New Orleans",
-        "latitude": 29.9419642,
-        "longitude": -90.1196752
+        "latitude": 29.944036,
+        "longitude": -90.115247
     },
     "details": [
         ["Role", "Founder, iOS Developer"],

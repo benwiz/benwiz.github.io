@@ -1,5 +1,10 @@
 # TO DO
 
+1. come up with complete entry format
+1. handle languages and tools as it's own property
+
+## Brainstorm
+
 - pages
     - ben (root)
     - marg
