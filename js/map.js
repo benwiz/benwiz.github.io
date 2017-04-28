@@ -103,14 +103,11 @@ $(document).ready(function() {
         $name.text(name);
     }
 
-    function populateDetails(details, options) {
+    function populateDetails(details) {
 
         var html = '<table>';
         for (var i=0; i<details.length; i++) {
             html += '<tr><th style="text-align:right; padding:0 5px 0 5px;">' + details[i][0] + '</th><td style="text-align:left; padding:0 5px 0 5px;">' + details[i][1] + '</td></tr>';
-        }
-        for (var i=0; i<options.length; i++) {
-            html += '<tr><th style="text-align:right; padding:0 5px 0 5px;">' + options[i][0] + '</th><td style="text-align:left; padding:0 5px 0 5px;">' + options[i][1] + '</td></tr>';
         }
         html += '</table>'
 
@@ -131,25 +128,26 @@ $(document).ready(function() {
         const detail_options = [
             ['City', data.city]
         ];
+        data.details = data.details.concat(detail_options);
 
         // if not zoomed in
         if (!m_is_zoomed) {
             var city_bubbles = getBubblesWithCity(bubbles, data.city);
-            if (city_bubbles.length > 0) {
+            if (city_bubbles.length > 1) {
                 // dislpay summary and incent to click
-                populateName('name');
-                populateDetails([['details', 'here?']], [['wtf', 'is option?;']])
-                populateSummary('something more here');
+                populateName(data.city);
+                populateDetails([]);
+                populateSummary(['Click to zoom in!']);
             } else {
                  // display bubble info
                 populateName(data.name);
-                populateDetails(data.details, detail_options);
+                populateDetails(data.details);
                 populateSummary(data.summary);
             }
         } else {
             // display bubble info
             populateName(data.name);
-            populateDetails(data.details, detail_options);
+            populateDetails(data.details);
             populateSummary(data.summary);
         }
 
