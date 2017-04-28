@@ -20,6 +20,7 @@ body {
 .info-container {
     border-right: 1px solid #444444;
     padding: 15px 35px 15px 35px;
+    overflow-y: auto;
 }
 
 .demo-container {
