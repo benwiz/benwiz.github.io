@@ -1,7 +1,11 @@
 # TO DO
 
 1. come up with complete entry format
-1. handle languages and tools as it's own property
+    1. handle languages and tools as it's own property
+1. acknowledge if bubble under mouse overlaps any other
+    1. display a summary with signal (popup) to click
+    1. figure out which ones for dynamic zoom scale
+1. better map with roads
 
 ## Brainstorm
 

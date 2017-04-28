@@ -8,6 +8,17 @@ $(document).ready(function() {
     var $details = $('#details');
     var $summary = $('#summary');
 
+    // constants
+    var BUBBLE_RADIUS = 5;
+    var BUBBLE_BORDER_WIDTH = 0;
+    var ZOOM_SCALE = 1000;
+    var MAP_COLOR = '#003f3f';
+    var MAP_BORDER_COLOR = MAP_COLOR;
+    var MAP_BORDER_WIDTH = 1;
+
+    // global variables
+    var m_is_zoomed = false;
+
     function getEntries() {
 
         return new Promise(function(resolve, reject) {
@@ -30,12 +41,31 @@ $(document).ready(function() {
 
                 // create bubble
                 var bubble = {
-                    // formatting
+                    // custom formatting
                     name: data.name,
-                    radius: 5,
+                    radius: BUBBLE_RADIUS,
+                    borderWidth: BUBBLE_BORDER_WIDTH,
                     fillKey: 'light',
                     latitude: data.location.latitude,
                     longitude: data.location.longitude,
+
+                    // standard formatting
+                    borderWidth: BUBBLE_BORDER_WIDTH,
+                    // borderOpacity: 1,
+                    // borderColor: '#FFFFFF',
+                    // popupOnHover: true,
+                    // popupTemplate: function(g,d) { console.log('hi'); return 'hi'; },
+                    // fillOpacity: 0.75,
+                    // animate: true,
+                    // highlightOnHover: true,
+                    highlightFillColor: 'cyan',
+                    // highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+                    // highlightBorderWidth: 2,
+                    // highlightBorderOpacity: 1,
+                    // highlightFillOpacity: 0.85,
+                    // exitDelay: 100,
+                    // key: JSON.stringify,
+
                     // data
                     city: data.location.city,
                     details: data.details,
@@ -54,7 +84,10 @@ $(document).ready(function() {
     function updateMap(map, bubbles) {
 
         // put bubbles onto map
-        map.bubbles(bubbles, {popupTemplate: populateInfo});
+        map.bubbles(bubbles, {popupTemplate: function(geography, data) {
+
+            return populateInfo(geography, data, bubbles);
+        }});
     }
 
     function populateMap(map) {
@@ -93,15 +126,46 @@ $(document).ready(function() {
         $summary.html(html);
     }
 
-    function populateInfo(bubble) {
+    function populateInfo(geography, data, bubbles) {
 
         const detail_options = [
-            ['City', bubble.city]
+            ['City', data.city]
         ];
 
-        populateName(bubble.name);
-        populateDetails(bubble.details, detail_options);
-        populateSummary(bubble.summary);
+        // if not zoomed in
+        if (!m_is_zoomed) {
+            var city_bubbles = getBubblesWithCity(bubbles, data.city);
+            if (city_bubbles.length > 0) {
+                // dislpay summary and incent to click
+                populateName('name');
+                populateDetails([['details', 'here?']], [['wtf', 'is option?;']])
+                populateSummary('something more here');
+            } else {
+                 // display bubble info
+                populateName(data.name);
+                populateDetails(data.details, detail_options);
+                populateSummary(data.summary);
+            }
+        } else {
+            // display bubble info
+            populateName(data.name);
+            populateDetails(data.details, detail_options);
+            populateSummary(data.summary);
+        }
+
+        // return 'popup html';
+    }
+
+    function getBubblesWithCity(bubbles, city) {
+
+        var city_bubbles = [];
+        for (var i=0; i<bubbles.length; i++) {
+            var bubble = bubbles[i];
+            if (bubble.city === city) {
+                city_bubbles.push(bubble);
+            }
+        }
+        return city_bubbles;
     }
 
     //
@@ -111,39 +175,28 @@ $(document).ready(function() {
     // map options
     var map_options = {
         element: document.getElementById('map'),
+        scope: 'world',
         responsive: true,
         projection: 'equirectangular', // mercator, equirectangular
         geographyConfig: {
             dataUrl: null,
             hideAntarctica: true,
-            borderWidth: 1,
+            borderWidth: MAP_BORDER_WIDTH,
             borderOpacity: 1,
-            borderColor: '#003f3f',
+            borderColor: MAP_BORDER_COLOR,
             popupOnHover: false,
-            highlightOnHover: false
-        },
-        bubblesConfig: {
-            borderWidth: 0,
-            // borderOpacity: 1,
-            // borderColor: '#FFFFFF',
-            // popupOnHover: true,
-            // radius: null,
-            // popupTemplate: function(geography, data) {
-            //   return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+            highlightOnHover: false,
+            // popupTemplate: function(geography, data) { //this function should just return a string
+            //     return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
             // },
-            // fillOpacity: 0.75,
-            // animate: true,
-            // highlightOnHover: true,
-            highlightFillColor: 'cyan',
+            // popupOnHover: true, //disable the popup while hovering
+            // highlightFillColor: '#FC8D59',
             // highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
             // highlightBorderWidth: 2,
-            // highlightBorderOpacity: 1,
-            // highlightFillOpacity: 0.85,
-            // exitDelay: 100,
-            // key: JSON.stringify
+            // highlightBorderOpacity: 1
         },
         fills: {
-            defaultFill: '#003f3f',
+            defaultFill: MAP_COLOR,
             light: '#FFFFFF',
             dark: '#777777',
             magenta: 'magenta'
@@ -180,6 +233,8 @@ $(document).ready(function() {
 
     function zoom(map, lng, lat, scale) {
 
+        var duration = 750;
+
         // Setup the options for the zoom (defaults given)
         var zoom_opts = {
             scaleFactor: scale,
@@ -188,7 +243,7 @@ $(document).ready(function() {
                 lat: lat
             },
             transition: {
-                duration: 750 // milliseconds
+                duration: duration // milliseconds
             },
             onZoomComplete: function (zoomData) {
                 // Called after zoomto completes.  Bound to the Datamaps instance.
@@ -201,24 +256,41 @@ $(document).ready(function() {
             }
         };
 
+        if (scale === 1) {
+            // go slower
+            duration *= 2.75;
+        } else {
+            // go faster
+            duration *= 1/4;
+        }
+
+        // rescale bubbles
+        var bubble_radius = BUBBLE_RADIUS;
+        var bubble_border_width = BUBBLE_BORDER_WIDTH;
+        map.svg
+            .transition().duration(duration)
+            .selectAll('.datamaps-bubble')
+            .attr('r', bubble_radius / scale)
+            // .style('stroke-width', (bubble_border_width / scale) + 'px');
+
         // perform the zoom
         map.zoomto(zoom_opts);
 
+        // set m_is_zoomed boolean
         if (scale === 1) {
-            is_zoomed = false;
+            m_is_zoomed = false;
         } else {
-            is_zoomed = true;
+            m_is_zoomed = true;
         }
     }
 
     // create map with default settings
     var map = new Datamap(map_options);
-    var is_zoomed = false;
 
     $(map.svg[0][0]).on('click', function(e) {
 
         if (e.target.tagName !== 'circle') {
-            if (is_zoomed) {
+            if (m_is_zoomed) {
                 zoom(map, 0, 0, 1);
             }
         }
@@ -227,10 +299,10 @@ $(document).ready(function() {
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
-        zoom(map, data.longitude, data.latitude, 10);
+        zoom(map, data.longitude, data.latitude, ZOOM_SCALE);
     });
 
-    // running this here is probably not the best approach
+    // populate map with bubbles
     populateMap(map);
 
 });
