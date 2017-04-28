@@ -118,7 +118,7 @@ $(document).ready(function() {
 
         var html = '';
         for (var i=0; i<paragraphs.length; i++) {
-            html += '<p>' + paragraphs[i] + '</p>';
+            html += '<p>&emsp;' + paragraphs[i] + '</p>';
         }
         $summary.html(html);
     }

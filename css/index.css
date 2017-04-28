@@ -40,6 +40,10 @@ body {
     margin-bottom: 50px;
 }
 
+.info-container .summary {
+    /*text-align: justify;*/
+}
+
 /*.info-container .name {
     color: #70c5cc;
 }*/
