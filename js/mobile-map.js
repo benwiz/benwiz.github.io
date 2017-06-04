@@ -1,6 +1,5 @@
 // http://datamaps.github.io/
 
-
 $(document).ready(function() {
 
     // get elements
@@ -11,13 +10,9 @@ $(document).ready(function() {
     // constants
     var BUBBLE_RADIUS = 5;
     var BUBBLE_BORDER_WIDTH = 0;
-    var ZOOM_SCALE = 1000;
     var MAP_COLOR = '#003f3f';
     var MAP_BORDER_COLOR = MAP_COLOR;
     var MAP_BORDER_WIDTH = 1;
-
-    // global variables
-    var m_is_zoomed = false;
 
     function getEntries() {
 
@@ -213,91 +208,19 @@ $(document).ready(function() {
         }
     };
 
-    // function rescale(datamap, translate, scale) {
-
-    //     // rescale world
-    //     datamap.svg
-    //         .selectAll('g')
-    //         .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
-
-    //     // rescale bubbles
-    //     var bubbleRadius = 5;
-    //     var bubbleBorder = 5;
-    //     datamap.svg
-    //         .selectAll('.datamaps-bubble')
-    //         .attr('r', bubbleRadius / scale)
-    //         .style('stroke-width', (bubbleBorder / scale) + 'px');
-    // }
-
-    function zoom(map, lng, lat, scale) {
-
-        var duration = 750;
-
-        // Setup the options for the zoom (defaults given)
-        var zoom_opts = {
-            scaleFactor: scale,
-            center: {
-                lng: lng,
-                lat: lat
-            },
-            transition: {
-                duration: duration // milliseconds
-            },
-            onZoomComplete: function (zoomData) {
-                // Called after zoomto completes.  Bound to the Datamaps instance.
-                // Passes one argument, zoomData.
-                // zoomData = {
-                //   translate: { x: <number>, y: <number> },
-                //   scale: <number>
-                // }
-                // no-op by default
-            }
-        };
-
-        if (scale === 1) {
-            // go slower
-            duration *= 2.75;
-        } else {
-            // go faster
-            duration *= 1/4;
-        }
-
-        // rescale bubbles
-        var bubble_radius = BUBBLE_RADIUS;
-        var bubble_border_width = BUBBLE_BORDER_WIDTH;
-        map.svg
-            .transition().duration(duration)
-            .selectAll('.datamaps-bubble')
-            .attr('r', bubble_radius / scale)
-            // .style('stroke-width', (bubble_border_width / scale) + 'px');
-
-        // perform the zoom
-        map.zoomto(zoom_opts);
-
-        // set m_is_zoomed boolean
-        if (scale === 1) {
-            m_is_zoomed = false;
-        } else {
-            m_is_zoomed = true;
-        }
-    }
-
     // create map with default settings
     var map = new Datamap(map_options);
 
     $(map.svg[0][0]).on('click', function(e) {
 
         if (e.target.tagName !== 'circle') {
-            if (m_is_zoomed) {
-                zoom(map, 0, 0, 1);
-            }
+
         }
     });
 
     $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
         var data = e.target.__data__;
-        zoom(map, data.longitude, data.latitude, ZOOM_SCALE);
     });
 
     // populate map with bubbles

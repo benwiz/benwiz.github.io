@@ -4,6 +4,10 @@
     <title>Ben Wiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+    <script src="./js/vendor/w3.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+
     <script src="./js/vendor/jquery-3.2.1.min.js"></script>
     <script src="./js/vendor/tether.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/vendor/tether.min.css">
@@ -14,17 +18,19 @@
     <script src="./js/vendor/datamaps.world.min.js"></script>
     <script src="./js/vendor/datamaps-zoomto.js"></script>
     <script src="./js/vendor/bluebird.min.js"></script>
-    <script src="./js/vendor/w3.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
 
     <!--<link rel="stylesheet" type="text/css" href="./css/desktop.css">-->
-    <!--<script src="./js/map.js"></script>-->
+    <!--<script src="./js/desktop-map.js"></script>-->
+
+    <link rel="stylesheet" type="text/css" href="./css/mobile.css">
+    <script src="./js/mobile-map.js"></script>
 
 </head>
 <body>
 
-    <div w3-include-html="partials/tmp.html"></div>
+    <div w3-include-html="partials/mobile.html"></div>
     <script>
         w3.includeHTML();
     </script>
