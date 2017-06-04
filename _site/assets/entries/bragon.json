@@ -1,0 +1,18 @@
+{
+    "name": "BragOn",
+    "location": {
+        "city": "New Orleans",
+        "latitude": 29.944036,
+        "longitude": -90.115247
+    },
+    "details": [
+        ["Role", "Founder, iOS Developer"],
+        ["Start", "March 2014"],
+        ["End", "May 2015"],
+        ["Language", "Objective-C"]
+    ],
+    "summary": [
+        "I started BragOn with two classmates from Tulane. The ideation and development of BragOn was my first foray into the startup scene and first real attempt at software programming outside of the classroom.",
+        "We explored targeted advertising and community participation in that advertising by encouraging users to share great local deals. We even gamified the app with our cute BragOn Dragon."
+    ]
+}

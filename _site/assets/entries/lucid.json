@@ -1,0 +1,18 @@
+{
+    "name": "Lucid",
+    "location": {
+        "city": "New Orleans",
+        "latitude": 29.951306,
+        "longitude": -90.065479
+    },
+    "details": [
+        ["Role", "TechOps Engineer"],
+        ["Start", "December 2016"],
+        ["End", "Present"],
+        ["Language", "Node.js, Python"]
+    ],
+    "summary": [
+        "At Lucid, I work in the Fulcrum business unit which is a programmatic sample (i.e. survey) exchange platform as an engineer. I work closely with our sales and client managers to produce value and innovate without being bogged down my the needs of a traditional tech team.",
+        "I spend half my time focusing on professional services where I help Lucid’s customers integrate with Fulcrum’s APIs. I spend the rest of my time in Lucid Labs generating ideas and developing moonshot experiments to innovate the industries in which Lucid operates."
+    ]
+}
