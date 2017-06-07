@@ -71,12 +71,15 @@ $(document).ready(function() {
     function createPostsAndBubbles(entries) {
         // create posts while creating a list of bubbles
 
+        var counter = 0;
+
         var bubbles = [];
         entries.forEach(function(entry) {
 
             // generate unique id which will unite post and bubble
             // because name can't be guarenteed to be unique
-            var id = bubbles.length;
+            var id = counter;
+            counter++;
 
             // create post
             var blog_content = JSON.stringify(entry);
