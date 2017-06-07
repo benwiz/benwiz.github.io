@@ -10,30 +10,15 @@ http-server -c-1 .
 
 # TO DO
 
-1. come up with complete entry format
-    1. handle languages and tools as it's own property
-1. acknowledge if bubble under mouse overlaps any other
-    1. display a summary with signal (popup) to click
-    1. figure out which ones for dynamic zoom scale
-1. better map with roads
-1. convert local imports to bower imports
 
 ## Brainstorm
 
-- pages
-    - ben (root)
-    - marg
-
-- ben
-    - links
-        - marg
-        - contact me
-    - interactive map acts as portfolio, blog, contact me all in one
-        - scan contents of `/entries` directory
-        - when highlighting a city dot, populate side bar
-        - when dot is clicked, dim all the non-connected city dots, draw airlines between city dots
-        - blur media field until a point is selected or hovered over long enough
-        - use a coding color scheme
+- views (probably just general filter by tag?)
+    - ben's travel blog
+    - ben's coding blog
+    - ben's portfolio
+    - marg's blog
+    - all travel locations
 
 - entry writer
     - tool to make it easy to add a new entry
@@ -43,6 +28,7 @@ http-server -c-1 .
 
 
 - mapping tools
+    - https://carto.com/blog/odyssey-js-new-open-source-tool-to-weave-interactive !!!!!!!!!
     - ammap https://www.amcharts.com/javascript-maps/ ** small logo without paying $140
     - http://jvectormap.com/
     - http://kartograph.org/ * http://kartograph.org/showcase/italia/

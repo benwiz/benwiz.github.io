@@ -10,7 +10,7 @@ $(document).ready(function() {
     // constants
     var BUBBLE_RADIUS = 5;
     var BUBBLE_BORDER_WIDTH = 0;
-    var MAP_COLOR = '#003f3f';
+    var MAP_COLOR = '#4E4E4E';
     var MAP_BORDER_COLOR = MAP_COLOR;
     var MAP_BORDER_WIDTH = 1;
 
@@ -53,8 +53,8 @@ $(document).ready(function() {
                     // fillOpacity: 0.75,
                     // animate: true,
                     // highlightOnHover: true,
-                    highlightFillColor: 'cyan',
-                    // highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+                    highlightFillColor: '#27A1DA',
+                    highlightBorderColor: '#27A1DA',
                     // highlightBorderWidth: 2,
                     // highlightBorderOpacity: 1,
                     // highlightFillOpacity: 0.85,
@@ -190,8 +190,8 @@ $(document).ready(function() {
         },
         fills: {
             defaultFill: MAP_COLOR,
-            light: '#FFFFFF',
-            dark: '#777777',
+            light: '#FEFEFE',
+            dark: '#222222',
             magenta: 'magenta'
         },
         done: function(datamap) {

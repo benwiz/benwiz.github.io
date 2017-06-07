@@ -5,7 +5,23 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    color: white;
-    background-color: black;
-    font-family: 'Inconsolata', monospace;
+    color: #FEFEFE;
+    background-color: #222222;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-container {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.title {
+    color: #27A1DA;
+    /*font-family: 'Hind', sans-serif;*/
+    font-size: 64px;
+}
+
+.heading {
+    width: 100%;
+    text-align: center;
 }
