@@ -69,6 +69,7 @@ $(document).ready(function() {
     };
 
     function createPostsAndBubbles(entries) {
+        // create posts while creating a list of bubbles
 
         var bubbles = [];
         entries.forEach(function(entry) {
@@ -80,45 +81,59 @@ $(document).ready(function() {
             // create post
             $blog.append('<div id="' + id + '">' + entry.name + '</div>');
 
-            // create bubble
-            // TODO: associate post with buble
-            var bubble = {
-                // set unique identifier
-                id: id,
+            // check bubbles list for overlapping bubbles
+            // currently checking by city, but it should be changed to actual visual overlap of bubbles
+            matching_bubbles = bubbles.filter(bubble => bubble.city === entry.location.city);
 
-                // custom formatting
-                name: entry.name,
-                radius: BUBBLE_RADIUS,
-                borderWidth: BUBBLE_BORDER_WIDTH,
-                fillKey: 'light',
-                latitude: entry.location.latitude,
-                longitude: entry.location.longitude,
-
-                // standard formatting
-                borderWidth: BUBBLE_BORDER_WIDTH,
-                // borderOpacity: 1,
-                // borderColor: '#FFFFFF',
-                // popupOnHover: true,
-                // popupTemplate: function(g,d) { console.log('hi'); return 'hi'; },
-                // fillOpacity: 0.75,
-                // animate: true,
-                // highlightOnHover: true,
-                highlightFillColor: '#27A1DA',
-                highlightBorderColor: '#27A1DA',
-                // highlightBorderWidth: 2,
-                // highlightBorderOpacity: 1,
-                // highlightFillOpacity: 0.85,
-                // exitDelay: 100,
-                // key: JSON.stringify,
-
-                // entry
-                city: entry.location.city,
-                details: entry.details,
-                summary: entry.summary
-            };
-            bubbles.push(bubble);
+            if (matching_bubbles.length > 0) {
+                // if a match, add new id to that bubble's list of assoicated posts (object ref works here)
+                matching_bubbles[0].ids.push(id);
+            } else {
+                var bubble = createBubble(id, entry);
+                bubbles.push(bubble);
+            }
         });
         return bubbles;
+    };
+
+    function createBubble(id, entry) {
+
+        var bubble = {
+            // set unique identifier
+            ids: [id],
+
+            // custom formatting
+            name: entry.name,
+            radius: BUBBLE_RADIUS,
+            borderWidth: BUBBLE_BORDER_WIDTH,
+            fillKey: 'light',
+            latitude: entry.location.latitude,
+            longitude: entry.location.longitude,
+
+            // standard formatting
+            borderWidth: BUBBLE_BORDER_WIDTH,
+            // borderOpacity: 1,
+            // borderColor: '#FFFFFF',
+            // popupOnHover: true,
+            // popupTemplate: function(g,d) { console.log('hi'); return 'hi'; },
+            // fillOpacity: 0.75,
+            // animate: true,
+            // highlightOnHover: true,
+            highlightFillColor: '#27A1DA',
+            highlightBorderColor: '#27A1DA',
+            // highlightBorderWidth: 2,
+            // highlightBorderOpacity: 1,
+            // highlightFillOpacity: 0.85,
+            // exitDelay: 100,
+            // key: JSON.stringify,
+
+            // entry
+            city: entry.location.city,
+            details: entry.details,
+            summary: entry.summary
+        };
+
+        return bubble;
     };
 
     function updateMap(map, bubbles) {
@@ -182,15 +197,19 @@ $(document).ready(function() {
 
     $(map.svg[0][0]).on('click', function(e) {
 
-        if (e.target.tagName !== 'circle') {
-
+        if (e.target.tagName === 'circle') {
+            var data = e.target.__data__;
+            var id = data['ids'][0];
+            console.log(data['ids'])
+            window.location.hash = id;
         }
     });
 
-    $(map.svg[0][0]).on('click', '.bubbles', function(e) {
+    // this following event block overlaps with the previous
+    // $(map.svg[0][0]).on('click', '.bubbles', function(e) {
 
-        var data = e.target.__data__;
-    });
+    //     var data = e.target.__data__;
+    // });
 
     // populate map with bubbles
     populateMap(map)
