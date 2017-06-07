@@ -79,7 +79,8 @@ $(document).ready(function() {
             var id = bubbles.length;
 
             // create post
-            $blog.append('<div id="' + id + '">' + entry.name + '</div>');
+            var blog_content = JSON.stringify(entry);
+            $blog.append('<div id="' + id + '">' + blog_content + '</div>');
 
             // check bubbles list for overlapping bubbles
             // currently checking by city, but it should be changed to actual visual overlap of bubbles
