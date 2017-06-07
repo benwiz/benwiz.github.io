@@ -2,11 +2,6 @@
 
 $(document).ready(function() {
 
-    // get elements
-    var $name = $('#name');
-    var $details = $('#details');
-    var $summary = $('#summary');
-
     // constants
     var BUBBLE_RADIUS = 5;
     var BUBBLE_BORDER_WIDTH = 0;
@@ -14,10 +9,17 @@ $(document).ready(function() {
     var MAP_BORDER_COLOR = MAP_COLOR;
     var MAP_BORDER_WIDTH = 1;
 
+    function populateMap(map) {
+
+        getEntries()
+            .then(createBubbles)
+            .then((bubbles) => updateMap(map, bubbles))
+            .catch((err) => console.log('promise chain error:', err));
+    }
+
     function getEntries() {
 
         return new Promise(function(resolve, reject) {
-
 
             // get list of entry files
             $.getJSON('assets/entries/entries.json', function(files) {
@@ -25,6 +27,11 @@ $(document).ready(function() {
                 resolve(files);
             });
         });
+    }
+
+    function createBubbles(entry_files) {
+
+        return Promise.map(entry_files, createBubble);
     }
 
     function createBubble(file) {
@@ -71,95 +78,14 @@ $(document).ready(function() {
         });
     };
 
-    function createBubbles(entry_files) {
-
-        return Promise.map(entry_files, createBubble);
-    }
-
     function updateMap(map, bubbles) {
 
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: function(geography, data) {
 
-            return populateInfo(geography, data, bubbles);
+            // return 'hey'; // populateInfo(geography, data, bubbles);
         }});
-    }
-
-    function populateMap(map) {
-
-        getEntries()
-            .then(createBubbles)
-            .then((bubbles) => updateMap(map, bubbles))
-            .catch((err) => console.log('promise chain error:', err));
-    }
-
-    function populateName(name) {
-
-        $name.text(name);
-    }
-
-    function populateDetails(details) {
-
-        var html = '<table>';
-        for (var i=0; i<details.length; i++) {
-            html += '<tr><th style="text-align:right; padding:0 5px 0 5px;">' + details[i][0] + '</th><td style="text-align:left; padding:0 5px 0 5px;">' + details[i][1] + '</td></tr>';
-        }
-        html += '</table>'
-
-        $details.html(html);
     };
-
-    function populateSummary(paragraphs) {
-
-        var html = '';
-        for (var i=0; i<paragraphs.length; i++) {
-            html += '<p>&emsp;' + paragraphs[i] + '</p>';
-        }
-        $summary.html(html);
-    }
-
-    function populateInfo(geography, data, bubbles) {
-
-        const detail_options = [
-            ['City', data.city]
-        ];
-        data.details = data.details.concat(detail_options);
-
-        // if not zoomed in
-        if (!m_is_zoomed) {
-            var city_bubbles = getBubblesWithCity(bubbles, data.city);
-            if (city_bubbles.length > 1) {
-                // dislpay summary and incent to click
-                populateName(data.city);
-                populateDetails([]);
-                populateSummary(['Click to zoom in!']);
-            } else {
-                 // display bubble info
-                populateName(data.name);
-                populateDetails(data.details);
-                populateSummary(data.summary);
-            }
-        } else {
-            // display bubble info
-            populateName(data.name);
-            populateDetails(data.details);
-            populateSummary(data.summary);
-        }
-
-        // return 'popup html';
-    }
-
-    function getBubblesWithCity(bubbles, city) {
-
-        var city_bubbles = [];
-        for (var i=0; i<bubbles.length; i++) {
-            var bubble = bubbles[i];
-            if (bubble.city === city) {
-                city_bubbles.push(bubble);
-            }
-        }
-        return city_bubbles;
-    }
 
     //
     // scripting below
@@ -214,7 +140,7 @@ $(document).ready(function() {
     $(map.svg[0][0]).on('click', function(e) {
 
         if (e.target.tagName !== 'circle') {
-
+            console.log('click')
         }
     });
 
