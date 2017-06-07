@@ -13,7 +13,7 @@ $(document).ready(function() {
 
         getEntries()
             .then(preprocessEntries)
-            .then(createBubbles)
+            .then(createPosts)
             .then((bubbles) => updateMap(map, bubbles))
             .catch((err) => console.log('promise chain error:', err));
     }
@@ -61,14 +61,10 @@ $(document).ready(function() {
         });
     };
 
-    function createBubbles(entries) {
+    function createPosts(entries) {
 
-        return Promise.map(entries, createBubble);
-    };
-
-    function createBubble(entry) {
-
-        return new Promise(function(resolve, reject) {
+        var bubbles = []
+        entries.forEach(function(entry) {
 
             // create bubble
             var bubble = {
@@ -102,8 +98,9 @@ $(document).ready(function() {
                 details: entry.details,
                 summary: entry.summary
             };
-            resolve(bubble);
+            bubbles.push(bubble);
         });
+        return bubbles;
     };
 
     function updateMap(map, bubbles) {
