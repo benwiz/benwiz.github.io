@@ -13,17 +13,16 @@ $(document).ready(function() {
 
         getEntries()
             .then(preprocessEntries)
-            .then(console.log)
-            // .then(createBubbles)
-            // .then((bubbles) => updateMap(map, bubbles))
-            // .catch((err) => console.log('promise chain error:', err));
+            .then(createBubbles)
+            .then((bubbles) => updateMap(map, bubbles))
+            .catch((err) => console.log('promise chain error:', err));
     }
 
     function getEntries() {
+        // get list of entry files to post
 
         return new Promise(function(resolve, reject) {
 
-            // get list of entry files
             $.getJSON('assets/entries/entries.json', function(files) {
 
                 resolve(files);
@@ -32,6 +31,7 @@ $(document).ready(function() {
     };
 
     function preprocessEntries(entry_files) {
+        // extract the data from each entry file and sort by post date (new to old)
 
         return new Promise(function(resolve, reject) {
 
@@ -49,6 +49,7 @@ $(document).ready(function() {
     };
 
     function preprocessEntry(entry_file) {
+        // extract json data as object from file
 
         return new Promise(function(resolve, reject) {
 
@@ -60,47 +61,48 @@ $(document).ready(function() {
         });
     };
 
-    function createBubble(file) {
+    function createBubbles(entries) {
+
+        return Promise.map(entries, createBubble);
+    };
+
+    function createBubble(entry) {
 
         return new Promise(function(resolve, reject) {
 
-            var filename = 'assets/entries/' + file;
-            $.getJSON(filename, function(data) {
+            // create bubble
+            var bubble = {
+                // custom formatting
+                name: entry.name,
+                radius: BUBBLE_RADIUS,
+                borderWidth: BUBBLE_BORDER_WIDTH,
+                fillKey: 'light',
+                latitude: entry.location.latitude,
+                longitude: entry.location.longitude,
 
-                // create bubble
-                var bubble = {
-                    // custom formatting
-                    name: data.name,
-                    radius: BUBBLE_RADIUS,
-                    borderWidth: BUBBLE_BORDER_WIDTH,
-                    fillKey: 'light',
-                    latitude: data.location.latitude,
-                    longitude: data.location.longitude,
+                // standard formatting
+                borderWidth: BUBBLE_BORDER_WIDTH,
+                // borderOpacity: 1,
+                // borderColor: '#FFFFFF',
+                // popupOnHover: true,
+                // popupTemplate: function(g,d) { console.log('hi'); return 'hi'; },
+                // fillOpacity: 0.75,
+                // animate: true,
+                // highlightOnHover: true,
+                highlightFillColor: '#27A1DA',
+                highlightBorderColor: '#27A1DA',
+                // highlightBorderWidth: 2,
+                // highlightBorderOpacity: 1,
+                // highlightFillOpacity: 0.85,
+                // exitDelay: 100,
+                // key: JSON.stringify,
 
-                    // standard formatting
-                    borderWidth: BUBBLE_BORDER_WIDTH,
-                    // borderOpacity: 1,
-                    // borderColor: '#FFFFFF',
-                    // popupOnHover: true,
-                    // popupTemplate: function(g,d) { console.log('hi'); return 'hi'; },
-                    // fillOpacity: 0.75,
-                    // animate: true,
-                    // highlightOnHover: true,
-                    highlightFillColor: '#27A1DA',
-                    highlightBorderColor: '#27A1DA',
-                    // highlightBorderWidth: 2,
-                    // highlightBorderOpacity: 1,
-                    // highlightFillOpacity: 0.85,
-                    // exitDelay: 100,
-                    // key: JSON.stringify,
-
-                    // data
-                    city: data.location.city,
-                    details: data.details,
-                    summary: data.summary
-                };
-                resolve(bubble);
-            });
+                // entry
+                city: entry.location.city,
+                details: entry.details,
+                summary: entry.summary
+            };
+            resolve(bubble);
         });
     };
 
@@ -109,7 +111,7 @@ $(document).ready(function() {
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: function(geography, data) {
 
-            // return 'hey'; // populateInfo(geography, data, bubbles);
+            return 'hey'; // populateInfo(geography, data, bubbles);
         }});
     };
 
