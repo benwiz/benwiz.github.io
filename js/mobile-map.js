@@ -12,9 +12,11 @@ $(document).ready(function() {
     function populateMap(map) {
 
         getEntries()
-            .then(createBubbles)
-            .then((bubbles) => updateMap(map, bubbles))
-            .catch((err) => console.log('promise chain error:', err));
+            .then(preprocessEntries)
+            .then(console.log)
+            // .then(createBubbles)
+            // .then((bubbles) => updateMap(map, bubbles))
+            // .catch((err) => console.log('promise chain error:', err));
     }
 
     function getEntries() {
@@ -27,12 +29,36 @@ $(document).ready(function() {
                 resolve(files);
             });
         });
-    }
+    };
 
-    function createBubbles(entry_files) {
+    function preprocessEntries(entry_files) {
 
-        return Promise.map(entry_files, createBubble);
-    }
+        return new Promise(function(resolve, reject) {
+
+            Promise.map(entry_files, preprocessEntry)
+                .then((data) => {
+
+                    data.sort(function(a, b) {
+
+                        return new Date(b.post_date) - new Date(a.post_date);
+                    });
+                    resolve(data);
+                })
+                .catch(reject);
+        })
+    };
+
+    function preprocessEntry(entry_file) {
+
+        return new Promise(function(resolve, reject) {
+
+            var filename = 'assets/entries/' + entry_file;
+            $.getJSON(filename, function(data) {
+
+                resolve(data);
+            });
+        });
+    };
 
     function createBubble(file) {
 
@@ -140,7 +166,7 @@ $(document).ready(function() {
     $(map.svg[0][0]).on('click', function(e) {
 
         if (e.target.tagName !== 'circle') {
-            console.log('click')
+
         }
     });
 
