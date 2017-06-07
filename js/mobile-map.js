@@ -9,13 +9,20 @@ $(document).ready(function() {
     var MAP_BORDER_COLOR = MAP_COLOR;
     var MAP_BORDER_WIDTH = 1;
 
+    // jQuery elements
+    var $blog = $('#blog');
+
     function populateMap(map) {
 
-        getEntries()
-            .then(preprocessEntries)
-            .then(createPosts)
-            .then((bubbles) => updateMap(map, bubbles))
-            .catch((err) => console.log('promise chain error:', err));
+        return new Promise(function(resolve, reject) {
+
+            getEntries()
+                .then(preprocessEntries)
+                .then(createPostsAndBubbles)
+                .then((bubbles) => updateMap(map, bubbles))
+                .then(resolve)
+                .catch(reject)
+        });
     }
 
     function getEntries() {
@@ -61,13 +68,24 @@ $(document).ready(function() {
         });
     };
 
-    function createPosts(entries) {
+    function createPostsAndBubbles(entries) {
 
-        var bubbles = []
+        var bubbles = [];
         entries.forEach(function(entry) {
 
+            // generate unique id which will unite post and bubble
+            // because name can't be guarenteed to be unique
+            var id = bubbles.length;
+
+            // create post
+            $blog.append('<div id="' + id + '">' + entry.name + '</div>');
+
             // create bubble
+            // TODO: associate post with buble
             var bubble = {
+                // set unique identifier
+                id: id,
+
                 // custom formatting
                 name: entry.name,
                 radius: BUBBLE_RADIUS,
@@ -108,7 +126,7 @@ $(document).ready(function() {
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: function(geography, data) {
 
-            return 'hey'; // populateInfo(geography, data, bubbles);
+            // return 'hey'; // populateInfo(geography, data, bubbles);
         }});
     };
 
@@ -175,6 +193,10 @@ $(document).ready(function() {
     });
 
     // populate map with bubbles
-    populateMap(map);
+    populateMap(map)
+        .then(() => {
+
+        })
+        .catch((err) => console.log('promise chain error:', err));
 
 });
