@@ -79,25 +79,28 @@ $(document).ready(function() {
             // initialize modal variable
             var modal = null;
 
+            // unique identifier to identify a bubble
+            // this may change in the future if bubble's are not organized by city
+            var bubble_id = entry.location.city.replace(' ', '').toLowerCase();
+
             // check bubbles list for overlapping bubbles
             // currently checking by city, but it should be changed to be actual visual overlap of bubbles
             matching_bubbles = bubbles.filter(bubble => bubble.city === entry.location.city);
-            if (matching_bubbles.length > 0) {
-                // TODO: get the relevant modal
-            } else {
-                // unique identifier to identify a bubble
-                var id = entry.location.city.replace(' ', '').toLowerCase();
+            if (matching_bubbles.length == 0) {
 
                 // if not a match, create the bubble
-                var bubble = createBubble(id, entry);
+                var bubble = createBubble(bubble_id, entry);
                 bubbles.push(bubble);
 
-                // create the actual modal itself
-                var modal_html = createModal(id, entry);
+                // create the actual modal and assoiciate with a bubble via id
+                var modal_html = createModal(bubble_id, entry);
                 $blog.append(modal_html);
             }
 
-            // TODO: add conent to modal
+            // add content to the appropriate modal's mody
+            console.log($(`${bubble_id}_body`));
+            $(`${bubble_id}_body`).append('<div>hello</div>');
+            // JSON.stringify(entry, null, 2)
         });
         return bubbles;
     };
@@ -109,8 +112,7 @@ $(document).ready(function() {
             <div class="remodal" data-remodal-id="${id}">
                 <button data-remodal-action="close" class="remodal-close"></button>
 
-                <h3>ID: ${id}</h3>
-                <p>lol, hi</p>
+                <div id="${id}_body"></div>
 
                 <br>
                 <button data-remodal-action="confirm" class="remodal-confirm close-modal-button">OK</button>
@@ -123,7 +125,7 @@ $(document).ready(function() {
 
         var bubble = {
             // set unique identifier
-            ids: [id],
+            id: id,
 
             // custom formatting
             name: entry.name,
@@ -222,7 +224,7 @@ $(document).ready(function() {
 
         if (e.target.tagName === 'circle') {
             var data = e.target.__data__;
-            var id = data['ids'][0];
+            var id = data['id'];
             var modal = $(`[data-remodal-id=${id}]`).remodal();
             modal.open();
         }
@@ -239,7 +241,7 @@ $(document).ready(function() {
             // this is a workaround because the achord for the modal is not working
             if (window.location.href.includes('#')) {
                 var split = window.location.href.split('#');
-                if (split.length === 2) {
+                if (split.length === 2 && split[1].length > 0) {
                     var id = split[1];
                     var modal = $(`[data-remodal-id=${id}]`).remodal();
                     modal.open();
