@@ -98,28 +98,12 @@ $(document).ready(function() {
             }
 
             // add content to the appropriate modal's mody
-            console.log($(`${bubble_id}_body`));
-            $(`${bubble_id}_body`).append('<div>hello</div>');
+            var content = createEntryContent(entry);
+            $(`#${bubble_id}_body`).append(content);
             // JSON.stringify(entry, null, 2)
         });
         return bubbles;
     };
-
-    function createModal(id) {
-        // create and return the modal for a given city
-
-        var modal_html = `
-            <div class="remodal" data-remodal-id="${id}">
-                <button data-remodal-action="close" class="remodal-close"></button>
-
-                <div id="${id}_body"></div>
-
-                <br>
-                <button data-remodal-action="confirm" class="remodal-confirm close-modal-button">OK</button>
-            </div>
-        `;
-        return modal_html;
-    }
 
     function createBubble(id, entry) {
 
@@ -160,6 +144,35 @@ $(document).ready(function() {
 
         return bubble;
     };
+
+    function createModal(id, entry) {
+        // create and return the modal for a given city
+
+        console.log(entry);
+        var modal_html = `
+            <div class="remodal" data-remodal-id="${id}">
+                <button data-remodal-action="close" class="remodal-close"></button>
+
+                <h2>${entry.location.city}</h2>
+                <div id="${id}_body"></div>
+
+                <br>
+                <button data-remodal-action="confirm" class="remodal-confirm close-modal-button">OK</button>
+            </div>
+        `;
+        return modal_html;
+    }
+
+    function createEntryContent(entry) {
+
+        var content_html = `
+            <div>
+                <h4>${entry.name}</h4>
+            </div>
+        `;
+
+        return content_html;
+    }
 
     function updateMap(map, bubbles) {
 
