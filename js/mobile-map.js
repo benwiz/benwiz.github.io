@@ -217,9 +217,7 @@ $(document).ready(function() {
 
     // populate map with bubbles
     populateMap(map)
-        .then(() => {
-
-        })
+        .then()
         .catch((err) => console.log('promise chain error:', err));
 
 });
