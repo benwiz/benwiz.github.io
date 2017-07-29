@@ -16,8 +16,12 @@ http-server -c-1 .
 
 ## To Do
 
-- in getEntries(), preprocess all the json files into objects
-- then iterate through all entry objects and collect all bubbles. Overlapping bubbles by coordinate & bubble size OR by city/country/region should only have one bubble on the map. Each bubble on the map will be associated with a list of all entries relating to that bubble ~ or just the most recent bc that's all that really matters, but it may be useful later to keep all. While iterating, also create the blog entry, it probably needs to expose an anchor point.
+- use better name for modal id instead of index number
+- review the content of bubble
+
+- in getEntries() ~ I have verified that this is not yet done 7/29/17
+  - preprocess all the json files into objects
+  - then iterate through all entry objects and collect all bubbles. Overlapping bubbles by coordinate & bubble size OR by city/country/region should only have one bubble on the map. Each bubble on the map will be associated with a list of all entries relating to that bubble ~ or just the most recent bc that's all that really matters, but it may be useful later to keep all. While iterating, also create the blog entry, it probably needs to expose an anchor point.
 
 ## Brainstorm
 

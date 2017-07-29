@@ -77,26 +77,48 @@ $(document).ready(function() {
         entries.forEach(function(entry, index) {
 
             // generate unique id which will unite post and bubble
+            // TODO: change to a unique, useful name, like city name
             var id = index;
 
-            // create post
-            var blog_content = JSON.stringify(entry);
-            $blog.append('<div id="' + id + '">' + blog_content + '</div>');
+            // initialize modal variable
+            var modal = null;
 
             // check bubbles list for overlapping bubbles
-            // currently checking by city, but it should be changed to actual visual overlap of bubbles
+            // currently checking by city, but it should be changed to be actual visual overlap of bubbles
             matching_bubbles = bubbles.filter(bubble => bubble.city === entry.location.city);
-
             if (matching_bubbles.length > 0) {
-                // if a match, add new id to that bubble's list of assoicated posts (object ref works here)
-                matching_bubbles[0].ids.push(id);
+                // TODO: get the relevant modal
             } else {
+                // if not a match, create the bubble
                 var bubble = createBubble(id, entry);
                 bubbles.push(bubble);
+
+                // create the actual modal itself
+                var modal_html = createModal(id, entry);
+                $blog.append(modal_html);
             }
+
+            // TODO: add conent to modal
         });
         return bubbles;
     };
+
+    function createModal(id) {
+        // create and return the modal for a given city
+
+        var modal_html = `
+            <div class="remodal" data-remodal-id="${id}">
+                <button data-remodal-action="close" class="remodal-close"></button>
+
+                <h3>ID: ${id}</h3>
+                <p>lol, hi</p>
+
+                <br>
+                <button data-remodal-action="confirm" class="remodal-confirm close-modal-button">OK</button>
+            </div>
+        `;
+        return modal_html;
+    }
 
     function createBubble(id, entry) {
 
@@ -201,9 +223,10 @@ $(document).ready(function() {
 
         if (e.target.tagName === 'circle') {
             var data = e.target.__data__;
-            console.log(data);
             var id = data['ids'][0];
-            console.log(data['ids']);
+            // window.location.href = '#' + id
+            var modal = $(`[data-remodal-id=${id}]`).remodal();
+            modal.open();
         }
     });
 
@@ -212,7 +235,19 @@ $(document).ready(function() {
 
     // populate map with bubbles
     populateMap(map)
-        .then()
+        .then(() => {
+
+            // if there is an achor, open the appropriate modal
+            // this is a workaround because the achord for the modal is not working
+            if (window.location.href.includes('#')) {
+                var split = window.location.href.split('#');
+                if (split.length === 2) {
+                    var id = split[1];
+                    var modal = $(`[data-remodal-id=${id}]`).remodal();
+                    modal.open();
+                }
+            }
+        })
         .catch((err) => console.log('promise chain error:', err));
 
 });
