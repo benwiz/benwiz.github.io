@@ -76,10 +76,6 @@ $(document).ready(function() {
         var bubbles = [];
         entries.forEach(function(entry, index) {
 
-            // generate unique id which will unite post and bubble
-            // TODO: change to a unique, useful name, like city name
-            var id = index;
-
             // initialize modal variable
             var modal = null;
 
@@ -89,6 +85,9 @@ $(document).ready(function() {
             if (matching_bubbles.length > 0) {
                 // TODO: get the relevant modal
             } else {
+                // unique identifier to identify a bubble
+                var id = entry.location.city.replace(' ', '').toLowerCase();
+
                 // if not a match, create the bubble
                 var bubble = createBubble(id, entry);
                 bubbles.push(bubble);
@@ -224,7 +223,6 @@ $(document).ready(function() {
         if (e.target.tagName === 'circle') {
             var data = e.target.__data__;
             var id = data['ids'][0];
-            // window.location.href = '#' + id
             var modal = $(`[data-remodal-id=${id}]`).remodal();
             modal.open();
         }
