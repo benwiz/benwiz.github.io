@@ -70,16 +70,14 @@ $(document).ready(function() {
 
     function createPostsAndBubbles(entries) {
         // create posts while creating a list of bubbles
-
-        var counter = 0;
+        // bubbles are the clickable dots on the map
+        // posts exist inside a modal, there is one modal for each city
 
         var bubbles = [];
-        entries.forEach(function(entry) {
+        entries.forEach(function(entry, index) {
 
             // generate unique id which will unite post and bubble
-            // because name can't be guarenteed to be unique
-            var id = counter;
-            counter++;
+            var id = index;
 
             // create post
             var blog_content = JSON.stringify(entry);
@@ -203,9 +201,9 @@ $(document).ready(function() {
 
         if (e.target.tagName === 'circle') {
             var data = e.target.__data__;
+            console.log(data);
             var id = data['ids'][0];
-            console.log(data['ids'])
-            window.location.hash = id;
+            console.log(data['ids']);
         }
     });
 
