@@ -209,11 +209,8 @@ $(document).ready(function() {
         }
     });
 
-    // this following event block overlaps with the previous
-    // $(map.svg[0][0]).on('click', '.bubbles', function(e) {
-
-    //     var data = e.target.__data__;
-    // });
+    // this following event block overlaps with the previous and is kept here just for reference
+    // $(map.svg[0][0]).on('click', '.bubbles', function(e) { var data = e.target.__data__; });
 
     // populate map with bubbles
     populateMap(map)
