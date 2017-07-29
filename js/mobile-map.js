@@ -165,9 +165,34 @@ $(document).ready(function() {
 
     function createEntryContent(entry) {
 
+        // create details
+        var details = '';
+        for (var i=0; i<entry.details.length; i++) {
+            var detail = entry.details[i];
+            var line = `<p>${detail[0]} - ${detail[1]}</p>`;
+            details = details + line;
+        }
+
+        // console.log(details);
+
+        // create summary
+        var summary = '';
+        for (var i=0; i<entry.summary.length; i++) {
+            var line = entry.summary[i];
+            summary = summary + ' ' + line;
+        }
+
         var content_html = `
             <div>
                 <h4>${entry.name}</h4>
+                <p>${entry.post_date}</p>
+
+                <br>
+                <div>${details}</div>
+
+                <br>
+                <p>${summary}</p>
+
             </div>
         `;
 
