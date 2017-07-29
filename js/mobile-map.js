@@ -145,7 +145,7 @@ $(document).ready(function() {
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: function(geography, data) {
 
-            // return 'hey'; // populateInfo(geography, data, bubbles);
+            return data['city']; // populateInfo(geography, data, bubbles);
         }});
     };
 
