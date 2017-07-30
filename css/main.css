@@ -5,8 +5,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    color: #FEFEFE;
-    background-color: #222222;
+    color: #FFFFFF;
     font-family: 'Open Sans', sans-serif;
     background-image: url('/assets/images/blue-triangles-medium.png');
 }
@@ -32,4 +31,8 @@ body {
 
 .close-modal-button {
     float: right;
+}
+
+.bubble-popup {
+    color: #E91C63;
 }

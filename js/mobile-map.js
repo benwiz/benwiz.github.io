@@ -213,7 +213,8 @@ $(document).ready(function() {
         // put bubbles onto map
         map.bubbles(bubbles, {popupTemplate: function(geography, data) {
 
-            return data['city']; // populateInfo(geography, data, bubbles);
+            var popup = `<div class="bubble-popup">${data['city']}</div>`;
+            return popup;
         }});
     };
 
