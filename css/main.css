@@ -1,13 +1,14 @@
 html,
 body {
-    height: 100%;
+    height: 90%;
     /*width: 100%;*/
     margin: 0;
     padding: 0;
-    /*overflow: hidden;*/
+    overflow: hidden;
     color: #FEFEFE;
     background-color: #222222;
     font-family: 'Open Sans', sans-serif;
+     background-image: url('/assets/images/blue-triangles-medium.png');
 }
 
 .main-container {
@@ -15,13 +16,20 @@ body {
     margin-right: 2.5%;
 }
 
+.heading {
+    position: absolute;
+    text-align: center;
+}
+
 .title {
     color: #27A1DA;
-    /*font-family: 'Hind', sans-serif;*/
     font-size: 64px;
 }
 
-.heading {
-    width: 100%;
-    text-align: center;
+.map-container {
+
+}
+
+.close-modal-button {
+    float: right;
 }

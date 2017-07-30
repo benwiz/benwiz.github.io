@@ -5,9 +5,9 @@ $(document).ready(function() {
     // constants
     var BUBBLE_RADIUS = 5;
     var BUBBLE_BORDER_WIDTH = 0;
-    var MAP_COLOR = '#4E4E4E';
-    var MAP_BORDER_COLOR = MAP_COLOR;
-    var MAP_BORDER_WIDTH = 1;
+    var MAP_COLOR = '#6BA9D2';
+    var MAP_BORDER_COLOR = '#000000'; // MAP_COLOR;
+    var MAP_BORDER_WIDTH = 0.25;
 
     // jQuery elements
     var $blog = $('#blog');
