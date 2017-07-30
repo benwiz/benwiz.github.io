@@ -18,7 +18,28 @@ $(document).ready(function() {
     // data maps countries data
     var countries = Datamap.prototype.worldTopo.objects.world.geometries;
 
-    function populateMap(map) {
+    function colorVisitedCountries() {
+
+        return new Promise(function(resolve, reject) {
+
+            $.getJSON('assets/visited-countries.json', function(visited_countries) {
+
+                for (var i=0; i<visited_countries.length; i++) {
+                    // update country fill code
+                    var visited_country = visited_countries[i];
+                    var country_code = countries.filter(country => country.properties.name == visited_country)[0].id;
+                    var choropleth = {};
+                    choropleth[country_code] = VISITED_MAP_COLOR;
+                    map.updateChoropleth(choropleth);
+                }
+
+                // resolve
+                resolve();
+            });
+        });
+    }
+
+    function populateMap() {
 
         return new Promise(function(resolve, reject) {
 
@@ -36,7 +57,7 @@ $(document).ready(function() {
 
         return new Promise(function(resolve, reject) {
 
-            $.getJSON('assets/entries/entries.json', function(files) {
+            $.getJSON('assets/entries.json', function(files) {
 
                 resolve(files);
             });
@@ -81,12 +102,6 @@ $(document).ready(function() {
 
         var bubbles = [];
         entries.forEach(function(entry, index) {
-
-            // update country fill code
-            var country_code = countries.filter(country => country.properties.name == entry.location.country)[0].id;
-            var choropleth = {};
-            choropleth[country_code] = VISITED_MAP_COLOR;
-            map.updateChoropleth(choropleth);
 
             // initialize modal variable
             var modal = null;
@@ -294,8 +309,9 @@ $(document).ready(function() {
     // this following event block overlaps with the previous and is kept here just for reference
     // $(map.svg[0][0]).on('click', '.bubbles', function(e) { var data = e.target.__data__; });
 
-    // populate map with bubbles
-    populateMap(map)
+    // create map
+    colorVisitedCountries()
+        .then(populateMap)
         .then(handleAnchor)
         .catch((err) => console.log('populate map promise chain error:', err));
 
