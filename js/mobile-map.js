@@ -6,6 +6,7 @@ $(document).ready(function() {
     var BUBBLE_RADIUS = 5;
     var BUBBLE_BORDER_WIDTH = 0;
     var MAP_COLOR = '#B6FFFF';
+    var VISITED_MAP_COLOR = '#84CCCC';
     var MAP_BORDER_COLOR = '#000000';
     var MAP_BORDER_WIDTH = 0.25;
 
@@ -208,6 +209,20 @@ $(document).ready(function() {
         }});
     };
 
+    function handleAnchor() {
+
+        // if there is an achor, open the appropriate modal
+        // this is a workaround because the achord for the modal is not working
+        if (window.location.href.includes('#')) {
+            var split = window.location.href.split('#');
+            if (split.length === 2 && split[1].length > 0) {
+                var id = split[1];
+                var modal = $(`[data-remodal-id=${id}]`).remodal();
+                modal.open();
+            }
+        }
+    }
+
     //
     // scripting below
     //
@@ -237,9 +252,7 @@ $(document).ready(function() {
         },
         fills: {
             defaultFill: MAP_COLOR,
-            light: '#FEFEFE',
-            dark: '#222222',
-            magenta: 'magenta'
+            visited: VISITED_MAP_COLOR
         },
         done: function(datamap) {
 
@@ -252,6 +265,9 @@ $(document).ready(function() {
 
             //     rescale(datamap, d3.event.translate, d3.event.scale);
             // }
+        },
+        data: {
+            USA: { fillKey: 'visited' }
         }
     };
 
@@ -273,19 +289,7 @@ $(document).ready(function() {
 
     // populate map with bubbles
     populateMap(map)
-        .then(() => {
-
-            // if there is an achor, open the appropriate modal
-            // this is a workaround because the achord for the modal is not working
-            if (window.location.href.includes('#')) {
-                var split = window.location.href.split('#');
-                if (split.length === 2 && split[1].length > 0) {
-                    var id = split[1];
-                    var modal = $(`[data-remodal-id=${id}]`).remodal();
-                    modal.open();
-                }
-            }
-        })
-        .catch((err) => console.log('promise chain error:', err));
+        .then(handleAnchor)
+        .catch((err) => console.log('populate map promise chain error:', err));
 
 });
