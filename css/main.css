@@ -1,6 +1,6 @@
 html,
 body {
-    height: 90%;
+    height: 100%;
     /*width: 100%;*/
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@ body {
     color: #FEFEFE;
     background-color: #222222;
     font-family: 'Open Sans', sans-serif;
-     background-image: url('/assets/images/blue-triangles-medium.png');
+    background-image: url('/assets/images/blue-triangles-medium.png');
 }
 
 .main-container {
@@ -27,7 +27,7 @@ body {
 }
 
 .map-container {
-
+    /* margin: 0 auto; */
 }
 
 .close-modal-button {

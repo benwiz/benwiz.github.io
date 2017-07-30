@@ -9,9 +9,14 @@ $(document).ready(function() {
     var VISITED_MAP_COLOR = '#84CCCC';
     var MAP_BORDER_COLOR = '#000000';
     var MAP_BORDER_WIDTH = 0.25;
+    var BUBBLE_COLOR = '#FFFFFF';
+    var HIGHLIGHT_BUBBLE_COLOR = '#E91C63';
 
     // jQuery elements
     var $blog = $('#blog');
+
+    // data maps countries data
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
 
     function populateMap(map) {
 
@@ -77,6 +82,12 @@ $(document).ready(function() {
         var bubbles = [];
         entries.forEach(function(entry, index) {
 
+            // update country fill code
+            var country_code = countries.filter(country => country.properties.name == entry.location.country)[0].id;
+            var choropleth = {};
+            choropleth[country_code] = VISITED_MAP_COLOR;
+            map.updateChoropleth(choropleth);
+
             // initialize modal variable
             var modal = null;
 
@@ -116,7 +127,7 @@ $(document).ready(function() {
             name: entry.name,
             radius: BUBBLE_RADIUS,
             borderWidth: BUBBLE_BORDER_WIDTH,
-            fillKey: 'light',
+            fillKey: 'bubble',
             latitude: entry.location.latitude,
             longitude: entry.location.longitude,
 
@@ -129,8 +140,8 @@ $(document).ready(function() {
             // fillOpacity: 0.75,
             // animate: true,
             // highlightOnHover: true,
-            highlightFillColor: '#27A1DA',
-            highlightBorderColor: '#27A1DA',
+            highlightFillColor: HIGHLIGHT_BUBBLE_COLOR,
+            highlightBorderColor: HIGHLIGHT_BUBBLE_COLOR,
             // highlightBorderWidth: 2,
             // highlightBorderOpacity: 1,
             // highlightFillOpacity: 0.85,
@@ -149,7 +160,6 @@ $(document).ready(function() {
     function createModal(id, entry) {
         // create and return the modal for a given city
 
-        console.log(entry);
         var modal_html = `
             <div class="remodal" data-remodal-id="${id}">
                 <button data-remodal-action="close" class="remodal-close"></button>
@@ -173,8 +183,6 @@ $(document).ready(function() {
             var line = `<p>${detail[0]} - ${detail[1]}</p>`;
             details = details + line;
         }
-
-        // console.log(details);
 
         // create summary
         var summary = '';
@@ -210,9 +218,9 @@ $(document).ready(function() {
     };
 
     function handleAnchor() {
-
         // if there is an achor, open the appropriate modal
         // this is a workaround because the achord for the modal is not working
+
         if (window.location.href.includes('#')) {
             var split = window.location.href.split('#');
             if (split.length === 2 && split[1].length > 0) {
@@ -252,7 +260,8 @@ $(document).ready(function() {
         },
         fills: {
             defaultFill: MAP_COLOR,
-            visited: VISITED_MAP_COLOR
+            visited: VISITED_MAP_COLOR,
+            bubble: BUBBLE_COLOR
         },
         done: function(datamap) {
 
@@ -265,9 +274,6 @@ $(document).ready(function() {
 
             //     rescale(datamap, d3.event.translate, d3.event.scale);
             // }
-        },
-        data: {
-            USA: { fillKey: 'visited' }
         }
     };
 
