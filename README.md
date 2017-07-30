@@ -16,8 +16,12 @@ http-server -c-1 .
 
 ## To Do
 
-- use better name for modal id instead of index number
-- review the content of bubble
+- multiple display options for types of posts (marg, ben, work, etc.)
+- different color for countries that have a post vs those that do not
+- song link in post
+- D3 tutorial... maybe need to eventually switch over
+
+- review the content of bubble object
 
 - in getEntries() ~ I have verified that this is not yet done 7/29/17
   - preprocess all the json files into objects

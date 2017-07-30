@@ -5,8 +5,8 @@ $(document).ready(function() {
     // constants
     var BUBBLE_RADIUS = 5;
     var BUBBLE_BORDER_WIDTH = 0;
-    var MAP_COLOR = '#6BA9D2';
-    var MAP_BORDER_COLOR = '#000000'; // MAP_COLOR;
+    var MAP_COLOR = '#B6FFFF';
+    var MAP_BORDER_COLOR = '#000000';
     var MAP_BORDER_WIDTH = 0.25;
 
     // jQuery elements
