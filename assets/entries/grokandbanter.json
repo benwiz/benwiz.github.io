@@ -7,6 +7,7 @@
         "latitude": 29.957579,
         "longitude": -90.074824
     },
+    "tags": ["job", "portfolio"],
     "details": [
         ["Role", "Developer & Information Analyst"],
         ["Start", "January 2016"],

@@ -7,6 +7,7 @@
         "latitude": 37.562993,
         "longitude": -122.361501
     },
+    "tags": ["job", "portfolio"],
     "details": [
         ["Role", "Contracted UX Designer"],
         ["Start", "October 2016"],
