@@ -55,7 +55,7 @@ d3.json('countries.json', function (json) {
     .enter()
     .append('path')
     .attr('d', path)
-    .classed('visited', country => countriesVisited.indexOf(country.properties.name) >= 0);
+    .classed('visited', country => {countriesVisited.indexOf(country.properties.name) >= 0 ? console.log(country.properties.name) : null; return countriesVisited.indexOf(country.properties.name) >= 0});
 
   // `places` is defined in `places.js`
   places.selectAll('path')
