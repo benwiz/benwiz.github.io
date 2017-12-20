@@ -54,7 +54,8 @@ d3.json('countries.json', function (json) {
     .data(json.features)
     .enter()
     .append('path')
-    .attr('d', path);
+    .attr('d', path)
+    .classed('visited', country => countriesVisited.indexOf(country.properties.name) >= 0);
 
   // `places` is defined in `places.js`
   places.selectAll('path')
@@ -67,7 +68,6 @@ d3.json('countries.json', function (json) {
     .on('click', onClick)
     .on('mousemove', onMouseMove)
     .on('mouseout', onMouseOut);
-
 });
 
 function onClick (place) {
@@ -84,4 +84,8 @@ function onMouseMove (place) {
 
 function onMouseOut (place, i) {
   tooltip.classed('hidden', true);
+}
+
+function visit() {
+  d3.select(this).classed('selected', true);
 }
