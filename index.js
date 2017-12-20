@@ -1,12 +1,10 @@
-// Map Config
+// Config
 var width = 1000;
 var height = 600;
 var center = [0, 0];
 var scale = 150;
 var rotation = [0, 0];
 var translation = [width / 2, height / 2];
-
-// Point config
 var radius = 5;
 
 //
