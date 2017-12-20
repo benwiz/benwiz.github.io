@@ -1,12 +1,17 @@
+// Config
 var width = 1000;
 var height = 600;
-
 var projection = d3.geoRobinson().scale(150).center([0, 27]).rotate([-100, 0]).translate([width / 2, height / 2]);
 
+//
 var svg = d3.select('body').append('svg').attr('width', width).attr('height', height);
+var path = d3.geoPath().projection(projection);
+
+//
 var boundary = svg.append('g').attr('id', 'boundary');
 var countries = svg.append('g').attr('id', 'countries');
-var path = d3.geoPath().projection(projection);
+
+//
 var boundaryFeature = {
   type: 'Feature',
   geometry: {
@@ -23,11 +28,13 @@ var boundaryFeature = {
   }
 };
 
+//
 d3.json('countries.json', function (json) {
   boundary
     .append('path')
     .datum(boundaryFeature)
     .attr('d', path);
+
   countries.selectAll('path')
     .data(json.features)
     .enter()
