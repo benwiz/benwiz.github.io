@@ -6,9 +6,7 @@
 
 ## To Do
 
-- Can I use markdown for desining the actual content of the entry? Keep it inside the same json strcuture that contains the metadata.
 - Design modal content
-- Detect if user is on mobile and redirect to a different page or throw a modal (probably redirect cuz modal may not work well on some devices).
 
 - Later
   - Figure out a better html templating system than javascript with ES6 string templating
