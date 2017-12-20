@@ -1,3 +1,7 @@
+// Initialize material dialog
+var dialogElement = document.querySelector('#mdc-dialog-with-list');
+var dialog = new mdc.dialog.MDCDialog(dialogElement);
+
 // Config
 var width = 1000;
 var height = 600;
@@ -45,7 +49,10 @@ var offsetT = document.getElementById('map').offsetTop+10;
 d3.json('countries.json', main);
 
 function onClick (place) {
+  console.log('dialog:', dialog);
   // console.log('click', place);
+  dialog.lastFocusedTarget = this;
+  dialog.show();
 }
 
 function generateTooltipHTML (place) {
@@ -160,3 +167,11 @@ function main (countriesJSON) {
     .on('mousemove', onMouseMove)
     .on('mouseout', onMouseOut);
 }
+
+// Dialog listeners
+// dialog.listen('MDCDialog:accept', function() {
+//   console.log('accepted');
+// });
+// dialog.listen('MDCDialog:cancel', function() {
+//   console.log('canceled');
+// });
