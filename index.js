@@ -77,11 +77,10 @@ d3.json('countries.json', function (json) {
       tooltip.classed('hidden', false)
         .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
         .html(label);
-      console.log(tooltip, 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px');
     })
     .on('mouseout', function (entry, i) {
       // console.log('mouseout', entry, i);
-      // tooltip.classed('hidden', true);
+      tooltip.classed('hidden', true);
     });
 
 });

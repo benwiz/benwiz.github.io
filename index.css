@@ -1,6 +1,10 @@
 path{ stroke: #999; fill: #eee;}
 #boundary path{ fill: #f2f9ff; stroke: none;}
 
+.hidden {
+    display: none;
+}
+
 div.tooltip {
     color: #222;
     background: #fff;
