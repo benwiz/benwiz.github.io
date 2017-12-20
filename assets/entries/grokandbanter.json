@@ -13,7 +13,7 @@
     "role": "Developer & Information Analyst",
     "start": "January 2016",
     "end": "October 2016",
-    "languages": "Node.js, Python"
+    "languages": ["Node.js, Python"]
   },
   "summary": [
     "blah blah blah something something nothing"
