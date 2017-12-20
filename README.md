@@ -10,3 +10,6 @@
 - Function that generates "place" data from "entries"
 - Script that generates an entry template
 - Figure out what info to display in tooltip and what should be displayed after click (probably in a modal but maybe elsewhere)
+
+- Later
+  - Figure out a better html templating system than javascript with ES6 string templating

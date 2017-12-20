@@ -49,20 +49,9 @@ var offsetT = document.getElementById('map').offsetTop+10;
 d3.json('countries.json', main);
 
 function onClick (place) {
-  console.log('dialog:', dialog);
-  // console.log('click', place);
+  populateDialog(place);
   dialog.lastFocusedTarget = this;
   dialog.show();
-}
-
-function generateTooltipHTML (place) {
-  var html = `
-    ${place.properties.name}
-    <ul>
-      ${place.properties.entries.map(entry => `<li>${entry.name}</li>`).join('')}
-    </ul>
-  `;
-  return html;
 }
 
 function onMouseMove (place) {
@@ -129,9 +118,12 @@ function generatePlacesData (entries) {
     features[entry.location.place].properties.entries.push(entry);
   });
 
-  // Flatten, we don't care about the keys
+  // Flatten, while doing so generate html for each place's dialog modal
   var flattenedFeatures = [];
-  Object.keys(features).forEach(featureKey => flattenedFeatures.push(features[featureKey]));
+  Object.keys(features).forEach(function (featureKey) {
+    var feature = features[featureKey];
+    flattenedFeatures.push(feature);
+  });
 
   return flattenedFeatures;
 }
@@ -167,6 +159,33 @@ function main (countriesJSON) {
     .on('mousemove', onMouseMove)
     .on('mouseout', onMouseOut);
 }
+
+//
+// Templating
+//
+// Generate tooltop html
+function generateTooltipHTML (place) {
+  var html = `
+    ${place.properties.name}
+    <ul>
+      ${place.properties.entries.map(entry => `<li>${entry.name}</li>`).join('')}
+    </ul>
+  `;
+  return html;
+}
+
+// Generate dialog html
+function populateDialog (place) {
+  // Set title of dialog
+  var dialogTitle = document.getElementById('dialog-title');
+  dialogTitle.innerHTML = place.properties.name;
+
+  // Populate content of dialog
+  var dialogContent = document.getElementById('dialog-content');
+  console.log(JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>'));
+  dialogContent.innerHTML = JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
+}
+
 
 // Dialog listeners
 // dialog.listen('MDCDialog:accept', function() {
