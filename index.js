@@ -45,7 +45,7 @@ var offsetT = document.getElementById('map').offsetTop+10;
 d3.json('countries.json', main);
 
 function onClick (place) {
-  console.log('click', place);
+  // console.log('click', place);
 }
 
 function generateTooltipHTML (place) {
