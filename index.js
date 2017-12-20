@@ -76,7 +76,6 @@ function getEntries () {
   // Get each entry's data
   var entries = [];
   entryNames.map(function (entryName) {
-    console.log(entryName);
     $.ajax({
       type: 'GET',
       url: '/assets/entries/' + entryName + '.json',
@@ -138,7 +137,6 @@ function main (countriesJSON) {
   // Get entries and generate place data for map
   var entries = getEntries();
   var placesData = generatePlacesData(entries);
-  console.log(placesData);
 
   // `places` is defined in `places.js`
   places.selectAll('path')
