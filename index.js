@@ -67,20 +67,24 @@ d3.json('countries.json', function (json) {
     .attr('cx', d => projection(d.geometry.coordinates)[0])
 		.attr('cy', d => projection(d.geometry.coordinates)[1])
     .attr('r', radius)
-    .on('click', function (entry) {
-      console.log('click', entry);
-    })
-    .on('mousemove', function (entry) {
-      // console.log('mousemove', entry);
-      var label = entry.properties.name;
-      var mouse = d3.mouse(svg.node()).map(entry => parseInt(entry));
-      tooltip.classed('hidden', false)
-        .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
-        .html(label);
-    })
-    .on('mouseout', function (entry, i) {
-      // console.log('mouseout', entry, i);
-      tooltip.classed('hidden', true);
-    });
+    .on('click', onClick)
+    .on('mousemove', onMouseMove)
+    .on('mouseout', onMouseOut);
 
 });
+
+function onClick (entry) {
+  console.log('click', entry);
+}
+
+function onMouseMove (entry) {
+  var label = entry.properties.name;
+  var mouse = d3.mouse(svg.node()).map(entry => parseInt(entry));
+  tooltip.classed('hidden', false)
+    .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
+    .html(label);
+}
+
+function onMouseOut (entry, i) {
+  tooltip.classed('hidden', true);
+}
