@@ -33,6 +33,9 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 ## To Do
 
 - Design modal content
+- Design tooltip content
+- Implement modal content
+- Implement tooltip content
 
 - Later
   - Figure out a better html templating system than javascript with ES6 string templating
