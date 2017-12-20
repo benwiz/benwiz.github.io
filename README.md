@@ -46,4 +46,5 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
   - Make background prettier
   - Add a title
   - Maybe get rid of Antarctica
-  - Make mobile disclaimer pretty. Then make it useful.
+  - Filter bubbles by tag (probably using fuzzy search or a multi select)
+  - Make mobile disclaimer pretty
