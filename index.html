@@ -17,13 +17,13 @@
       role="alertdialog"
       aria-labelledby="mdc-dialog-with-list-label"
       aria-describedby="mdc-dialog-with-list-description">
-      <div class="mdc-dialog__surface">
+      <div class="mdc-dialog__surface" style="height:80%;">
         <header class="mdc-dialog__header">
           <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
             <span id="dialog-title">Dialog Title</span>
           </h2>
         </header>
-        <section id="mdc-dialog-with-list-description" class="mdc-dialog__body mdc-dialog__body--scrollable">
+        <section id="mdc-dialog-with-list-description" class="mdc-dialog__body" style="overflow:hidden"> <!-- Not using `mdc-dialog__body--scrollable` right now because I can't figure out how to increase its height. -->
           <div id="dialog-content">
             Something
           </div>

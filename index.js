@@ -182,7 +182,6 @@ function populateDialog (place) {
 
   // Populate content of dialog
   var dialogContent = document.getElementById('dialog-content');
-  console.log(JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>'));
   dialogContent.innerHTML = JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
 }
 
