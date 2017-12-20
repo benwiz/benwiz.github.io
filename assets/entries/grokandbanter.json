@@ -8,12 +8,12 @@
         "longitude": -90.074824
     },
     "tags": ["job", "portfolio"],
-    "details": [
-        ["Role", "Developer & Information Analyst"],
-        ["Start", "January 2016"],
-        ["End", "October 2016"],
-        ["Language", "Node.js, Python"]
-    ],
+    "details": {
+        "role": "Developer & Information Analyst",
+        "start": "January 2016",
+        "end": "October 2016",
+        "languages": "Node.js, Python"
+    },
     "summary": [
         "At Grok + Banter we were building an end-to-end platform to support our own computer-vision powered, marketing analytics IoT device. By tracking reactions to out-of-home advertisements we hoped to provide actionable insights strong enough to bring out-of-home marketing back into the limelight.",
         "I took ownership of our IoT device with embedded computer vision software. As a fresh college graduate have so much responsibility and expectation was difficult but very beneficial to my development as an engineer. I went from zero knowledge of computer vision, embedded systems, and data streams to working very closely with those and more every day.",
