@@ -42,7 +42,34 @@ var offsetL = document.getElementById('map').offsetLeft+10;
 var offsetT = document.getElementById('map').offsetTop+10;
 
 // Load countries (world map) data
-d3.json('countries.json', function (json) {
+d3.json('countries.json', main);
+
+function onClick (place) {
+  console.log('click', place);
+}
+
+function onMouseMove (place) {
+  var label = place.properties.name;
+  var mouse = d3.mouse(svg.node()).map(place => parseInt(place));
+  tooltip.classed('hidden', false)
+    .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
+    .html(label);
+}
+
+function onMouseOut (place, i) {
+  tooltip.classed('hidden', true);
+}
+
+function main (countriesJSON) {
+//   var url = 'http://yoursite.com/data/users.json';
+// var j = [];
+// $.ajax({
+//   type: 'GET',
+//   url: url,
+//   dataType: 'json',
+//   success: function(data) { j = data;},
+//   async: false
+// });
   // Draw boundary
   boundary
     .append('path')
@@ -51,7 +78,7 @@ d3.json('countries.json', function (json) {
 
   // Draw countries
   countries.selectAll('path')
-    .data(json.features)
+    .data(countriesJSON.features)
     .enter()
     .append('path')
     .attr('d', path)
@@ -68,20 +95,4 @@ d3.json('countries.json', function (json) {
     .on('click', onClick)
     .on('mousemove', onMouseMove)
     .on('mouseout', onMouseOut);
-});
-
-function onClick (place) {
-  console.log('click', place);
-}
-
-function onMouseMove (place) {
-  var label = place.properties.name;
-  var mouse = d3.mouse(svg.node()).map(place => parseInt(place));
-  tooltip.classed('hidden', false)
-    .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
-    .html(label);
-}
-
-function onMouseOut (place, i) {
-  tooltip.classed('hidden', true);
 }
