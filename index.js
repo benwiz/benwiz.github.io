@@ -61,7 +61,6 @@ d3.json('countries.json', function (json) {
   // `entries` is defined in `entries.js`
   entries.selectAll('path')
     .data(entriesData.features)
-    // .data([aa])
     .enter()
     .append('circle')
     .attr('cx', d => projection(d.geometry.coordinates)[0])
