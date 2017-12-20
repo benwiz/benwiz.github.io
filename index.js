@@ -19,7 +19,7 @@ var boundary = svg.append('g').attr('id', 'boundary');
 var countries = svg.append('g').attr('id', 'countries');
 var entries = svg.append('g').attr('class', 'bubble');
 
-//
+// Boundary data
 var boundaryFeature = {
   type: 'Feature',
   geometry: {
@@ -43,7 +43,7 @@ var tooltip = d3.select('#map')
 var offsetL = document.getElementById('map').offsetLeft+10;
 var offsetT = document.getElementById('map').offsetTop+10;
 
-//
+// Load countries (world map) data
 d3.json('countries.json', function (json) {
   // Draw boundary
   boundary
