@@ -29,6 +29,7 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 ## Ideas
 
 - Size of bubble corresponds to amount of time spent
+- Color of each country depends on number of days I have spent in that country
 
 ## To Do
 
