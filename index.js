@@ -46,7 +46,7 @@ var offsetL = document.getElementById('map').offsetLeft+10;
 var offsetT = document.getElementById('map').offsetTop+10;
 
 // Load countries (world map) data
-d3.json('countries.json', main);
+d3.json('assets/countries.json', main);
 
 function onClick (place) {
   populateDialog(place);
