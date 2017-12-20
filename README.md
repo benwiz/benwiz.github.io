@@ -24,6 +24,7 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 **CNAME** is necessary so that AWS Route 53 can create a CNAME, I think this is required by GitHub Pages
 **.gitignore** files to ignore for git
 **.editorconfig** tell the editor how to behave
+**README.md** this
 
 ## Ideas
 
