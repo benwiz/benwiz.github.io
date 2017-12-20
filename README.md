@@ -1,5 +1,9 @@
 # benwiz.github.io
 
+## Ideas
+
+- Size of bubble corresponds to amount of time spent
+
 ## To Do
 
 - Figure out entry data format

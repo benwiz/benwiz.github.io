@@ -48,8 +48,18 @@ function onClick (place) {
   console.log('click', place);
 }
 
+function generateTooltipHTML (place) {
+  var html = `
+    ${place.properties.name}
+    <ul>
+      ${place.properties.entries.map(entry => `<li>${entry.name}</li>`).join('')}
+    </ul>
+  `;
+  return html;
+}
+
 function onMouseMove (place) {
-  var label = place.properties.name;
+  var label = generateTooltipHTML(place);
   var mouse = d3.mouse(svg.node()).map(place => parseInt(place));
   tooltip.classed('hidden', false)
     .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
