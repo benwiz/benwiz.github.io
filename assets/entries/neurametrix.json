@@ -1,10 +1,13 @@
 {
     "name": "NeuraMetrix",
+    "post_date": "2017-06-03T03:31:54.123Z",
     "location": {
         "city": "San Francisco",
+        "country": "United States of America",
         "latitude": 37.562993,
         "longitude": -122.361501
     },
+    "tags": ["job", "portfolio"],
     "details": [
         ["Role", "Contracted UX Designer"],
         ["Start", "October 2016"],

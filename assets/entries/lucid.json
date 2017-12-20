@@ -1,10 +1,13 @@
 {
     "name": "Lucid",
+    "post_date": "2017-06-04T03:31:54.123Z",
     "location": {
         "city": "New Orleans",
+        "country": "United States of America",
         "latitude": 29.951306,
         "longitude": -90.065479
     },
+    "tags": ["job", "portfolio"],
     "details": [
         ["Role", "TechOps Engineer"],
         ["Start", "December 2016"],

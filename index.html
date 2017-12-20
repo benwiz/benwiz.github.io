@@ -4,6 +4,11 @@
     <title>Ben Wiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+    <script src="./js/vendor/w3.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Hind|Open+Sans" rel="stylesheet">
+
+    <!-- Vendor -->
     <script src="./js/vendor/jquery-3.2.1.min.js"></script>
     <script src="./js/vendor/tether.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/vendor/tether.min.css">
@@ -14,39 +19,22 @@
     <script src="./js/vendor/datamaps.world.min.js"></script>
     <script src="./js/vendor/datamaps-zoomto.js"></script>
     <script src="./js/vendor/bluebird.min.js"></script>
+    <link rel="stylesheet" href="./css/vendor/material.pink-teal.min.css">
+    <script src="./js/vendor/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./css/vendor/remodal.css">
+    <link rel="stylesheet" href="./css/vendor/remodal-default-theme.css">
+    <script src="./js/vendor/remodal.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+    <!-- Mine -->
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/mobile.css">
+    <script src="./js/mobile-map.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body>
 
-    <div class="main-container gutter-0 row">
-
-        <div class="info-container col-md-4 col1">
-            <div class="row name">
-                <h2>[ <span id="name"></span> ]</h2>
-            </div>
-            <div id="details" class="row details">
-                <!-- dynamically populate list items from `details` object property -->
-            </div>
-            <div id="summary" class="row summary">
-                <!-- dynamically populate paragraphs from `summary` array property -->
-            </div>
-        </div>
-
-        <div class="col-md-8 col2">
-            <div class="demo-container">
-                <!--<img src="./assets/dragon_drunk.png"></img>-->
-            </div>
-            <div id="map-container" class="map-conatiner">
-                <div id="map" class="map"></div>
-            </div>
-        </div>
-
-    </div>
-
+    <div w3-include-html="partials/mobile.html"></div>
+    <script>w3.includeHTML();</script>
 </body>
 </html>
-
-<script src="./js/map.js"></script>
