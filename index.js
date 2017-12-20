@@ -1,13 +1,13 @@
 // Map Config
 var width = 1000;
 var height = 600;
-var center = [0, 27];
+var center = [0, 0];
 var scale = 150;
-var rotation = [-100, 0];
+var rotation = [0, 0];
 var translation = [width / 2, height / 2];
 
 // Point config
-var radius = 20;
+var radius = 5;
 
 //
 var svg = d3.select('body').append('svg').attr('width', width).attr('height', height);
@@ -17,7 +17,7 @@ var path = d3.geoPath().projection(projection);
 //
 var boundary = svg.append('g').attr('id', 'boundary');
 var countries = svg.append('g').attr('id', 'countries');
-var entries = svg.append('g').attr('class', 'bubble');
+var places = svg.append('g').attr('class', 'bubble');
 
 // Boundary data
 var boundaryFeature = {
@@ -58,9 +58,9 @@ d3.json('countries.json', function (json) {
     .append('path')
     .attr('d', path);
 
-  // `entries` is defined in `entries.js`
-  entries.selectAll('path')
-    .data(entriesData.features)
+  // `places` is defined in `places.js`
+  places.selectAll('path')
+    .data(placesData.features)
     .enter()
     .append('circle')
     .attr('cx', d => projection(d.geometry.coordinates)[0])
@@ -72,18 +72,18 @@ d3.json('countries.json', function (json) {
 
 });
 
-function onClick (entry) {
-  console.log('click', entry);
+function onClick (place) {
+  console.log('click', place);
 }
 
-function onMouseMove (entry) {
-  var label = entry.properties.name;
-  var mouse = d3.mouse(svg.node()).map(entry => parseInt(entry));
+function onMouseMove (place) {
+  var label = place.properties.name;
+  var mouse = d3.mouse(svg.node()).map(place => parseInt(place));
   tooltip.classed('hidden', false)
     .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
     .html(label);
 }
 
-function onMouseOut (entry, i) {
+function onMouseOut (place, i) {
   tooltip.classed('hidden', true);
 }

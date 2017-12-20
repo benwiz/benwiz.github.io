@@ -1,4 +1,4 @@
-var entriesJSON = `
+var placesJSON = `
 {
   "type": "FeatureCollection",
 
@@ -18,4 +18,4 @@ var entriesJSON = `
 }
 `;
 
-var entriesData = JSON.parse(entriesJSON);
+var placesData = JSON.parse(placesJSON);
