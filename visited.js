@@ -16,6 +16,8 @@ var countriesVisited = [
   'Sweden',
   'Denmark',
   'Greece',
+  'Netherlands',
+  'Belgium',
   // ME
   'Israel',
   // SEA
