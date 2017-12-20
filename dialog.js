@@ -7,8 +7,3 @@ dialog.listen('MDCDialog:accept', function() {
 dialog.listen('MDCDialog:cancel', function() {
   console.log('canceled');
 })
-
-document.querySelector('#default-dialog-activation').addEventListener('click', function (evt) {
-  dialog.lastFocusedTarget = evt.target;
-  dialog.show();
-})
