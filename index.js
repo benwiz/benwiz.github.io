@@ -90,8 +90,34 @@ function getEntries () {
   return entries;
 }
 
+// Group entries by place using necessary format
 function generatePlacesData (entries) {
+  var features = {};
 
+  // Create features grouped by location
+  entries.forEach(function (entry, i) {
+    if (!features[entry.location.place]) {
+      features[entry.location.place] = {
+        // id: i,
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [entry.location.longitude, entry.location.latitude],
+        },
+        properties: {
+          name: entry.location.place,
+          entries: [],
+        },
+      };
+    }
+    features[entry.location.place].properties.entries.push(entry);
+  });
+
+  // Flatten, we don't care about the keys
+  var flattenedFeatures = [];
+  Object.keys(features).forEach(featureKey => flattenedFeatures.push(features[featureKey]));
+
+  return flattenedFeatures;
 }
 
 function main (countriesJSON) {
@@ -111,10 +137,12 @@ function main (countriesJSON) {
 
   // Get entries and generate place data for map
   var entries = getEntries();
+  var placesData = generatePlacesData(entries);
+  console.log(placesData);
 
   // `places` is defined in `places.js`
   places.selectAll('path')
-    .data(placesData.features)
+    .data(placesData)
     .enter()
     .append('circle')
     .attr('cx', d => projection(d.geometry.coordinates)[0])

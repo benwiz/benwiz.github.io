@@ -1,21 +1,22 @@
 {
-    "name": "Lucid",
-    "post_date": "2017-06-04T03:31:54.123Z",
-    "location": {
-        "city": "New Orleans",
-        "country": "United States of America",
-        "latitude": 29.951306,
-        "longitude": -90.065479
-    },
-    "tags": ["job", "portfolio"],
-    "details": {
-        "role": "TechOps Engineer",
-        "start": "December 2016",
-        "end": "Present",
-        "languages": ["Node.js", "Python"]
-    },
-    "summary": [
-        "At Lucid, I work in the Fulcrum business unit which is a programmatic sample (i.e. survey) exchange platform as an engineer. I work closely with our sales and client managers to produce value and innovate without being bogged down my the needs of a traditional tech team.",
-        "I spend half my time focusing on professional services where I help Lucid’s customers integrate with Fulcrum’s APIs. I spend the rest of my time in Lucid Labs generating ideas and developing moonshot experiments to innovate the industries in which Lucid operates."
-    ]
+  "name": "Lucid",
+  "post_date": "2017-06-04T03:31:54.123Z",
+  "location": {
+    "place": "New Orleans",
+    "city": "New Orleans",
+    "country": "United States of America",
+    "latitude": 29.951306,
+    "longitude": -90.065479
+  },
+  "tags": ["job", "portfolio"],
+  "details": {
+    "role": "TechOps Engineer",
+    "start": "December 2016",
+    "end": "Present",
+    "languages": ["Node.js", "Python"]
+  },
+  "summary": [
+    "At Lucid, I work in the Fulcrum business unit which is a programmatic sample (i.e. survey) exchange platform as an engineer. I work closely with our sales and client managers to produce value and innovate without being bogged down my the needs of a traditional tech team.",
+    "I spend half my time focusing on professional services where I help Lucid’s customers integrate with Fulcrum’s APIs. I spend the rest of my time in Lucid Labs generating ideas and developing moonshot experiments to innovate the industries in which Lucid operates."
+  ]
 }

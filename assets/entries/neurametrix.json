@@ -1,20 +1,21 @@
 {
-    "name": "NeuraMetrix",
-    "post_date": "2017-06-03T03:31:54.123Z",
-    "location": {
-        "city": "San Francisco",
-        "country": "United States of America",
-        "latitude": 37.562993,
-        "longitude": -122.361501
-    },
-    "tags": ["job", "portfolio"],
-    "details": {
-        "role": "Contracted UX Designer",
-        "start": "October 2016",
-        "end": "December 2016",
-        "languages": ["JavaScript"]
-    },
-    "summary": [
-        "Created simple data visualizations to bring life to NeuraMetrix's acquired data."
-    ]
+  "name": "NeuraMetrix",
+  "post_date": "2017-06-03T03:31:54.123Z",
+  "location": {
+    "place": "San Francisco",
+    "city": "San Francisco",
+    "country": "United States of America",
+    "latitude": 37.562993,
+    "longitude": -122.361501
+  },
+  "tags": ["job", "portfolio"],
+  "details": {
+    "role": "Contracted UX Designer",
+    "start": "October 2016",
+    "end": "December 2016",
+    "languages": ["JavaScript"]
+  },
+  "summary": [
+    "Created simple data visualizations to bring life to NeuraMetrix's acquired data."
+  ]
 }
