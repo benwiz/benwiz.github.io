@@ -37,9 +37,9 @@ var boundaryFeature = {
 };
 
 // Experimental / In Progress
-var tooltip = d3.select("#map")
-         .append("div")
-         .attr("class", "tooltip hidden");
+var tooltip = d3.select('#map')
+         .append('div')
+         .attr('class', 'tooltip hidden');
 var offsetL = document.getElementById('map').offsetLeft+10;
 var offsetT = document.getElementById('map').offsetTop+10;
 
@@ -70,16 +70,18 @@ d3.json('countries.json', function (json) {
     .on('click', function (entry) {
       console.log('click', entry);
     })
-    .on('mousemove', function (d) {
+    .on('mousemove', function (entry) {
       // console.log('mousemove', entry);
-      label = d.properties.name;
-      var mouse = d3.mouse(svg.node()).map(d => parseInt(d));
-      tooltip.classed("hidden", false)
-        .attr("style", "left:"+(mouse[0]+offsetL)+"px; top:"+(mouse[1]+offsetT)+"px")
+      var label = entry.properties.name;
+      var mouse = d3.mouse(svg.node()).map(entry => parseInt(entry));
+      tooltip.classed('hidden', false)
+        .attr('style', 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px')
         .html(label);
+      console.log(tooltip, 'left:'+(mouse[0]+offsetL)+'px; top:'+(mouse[1]+offsetT)+'px');
     })
     .on('mouseout', function (entry, i) {
       // console.log('mouseout', entry, i);
+      // tooltip.classed('hidden', true);
     });
 
 });
