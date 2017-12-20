@@ -60,16 +60,41 @@ function onMouseOut (place, i) {
   tooltip.classed('hidden', true);
 }
 
+function getEntries () {
+  // Get entry names
+  var entryNames = [];
+  $.ajax({
+    type: 'GET',
+    url: '/assets/entries.json',
+    dataType: 'json',
+    success: function(data) {
+      data.forEach(entryName => entryNames.push(entryName))
+    },
+    async: false,
+  });
+
+  // Get each entry's data
+  var entries = [];
+  entryNames.map(function (entryName) {
+    console.log(entryName);
+    $.ajax({
+      type: 'GET',
+      url: '/assets/entries/' + entryName + '.json',
+      dataType: 'json',
+      success: entry => entries.push(entry),
+      error: console.log,
+      async: false,
+    });
+  });
+
+  return entries;
+}
+
+function generatePlacesData (entries) {
+
+}
+
 function main (countriesJSON) {
-//   var url = 'http://yoursite.com/data/users.json';
-// var j = [];
-// $.ajax({
-//   type: 'GET',
-//   url: url,
-//   dataType: 'json',
-//   success: function(data) { j = data;},
-//   async: false
-// });
   // Draw boundary
   boundary
     .append('path')
@@ -83,6 +108,9 @@ function main (countriesJSON) {
     .append('path')
     .attr('d', path)
     .classed('visited', country => countriesVisited.indexOf(country.properties.name) >= 0);
+
+  // Get entries and generate place data for map
+  var entries = getEntries();
 
   // `places` is defined in `places.js`
   places.selectAll('path')
