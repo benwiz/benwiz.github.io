@@ -1,8 +1,8 @@
-path{
+path {
     stroke: #999;
     fill: #eee;
 }
-#boundary path{
+#boundary path {
     fill: #f2f9ff;
     stroke: none;
 }

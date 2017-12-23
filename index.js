@@ -178,9 +178,12 @@ function populateDialog (place) {
   var dialogTitle = document.getElementById('dialog-title');
   dialogTitle.innerHTML = place.properties.name;
 
-  // Populate content of dialog
+  // TODO: Populate content of dialog
   var dialogContent = document.getElementById('dialog-content');
-  dialogContent.innerHTML = JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
+  // dialogContent.innerHTML = place.properties.entries
+
+  // Code to generate a nice looking JSON string for HTML
+  // JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
 }
 
 
@@ -191,3 +194,4 @@ function populateDialog (place) {
 // dialog.listen('MDCDialog:cancel', function() {
 //   console.log('canceled');
 // });
+

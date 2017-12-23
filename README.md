@@ -34,9 +34,9 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 ## To Do
 
 - Implement modal content
-  - name
-  - date
-  -
+  - Drop button to bottom
+  - Create container for text
+  - Create gridlist for images
 - Make tooltip pretty
 - Make bubbles pretty
 - Make map pretty
