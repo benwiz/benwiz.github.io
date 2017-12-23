@@ -39,9 +39,7 @@ var boundaryFeature = {
 };
 
 // Experimental / In Progress
-var tooltip = d3.select('#map')
-         .append('div')
-         .attr('class', 'tooltip hidden');
+var tooltip = d3.select('#map').append('div').attr('class', 'tooltip hidden');
 var offsetL = document.getElementById('map').offsetLeft+10;
 var offsetT = document.getElementById('map').offsetTop+10;
 

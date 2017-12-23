@@ -33,10 +33,13 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 
 ## To Do
 
-- Design modal content
-- Design tooltip content
 - Implement modal content
-- Implement tooltip content
+  - name
+  - date
+  -
+- Make tooltip pretty
+- Make bubbles pretty
+- Make map pretty
 
 - Later
   - Figure out a better html templating system than javascript with ES6 string templating
@@ -46,5 +49,6 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
   - Make background prettier
   - Add a title
   - Maybe get rid of Antarctica
-  - Filter bubbles by tag (probably using fuzzy search or a multi select)
+  - Filter bubbles by tag (probably using fuzzy search and/or a multi select)
   - Make mobile disclaimer pretty
+  - Draw connections to related cities
