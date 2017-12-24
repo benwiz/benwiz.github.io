@@ -183,6 +183,9 @@ function populateDialog (place) {
   dialogContent.innerHTML = generateDialogContentHTML(place.properties.entries);
 
   // Initialize masonry. Although it would be better to set configs here, it's only working if I set in css.
+  try {
+    $('.grid').masonry('destroy');
+  } catch (e) {}
   $('.grid').masonry({
     // horizontalOrder: true,
   });
