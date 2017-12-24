@@ -217,6 +217,17 @@ function generateDialogContentHTML(entries) {
   return contentHTML
 }
 
+function test() {
+  var html = `
+    <div class="grid">
+      <div class="grid-item">hello, world!</div>
+      <div class="grid-item grid-item--width2">hello, world!</div>
+      <div class="grid-item">hello, world!</div>
+    </div>
+  `;
+  return html;
+}
+
 function generateFirstCardHTML(entry, color) {
   // Generate first card
   var html = `
