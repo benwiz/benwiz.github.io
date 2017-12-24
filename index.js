@@ -185,13 +185,3 @@ function populateDialog (place) {
   // Code to generate a nice looking JSON string for HTML
   // JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
 }
-
-
-// Dialog listeners
-// dialog.listen('MDCDialog:accept', function() {
-//   console.log('accepted');
-// });
-// dialog.listen('MDCDialog:cancel', function() {
-//   console.log('canceled');
-// });
-
