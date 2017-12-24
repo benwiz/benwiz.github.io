@@ -182,7 +182,7 @@ function populateDialog (place) {
   var dialogContent = document.getElementById('dialog-content-outer-grid');
   dialogContent.innerHTML = generateDialogContentHTML(place.properties.entries);
 
-  // Initialize masonry
+  // Initialize masonry. Although it would be better to set configs here, it's only working if I set in css.
   $('.grid').masonry(/*{
     columnWidth: 250,
     itemSelector: '.grid-item',
