@@ -179,18 +179,13 @@ function populateDialog (place) {
   dialogTitle.innerHTML = place.properties.name;
 
   // TODO: Populate content of dialog
-  var dialogContent = document.getElementById('dialog-content-outer-grid');
+  var dialogContent = document.getElementById('dialog-content-grid');
   dialogContent.innerHTML = generateDialogContentHTML(place.properties.entries);
 
   // Initialize masonry. Although it would be better to set configs here, it's only working if I set in css.
-  $('.grid').masonry(/*{
-    columnWidth: 250,
-    itemSelector: '.grid-item',
-    gutter: 10,
-  }*/);
-
-  // Code to generate a nice looking JSON string for HTML
-  // JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
+  $('.grid').masonry({
+    // horizontalOrder: true,
+  });
 }
 
 // Generate a new level 1 cell for each entry, then generate cards for all the entry details.
@@ -200,23 +195,22 @@ function generateDialogContentHTML(entries) {
   entries.forEach(function(entry, i) {
 
     // Pick alternating colors
-    var color;
-    if (i % 2) {
-      color = 'lightblue';
-    } else {
-      color = 'lightgreen';
-    }
+    var colors = ['#ceefff', '#e4fff5', '#ececec', '#c0e7f6', '#dbcafd']
+    console.log(i % entries.length);
+    var color = colors[i % entries.length];
+
+    // Wrap the following entryHTML block in these divs if I separate out each entry more
+    //<div class="mdc-layout-grid__cell--span-12"></div>
+    //<div class="grid"></div>
 
     // Create html
     var entryHTML = `
-      <div class="mdc-layout-grid__cell--span-12">
-        <div class="grid">
-          ${generateFirstCardHTML(entry, color)}
-          ${generateDetailsCardHTML(entry, color)}
-          ${generateLocationCardHTML(entry, color)}
-          ${generateImagesCardHTML(entry, color)}
-        </div>
-      </div>
+        ${generateFirstCardHTML(entry, color)}
+        ${generateDetailsCardHTML(entry, color)}
+        ${generateLocationCardHTML(entry, color)}
+        ${generateImagesCardHTML(entry, color)}
+        ${generateInvisibleCardHTML()}
+        ${generateInvisibleCardHTML()}
     `;
     contentHTML += entryHTML;
   });
@@ -299,6 +293,23 @@ function generateImagesCardHTML(entry, color) {
         </section>
         <section class="mdc-card__supporting-text">
           some images will go here
+        </section>
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function generateInvisibleCardHTML() {
+  var html = `
+    <div class="grid-item">
+      <div class="mdc-card" style="visibility:hidden;">
+        <section class="mdc-card__primary">
+          <h1 class="mdc-card__title mdc-card__title--large">NOthing</h1>
+        </section>
+        <section class="mdc-card__supporting-text">
+          Nothing d
         </section>
       </div>
     </div>
