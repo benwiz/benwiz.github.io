@@ -179,9 +179,27 @@ function populateDialog (place) {
   dialogTitle.innerHTML = place.properties.name;
 
   // TODO: Populate content of dialog
-  var dialogContent = document.getElementById('dialog-content');
-  // dialogContent.innerHTML = place.properties.entries
+  var dialogContent = document.getElementById('dialog-content-outer-grid');
+  dialogContent.innerHTML = generateDialogContentHTML(place.properties.entries);
 
   // Code to generate a nice looking JSON string for HTML
   // JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
+}
+
+// Generate a new level 1 cell for each entry, then generate cards for all the entry details.
+function generateDialogContentHTML(entries) {
+  var contentHTML = '';
+  // Loop through each entry and generate the html for the level 1 cell
+  entries.forEach(function(entry) {
+    var entryHTML = `
+    <div class="mdc-layout-grid__cell--span-12" style="background-color:lightgreen;">
+      <div class="mdc-layout-grid__inner">
+        hi
+      </div>
+    </div>
+    `;
+    contentHTML += entryHTML;
+  });
+
+  return contentHTML
 }
