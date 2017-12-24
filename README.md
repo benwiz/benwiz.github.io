@@ -33,7 +33,6 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 
 ## To Do
 
-- BUG: If a modal is re-opened all the formatting gets screwed up. Probably need to destroy previous masonry
 - Make tooltip pretty
 - Make bubbles pretty
 - Make map pretty
