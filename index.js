@@ -190,9 +190,19 @@ function populateDialog (place) {
 function generateDialogContentHTML(entries) {
   var contentHTML = '';
   // Loop through each entry and generate the html for the level 1 cell
-  entries.forEach(function(entry) {
+  entries.forEach(function(entry, i) {
+
+    // Pick alternating colors
+    var color;
+    if (i % 2) {
+      color = 'lightblue';
+    } else {
+      color = 'lightgreen';
+    }
+
+    // Create html
     var entryHTML = `
-    <div class="mdc-layout-grid__cell--span-12" style="background-color:lightgreen;">
+    <div class="mdc-layout-grid__cell--span-12" style="background-color:${color};">
       <div class="mdc-layout-grid__inner">
         hi
       </div>
