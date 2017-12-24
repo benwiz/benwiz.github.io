@@ -37,7 +37,7 @@ div.tooltip {
 }
 
 .mdc-layout-grid__cell--span-12 {
-    /* background-color: lightblue; */
+    background-color: gray;
 }
 
 .mdc-layout-grid__cell--span-4 {

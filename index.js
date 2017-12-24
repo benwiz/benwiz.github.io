@@ -182,6 +182,12 @@ function populateDialog (place) {
   var dialogContent = document.getElementById('dialog-content-outer-grid');
   dialogContent.innerHTML = generateDialogContentHTML(place.properties.entries);
 
+  // Initialize masonry
+  $('.grid').masonry({
+    columnWidth: 200,
+    itemSelector: '.grid-item',
+  });
+
   // Code to generate a nice looking JSON string for HTML
   // JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
 }
@@ -203,7 +209,7 @@ function generateDialogContentHTML(entries) {
     // Create html
     var entryHTML = `
       <div class="mdc-layout-grid__cell--span-12">
-        <div class="mdc-layout-grid__inner">
+        <div class="grid">
           ${generateFirstCardHTML(entry, color)}
           ${generateDetailsCardHTML(entry, color)}
           ${generateLocationCardHTML(entry, color)}
@@ -217,28 +223,17 @@ function generateDialogContentHTML(entries) {
   return contentHTML
 }
 
-function test() {
-  var html = `
-    <div class="grid">
-      <div class="grid-item">hello, world!</div>
-      <div class="grid-item grid-item--width2">hello, world!</div>
-      <div class="grid-item">hello, world!</div>
-    </div>
-  `;
-  return html;
-}
-
 function generateFirstCardHTML(entry, color) {
   // Generate first card
   var html = `
-    <div class="mdc-layout-grid__cell--span-4">
+    <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">${entry.name}</h1>
           <h2 class="mdc-card__subtitle">${entry.details.role}</h2>
         </section>
         <section class="mdc-card__supporting-text">
-          ${entry.summary.join('<br><br>')}
+          ${entry.summary.join('<br>')}
         </section>
   `;
 
@@ -262,7 +257,7 @@ function generateFirstCardHTML(entry, color) {
 
 function generateDetailsCardHTML(entry, color) {
   var html = `
-    <div class="mdc-layout-grid__cell--span-4">
+    <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">Details</h1>
@@ -279,7 +274,7 @@ function generateDetailsCardHTML(entry, color) {
 
 function generateLocationCardHTML(entry, color) {
   var html = `
-    <div class="mdc-layout-grid__cell--span-4">
+    <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">Location</h1>
@@ -296,7 +291,7 @@ function generateLocationCardHTML(entry, color) {
 
 function generateImagesCardHTML(entry, color) {
   var html = `
-    <div class="mdc-layout-grid__cell--span-4">
+    <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">Image Gallery</h1>
