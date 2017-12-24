@@ -202,14 +202,100 @@ function generateDialogContentHTML(entries) {
 
     // Create html
     var entryHTML = `
-    <div class="mdc-layout-grid__cell--span-12" style="background-color:${color};">
-      <div class="mdc-layout-grid__inner">
-        hi
+      <div class="mdc-layout-grid__cell--span-12">
+        <div class="mdc-layout-grid__inner">
+          ${generateFirstCardHTML(entry, color)}
+          ${generateDetailsCardHTML(entry, color)}
+          ${generateLocationCardHTML(entry, color)}
+          ${generateImagesCardHTML(entry, color)}
+        </div>
       </div>
-    </div>
     `;
     contentHTML += entryHTML;
   });
 
   return contentHTML
+}
+
+function generateFirstCardHTML(entry, color) {
+  // Generate first card
+  var html = `
+    <div class="mdc-layout-grid__cell--span-4">
+      <div class="mdc-card" style="background-color:${color};">
+        <section class="mdc-card__primary">
+          <h1 class="mdc-card__title mdc-card__title--large">${entry.name}</h1>
+          <h2 class="mdc-card__subtitle">${entry.details.role}</h2>
+        </section>
+        <section class="mdc-card__supporting-text">
+          ${entry.summary.join('<br><br>')}
+        </section>
+  `;
+
+  // If website, display website
+  if (entry.details.website) {
+    html += `
+      <section class="mdc-card__actions">
+        <a class="mdc-button mdc-button--compact mdc-card__action" href="${entry.details.website}" target="_">Website</a>
+      </section>
+    `;
+  }
+
+  // Close first card
+  html += `
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function generateDetailsCardHTML(entry, color) {
+  var html = `
+    <div class="mdc-layout-grid__cell--span-4">
+      <div class="mdc-card" style="background-color:${color};">
+        <section class="mdc-card__primary">
+          <h1 class="mdc-card__title mdc-card__title--large">Details</h1>
+        </section>
+        <section class="mdc-card__supporting-text">
+          ${JSON.stringify(entry.details, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp')}
+        </section>
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function generateLocationCardHTML(entry, color) {
+  var html = `
+    <div class="mdc-layout-grid__cell--span-4">
+      <div class="mdc-card" style="background-color:${color};">
+        <section class="mdc-card__primary">
+          <h1 class="mdc-card__title mdc-card__title--large">Location</h1>
+        </section>
+        <section class="mdc-card__supporting-text">
+          ${JSON.stringify(entry.location, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp')}
+        </section>
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function generateImagesCardHTML(entry, color) {
+  var html = `
+    <div class="mdc-layout-grid__cell--span-4">
+      <div class="mdc-card" style="background-color:${color};">
+        <section class="mdc-card__primary">
+          <h1 class="mdc-card__title mdc-card__title--large">Image Gallery</h1>
+        </section>
+        <section class="mdc-card__supporting-text">
+          some images will go here
+        </section>
+      </div>
+    </div>
+  `;
+
+  return html;
 }

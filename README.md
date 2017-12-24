@@ -34,9 +34,7 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 ## To Do
 
 - Implement modal content
-  - Drop button to bottom
-  - Create container for text
-  - Create gridlist for images
+  - Use https://masonry.desandro.com/ for internal grid
 - Make tooltip pretty
 - Make bubbles pretty
 - Make map pretty

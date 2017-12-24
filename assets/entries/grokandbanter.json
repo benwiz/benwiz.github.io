@@ -17,7 +17,7 @@
     "tools": ["OpenCV", "DLib", "Docker", "SoC", "Hapi.js", "RabbitMQ", "PostgreSQL"]
   },
   "summary": [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non arcu ut ipsum imperdiet dignissim eget eu erat. Quisque erat nibh, dictum a faucibus et, cursus eu turpis. Etiam orci elit, bibendum non nisl et, sagittis iaculis urna. Sed auctor lobortis felis at viverra. Sed tempus elit id molestie porttitor. Proin eget leo rhoncus, pretium tortor et, rutrum ipsum. Aenean turpis erat, ullamcorper vitae mi sit amet, dapibus ultrices erat. Duis eros mauris, pharetra faucibus ante vel, ornare porta lacus. Aenean ut leo urna. Donec laoreet in tortor sit amet faucibus. Nunc a aliquam augue. Nulla facilisi. Curabitur hendrerit lobortis risus, ultricies commodo nulla venenatis vel. Ut id interdum est, quis hendrerit lacus. Nulla et metus eget magna luctus auctor ut dictum ante. Pellentesque vitae magna velit.",
-    "Proin sem augue, vulputate sed vehicula porttitor, congue et felis. Aenean euismod vestibulum enim, quis dapibus nisl hendrerit porta. Praesent consequat imperdiet feugiat. Donec in dui non libero hendrerit congue. Donec quis ligula et purus vestibulum rhoncus in ac elit. Vivamus pulvinar metus ac turpis tempor, in consectetur justo malesuada. Mauris interdum eros odio, sed vulputate diam porta a. Nam mattis at eros sit amet dictum. Donec cursus, magna eu laoreet semper, dui leo sollicitudin arcu, eu pharetra nunc tellus ut mauris. Fusce pharetra velit odio. Vivamus sed ante velit. Quisque ullamcorper elementum molestie. Aenean venenatis leo at mi rutrum fermentum."
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non arcu ut ipsum imperdiet dignissim eget eu erat.",
+    "Proin sem augue, vulputate sed vehicula porttitor, congue et felis. Aenean euismod vestibulum enim, quis dapibus nisl hendrerit porta. Praesent consequat imperdiet feugiat."
   ]
 }
