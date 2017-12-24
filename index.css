@@ -2,6 +2,7 @@ path {
     stroke: #999;
     fill: #eee;
 }
+
 #boundary path {
     fill: #f2f9ff;
     stroke: none;
@@ -24,4 +25,21 @@ div.tooltip {
 
 .visited {
     fill: lightcyan;
+}
+
+.mdc-dialog__surface {
+    height: 80%;
+}
+
+.mdc-dialog__body--scrollable {
+    height: 100%;
+    max-height: 100%;
+}
+
+.mdc-layout-grid__cell--span-12 {
+    background-color: lightblue;
+}
+
+.mdc-layout-grid__cell--span-4 {
+    background-color: white;
 }
