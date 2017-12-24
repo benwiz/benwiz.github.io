@@ -36,6 +36,7 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 - Make tooltip pretty
 - Make bubbles pretty
 - Make map pretty
+- Make mobile friendly
 
 - Later
   - Figure out a better html templating system than javascript with ES6 string templating
