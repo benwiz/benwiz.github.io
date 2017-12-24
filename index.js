@@ -183,10 +183,11 @@ function populateDialog (place) {
   dialogContent.innerHTML = generateDialogContentHTML(place.properties.entries);
 
   // Initialize masonry
-  $('.grid').masonry({
-    columnWidth: 200,
+  $('.grid').masonry(/*{
+    columnWidth: 250,
     itemSelector: '.grid-item',
-  });
+    gutter: 10,
+  }*/);
 
   // Code to generate a nice looking JSON string for HTML
   // JSON.stringify(place.properties.entries, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp');
