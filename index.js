@@ -235,6 +235,20 @@ function generateFirstCardHTML(entry, color) {
         </section>
   `;
 
+  // var entryNames = [];
+  // $.ajax({
+  //   type: 'GET',
+  //   url: '/assets/images/bragon/',
+  //   // dataType: 'json',
+  //   success: function (data) {
+  //     console.log('Success:', data);
+  //   },
+  //   error: function (err) {
+  //     console.log(err);
+  //   },
+  //   // async: false,
+  // });
+
   // If website, display website
   if (entry.details.website) {
     html += `

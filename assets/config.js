@@ -1,3 +1,10 @@
+var entryNames = [
+  'lucid',
+  'grokandbanter',
+  'bragon',
+  'neurametrix',
+];
+
 var countriesVisited = [
   // NA
   'United States',
