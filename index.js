@@ -209,6 +209,7 @@ function generateDialogContentHTML(entries) {
     // Create html
     var entryHTML = `
         ${generateFirstCardHTML(entry, color)}
+        ${generateSummaryCardHTML(entry, color)}
         ${generateDetailsCardHTML(entry, color)}
         ${generateImagesCardHTML(entry, color)}
     `;
@@ -223,12 +224,10 @@ function generateFirstCardHTML(entry, color) {
   var html = `
     <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
+        <section class="mdc-card__media demo-card__16-9-media"></section>
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">${entry.name}</h1>
           <i><h2 class="mdc-card__subtitle">${entry.details.role}</h2></i>
-        </section>
-        <section class="mdc-card__supporting-text">
-          ${entry.summary.join('<br>')}
         </section>
   `;
 
@@ -243,6 +242,24 @@ function generateFirstCardHTML(entry, color) {
 
   // Close first card
   html += `
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function generateSummaryCardHTML(entry, color) {
+    // Generate first card
+    var html = `
+    <div class="grid-item">
+      <div class="mdc-card" style="background-color:${color};">
+        <section class="mdc-card__primary">
+          <h1 class="mdc-card__title mdc-card__title--large">Summary</h1>
+        </section>
+        <section class="mdc-card__supporting-text">
+          ${entry.summary.join('<br>')}
+        </section>
       </div>
     </div>
   `;
