@@ -46,6 +46,10 @@ var imageFilenames = {
   lucid: [
     'logo.png',
   ],
-  grokandbanter: [],
-  neurametrix: [],
+  grokandbanter: [
+    'logo.png',
+  ],
+  neurametrix: [
+    'logo.png',
+  ],
 };
