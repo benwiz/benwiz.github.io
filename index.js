@@ -223,8 +223,7 @@ function generateFirstCardHTML(entry, color) {
   // Generate first card
   var html = `
     <div class="grid-item">
-      <div class="mdc-card" style="background-color:${color};">
-        <section class="mdc-card__media demo-card__16-9-media"></section>
+      <div class="mdc-card mdc-card--theme-dark demo-card demo-card--bg-demo" style="background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">${entry.name}</h1>
           <i><h2 class="mdc-card__subtitle">${entry.details.role}</h2></i>

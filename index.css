@@ -57,11 +57,21 @@ div.tooltip {
     max-width: 47%;
 }
 
-.demo-card__16-9-media {
-    /* view-source:https://material-components-web.appspot.com/card.html */
-    background-image: url("https://material-components-web.appspot.com/images/16-9.jpg");
+.demo-card {
+    max-width: 21.875rem;
+    /* 350sp */
+    margin-bottom: 48px;
+}
+
+.demo-card--bg-demo {
+    height: 21.875rem;
+    /* 350sp */
+    background-image: url("https://material-components-web.appspot.com/images/16-9.jpg"); /* 16-9 blue, 1-1 orange */
     background-size: cover;
     background-repeat: no-repeat;
-    height: 12.313rem;
-    /* 197sp, for 16:9 ratio with 350sp demo card width */
+}
+
+.demo-card--bg-demo .mdc-card__primary,
+.demo-card--bg-demo .mdc-card__actions {
+    background: rgba(0, 0, 0, .4);
 }
