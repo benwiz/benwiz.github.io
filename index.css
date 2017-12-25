@@ -49,7 +49,10 @@ div.tooltip {
 }
 
 .grid-item {
-
     width: 225px;
     margin: 5px;
+}
+
+.entry-image {
+    max-width: 47%;
 }

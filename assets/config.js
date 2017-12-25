@@ -37,3 +37,15 @@ var countriesVisited = [
   'Australia',
   'New Zealand',
 ];
+
+var imageFilenames = {
+  bragon: [
+    'dragon.png',
+    'dragon_drunk.png',
+  ],
+  lucid: [
+    'logo.png',
+  ],
+  grokandbanter: [],
+  neurametrix: [],
+};

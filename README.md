@@ -49,3 +49,5 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
   - Filter bubbles by tag (probably using fuzzy search and/or a multi select)
   - Make mobile disclaimer pretty
   - Draw connections to related cities
+
+- Why do I not use ES6 when in the front end, I think it's pretty widely supported at this point.

@@ -198,8 +198,7 @@ function generateDialogContentHTML(entries) {
   entries.forEach(function(entry, i) {
 
     // Pick alternating colors
-    var colors = ['#ceefff', '#e4fff5', '#ececec', '#c0e7f6', '#dbcafd']
-    console.log(i % entries.length);
+    var colors = ['#ceefff', '#ececec', '#dbcafd']
     var color = colors[i % entries.length];
 
     // Wrap the following entryHTML block in these divs if I separate out each entry more
@@ -210,10 +209,7 @@ function generateDialogContentHTML(entries) {
     var entryHTML = `
         ${generateFirstCardHTML(entry, color)}
         ${generateDetailsCardHTML(entry, color)}
-        ${/*generateLocationCardHTML(entry, color)*/null}
         ${generateImagesCardHTML(entry, color)}
-        ${generateInvisibleCardHTML()}
-        ${generateInvisibleCardHTML()}
     `;
     contentHTML += entryHTML;
   });
@@ -234,20 +230,6 @@ function generateFirstCardHTML(entry, color) {
           ${entry.summary.join('<br>')}
         </section>
   `;
-
-  // var entryNames = [];
-  // $.ajax({
-  //   type: 'GET',
-  //   url: '/assets/images/bragon/',
-  //   // dataType: 'json',
-  //   success: function (data) {
-  //     console.log('Success:', data);
-  //   },
-  //   error: function (err) {
-  //     console.log(err);
-  //   },
-  //   // async: false,
-  // });
 
   // If website, display website
   if (entry.details.website) {
@@ -302,6 +284,13 @@ function generateLocationCardHTML(entry, color) {
 }
 
 function generateImagesCardHTML(entry, color) {
+  var name = entry.name.toLowerCase();
+  var filenames = imageFilenames[name];
+  if (filenames === undefined || filenames.length === 0) {
+    return '';
+  }
+
+  // Create grid item and card
   var html = `
     <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
@@ -311,10 +300,15 @@ function generateImagesCardHTML(entry, color) {
         <section class="mdc-card__supporting-text">
   `;
 
-  // Create image tags
-  var dirName = entry.name.toLowerCase();
+  // Add images
+  filenames.forEach(function (filename) {
+    html += `
+      <img src="/assets/images/${name}/${filename}" class="entry-image"></img>
+    `;
+  });
 
 
+  // Close all elements
   html += `
         </section>
       </div>
