@@ -298,7 +298,7 @@ function generateImagesCardHTML(entry, color) {
     <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">
-          <h1 class="mdc-card__title mdc-card__title--large">Image Gallery</h1>
+          <h1 class="mdc-card__title mdc-card__title--large">Images</h1>
         </section>
         <section class="mdc-card__supporting-text">
   `;
@@ -328,7 +328,7 @@ function generateInvisibleCardHTML() {
     <div class="grid-item">
       <div class="mdc-card" style="visibility:hidden;">
         <section class="mdc-card__primary">
-          <h1 class="mdc-card__title mdc-card__title--large">NOthing</h1>
+          <h1 class="mdc-card__title mdc-card__title--large">Nothing</h1>
         </section>
         <section class="mdc-card__supporting-text">
           Nothing d
