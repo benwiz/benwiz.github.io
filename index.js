@@ -305,7 +305,9 @@ function generateImagesCardHTML(entry, color) {
   // Add images
   filenames.forEach(function (filename) {
     html += `
-      <img src="/assets/images/${name}/${filename}" class="entry-image"></img>
+      <a href="/assets/images/${name}/${filename}" target="_">
+        <img src="/assets/images/${name}/${filename}" class="entry-image"></img>
+      </a>
     `;
   });
 
