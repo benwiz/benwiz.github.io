@@ -285,6 +285,8 @@ function generateLocationCardHTML(entry, color) {
 
 function generateImagesCardHTML(entry, color) {
   var name = entry.name.toLowerCase();
+  if (name === 'grok + banter') name = 'grokandbanter';
+
   var filenames = imageFilenames[name];
   if (filenames === undefined || filenames.length === 0) {
     return '';

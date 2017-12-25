@@ -5,6 +5,23 @@ var entryNames = [
   'neurametrix',
 ];
 
+var imageFilenames = {
+  bragon: [
+    'dragon.png',
+    'dragon_drunk.png',
+  ],
+  lucid: [
+    'logo.png',
+  ],
+  grokandbanter: [
+    'logo.png',
+  ],
+  neurametrix: [
+    'logo.png',
+  ],
+};
+
+
 var countriesVisited = [
   // NA
   'United States',
@@ -37,19 +54,3 @@ var countriesVisited = [
   'Australia',
   'New Zealand',
 ];
-
-var imageFilenames = {
-  bragon: [
-    'dragon.png',
-    'dragon_drunk.png',
-  ],
-  lucid: [
-    'logo.png',
-  ],
-  grokandbanter: [
-    'logo.png',
-  ],
-  neurametrix: [
-    'logo.png',
-  ],
-};
