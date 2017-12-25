@@ -66,16 +66,16 @@ function onMouseOut (place, i) {
 
 function getEntries () {
   // Get entry names
-  var entryNames = [];
-  $.ajax({
-    type: 'GET',
-    url: '/assets/entries.json',
-    dataType: 'json',
-    success: function(data) {
-      data.forEach(entryName => entryNames.push(entryName))
-    },
-    async: false,
-  });
+  // var entryNames = [];
+  // $.ajax({
+  //   type: 'GET',
+  //   url: '/assets/entries.json',
+  //   dataType: 'json',
+  //   success: function(data) {
+  //     data.forEach(entryName => entryNames.push(entryName))
+  //   },
+  //   async: false,
+  // });
 
   // Get each entry's data
   var entries = [];
@@ -210,7 +210,7 @@ function generateDialogContentHTML(entries) {
     var entryHTML = `
         ${generateFirstCardHTML(entry, color)}
         ${generateDetailsCardHTML(entry, color)}
-        ${generateLocationCardHTML(entry, color)}
+        ${/*generateLocationCardHTML(entry, color)*/null}
         ${generateImagesCardHTML(entry, color)}
         ${generateInvisibleCardHTML()}
         ${generateInvisibleCardHTML()}
@@ -295,7 +295,13 @@ function generateImagesCardHTML(entry, color) {
           <h1 class="mdc-card__title mdc-card__title--large">Image Gallery</h1>
         </section>
         <section class="mdc-card__supporting-text">
-          some images will go here
+  `;
+
+  // Create image tags
+  var dirName = entry.name.toLowerCase();
+
+
+  html += `
         </section>
       </div>
     </div>
