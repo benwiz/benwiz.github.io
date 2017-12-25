@@ -225,7 +225,7 @@ function generateFirstCardHTML(entry, color) {
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">${entry.name}</h1>
-          <h2 class="mdc-card__subtitle">${entry.details.role}</h2>
+          <i><h2 class="mdc-card__subtitle">${entry.details.role}</h2></i>
         </section>
         <section class="mdc-card__supporting-text">
           ${entry.summary.join('<br>')}
