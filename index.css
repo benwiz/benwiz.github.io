@@ -60,14 +60,12 @@ div.tooltip {
 .demo-card {
     max-width: 21.875rem;
     /* 350sp */
-    margin-bottom: 48px;
 }
 
 .demo-card--bg-demo {
     height: 21.875rem;
     /* 350sp */
-    background-image: url("https://material-components-web.appspot.com/images/16-9.jpg"); /* 16-9 blue, 1-1 orange */
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 

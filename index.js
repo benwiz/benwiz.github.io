@@ -220,10 +220,13 @@ function generateDialogContentHTML(entries) {
 }
 
 function generateFirstCardHTML(entry, color) {
+  var name = entry.name.toLowerCase();
+  if (name === 'grok + banter') name = 'grokandbanter';
+
   // Generate first card
   var html = `
     <div class="grid-item">
-      <div class="mdc-card mdc-card--theme-dark demo-card demo-card--bg-demo" style="background-color:${color};">
+      <div class="mdc-card mdc-card--theme-dark demo-card demo-card--bg-demo" style="background-image:url('assets/images/${name}/logo.png'); background-color:${color};">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">${entry.name}</h1>
           <i><h2 class="mdc-card__subtitle">${entry.details.role}</h2></i>
@@ -249,8 +252,7 @@ function generateFirstCardHTML(entry, color) {
 }
 
 function generateSummaryCardHTML(entry, color) {
-    // Generate first card
-    var html = `
+  var html = `
     <div class="grid-item">
       <div class="mdc-card" style="background-color:${color};">
         <section class="mdc-card__primary">

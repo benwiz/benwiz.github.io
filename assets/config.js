@@ -7,14 +7,16 @@ var entryNames = [
 
 var imageFilenames = {
   bragon: [
-    'dragon.png',
+    'logo.png',
     'dragon_drunk.png',
+    'tag.png',
   ],
   lucid: [
     'logo.png',
   ],
   grokandbanter: [
     'logo.png',
+    'fullname.png',
   ],
   neurametrix: [
     'logo.png',

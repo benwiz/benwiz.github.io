@@ -31,6 +31,8 @@ Currently I'm trying to keep this very, very simple and want to avoid brining in
 
 ## To Do
 
+- Make cards pretty
+  - Each entry needs to have a color scheme and a main image (logo). Or base the color sheme off of the provided image.
 - Make tooltip pretty
 - Make bubbles pretty
 - Make map pretty
