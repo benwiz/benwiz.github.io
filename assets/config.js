@@ -23,7 +23,6 @@ var imageFilenames = {
   ],
 };
 
-
 var countriesVisited = [
   // NA
   'United States',
