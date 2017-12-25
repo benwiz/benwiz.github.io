@@ -188,6 +188,7 @@ function populateDialog (place) {
   } catch (e) {}
   $('.grid').masonry({
     // horizontalOrder: true,
+    fitWidth: true,
   });
 }
 
