@@ -14,7 +14,7 @@
     "start": "March 2014",
     "end": "May 2015",
     "languages": ["Objective-C"],
-    "tools": []
+    "tools": ["Parse DaaS"]
   },
   "summary": [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non arcu ut ipsum imperdiet dignissim eget eu erat.",

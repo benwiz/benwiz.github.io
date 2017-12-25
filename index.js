@@ -258,7 +258,18 @@ function generateDetailsCardHTML(entry, color) {
           <h1 class="mdc-card__title mdc-card__title--large">Details</h1>
         </section>
         <section class="mdc-card__supporting-text">
-          ${JSON.stringify(entry.details, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp')}
+  `;
+  // ${JSON.stringify(entry.details, null, 2).replace(/(\r\n|\r|\n)/g, '<br>').replace(/  /g, '&nbsp;&nbsp')}
+
+  html += `
+    <ul>
+      <li>${entry.details.start} - ${entry.details.end}</li>
+      <li>${entry.details.languages}</li>
+      <li>${entry.details.tools.join(', ')}</li>
+    </ul>
+  `;
+
+  html += `
         </section>
       </div>
     </div>

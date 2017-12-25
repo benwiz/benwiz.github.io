@@ -14,6 +14,7 @@
     "start": "October 2016",
     "end": "December 2016",
     "languages": ["JavaScript"],
+    "tools": ["jQuery", "Chart.js", "Wordpress"],
     "website": "https://www.neurametrix.com/"
   },
   "summary": [

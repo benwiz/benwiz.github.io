@@ -14,7 +14,7 @@
     "start": "December 2016",
     "end": "Present",
     "languages": ["Node.js", "Python"],
-    "tools": ["Django", "Elastic Beanstalk", "AWS Lambda", "Apache Kafka", "ElasticSearch"],
+    "tools": ["Elastic Beanstalk", "Apache Kafka", "ElasticSearch", "AWS Lambda", "Django", "Hapi.js", "Docker"],
     "website": "https://luc.id"
   },
   "summary": [
