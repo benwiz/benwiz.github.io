@@ -1,6 +1,10 @@
+@import "@material/card/mdc-card";
 @import "@material/button/mdc-button";
 
-.foo-button {
-  @include mdc-button-ink-color(teal);
-  @include mdc-states(teal);
+.main-card {
+  max-height: 350px;
+  max-width: 350px;
+
+  min-height: 200px;
+  min-width: 150px;
 }

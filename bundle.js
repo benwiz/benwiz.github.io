@@ -521,7 +521,12 @@ exports.getNormalizedEventCoords = getNormalizedEventCoords;
 
 var _ripple = __webpack_require__(4);
 
-var ripple = new _ripple.MDCRipple(document.querySelector('.foo-button'));
+// Apply ripple to all ripple-buttons
+var rippleButtons = document.querySelectorAll('.ripple-button');
+rippleButtons.forEach(function (button) {
+  new _ripple.MDCRipple(button);
+  console.log(button);
+});
 
 /***/ }),
 /* 4 */

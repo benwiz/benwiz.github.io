@@ -1,13 +1,29 @@
 <html>
  <head>
-   <link rel="stylesheet" href="bundle.css">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+    <!-- <title>Ben Wiz</title> -->
+
+    <link rel="stylesheet" href="bundle.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  </head>
  <body>
   <script src="bundle.js" async></script>
 
-  <button class="mdc-button foo-button">
-    Button!
-  </button>
+  <div class="mdc-card main-card">
+    <div class="mdc-card__media mdc-card__media"> <!-- mdc-card__media--square as alternative -->
+      <div class="mdc-card__media-content">Title</div>
+    </div>
+    <div class="mdc-card__actions">
+      <div class="mdc-card__action-buttons">
+        <button class="mdc-button mdc-card__action mdc-card__action--button ripple-button">Action 1</button>
+        <button class="mdc-button mdc-card__action mdc-card__action--button ripple-button">Action 2</button>
+      </div>
+      <div class="mdc-card__action-icons">
+        <i class="material-icons mdc-card__action mdc-card__action--icon" tabindex="0" role="button" title="Share">share</i>
+        <i class="material-icons mdc-card__action mdc-card__action--icon" tabindex="0" role="button" title="More options">more_vert</i>
+      </div>
+    </div>
+  </div>
 
  </body>
 </html>
