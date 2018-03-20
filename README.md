@@ -18,10 +18,10 @@ Start local server that better simulates what GitHub Pages does.
 http-server
 ```
 
-To build updates
+To build updates while making changes
 
 ```bash
-npx webpack
+npx webpack --watch
 ```
 
 ## To Do
