@@ -1,3 +1,6 @@
+const glob = require('glob');
+const path = require('path');
+
 module.exports = [{
   entry: './app.scss',
   output: {
@@ -17,8 +20,13 @@ module.exports = [{
         },
         { loader: 'extract-loader' },
         { loader: 'css-loader' },
-        { loader: 'sass-loader' },
+        { loader: 'sass-loader',
+          options: {
+            includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d))
+          }
+        },
       ]
     }]
   },
 }];
+console.log(glob.sync('node_modules').map((d) => path.join(__dirname, d)));
