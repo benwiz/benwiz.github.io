@@ -4,5 +4,4 @@ import {MDCRipple} from '@material/ripple';
 const rippleButtons = document.querySelectorAll('.ripple-button');
 rippleButtons.forEach(function (button) {
   new MDCRipple(button);
-  console.log(button);
 });

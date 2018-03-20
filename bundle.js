@@ -525,7 +525,6 @@ var _ripple = __webpack_require__(4);
 var rippleButtons = document.querySelectorAll('.ripple-button');
 rippleButtons.forEach(function (button) {
   new _ripple.MDCRipple(button);
-  console.log(button);
 });
 
 /***/ }),

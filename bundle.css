@@ -827,14 +827,8 @@ body {
 .outer-container {
   display: table;
   position: absolute;
-  height: 100%;
-  width: 100%; }
-
-.outer-container {
-  position: absolute;
-  display: table;
-  width: 100%;
-  height: 100%; }
+  height: 98%;
+  width: 99%; }
 
 .inner-container {
   display: table-cell;
@@ -846,3 +840,30 @@ body {
 
 .main-card__media {
   background-image: url("/images/mangos.jpg"); }
+
+.main-card--photo {
+  width: 200px; }
+
+.main-card__media {
+  background-image: url("/images/mangos.jpg"); }
+
+.main-card__media--16-9 {
+  background-image: url("/images/mangos.jpg"); }
+
+.main-card__primary {
+  padding: 1rem; }
+
+.main-card__title {
+  margin: 0; }
+
+.main-card__subtitle {
+  color: rgba(0, 0, 0, 0.54);
+  /* @alternate */
+  color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
+  margin: 0; }
+
+.main-card__secondary {
+  color: rgba(0, 0, 0, 0.54);
+  /* @alternate */
+  color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
+  padding: 0 1rem 8px 1rem; }
