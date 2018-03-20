@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
-    "extract-loader": "^2.0.0",
+    "extract-loader": "^1.0.2",
     "file-loader": "^1.1.11",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
