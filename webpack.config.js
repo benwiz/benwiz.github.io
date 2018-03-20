@@ -22,8 +22,17 @@ module.exports = [{
         { loader: 'css-loader' },
         { loader: 'sass-loader',
           options: {
-            includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d))
-          }
+            // includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d))
+            // Tutorial says to use importer even though includePaths appears to work.
+            importer: function(url, prev) {
+              if(url.indexOf('@material') === 0) {
+                var filePath = url.split('@material')[1];
+                var nodeModulePath = `./node_modules/@material/${filePath}`;
+                return { file: require('path').resolve(nodeModulePath) };
+              }
+              return { file: url };
+            }
+          },
         },
       ]
     }]
