@@ -841,12 +841,6 @@ body {
 .main-card__media {
   background-image: url("/images/mangos.jpg"); }
 
-.main-card--photo {
-  width: 200px; }
-
-.main-card__media {
-  background-image: url("/images/mangos.jpg"); }
-
 .main-card__media--16-9 {
   background-image: url("/images/mangos.jpg"); }
 
