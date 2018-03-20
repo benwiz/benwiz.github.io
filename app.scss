@@ -1,10 +1,37 @@
 @import "@material/card/mdc-card";
 @import "@material/button/mdc-button";
 
+body {
+  // height: 100%;
+  background-color: lightblue;
+}
+
+.outer-container {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.outer-container {
+  position: absolute;
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.inner-container {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .main-card {
-  max-height: 350px;
   max-width: 350px;
 
-  min-height: 200px;
-  min-width: 150px;
+  // Horizontal align
+  margin: 0 auto;
+}
+
+.main-card__media {
+  background-image: url("/images/mangos.jpg");
 }
