@@ -27,3 +27,4 @@ npx webpack --watch
 ## To Do
 
 - https
+- Link to resume
