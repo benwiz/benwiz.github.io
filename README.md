@@ -26,5 +26,5 @@ npx webpack --watch
 
 ## To Do
 
-- https
+- Figure out where to display projcts
 - Link to resume

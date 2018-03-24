@@ -840,10 +840,10 @@ body {
   margin: 0 auto; }
 
 .main-card__media {
-  background-image: url("/images/mangos.jpg"); }
+  background-image: url("/assets/images/mangos.jpg"); }
 
 .main-card__media--16-9 {
-  background-image: url("/images/mangos.jpg"); }
+  background-image: url("/assets/images/mangos.jpg"); }
 
 .main-card__primary {
   padding: 1rem; }
