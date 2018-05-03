@@ -28,3 +28,4 @@ npx webpack --watch
 
 - Contact mailto link
 - Create a place to display and talk about BragOn. Probably a GitHub repo.
+- Create a place to talk about Tulane. Maybe. Could talk about BCI.
