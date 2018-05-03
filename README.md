@@ -26,4 +26,5 @@ npx webpack --watch
 
 ## To Do
 
-- Redo everything more cleanly now that I understand how webpack works
+- Contact mailto link
+- Create a place to display and talk about BragOn. Probably a GitHub repo.

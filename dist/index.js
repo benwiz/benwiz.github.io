@@ -68,9 +68,10 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// import {MDCRipple} from '@material/ripple';
+//
+// MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
-
-console.log('Hi, welcome to benwiz.io!');
 
 /***/ })
 /******/ ]);
