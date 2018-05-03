@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import "@material/card/mdc-card";
-@import "@material/button/mdc-button";
 
 body {
   font-family: 'Dosis', sans-serif;
@@ -19,34 +18,31 @@ body {
   vertical-align: middle;
 }
 
-.main-card {
+.mdc-card {
   max-width: 350px;
   margin: 0 auto;
 }
-.main-card__media {
+
+.mdc-card__media, .mdc-card__media--16-9 {
   background-image: url("/assets/images/mangos.jpg");
 }
 
-.main-card__media--16-9 {
-  background-image: url("/assets/images/mangos.jpg");
-}
-
-.main-card__primary {
+.mdc-card__primary {
   padding: 1rem;
 }
 
-.main-card__title {
+.mdc-card__title {
   margin: 0;
 }
 
-.main-card__subtitle {
+.mdc-card__subtitle {
   color: rgba(0, 0, 0, 0.54);
   /* @alternate */
   color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
   margin: 0;
 }
 
-.main-card__secondary {
+.mdc-card__secondary {
   color: rgba(0, 0, 0, 0.54);
   /* @alternate */
   color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));

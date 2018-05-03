@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "node": false
+  },
+  "rules": {
+    "max-len": [1, 100, 2, { "ignoreComments": true }],
+    "no-console": 0,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-param-reassign": ["error", { "props": false }],
+    "radix": ["error", "as-needed"],
+    "no-new": "off",
+    "no-mixed-operators": "off"
+  }
+}

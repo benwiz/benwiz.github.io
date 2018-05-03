@@ -1,13 +1,12 @@
-const glob = require('glob');
-const path = require('path');
-
 module.exports = [
+  // App: `ui`
   {
-    entry: './app.scss',
+    entry: {
+      index: './index.scss',
+    },
     output: {
-      // This is necessary for webpack to compile
-      // But we never use style-bundle.js
-      filename: 'style-bundle.js',
+      // This is necessary for webpack to compile. But we never use it.
+      filename: './tmp/[name].scss',
     },
     module: {
       rules: [{
@@ -16,42 +15,45 @@ module.exports = [
           {
             loader: 'file-loader',
             options: {
-              name: 'bundle.css',
+              name: './dist/[name].css',
             },
           },
           { loader: 'extract-loader' },
           { loader: 'css-loader' },
-          { loader: 'sass-loader',
+          {
+            loader: 'sass-loader',
             options: {
-              // includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d))
-              // Tutorial says to use importer even though includePaths appears to work.
-              importer: function(url, prev) {
-                if(url.indexOf('@material') === 0) {
-                  var filePath = url.split('@material')[1];
-                  var nodeModulePath = `./node_modules/@material/${filePath}`;
+              importer(url, prev) {
+                if (url.indexOf('@material') === 0) {
+                  const filePath = url.split('@material')[1];
+                  const nodeModulePath = `./node_modules/@material/${filePath}`;
                   return { file: require('path').resolve(nodeModulePath) };
                 }
                 return { file: url };
-              }
+              },
             },
           },
-        ]
-      }]
+        ],
+      }],
     },
   },
+  // App: `ui`
   {
-    entry: "./app.js",
+    entry: {
+      index: './index.js',
+    },
     output: {
-      filename: "bundle.js"
+      filename: './dist/[name].js',
     },
     module: {
       loaders: [{
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
-        }
-      }]
+          presets: ['es2015'],
+        },
+      }],
     },
+    devtool: 'source-map',
   },
 ];
