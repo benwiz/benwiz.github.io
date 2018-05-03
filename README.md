@@ -26,5 +26,4 @@ npx webpack --watch
 
 ## To Do
 
-- Figure out where to display projcts
-- Link to resume
+- Redo everything more cleanly now that I understand how webpack works
