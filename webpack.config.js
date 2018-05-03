@@ -1,12 +1,11 @@
 module.exports = [
-  // App: `ui`
   {
     entry: {
       index: './index.scss',
     },
     output: {
       // This is necessary for webpack to compile. But we never use it.
-      filename: './tmp/[name].scss',
+      filename: './tmp/tmp.js',
     },
     module: {
       rules: [{
@@ -37,7 +36,6 @@ module.exports = [
       }],
     },
   },
-  // App: `ui`
   {
     entry: {
       index: './index.js',
