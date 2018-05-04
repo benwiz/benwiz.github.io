@@ -68,10 +68,26 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
 // import {MDCRipple} from '@material/ripple';
 //
 // MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
+var tooltip = document.querySelector('#tooltip');
+var links = document.querySelectorAll('a');
+var onLinkMouseover = function onLinkMouseover(e) {
+  tooltip.style.visibility = 'visible';
+  tooltip.textContent = e.target.getAttribute('label');
+};
+var onLinkMouseleave = function onLinkMouseleave(_e) {
+  tooltip.style.visibility = 'hidden';
+  tooltip.textContent = 'nothing';
+};
+links.forEach(function (link) {
+  link.addEventListener('mouseenter', onLinkMouseover);
+  link.addEventListener('mouseleave', onLinkMouseleave);
+});
 
 /***/ })
 /******/ ]);
