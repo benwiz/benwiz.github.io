@@ -26,6 +26,6 @@ npx webpack --watch
 
 ## To Do
 
+- Use a better background
 - Contact mailto link
 - Create a place to display and talk about BragOn. Probably a GitHub repo.
-- Create a place to talk about Tulane. Maybe. Could talk about BCI.
