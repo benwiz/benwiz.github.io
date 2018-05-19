@@ -1,27 +1,84 @@
 // Card selectors
 const setTulaneCard = () => {
-  console.log('setTulaneCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'Tulane University';
+  subtitleElement.innerHTML = 'B.S. in Economics and Computer Science';
+  secondaryElement.innerHTML = 'Something about why I like Tulane.';
 };
 const setBragOnCard = () => {
-  console.log('setBragOnCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'BragOn, LLC';
+  subtitleElement.innerHTML = 'Founder & iOS Developer 2014-2015';
+  secondaryElement.innerHTML = 'Something about why I started BragOn.';
 };
 const setGrokAndBanterCard = () => {
-  console.log('setGrokAndBanterCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'Grok + Banter';
+  subtitleElement.innerHTML = 'Information Analyst and Software Developer | 2016';
+  secondaryElement.innerHTML = 'Something about why I think G+B was a good experience.';
 };
 const setLucidCard = () => {
-  console.log('setLucidCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'Lucid';
+  subtitleElement.innerHTML = 'Senior Engineer';
+  secondaryElement.innerHTML = 'Something about why I was valuable to Lucid.';
 };
 const setWWOZToSpotifyCard = () => {
-  console.log('setWWOZToSpotifyCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'WWOZ-to-Spotify';
+  subtitleElement.innerHTML = '';
+  secondaryElement.innerHTML = 'An AWS Lambda function written in Clojure that reads WWOZ\'s RSS feed then adds each song to a Spotify playlist';
+  // NOTE: When adding links, make sure there is one to the spotify playlist.
 };
 const setLowpolyCard = () => {
-  console.log('setLowpolyCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'Lowpoly';
+  subtitleElement.innerHTML = '';
+  secondaryElement.innerHTML = 'A collection of AWS Lambda functions written in Clojure and Python that turn an image into a lowpoly version made of triangles.';
 };
 const setSquiggleCard = () => {
-  console.log('setSquiggleCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'Squiggle';
+  subtitleElement.innerHTML = '';
+  secondaryElement.innerHTML = 'A ClojureScript website that uses Quil (a Processing wrapper) to for several small drawings and animations.';
 };
 const setProfileCard = () => {
-  console.log('setProfileCard()');
+  const titleElement = document.querySelector('.mdc-card__title');
+  const subtitleElement = document.querySelector('.mdc-card__subtitle');
+  const secondaryElement = document.querySelector('.mdc-card__secondary');
+  const actionsElement = document.querySelector('.mdc-card__actions');
+
+  titleElement.innerHTML = 'Ben Wisialowski';
+  subtitleElement.innerHTML = 'Senior Engineer at Lucid';
+  secondaryElement.innerHTML = 'Software developer enjoying the food, music, and culture of New Orleans.';
 };
 
 // Initialize click handlers to toggle between cards
@@ -63,6 +120,7 @@ const initTooltip = () => {
 };
 
 // Init everything
+setProfileCard();
 initCardSelectors();
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   // Do nothing if mobile

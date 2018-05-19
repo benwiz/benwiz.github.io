@@ -26,7 +26,4 @@ npx webpack --watch
 
 ## To Do
 
-- Brand?
-- Use a better background
-- Contact mailto link
-- Create a place to display and talk about BragOn. Probably a GitHub repo.
+- Use a better background. Probably make it using p5.js.
