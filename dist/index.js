@@ -71,6 +71,17 @@
 
 
 // Card selectors
+var setProfileCard = function setProfileCard() {
+  var titleElement = document.querySelector('.mdc-card__title');
+  var subtitleElement = document.querySelector('.mdc-card__subtitle');
+  var secondaryElement = document.querySelector('.mdc-card__secondary');
+  var actionIconsElement = document.querySelector('.mdc-card__action-icons');
+
+  titleElement.innerHTML = 'Ben Wisialowski';
+  subtitleElement.innerHTML = 'Senior Engineer at Lucid';
+  secondaryElement.innerHTML = 'Software developer enjoying the food, music, and culture of New Orleans.';
+  actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://github.com/benwiz" target="_blank" label="GitHub">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n    <a class="link-icon" href="https://www.linkedin.com/in/benwiz" target="_blank" label="LinkedIn">\n      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"><path d="M0 0v24h24v-24h-24zm8 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.397-2.586 7-2.777 7 2.476v6.759z"/></svg>\n    </a>\n    <a class="link-icon" href="/assets/resume.pdf" target="_blank" label="Resume">\n      <img src="/assets/images/resume.svg" height="24">\n    </a>\n  ';
+};
 var setTulaneCard = function setTulaneCard() {
   var titleElement = document.querySelector('.mdc-card__title');
   var subtitleElement = document.querySelector('.mdc-card__subtitle');
@@ -79,7 +90,7 @@ var setTulaneCard = function setTulaneCard() {
 
   titleElement.innerHTML = 'Tulane University';
   subtitleElement.innerHTML = 'B.S. in Economics and Computer Science';
-  secondaryElement.innerHTML = 'Something about why I like Tulane.';
+  secondaryElement.innerHTML = '';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://tulane.edu" target="_blank" label="Tulane">\n      <img src="/assets/images/tulane.png" height="24">\n    </a>\n  ';
 };
 var setBragOnCard = function setBragOnCard() {
@@ -90,7 +101,7 @@ var setBragOnCard = function setBragOnCard() {
 
   titleElement.innerHTML = 'BragOn, LLC';
   subtitleElement.innerHTML = 'Founder & iOS Developer';
-  secondaryElement.innerHTML = 'Something about why I started BragOn.';
+  secondaryElement.innerHTML = '';
   actionIconsElement.innerHTML = '';
 };
 var setGrokAndBanterCard = function setGrokAndBanterCard() {
@@ -101,7 +112,7 @@ var setGrokAndBanterCard = function setGrokAndBanterCard() {
 
   titleElement.innerHTML = 'Grok + Banter';
   subtitleElement.innerHTML = 'Information Analyst and Software Developer';
-  secondaryElement.innerHTML = 'Something about why I think G+B was a good experience.';
+  secondaryElement.innerHTML = '';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://www.linkedin.com/company/grok-&-banter-llc/" target="_blank" label="Grok + Banter">\n      <img src="/assets/images/gb.png" height="24">\n    </a>\n  ';
 };
 var setLucidCard = function setLucidCard() {
@@ -112,7 +123,7 @@ var setLucidCard = function setLucidCard() {
 
   titleElement.innerHTML = 'Lucid';
   subtitleElement.innerHTML = 'Senior Engineer';
-  secondaryElement.innerHTML = 'Something about why I was valuable to Lucid.';
+  secondaryElement.innerHTML = '';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://luc.id" target="_blank" label="Lucid">\n      <img src="/assets/images/lucid-large.png" height="24">\n    </a>\n  ';
 };
 var setWWOZToSpotifyCard = function setWWOZToSpotifyCard() {
@@ -148,17 +159,6 @@ var setSquiggleCard = function setSquiggleCard() {
   subtitleElement.innerHTML = '';
   secondaryElement.innerHTML = 'A ClojureScript website that uses Quil, a Processing wrapper, to for several small drawings and animations.';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://github.com/benwiz/squiggle/" target="_blank" label="GitHub - Squiggle">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n    <a class="link-icon" href="http://benwiz.io/squiggle/" target="_blank" label="Squiggle">\n      <img src="/assets/images/squiggle.png" height="24">\n    </a>\n  ';
-};
-var setProfileCard = function setProfileCard() {
-  var titleElement = document.querySelector('.mdc-card__title');
-  var subtitleElement = document.querySelector('.mdc-card__subtitle');
-  var secondaryElement = document.querySelector('.mdc-card__secondary');
-  var actionIconsElement = document.querySelector('.mdc-card__action-icons');
-
-  titleElement.innerHTML = 'Ben Wisialowski';
-  subtitleElement.innerHTML = 'Senior Engineer at Lucid';
-  secondaryElement.innerHTML = 'Software developer enjoying the food, music, and culture of New Orleans.';
-  actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://github.com/benwiz" target="_blank" label="GitHub">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n    <a class="link-icon" href="https://www.linkedin.com/in/benwiz" target="_blank" label="LinkedIn">\n      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"><path d="M0 0v24h24v-24h-24zm8 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.397-2.586 7-2.777 7 2.476v6.759z"/></svg>\n    </a>\n    <a class="link-icon" href="/assets/resume.pdf" target="_blank" label="Resume">\n      <img src="/assets/images/resume.svg" height="24">\n    </a>\n  ';
 };
 
 // Initialize click handlers to toggle between cards
