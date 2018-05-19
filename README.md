@@ -26,4 +26,5 @@ npx webpack --watch
 
 ## To Do
 
+- Custom pictures for each card
 - Use a better background. Probably make it using p5.js.
