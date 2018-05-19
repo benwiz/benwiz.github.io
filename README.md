@@ -26,6 +26,7 @@ npx webpack --watch
 
 ## To Do
 
-- Better content description for each card. This is the last step before merging into master to deploy.
-- Custom pictures for each card
-- Use a better background. Probably make it using p5.js.
+- Better content description for each career card
+- Height of card should not change between content switches
+- Custom pictures for each content-set
+- Use a better background. Probably make it using p5.js
