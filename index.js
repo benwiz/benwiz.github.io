@@ -100,7 +100,7 @@ const setSquiggleCard = () => {
 
   titleElement.innerHTML = 'Squiggle';
   subtitleElement.innerHTML = '';
-  secondaryElement.innerHTML = 'A ClojureScript website that uses Quil (a Processing wrapper) to for several small drawings and animations.';
+  secondaryElement.innerHTML = 'A ClojureScript website that uses Quil, a Processing wrapper, to for several small drawings and animations.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="http://benwiz.io/squiggle/" target="_blank" label="Squiggle">
       <img src="/assets/images/squiggle.png" height="24">

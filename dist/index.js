@@ -146,7 +146,7 @@ var setSquiggleCard = function setSquiggleCard() {
 
   titleElement.innerHTML = 'Squiggle';
   subtitleElement.innerHTML = '';
-  secondaryElement.innerHTML = 'A ClojureScript website that uses Quil (a Processing wrapper) to for several small drawings and animations.';
+  secondaryElement.innerHTML = 'A ClojureScript website that uses Quil, a Processing wrapper, to for several small drawings and animations.';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="http://benwiz.io/squiggle/" target="_blank" label="Squiggle">\n      <img src="/assets/images/squiggle.png" height="24">\n    </a>\n    <a class="link-icon" href="https://github.com/benwiz/squiggle/" target="_blank" label="GitHub - Squiggle">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n  ';
 };
 var setProfileCard = function setProfileCard() {
