@@ -70,13 +70,39 @@
 "use strict";
 
 
+// Card selectors
+var setTulaneCard = function setTulaneCard() {
+  console.log('setTulaneCard()');
+};
+var setBragOnCard = function setBragOnCard() {
+  console.log('setBragOnCard()');
+};
+var setGrokAndBanterCard = function setGrokAndBanterCard() {
+  console.log('setGrokAndBanterCard()');
+};
+var setLucidCard = function setLucidCard() {
+  console.log('setLucidCard()');
+};
+var setWWOZToSpotifyCard = function setWWOZToSpotifyCard() {
+  console.log('setWWOZToSpotifyCard()');
+};
+var setLowpolyCard = function setLowpolyCard() {
+  console.log('setLowpolyCard()');
+};
+var setSquiggleCard = function setSquiggleCard() {
+  console.log('setSquiggleCard()');
+};
+var setProfileCard = function setProfileCard() {
+  console.log('setProfileCard()');
+};
+
 // Initialize click handlers to toggle between cards
 var initCardSelectors = function initCardSelectors() {
   var cardSelectors = document.querySelectorAll('.card-selector');
   var onCardSelectorClick = function onCardSelectorClick(e) {
     var cardSelector = e.target.parentNode;
     var label = cardSelector.getAttribute('label');
-    console.log(label);
+    if (label === 'Tulane University') setTulaneCard();else if (label === 'BragOn') setBragOnCard();else if (label === 'Grok + Banter') setGrokAndBanterCard();else if (label === 'Lucid') setLucidCard();else if (label === 'WWOZ-to-Spotify') setWWOZToSpotifyCard();else if (label === 'Lowpoly') setLowpolyCard();else if (label === 'Squiggle') setSquiggleCard();else setProfileCard();
   };
   cardSelectors.forEach(function (cardSelector) {
     cardSelector.addEventListener('click', onCardSelectorClick);
