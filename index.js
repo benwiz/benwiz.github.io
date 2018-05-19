@@ -1,10 +1,20 @@
-// import {MDCRipple} from '@material/ripple';
-//
-// MDCRipple.attachTo(document.querySelector('.mdc-button'));
+// Initialize click handlers to toggle between cards
+const initCardSelectors = () => {
+  const cardSelectors = document.querySelectorAll('.card-selector');
+  const onCardSelectorClick = (e) => {
+    const cardSelector = e.target.parentNode;
+    const label = cardSelector.getAttribute('label');
+    console.log(label);
+  };
+  cardSelectors.forEach((cardSelector) => {
+    cardSelector.addEventListener('click', onCardSelectorClick);
+  });
+};
 
+// Initialize the tooltip at the bottom
 const initTooltip = () => {
   const tooltip = document.querySelector('#tooltip');
-  const links = document.querySelectorAll('.link-icon');
+  const links = document.querySelectorAll('a');
   const onLinkMouseover = (e) => {
     tooltip.style.visibility = 'visible';
     tooltip.textContent = e.target.getAttribute('label');
@@ -19,6 +29,8 @@ const initTooltip = () => {
   });
 };
 
+// Init everything
+initCardSelectors();
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   // Do nothing if mobile
 } else {

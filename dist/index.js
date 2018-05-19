@@ -70,13 +70,23 @@
 "use strict";
 
 
-// import {MDCRipple} from '@material/ripple';
-//
-// MDCRipple.attachTo(document.querySelector('.mdc-button'));
+// Initialize click handlers to toggle between cards
+var initCardSelectors = function initCardSelectors() {
+  var cardSelectors = document.querySelectorAll('.card-selector');
+  var onCardSelectorClick = function onCardSelectorClick(e) {
+    var cardSelector = e.target.parentNode;
+    var label = cardSelector.getAttribute('label');
+    console.log(label);
+  };
+  cardSelectors.forEach(function (cardSelector) {
+    cardSelector.addEventListener('click', onCardSelectorClick);
+  });
+};
 
+// Initialize the tooltip at the bottom
 var initTooltip = function initTooltip() {
   var tooltip = document.querySelector('#tooltip');
-  var links = document.querySelectorAll('.link-icon');
+  var links = document.querySelectorAll('a');
   var onLinkMouseover = function onLinkMouseover(e) {
     tooltip.style.visibility = 'visible';
     tooltip.textContent = e.target.getAttribute('label');
@@ -91,6 +101,8 @@ var initTooltip = function initTooltip() {
   });
 };
 
+// Init everything
+initCardSelectors();
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   // Do nothing if mobile
 } else {
