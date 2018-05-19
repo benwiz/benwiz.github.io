@@ -4,7 +4,7 @@
 
 const initTooltip = () => {
   const tooltip = document.querySelector('#tooltip');
-  const links = document.querySelectorAll('a');
+  const links = document.querySelectorAll('.link-icon');
   const onLinkMouseover = (e) => {
     tooltip.style.visibility = 'visible';
     tooltip.textContent = e.target.getAttribute('label');
@@ -20,7 +20,8 @@ const initTooltip = () => {
 };
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  // Do something if mobile
+  // Do nothing if mobile
 } else {
+  // Initialize tooltip if not mobile
   initTooltip();
 }

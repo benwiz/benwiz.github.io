@@ -76,7 +76,7 @@
 
 var initTooltip = function initTooltip() {
   var tooltip = document.querySelector('#tooltip');
-  var links = document.querySelectorAll('a');
+  var links = document.querySelectorAll('.link-icon');
   var onLinkMouseover = function onLinkMouseover(e) {
     tooltip.style.visibility = 'visible';
     tooltip.textContent = e.target.getAttribute('label');
@@ -92,8 +92,9 @@ var initTooltip = function initTooltip() {
 };
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  // Do something if mobile
+  // Do nothing if mobile
 } else {
+  // Initialize tooltip if not mobile
   initTooltip();
 }
 
