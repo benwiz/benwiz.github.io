@@ -85,7 +85,7 @@ const setWWOZToSpotifyCard = () => {
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
   titleElement.innerHTML = 'WWOZ-to-Spotify';
-  subtitleElement.innerHTML = '';
+  subtitleElement.innerHTML = ' ';
   secondaryElement.innerHTML = 'An AWS Lambda function written in Clojure that reads WWOZ\'s RSS feed then adds each song to a Spotify playlist';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://github.com/benwiz/wwoz_to_spotify/" target="_blank" label="GitHub - WWOZ-to-Spotify">
@@ -104,7 +104,7 @@ const setLowpolyCard = () => {
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
   titleElement.innerHTML = 'Lowpoly';
-  subtitleElement.innerHTML = '';
+  subtitleElement.innerHTML = ' ';
   secondaryElement.innerHTML = 'A collection of AWS Lambda functions written in Clojure and Python that turn an image into a lowpoly version made of triangles.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://github.com/benwiz/lowpoly/" target="_blank" label="GitHub - Lowpoly">
@@ -122,7 +122,7 @@ const setSquiggleCard = () => {
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
   titleElement.innerHTML = 'Squiggle';
-  subtitleElement.innerHTML = '';
+  subtitleElement.innerHTML = ' ';
   secondaryElement.innerHTML = 'A ClojureScript website that uses Quil, a Processing wrapper, to for several small drawings and animations.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://github.com/benwiz/squiggle/" target="_blank" label="GitHub - Squiggle">

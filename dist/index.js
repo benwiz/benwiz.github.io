@@ -133,7 +133,7 @@ var setWWOZToSpotifyCard = function setWWOZToSpotifyCard() {
   var actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
   titleElement.innerHTML = 'WWOZ-to-Spotify';
-  subtitleElement.innerHTML = '';
+  subtitleElement.innerHTML = ' ';
   secondaryElement.innerHTML = 'An AWS Lambda function written in Clojure that reads WWOZ\'s RSS feed then adds each song to a Spotify playlist';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://github.com/benwiz/wwoz_to_spotify/" target="_blank" label="GitHub - WWOZ-to-Spotify">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n    <a class="link-icon" href="https://open.spotify.com/user/bwisialowski/playlist/3vjFwtIxnPkNXk0XWTj0wy?si=98jhghgARwCK3FnRX3rcNQ" target="_blank" label="Spotify">\n      <img src="/assets/images/spotify.svg" height="24">\n    </a>\n  ';
   // TODO: Link to spotify playlist.
@@ -145,7 +145,7 @@ var setLowpolyCard = function setLowpolyCard() {
   var actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
   titleElement.innerHTML = 'Lowpoly';
-  subtitleElement.innerHTML = '';
+  subtitleElement.innerHTML = ' ';
   secondaryElement.innerHTML = 'A collection of AWS Lambda functions written in Clojure and Python that turn an image into a lowpoly version made of triangles.';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://github.com/benwiz/lowpoly/" target="_blank" label="GitHub - Lowpoly">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n    <a class="link-icon" href="http://benwiz.io/lowpoly/" target="_blank" label="Lowpoly">\n      <img src="/assets/images/lowpoly.png" height="24">\n    </a>\n  ';
 };
@@ -156,7 +156,7 @@ var setSquiggleCard = function setSquiggleCard() {
   var actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
   titleElement.innerHTML = 'Squiggle';
-  subtitleElement.innerHTML = '';
+  subtitleElement.innerHTML = ' ';
   secondaryElement.innerHTML = 'A ClojureScript website that uses Quil, a Processing wrapper, to for several small drawings and animations.';
   actionIconsElement.innerHTML = '\n    <a class="link-icon" href="https://github.com/benwiz/squiggle/" target="_blank" label="GitHub - Squiggle">\n      <img src="/assets/images/mark-github.svg" height="24">\n    </a>\n    <a class="link-icon" href="http://benwiz.io/squiggle/" target="_blank" label="Squiggle">\n      <img src="/assets/images/squiggle.png" height="24">\n    </a>\n  ';
 };
