@@ -26,7 +26,6 @@ npx webpack --watch
 
 ## To Do
 
-- Better content description for each career card
 - Height of card should not change between content switches
 - Custom pictures for each content-set
     - Squiggle: a slow moving dashed spiral or something simple and good for background
