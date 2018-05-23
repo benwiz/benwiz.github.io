@@ -30,7 +30,7 @@ const setTulaneCard = () => {
 
   titleElement.innerHTML = 'Tulane University';
   subtitleElement.innerHTML = 'B.S. in Economics and Computer Science';
-  secondaryElement.innerHTML = '';
+  secondaryElement.innerHTML = 'Explored New Orleans while learning about game theory, building a brain-computer interface, and studing abroad in Australia.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://tulane.edu" target="_blank" label="Tulane">
       <img src="/assets/images/tulane.png" height="24">
@@ -45,7 +45,7 @@ const setBragOnCard = () => {
 
   titleElement.innerHTML = 'BragOn, LLC';
   subtitleElement.innerHTML = 'Founder & iOS Developer';
-  secondaryElement.innerHTML = '';
+  secondaryElement.innerHTML = 'A community-oriented shopping app that aimed to connect consumers with local retailers.';
   actionIconsElement.innerHTML = '';
 };
 const setGrokAndBanterCard = () => {
@@ -56,7 +56,7 @@ const setGrokAndBanterCard = () => {
 
   titleElement.innerHTML = 'Grok + Banter';
   subtitleElement.innerHTML = 'Information Analyst and Software Developer';
-  secondaryElement.innerHTML = '';
+  secondaryElement.innerHTML = 'Using computer vision and IoT cameras, we aimed to determine the effectiveness of out-of-home advertisements.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://www.linkedin.com/company/grok-&-banter-llc/" target="_blank" label="Grok + Banter">
       <img src="/assets/images/gb.png" height="24">
@@ -71,7 +71,7 @@ const setLucidCard = () => {
 
   titleElement.innerHTML = 'Lucid';
   subtitleElement.innerHTML = 'Senior Engineer';
-  secondaryElement.innerHTML = '';
+  secondaryElement.innerHTML = 'Leader on the integrations team filling all rolls from joining early state sales meetings to product design to implementation and, finally, support.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://luc.id" target="_blank" label="Lucid">
       <img src="/assets/images/lucid-large.png" height="24">
