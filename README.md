@@ -29,4 +29,13 @@ npx webpack --watch
 - Better content description for each career card
 - Height of card should not change between content switches
 - Custom pictures for each content-set
+    - Squiggle: a slow moving dashed spiral or something simple and good for background
+    - Lowpoly: a really good looking picture, maybe kaminsky's
+    - WWOZ: embedded spotify play button
+    - Lucid: a picture of me at Lucid
+    - G+B: logo? a picture of a person with a yellow box?
+    - BragOn: dragon
+    - Tulane: picture from Tulane years or of Tulane
+    - Profile: a digital sketch or characature
 - Use a better background. Probably make it using p5.js
+- Fix G+B logo

@@ -241,7 +241,8 @@ body {
   color: rgba(0, 0, 0, 0.54);
   /* @alternate */
   color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
-  margin: 0; }
+  margin: 0;
+  height: 23px; }
 
 .mdc-card__secondary {
   color: rgba(0, 0, 0, 0.54);
