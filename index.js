@@ -30,7 +30,7 @@ const setTulaneCard = () => {
 
   titleElement.innerHTML = 'Tulane University';
   subtitleElement.innerHTML = 'B.S. in Economics and Computer Science';
-  secondaryElement.innerHTML = 'Explored New Orleans while learning about game theory, building a brain-computer interface, and studing abroad in Australia.';
+  secondaryElement.innerHTML = 'Explored New Orleans while learning about game theory, building a brain-computer interface, and studying abroad in Australia.';
   actionIconsElement.innerHTML = `
     <a class="link-icon" href="https://tulane.edu" target="_blank" label="Tulane">
       <img src="/assets/images/tulane.png" height="24">
