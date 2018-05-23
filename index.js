@@ -1,10 +1,12 @@
 // Card selectors
 const setProfileCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'Ben Wisialowski';
   subtitleElement.innerHTML = 'Senior Engineer at Lucid';
   secondaryElement.innerHTML = 'Software developer enjoying the food, music, and culture of New Orleans.';
@@ -23,11 +25,13 @@ const setProfileCard = () => {
   `;
 };
 const setTulaneCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'Tulane University';
   subtitleElement.innerHTML = 'B.S. in Economics and Computer Science';
   secondaryElement.innerHTML = 'Explored New Orleans while learning about game theory, building a brain-computer interface, and studying abroad in Australia.';
@@ -38,22 +42,26 @@ const setTulaneCard = () => {
   `;
 };
 const setBragOnCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'BragOn, LLC';
   subtitleElement.innerHTML = 'Founder & iOS Developer';
   secondaryElement.innerHTML = 'A community-oriented shopping app that aimed to connect consumers with local retailers.';
   actionIconsElement.innerHTML = '';
 };
 const setGrokAndBanterCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'Grok + Banter';
   subtitleElement.innerHTML = 'Information Analyst and Software Developer';
   secondaryElement.innerHTML = 'Using computer vision and IoT cameras, we aimed to determine the effectiveness of out-of-home advertisements.';
@@ -64,11 +72,13 @@ const setGrokAndBanterCard = () => {
   `;
 };
 const setLucidCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'Lucid';
   subtitleElement.innerHTML = 'Senior Engineer';
   secondaryElement.innerHTML = 'Leader on the integrations team filling all rolls from joining early state sales meetings to product design to implementation and, finally, support.';
@@ -79,11 +89,13 @@ const setLucidCard = () => {
   `;
 };
 const setWWOZToSpotifyCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'WWOZ-to-Spotify';
   subtitleElement.innerHTML = 'Clojure';
   secondaryElement.innerHTML = 'An AWS Lambda function that reads WWOZ\'s RSS feed then adds each song to a Spotify playlist';
@@ -97,11 +109,13 @@ const setWWOZToSpotifyCard = () => {
   `;
 };
 const setLowpolyCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/lowpoly.jpg")';
   titleElement.innerHTML = 'Lowpoly';
   subtitleElement.innerHTML = 'Clojure, Python, JavaScript';
   secondaryElement.innerHTML = 'Turn a normal image into a lowpoly version using basic computer vision and Delaunay triangulation..';
@@ -115,11 +129,13 @@ const setLowpolyCard = () => {
   `;
 };
 const setSquiggleCard = () => {
+  const mediaElement = document.querySelector('.mdc-card__media');
   const titleElement = document.querySelector('.mdc-card__title');
   const subtitleElement = document.querySelector('.mdc-card__subtitle');
   const secondaryElement = document.querySelector('.mdc-card__secondary');
   const actionIconsElement = document.querySelector('.mdc-card__action-icons');
 
+  mediaElement.style.backgroundImage = 'url("/assets/images/backgrounds/mangos.jpg")';
   titleElement.innerHTML = 'Squiggle';
   subtitleElement.innerHTML = 'ClojureScript';
   secondaryElement.innerHTML = 'Use Quil, a Processing wrapper, for several small drawings and animations.';
