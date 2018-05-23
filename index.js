@@ -95,7 +95,6 @@ const setWWOZToSpotifyCard = () => {
       <img src="/assets/images/spotify.svg" height="24">
     </a>
   `;
-  // TODO: Link to spotify playlist.
 };
 const setLowpolyCard = () => {
   const titleElement = document.querySelector('.mdc-card__title');
