@@ -26,8 +26,7 @@ npx webpack --watch
 
 ## To Do
 
-- Background: p5.js delaunay nets or one giant one as a wall... thinking flitting small ones is better
-  - probably will go back to floating secondary card
+- Background: p5.js delaunay repulsion or delaunay monsters
 - Custom pictures for each content-set
   - Squiggle: a slow moving dashed spiral or something simple and good for background, use p5.js or processing.js. Or, better yet, create it in Squiggle then create a gif of it.
   - Lowpoly: a really good looking picture, maybe kaminsky's
