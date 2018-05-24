@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import "@material/card/mdc-card";
+@import "@material/elevation/mdc-elevation";
 // @import "@material/button/mdc-button";
 
 body {
   font-family: 'Dosis', sans-serif;
   font-weight: 300;
-  background-color: lightblue;
+  background-color: #add8e6; // #FAFAFA;
 }
 
 .outer-container {
@@ -23,6 +24,11 @@ body {
   max-width: 350px;
   margin: 0 auto;
   margin-bottom: 16px;
+}
+
+.mdc-elevation--z0 {
+  border: 1px solid #909090;
+  // background-color: transparent;
 }
 
 .mdc-card__media {
