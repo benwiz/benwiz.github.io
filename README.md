@@ -40,3 +40,4 @@ npx webpack --watch
 - Fix G+B logo
 - Fix WWOZ-to-Spotify logo
 - Height of card should not change between content switches
+- Do I want to chop corners off the cards?
