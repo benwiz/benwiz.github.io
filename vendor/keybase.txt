@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/benwiz37
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.benwiz.io
+  * I am benwiz37 (https://keybase.io/benwiz37) on keybase.
+  * I have a public key with fingerprint 7646 427B 318D 44EB F007  D620 9E16 C121 7B97 CD4B
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120dde8037fc154420b0b48efaf67c59f430002c6dd9016788a89a8abe47b6ce19b0a",
+      "fingerprint": "7646427b318d44ebf007d6209e16c1217b97cd4b",
+      "host": "keybase.io",
+      "key_id": "9e16c1217b97cd4b",
+      "kid": "010115f7573bad725564d9391020f1b7077fc782bc8a7eac4756089ac4a2367f53e30a",
+      "uid": "fc142e122e99805dd57d4a1ec99b2719",
+      "username": "benwiz37"
+    },
+    "service": {
+      "hostname": "www.benwiz.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1539869681,
+  "expire_in": 157680000,
+  "prev": "dfa3610b5bd1bffd2e066fc751c1fc5ed6a8603575a5d76241ad319133f1f5ec",
+  "seqno": 26,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.80
+Comment: https://keybase.io/crypto
+
+yMNzAnicbZJ7UFVFHMehK4wxqVCh4yhNHgoZvcLuee05F8EHY2aYRoUpxL2ePbsH
+z0D3Xu69vF+mMfZAmSYi0AGpnCRMlEdREyWgNITgCwmUMZSYtMRH6VAziHQu6n/9
+tbO7n993v9/f/k7MMvkE+FbPbV+U90lvnO/J9soMn6SuD/7KY7CD5DCWPCaVTi80
+jVC3x5aqE8bCAMgCQqgEOKSpUOB5FmCAeYlqiiYiVZA1ngMAsKpIiAygiCRJkWRF
+UjDlERZVCmUMFMbMaLo9hbqcLt3uMWSRyIs8izAHJcLzFGsAICKyQKZQVCELEZaR
+SnhsFG5zuL0VhjmsuGmE7jDOjI1t2t7/8I98AwgFDQmIwwpBrCCIPJE5GQIWaBAj
+gIw8SGKxKimIKiqPBBEYxlVeYTkRaQJHuWnfGdNyRnaepZBlqSxLQCBEQIRXIFVl
+GbMIyl7QTV125S1q0Jjas/RcDjEFZsY4zdRV6m2sN8lDIisrK+IB9SCQ0+XwOFRH
+mnG1zeNxui3eUk+Oc5ql2PZQxYZ1OzEaaVRkUpdbd9gZCzRI1aN7ZaHAyZIoixI0
+MzTbqbuoTfcSAhIl45OA9x2aaUgSTeFECLCACcSaRlgKRNHohwBVqKkCJaIiiYAT
+kKAIBIksDxXCQRlynAY1gaqMN1e63cFYWNHwqaQYmm49xa54MlyUKehof3OGj2+A
+j7/fY94J8wl4PPDR3OW2BPo0BK4Kqd4QeGasSAuoONVwYsZE3RTHT9xaOn42/vS5
+uGXXekuSPM/bzOuWpLyUXjtY/8faszt2fBVYBRpy6yZcaaRqY1dbzsg3euRrC6N/
+7avrPro3Zmy77caFOQuH5fN5Sc8kBbUFHXs2SWludgl2f/ZvNfqa7fPOwkl/30v9
+WV9fXGPirh6v2jn7fsITYaujLv2weeuhyX1zP9yFi5+rjOxeWlkyGpx4aIAkbNi8
+CPVZ10zGnvxyZkZn6O7di13BmU+13rx8uK1bPTpSrVmn8os7Oq/Mutq8pPXt3/YP
+Wu8Mp2QU7tprCbs98sunnYn2nHXFNi21JKyizDHe3lMa7/vGio3H3skvD/avejVi
++dDMwhvl68NaS480NX2/ZyS0K2xLcuhUxHlluKcioT2k9+cvhmrqyifjo2vNd9/r
+6Q9a5rzpph0hJdXNo/9e+Cg69umVPyr7Vq+9XXvPGP3vMPl902AOLB840Phicv1n
+VU0JV16OTQ7g512fZ8qurWk0DYRPZCfm3j+y6f3GtKC61Mtl4RVtmQ4PHhotKzDJ
+xfV+Baf3vzC04ExTftGBBeFt1ctrK+4xzCr7WJHf4K3t52Js9a9vWVwzSuanmy92
+jwf9FORJPvjPnt6YqP6PD8+WrNf7J6be3Vm6Xti19Xif/7crTHfznqyPjAr/M7Zr
+6NQdq7klLvngylfmzym1tvwHmpzIbg==
+=s+UV
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/benwiz37
+
+==================================================================

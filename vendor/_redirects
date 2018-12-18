@@ -1,0 +1,2 @@
+# Redirect default Netlify subdomain to primary domain
+http://eager-shockley-d59830.netlify.com/* http://www.benwiz.io/:splat 301!
