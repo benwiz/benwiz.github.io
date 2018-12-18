@@ -8,9 +8,7 @@ I use the word `line` but `edge` would have been a better choice.
 
 ## To Do
 
-- Add google analytics
+- Use npm and webpack so that I only import the mdc components I need
 
 - SEO
   - Learn more about `nofollow` links
-  - Fix massive js imports
-    - Use npm and webpack to ensure that only necessary mdc components are included
