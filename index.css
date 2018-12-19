@@ -28,12 +28,24 @@ p {
   margin: 8px;
 }
 
-/* Some specific overrides for .project-button come AFTER .mdc-button */
-.project-button {
+.projects {
+  width: 100%;
+  margin: 8px;
+  display: inline-block;
+}
+.projects .mdc-button {
+  width: calc(50% - 4px);
+  margin: 0px;
+}
+.projects .left-button {
+  float: left;
+}
+.projects .right-button {
+  float: right;
 }
 
 svg path {
-  fill: var(--mdc-theme-primary) !important;
+  fill: var(--mdc-theme-primary);
 }
 
 p {
