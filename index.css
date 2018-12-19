@@ -28,6 +28,14 @@ p {
   margin: 8px;
 }
 
+/* Some specific overrides for .project-button come AFTER .mdc-button */
+.project-button {
+}
+
+svg path {
+  fill: var(--mdc-theme-primary) !important;
+}
+
 p {
   margin-bottom: 20px;
 }
