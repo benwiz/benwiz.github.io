@@ -47,10 +47,6 @@ p {
   float: right;
 }
 
-svg path {
-  fill: var(--mdc-theme-primary);
-}
-
 canvas {
   position: absolute;
   top: 0;
