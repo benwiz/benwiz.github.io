@@ -17,11 +17,8 @@ body {
 }
 
 #container {
-}
-
-p {
   max-width: 300px;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 i {
@@ -29,9 +26,14 @@ i {
 }
 
 .mdc-button,
-.mdc-slider {
-  width: 300px;
-  margin: 8px auto;
+.mdc-slider,
+p {
+  width: 100%;
+  margin: 8px;
+}
+
+p {
+  margin-bottom: 20px;
 }
 
 canvas {
