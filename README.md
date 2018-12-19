@@ -13,3 +13,6 @@ I use the word `line` but `edge` would have been a better choice.
 
 - SEO
   - Learn more about `nofollow` links
+
+- Later
+  - There are so many old branches, maybe get rid of many
