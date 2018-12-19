@@ -23,14 +23,17 @@ body {
 
 .mdc-button,
 .mdc-slider,
-p {
+p,
+.projects {
   width: 100%;
   margin: 8px;
 }
 
+p {
+  margin-bottom: 20px;
+}
+
 .projects {
-  width: 100%;
-  margin: 8px;
   display: inline-block;
 }
 .projects .mdc-button {
@@ -46,10 +49,6 @@ p {
 
 svg path {
   fill: var(--mdc-theme-primary);
-}
-
-p {
-  margin-bottom: 20px;
 }
 
 canvas {
