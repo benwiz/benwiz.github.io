@@ -35,6 +35,8 @@ p {
 
 .projects {
   display: inline-block;
+  width: 100%;
+  margin-bottom: 4px;
 }
 .projects .mdc-button {
   width: calc(50% - 4px);
