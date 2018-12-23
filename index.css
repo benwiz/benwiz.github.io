@@ -39,7 +39,7 @@ p {
   margin-bottom: 4px;
 }
 .projects .mdc-button {
-  width: calc(50% - 4px);
+  width: calc(50% - 6px);
   margin: 0px;
 }
 .projects .left-button {
