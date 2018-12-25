@@ -742,13 +742,9 @@ exports.default = MDCSliderAdapter;
 
 var _index = __webpack_require__(11);
 
-var _p5Min = __webpack_require__(14);
+__webpack_require__(14);
 
-var P5 = _interopRequireWildcard(_p5Min);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-// Config as a global var
+// Config as a global
 var CONFIG = {
   numPoints: 55,
   numEdges: 2, // K-nearest neighbors. Use "0" for no lines. Use "Infinity" for all.
@@ -765,27 +761,28 @@ var CONFIG = {
   cursorRadius: 30,
   isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 };
+
 //
 // Utility functions
 //
 
-function getRandomFloat(min, max) {
+var getRandomFloat = function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
-}
+};
 
-function getRandomInt(min, max) {
+var getRandomInt = function getRandomInt(min, max) {
   return Math.floor(getRandomFloat(min, max));
-}
+};
 
-function degToRadians(angle) {
+var degToRadians = function degToRadians(angle) {
   return angle * (Math.PI / 180);
-}
+};
 
-function radiansToDeg(angle) {
+var radiansToDeg = function radiansToDeg(angle) {
   return angle * (180 / Math.PI);
-}
+};
 
-function distance(point1, point2) {
+var distance = function distance(point1, point2) {
   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
   var x1 = point1[0];
   var y1 = point1[1];
@@ -793,9 +790,9 @@ function distance(point1, point2) {
   var y2 = point2[1];
   var dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
   return dist;
-}
+};
 
-function lineContainsPoint(line, point) {
+var lineContainsPoint = function lineContainsPoint(line, point) {
   for (var i = 0; i < line.length; i++) {
     var dist = distance(point, line[i]);
     if (dist === 0) {
@@ -804,13 +801,13 @@ function lineContainsPoint(line, point) {
   }
 
   return -1;
-}
+};
 
 //
 // Creation, updating, and drawing functions
 //
 
-function createPoint() {
+var createPoint = function createPoint() {
   var speedMultiplier = CONFIG.speedMultiplier;
   var rMin = CONFIG.rMin;
   var rMax = CONFIG.rMax;
@@ -836,27 +833,27 @@ function createPoint() {
     }
   };
   return point;
-}
+};
 
-function createPoints(n) {
+var createPoints = function createPoints(n) {
   var points = [];
   for (var i = 0; i < n; i++) {
     var point = createPoint();
     points.push(point);
   }
   return points;
-}
+};
 
-function drawPoint(point) {
+var drawPoint = function drawPoint(point) {
   if (point.r > 0) {
     strokeWeight(1);
     stroke(point.color.r, point.color.g, point.color.b, point.color.a);
     fill(point.color.r, point.color.g, point.color.b, point.color.a / 2);
     ellipse(point.x, point.y, 2 * point.r); // Set diameter
   }
-}
+};
 
-function updatePoint(point, cursorRadius) {
+var updatePoint = function updatePoint(point, cursorRadius) {
   // Update location
   point.x += point.velocity.speed * Math.cos(degToRadians(point.velocity.angle)) * point.velocity.runAwayMultiplier;
   point.y += point.velocity.speed * Math.sin(degToRadians(point.velocity.angle)) * point.velocity.runAwayMultiplier;
@@ -912,9 +909,9 @@ function updatePoint(point, cursorRadius) {
       point.velocity.runAwayMultiplier = 1;
     }
   }
-}
+};
 
-function createLines(k, points) {
+var createLines = function createLines(k, points) {
   var linesForPoints = [];
 
   // Create all pairs of points
@@ -924,11 +921,11 @@ function createLines(k, points) {
       if (i === j) continue;
       var point1 = points[i];
       var point2 = points[j];
-      var line = [[point1.x, point1.y], [point2.x, point2.y]];
-      line.sort(function (a, b) {
+      var _line = [[point1.x, point1.y], [point2.x, point2.y]];
+      _line.sort(function (a, b) {
         return a[0] - b[0];
       });
-      linesForPoint.push(line);
+      linesForPoint.push(_line);
     }
     linesForPoints.push(linesForPoint);
   }
@@ -937,44 +934,44 @@ function createLines(k, points) {
   var lines = [];
 
   // Sort points using distance function
-  for (var i = 0; i < linesForPoints.length; i++) {
+  for (var _i = 0; _i < linesForPoints.length; _i++) {
     // Sort the lines for each point
-    var linesForPoint = linesForPoints[i];
-    linesForPoint.sort(function (line1, line2) {
+    var _linesForPoint = linesForPoints[_i];
+    _linesForPoint.sort(function (line1, line2) {
       var dist1 = distance(line1[0], line1[1]);
       var dist2 = distance(line2[0], line2[1]);
       return dist1 - dist2;
     });
 
     // Keep first k elements
-    linesForPoint.splice(k);
+    _linesForPoint.splice(k);
 
     // Store in flattened list
-    lines = lines.concat(linesForPoint);
+    lines = lines.concat(_linesForPoint);
   }
 
   // Dedupe
-  for (var i = 0; i < lines.length; i++) {
-    var baseLine = lines[i];
-    for (var j = 0; j < lines.length; j++) {
-      if (i === j) continue;
-      var testLine = lines[j];
+  for (var _i2 = 0; _i2 < lines.length; _i2++) {
+    var baseLine = lines[_i2];
+    for (var _j = 0; _j < lines.length; _j++) {
+      if (_i2 === _j) continue;
+      var testLine = lines[_j];
       if (baseLine[0][0] === testLine[0][0] && baseLine[0][1] === testLine[0][1] && baseLine[1][0] === testLine[1][0] && baseLine[1][1] === testLine[1][1]) {
-        lines.splice(j, 1);
+        lines.splice(_j, 1);
       }
     }
   }
 
   return lines;
-}
+};
 
-function drawLine(l) {
+var drawLine = function drawLine(l) {
   strokeWeight(CONFIG.lineStrokeWeight);
   stroke(CONFIG.color.r, CONFIG.color.g, CONFIG.color.b, CONFIG.color.a);
   line(l[0][0], l[0][1], l[1][0], l[1][1]);
-}
+};
 
-function findTriangles(lines) {
+var findTriangles = function findTriangles(lines) {
   // High level: For each line, for each point on the line, find the points connections. For every
   // shared connection point we have a triangle using that shared point as the third vertex.
 
@@ -1029,16 +1026,16 @@ function findTriangles(lines) {
     }
 
     // Create the triangles
-    for (var k = 0; k < matches.length; k++) {
-      var triangle = [basePoint1, basePoint2, matches[k]];
+    for (var _k = 0; _k < matches.length; _k++) {
+      var triangle = [basePoint1, basePoint2, matches[_k]];
       triangles.push(triangle);
     }
   }
 
   return triangles;
-}
+};
 
-function drawPolygons(polygons) {
+var drawPolygons = function drawPolygons(polygons) {
   strokeWeight(0);
   fill(CONFIG.color.r, CONFIG.color.g, CONFIG.color.b, CONFIG.color.a / 2);
 
@@ -1052,9 +1049,9 @@ function drawPolygons(polygons) {
     }
     endShape(CLOSE);
   }
-}
+};
 
-function createOrKillPoints(points, numPoints) {
+var createOrKillPoints = function createOrKillPoints(points, numPoints) {
   var diff = points.length - numPoints;
   // If the difference is positive, kill points. If negative, create points.
   if (diff > 0) {
@@ -1069,9 +1066,9 @@ function createOrKillPoints(points, numPoints) {
   }
 
   return points;
-}
+};
 
-function drawCursorBubble(isMobile) {
+var drawCursorBubble = function drawCursorBubble(isMobile) {
   if (isMobile) {
     return;
   }
@@ -1079,7 +1076,7 @@ function drawCursorBubble(isMobile) {
   strokeWeight(1);
   fill(CONFIG.color.r, CONFIG.color.b, CONFIG.color.g, CONFIG.color.a);
   ellipse(mouseX, mouseY, CONFIG.cursorRadius);
-}
+};
 
 //
 //
@@ -1105,7 +1102,7 @@ window.draw = function () {
   // Create or kill points until the number matches the CONFIG.numPoints
   POINTS = createOrKillPoints(POINTS.slice(), CONFIG.numPoints);
 
-  // Draw and update points
+  // Draw and update
   for (var i = 0; i < POINTS.length; i++) {
     var point = POINTS[i];
     drawPoint(point);
@@ -1114,8 +1111,8 @@ window.draw = function () {
 
   // Calculate and draw lines
   var lines = createLines(CONFIG.numEdges, POINTS);
-  for (var i = 0; i < lines.length; i++) {
-    var l = lines[i];
+  for (var _i3 = 0; _i3 < lines.length; _i3++) {
+    var l = lines[_i3];
     drawLine(l);
   }
 
@@ -1127,13 +1124,13 @@ window.draw = function () {
 //
 // JS Event Listeners
 //
-var containerDiv = document.querySelector('#container');
-var numPointsSlider = new _index.MDCSlider(container.querySelector('#num-points'));
-numPointsSlider.listen('MDCSlider:change', function () {
+var containerDiv = document.querySelector("#container");
+var numPointsSlider = new _index.MDCSlider(container.querySelector("#num-points"));
+numPointsSlider.listen("MDCSlider:change", function () {
   CONFIG.numPoints = numPointsSlider.value;
 });
-var numEdgesSlider = new _index.MDCSlider(container.querySelector('#num-edges'));
-numEdgesSlider.listen('MDCSlider:change', function () {
+var numEdgesSlider = new _index.MDCSlider(container.querySelector("#num-edges"));
+numEdgesSlider.listen("MDCSlider:change", function () {
   CONFIG.numEdges = numEdgesSlider.value;
 });
 

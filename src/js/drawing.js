@@ -1,8 +1,8 @@
-import { MDCSlider } from '@material/slider/index';
-import * as P5 from 'p5/lib/p5.min.js';
+import { MDCSlider } from "@material/slider/index";
+import "p5/lib/p5.min.js";
 
-// Config as a global var
-var CONFIG = {
+// Config as a global
+const CONFIG = {
   numPoints: 55,
   numEdges: 2, // K-nearest neighbors. Use "0" for no lines. Use "Infinity" for all.
   speedMultiplier: 1,
@@ -13,64 +13,65 @@ var CONFIG = {
     r: 30,
     g: 144,
     b: 255,
-    a: 16,
+    a: 16
   },
   cursorRadius: 30,
   isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent,
-  ),
+    navigator.userAgent
+  )
 };
+
 //
 // Utility functions
 //
 
-function getRandomFloat(min, max) {
+const getRandomFloat = (min, max) => {
   return Math.random() * (max - min) + min;
-}
+};
 
-function getRandomInt(min, max) {
+const getRandomInt = (min, max) => {
   return Math.floor(getRandomFloat(min, max));
-}
+};
 
-function degToRadians(angle) {
+const degToRadians = angle => {
   return angle * (Math.PI / 180);
-}
+};
 
-function radiansToDeg(angle) {
+const radiansToDeg = angle => {
   return angle * (180 / Math.PI);
-}
+};
 
-function distance(point1, point2) {
+const distance = (point1, point2) => {
   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
-  var x1 = point1[0];
-  var y1 = point1[1];
-  var x2 = point2[0];
-  var y2 = point2[1];
-  var dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  const x1 = point1[0];
+  const y1 = point1[1];
+  const x2 = point2[0];
+  const y2 = point2[1];
+  const dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
   return dist;
-}
+};
 
-function lineContainsPoint(line, point) {
-  for (var i = 0; i < line.length; i++) {
-    var dist = distance(point, line[i]);
+const lineContainsPoint = (line, point) => {
+  for (let i = 0; i < line.length; i++) {
+    const dist = distance(point, line[i]);
     if (dist === 0) {
       return i;
     }
   }
 
   return -1;
-}
+};
 
 //
 // Creation, updating, and drawing functions
 //
 
-function createPoint() {
-  var speedMultiplier = CONFIG.speedMultiplier;
-  var rMin = CONFIG.rMin;
-  var rMax = CONFIG.rMax;
+const createPoint = () => {
+  const speedMultiplier = CONFIG.speedMultiplier;
+  const rMin = CONFIG.rMin;
+  const rMax = CONFIG.rMax;
 
-  var point = {
+  const point = {
     // Init location. Consider rMax to ensure that no points are generated partially offscreen.
     x: getRandomFloat(20, windowWidth - 20), // windowWidth / 2,
     y: getRandomFloat(20, windowHeight - 20), // windowHeight / 2,
@@ -78,7 +79,7 @@ function createPoint() {
     velocity: {
       angle: getRandomInt(0, 360),
       speed: getRandomFloat(0.2, 1) * speedMultiplier,
-      runAwayMultiplier: 1,
+      runAwayMultiplier: 1
     },
     // Radius of point
     r: getRandomFloat(rMin, rMax),
@@ -87,31 +88,31 @@ function createPoint() {
       r: CONFIG.color.r,
       g: CONFIG.color.g,
       b: CONFIG.color.b,
-      a: CONFIG.color.a,
-    },
+      a: CONFIG.color.a
+    }
   };
   return point;
-}
+};
 
-function createPoints(n) {
-  var points = [];
-  for (var i = 0; i < n; i++) {
-    var point = createPoint();
+const createPoints = n => {
+  const points = [];
+  for (let i = 0; i < n; i++) {
+    const point = createPoint();
     points.push(point);
   }
   return points;
-}
+};
 
-function drawPoint(point) {
+const drawPoint = point => {
   if (point.r > 0) {
     strokeWeight(1);
     stroke(point.color.r, point.color.g, point.color.b, point.color.a);
     fill(point.color.r, point.color.g, point.color.b, point.color.a / 2);
     ellipse(point.x, point.y, 2 * point.r); // Set diameter
   }
-}
+};
 
-function updatePoint(point, cursorRadius) {
+const updatePoint = (point, cursorRadius) => {
   // Update location
   point.x +=
     point.velocity.speed *
@@ -141,14 +142,14 @@ function updatePoint(point, cursorRadius) {
   }
 
   // Make point run away from mouse
-  var mousePos = [mouseX, mouseY];
-  var pointPos = [point.x, point.y];
-  var dist = distance(mousePos, pointPos);
+  const mousePos = [mouseX, mouseY];
+  const pointPos = [point.x, point.y];
+  const dist = distance(mousePos, pointPos);
   if (dist < cursorRadius) {
     // Calculate angle to mousePos from point. Then reverse it and set as new angle.
-    var a = mouseX - point.x;
-    var o = mouseY - point.y;
-    var h = dist;
+    const a = mouseX - point.x;
+    const o = mouseY - point.y;
+    const h = dist;
 
     // Determine angle based on quadrant. I'm sure there is a generic solution out there, but this works.
     if (a > 0 && o > 0) {
@@ -173,20 +174,20 @@ function updatePoint(point, cursorRadius) {
       point.velocity.runAwayMultiplier = 1;
     }
   }
-}
+};
 
-function createLines(k, points) {
-  var linesForPoints = [];
+const createLines = (k, points) => {
+  const linesForPoints = [];
 
   // Create all pairs of points
-  for (var i = 0; i < points.length; i++) {
-    var linesForPoint = [];
-    for (var j = 0; j < points.length; j++) {
+  for (let i = 0; i < points.length; i++) {
+    const linesForPoint = [];
+    for (let j = 0; j < points.length; j++) {
       if (i === j) continue;
-      var point1 = points[i];
-      var point2 = points[j];
-      var line = [[point1.x, point1.y], [point2.x, point2.y]];
-      line.sort(function(a, b) {
+      const point1 = points[i];
+      const point2 = points[j];
+      const line = [[point1.x, point1.y], [point2.x, point2.y]];
+      line.sort((a, b) => {
         return a[0] - b[0];
       });
       linesForPoint.push(line);
@@ -195,15 +196,15 @@ function createLines(k, points) {
   }
 
   // Store the flattened list of lines
-  var lines = [];
+  let lines = [];
 
   // Sort points using distance function
-  for (var i = 0; i < linesForPoints.length; i++) {
+  for (let i = 0; i < linesForPoints.length; i++) {
     // Sort the lines for each point
-    var linesForPoint = linesForPoints[i];
-    linesForPoint.sort(function(line1, line2) {
-      var dist1 = distance(line1[0], line1[1]);
-      var dist2 = distance(line2[0], line2[1]);
+    const linesForPoint = linesForPoints[i];
+    linesForPoint.sort((line1, line2) => {
+      const dist1 = distance(line1[0], line1[1]);
+      const dist2 = distance(line2[0], line2[1]);
       return dist1 - dist2;
     });
 
@@ -215,11 +216,11 @@ function createLines(k, points) {
   }
 
   // Dedupe
-  for (var i = 0; i < lines.length; i++) {
-    var baseLine = lines[i];
-    for (var j = 0; j < lines.length; j++) {
+  for (let i = 0; i < lines.length; i++) {
+    const baseLine = lines[i];
+    for (let j = 0; j < lines.length; j++) {
       if (i === j) continue;
-      var testLine = lines[j];
+      const testLine = lines[j];
       if (
         baseLine[0][0] === testLine[0][0] &&
         baseLine[0][1] === testLine[0][1] &&
@@ -232,35 +233,35 @@ function createLines(k, points) {
   }
 
   return lines;
-}
+};
 
-function drawLine(l) {
+const drawLine = l => {
   strokeWeight(CONFIG.lineStrokeWeight);
   stroke(CONFIG.color.r, CONFIG.color.g, CONFIG.color.b, CONFIG.color.a);
   line(l[0][0], l[0][1], l[1][0], l[1][1]);
-}
+};
 
-function findTriangles(lines) {
+const findTriangles = lines => {
   // High level: For each line, for each point on the line, find the points connections. For every
   // shared connection point we have a triangle using that shared point as the third vertex.
 
-  var triangles = [];
+  const triangles = [];
 
-  for (var i = 0; i < lines.length; i++) {
-    var baseLine = lines[i];
-    var basePoint1 = baseLine[0];
-    var basePoint2 = baseLine[1];
+  for (let i = 0; i < lines.length; i++) {
+    const baseLine = lines[i];
+    const basePoint1 = baseLine[0];
+    const basePoint2 = baseLine[1];
 
-    var matches1 = [];
-    var matches2 = [];
+    const matches1 = [];
+    const matches2 = [];
 
     // Find connections
-    for (var j = 0; j < lines.length; j++) {
+    for (let j = 0; j < lines.length; j++) {
       if (i === j) continue;
-      var testLine = lines[j];
+      const testLine = lines[j];
 
       // Find connections for first base point
-      var index = lineContainsPoint(testLine, basePoint1);
+      let index = lineContainsPoint(testLine, basePoint1);
       if (index > -1) {
         if (index === 0) {
           var match = testLine[1];
@@ -283,10 +284,10 @@ function findTriangles(lines) {
     }
 
     // Get matches
-    var matches = [];
-    for (var k = 0; k < matches1.length; k++) {
-      for (var l = 0; l < matches2.length; l++) {
-        var dist = distance(matches1[k], matches2[l]);
+    const matches = [];
+    for (let k = 0; k < matches1.length; k++) {
+      for (let l = 0; l < matches2.length; l++) {
+        const dist = distance(matches1[k], matches2[l]);
         if (dist === 0) {
           matches.push(matches1[k]);
           break;
@@ -295,49 +296,49 @@ function findTriangles(lines) {
     }
 
     // Create the triangles
-    for (var k = 0; k < matches.length; k++) {
-      var triangle = [basePoint1, basePoint2, matches[k]];
+    for (let k = 0; k < matches.length; k++) {
+      const triangle = [basePoint1, basePoint2, matches[k]];
       triangles.push(triangle);
     }
   }
 
   return triangles;
-}
+};
 
-function drawPolygons(polygons) {
+const drawPolygons = polygons => {
   strokeWeight(0);
   fill(CONFIG.color.r, CONFIG.color.g, CONFIG.color.b, CONFIG.color.a / 2);
 
-  for (var i = 0; i < polygons.length; i++) {
-    var polygon = polygons[i];
+  for (let i = 0; i < polygons.length; i++) {
+    const polygon = polygons[i];
 
     beginShape();
-    for (var j = 0; j < polygon.length; j++) {
-      var point = polygon[j];
+    for (let j = 0; j < polygon.length; j++) {
+      const point = polygon[j];
       vertex(point[0], point[1]);
     }
     endShape(CLOSE);
   }
-}
+};
 
-function createOrKillPoints(points, numPoints) {
-  var diff = points.length - numPoints;
+const createOrKillPoints = (points, numPoints) => {
+  let diff = points.length - numPoints;
   // If the difference is positive, kill points. If negative, create points.
   if (diff > 0) {
     while (diff > 0) {
-      var randomIndex = Math.floor(Math.random() * points.length);
+      const randomIndex = Math.floor(Math.random() * points.length);
       points.splice(randomIndex, 1);
       diff -= 1;
     }
   } else if (diff < 0) {
-    var newPoints = createPoints(-1 * diff);
+    const newPoints = createPoints(-1 * diff);
     points = points.concat(newPoints);
   }
 
   return points;
-}
+};
 
-function drawCursorBubble(isMobile) {
+const drawCursorBubble = isMobile => {
   if (isMobile) {
     return;
   }
@@ -345,7 +346,7 @@ function drawCursorBubble(isMobile) {
   strokeWeight(1);
   fill(CONFIG.color.r, CONFIG.color.b, CONFIG.color.g, CONFIG.color.a);
   ellipse(mouseX, mouseY, CONFIG.cursorRadius);
-}
+};
 
 //
 //
@@ -353,7 +354,7 @@ function drawCursorBubble(isMobile) {
 // Only in setup() and draw() will I ever touch global variables.
 //
 //
-var POINTS = [];
+let POINTS = [];
 
 window.setup = () => {
   createCanvas(windowWidth, windowHeight);
@@ -371,38 +372,34 @@ window.draw = () => {
   // Create or kill points until the number matches the CONFIG.numPoints
   POINTS = createOrKillPoints(POINTS.slice(), CONFIG.numPoints);
 
-  // Draw and update points
-  for (var i = 0; i < POINTS.length; i++) {
-    var point = POINTS[i];
+  // Draw and update
+  for (let i = 0; i < POINTS.length; i++) {
+    const point = POINTS[i];
     drawPoint(point);
     updatePoint(point, CONFIG.cursorRadius);
   }
 
   // Calculate and draw lines
-  var lines = createLines(CONFIG.numEdges, POINTS);
-  for (var i = 0; i < lines.length; i++) {
-    var l = lines[i];
+  const lines = createLines(CONFIG.numEdges, POINTS);
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
     drawLine(l);
   }
 
   // Find and draw closed polygons
-  var triangles = findTriangles(lines);
+  const triangles = findTriangles(lines);
   drawPolygons(triangles);
-}
+};
 
 //
 // JS Event Listeners
 //
-var containerDiv = document.querySelector('#container');
-const numPointsSlider = new MDCSlider(
-  container.querySelector('#num-points'),
-);
-numPointsSlider.listen('MDCSlider:change', () => {
+const containerDiv = document.querySelector("#container");
+const numPointsSlider = new MDCSlider(container.querySelector("#num-points"));
+numPointsSlider.listen("MDCSlider:change", () => {
   CONFIG.numPoints = numPointsSlider.value;
 });
-const numEdgesSlider = new MDCSlider(
-  container.querySelector('#num-edges'),
-);
-numEdgesSlider.listen('MDCSlider:change', () => {
+const numEdgesSlider = new MDCSlider(container.querySelector("#num-edges"));
+numEdgesSlider.listen("MDCSlider:change", () => {
   CONFIG.numEdges = numEdgesSlider.value;
 });
