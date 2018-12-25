@@ -1,1 +1,4 @@
-console.log("hey, from es6!");
+import { MDCRipple } from '@material/ripple/index';
+
+// Add ripples
+document.querySelectorAll('.mdc-button').forEach(MDCRipple.attachTo);

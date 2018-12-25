@@ -1,3 +1,6 @@
+import { MDCSlider } from '@material/slider/index';
+import * as P5 from 'p5/lib/p5.min.js';
+
 // Config as a global var
 var CONFIG = {
   numPoints: 55,
@@ -352,14 +355,14 @@ function drawCursorBubble(isMobile) {
 //
 var POINTS = [];
 
-function setup() {
+window.setup = () => {
   createCanvas(windowWidth, windowHeight);
   background(255);
 
   POINTS = createPoints(CONFIG.numPoints);
-}
+};
 
-function draw() {
+window.draw = () => {
   background(255);
 
   // Draw bubble around cursor
@@ -391,13 +394,13 @@ function draw() {
 // JS Event Listeners
 //
 var containerDiv = document.querySelector('#container');
-const numPointsSlider = new mdc.slider.MDCSlider(
+const numPointsSlider = new MDCSlider(
   container.querySelector('#num-points'),
 );
 numPointsSlider.listen('MDCSlider:change', () => {
   CONFIG.numPoints = numPointsSlider.value;
 });
-const numEdgesSlider = new mdc.slider.MDCSlider(
+const numEdgesSlider = new MDCSlider(
   container.querySelector('#num-edges'),
 );
 numEdgesSlider.listen('MDCSlider:change', () => {

@@ -34,5 +34,11 @@
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
     "webpack": "^3.11.0"
+  },
+  "dependencies": {
+    "@material/button": "^0.42.0",
+    "@material/ripple": "^0.42.0",
+    "@material/slider": "^0.42.1",
+    "p5": "^0.7.2"
   }
 }
