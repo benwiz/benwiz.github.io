@@ -152,7 +152,6 @@ const updatePoint = (point, cursorRadius) => {
       angle = radiansToDeg(Math.asin(-o / h));
     }
 
-    console.log(angle);
     point.velocity.angle = angle;
 
     // Increment the runAwayMultiplier (look into using inverse square of distance)
