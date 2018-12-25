@@ -11,6 +11,7 @@
     "no-param-reassign": ["error", { "props": false }],
     "radix": ["error", "as-needed"],
     "no-new": "off",
-    "no-mixed-operators": "off"
+    "no-mixed-operators": "off",
+    "no-plusplus": false
   }
 }
