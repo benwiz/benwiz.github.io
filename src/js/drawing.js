@@ -152,16 +152,19 @@ const updatePoint = (point, cursorRadius) => {
     const h = dist;
 
     // Determine angle based on quadrant. I'm sure there is a generic solution out there, but this works.
+    let angle;
     if (a > 0 && o > 0) {
-      var angle = radiansToDeg(Math.asin(o / h)) + 180;
+      angle = radiansToDeg(Math.asin(o / h)) + 180;
     } else if (a > 0 && o <= 0) {
-      var angle = radiansToDeg(Math.acos(-a / h));
+      angle = radiansToDeg(Math.acos(-a / h));
     } else if (a <= 0 && o > 0) {
-      var angle = radiansToDeg(Math.acos(a / h)) + 180;
-    } else if (a <= 0 && o <= 0) {
-      var angle = radiansToDeg(Math.asin(-o / h));
+      angle = radiansToDeg(Math.acos(a / h)) + 180;
+    } else {
+      //if (a <= 0 && o <= 0) {
+      angle = radiansToDeg(Math.asin(-o / h));
     }
 
+    console.log(angle);
     point.velocity.angle = angle;
 
     // Increment the runAwayMultiplier (look into using inverse square of distance)
@@ -263,10 +266,11 @@ const findTriangles = lines => {
       // Find connections for first base point
       let index = lineContainsPoint(testLine, basePoint1);
       if (index > -1) {
+        let match;
         if (index === 0) {
-          var match = testLine[1];
+          match = testLine[1];
         } else {
-          var match = testLine[0];
+          match = testLine[0];
         }
         matches1.push(match);
       }
@@ -274,10 +278,11 @@ const findTriangles = lines => {
       // Find connections for second base point
       index = lineContainsPoint(testLine, basePoint2);
       if (index > -1) {
+        let match;
         if (index === 0) {
-          var match = testLine[1];
+          match = testLine[1];
         } else {
-          var match = testLine[0];
+          match = testLine[0];
         }
         matches2.push(match);
       }
