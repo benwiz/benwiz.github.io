@@ -37,7 +37,7 @@ const distance = (point1, point2) => {
   const y1 = point1[1];
   const x2 = point2[0];
   const y2 = point2[1];
-  const dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
   return dist;
 };
 
@@ -57,9 +57,7 @@ const lineContainsPoint = (line, point) => {
 //
 
 const createPoint = () => {
-  const speedMultiplier = CONFIG.speedMultiplier;
-  const rMin = CONFIG.rMin;
-  const rMax = CONFIG.rMax;
+  const { speedMultiplier, rMin, rMax } = CONFIG;
 
   const point = {
     // Init location. Consider rMax to ensure that no points are generated partially offscreen.

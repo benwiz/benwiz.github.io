@@ -788,7 +788,7 @@ var distance = function distance(point1, point2) {
   var y1 = point1[1];
   var x2 = point2[0];
   var y2 = point2[1];
-  var dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  var dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
   return dist;
 };
 
@@ -808,9 +808,10 @@ var lineContainsPoint = function lineContainsPoint(line, point) {
 //
 
 var createPoint = function createPoint() {
-  var speedMultiplier = CONFIG.speedMultiplier;
-  var rMin = CONFIG.rMin;
-  var rMax = CONFIG.rMax;
+  var speedMultiplier = CONFIG.speedMultiplier,
+      rMin = CONFIG.rMin,
+      rMax = CONFIG.rMax;
+
 
   var point = {
     // Init location. Consider rMax to ensure that no points are generated partially offscreen.
