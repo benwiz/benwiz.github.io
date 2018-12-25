@@ -1,12 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis");
+@import "_variables";
 @import "@material/button/mdc-button";
 @import "@material/ripple/mdc-ripple";
 @import "@material/slider/mdc-slider";
-
-:root {
-  --mdc-theme-primary: dodgerblue; /* deepskyblue, dodgerblue */
-  --mdc-theme-secondary: dodgerblue;
-}
 
 body {
   font-family: "Dosis", sans-serif;
