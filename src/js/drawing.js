@@ -1,5 +1,5 @@
-import { MDCSlider } from "@material/slider/index";
-import "p5/lib/p5.min.js";
+import { MDCSlider } from '@material/slider/index';
+import 'p5/lib/p5.min';
 
 // Config as a global
 const CONFIG = {
@@ -13,33 +13,23 @@ const CONFIG = {
     r: 30,
     g: 144,
     b: 255,
-    a: 16
+    a: 16,
   },
   cursorRadius: 30,
-  isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  )
+  isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
 };
 
 //
 // Utility functions
 //
 
-const getRandomFloat = (min, max) => {
-  return Math.random() * (max - min) + min;
-};
+const getRandomFloat = (min, max) => Math.random() * (max - min) + min;
 
-const getRandomInt = (min, max) => {
-  return Math.floor(getRandomFloat(min, max));
-};
+const getRandomInt = (min, max) => Math.floor(getRandomFloat(min, max));
 
-const degToRadians = angle => {
-  return angle * (Math.PI / 180);
-};
+const degToRadians = angle => angle * (Math.PI / 180);
 
-const radiansToDeg = angle => {
-  return angle * (180 / Math.PI);
-};
+const radiansToDeg = angle => angle * (180 / Math.PI);
 
 const distance = (point1, point2) => {
   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
@@ -79,7 +69,7 @@ const createPoint = () => {
     velocity: {
       angle: getRandomInt(0, 360),
       speed: getRandomFloat(0.2, 1) * speedMultiplier,
-      runAwayMultiplier: 1
+      runAwayMultiplier: 1,
     },
     // Radius of point
     r: getRandomFloat(rMin, rMax),
@@ -88,13 +78,13 @@ const createPoint = () => {
       r: CONFIG.color.r,
       g: CONFIG.color.g,
       b: CONFIG.color.b,
-      a: CONFIG.color.a
-    }
+      a: CONFIG.color.a,
+    },
   };
   return point;
 };
 
-const createPoints = n => {
+const createPoints = (n) => {
   const points = [];
   for (let i = 0; i < n; i++) {
     const point = createPoint();
@@ -103,7 +93,7 @@ const createPoints = n => {
   return points;
 };
 
-const drawPoint = point => {
+const drawPoint = (point) => {
   if (point.r > 0) {
     strokeWeight(1);
     stroke(point.color.r, point.color.g, point.color.b, point.color.a);
@@ -160,7 +150,7 @@ const updatePoint = (point, cursorRadius) => {
     } else if (a <= 0 && o > 0) {
       angle = radiansToDeg(Math.acos(a / h)) + 180;
     } else {
-      //if (a <= 0 && o <= 0) {
+      // if (a <= 0 && o <= 0) {
       angle = radiansToDeg(Math.asin(-o / h));
     }
 
@@ -190,9 +180,7 @@ const createLines = (k, points) => {
       const point1 = points[i];
       const point2 = points[j];
       const line = [[point1.x, point1.y], [point2.x, point2.y]];
-      line.sort((a, b) => {
-        return a[0] - b[0];
-      });
+      line.sort((a, b) => a[0] - b[0]);
       linesForPoint.push(line);
     }
     linesForPoints.push(linesForPoint);
@@ -238,13 +226,13 @@ const createLines = (k, points) => {
   return lines;
 };
 
-const drawLine = l => {
+const drawLine = (l) => {
   strokeWeight(CONFIG.lineStrokeWeight);
   stroke(CONFIG.color.r, CONFIG.color.g, CONFIG.color.b, CONFIG.color.a);
   line(l[0][0], l[0][1], l[1][0], l[1][1]);
 };
 
-const findTriangles = lines => {
+const findTriangles = (lines) => {
   // High level: For each line, for each point on the line, find the points connections. For every
   // shared connection point we have a triangle using that shared point as the third vertex.
 
@@ -310,7 +298,7 @@ const findTriangles = lines => {
   return triangles;
 };
 
-const drawPolygons = polygons => {
+const drawPolygons = (polygons) => {
   strokeWeight(0);
   fill(CONFIG.color.r, CONFIG.color.g, CONFIG.color.b, CONFIG.color.a / 2);
 
@@ -343,7 +331,7 @@ const createOrKillPoints = (points, numPoints) => {
   return points;
 };
 
-const drawCursorBubble = isMobile => {
+const drawCursorBubble = (isMobile) => {
   if (isMobile) {
     return;
   }
@@ -399,12 +387,12 @@ window.draw = () => {
 //
 // JS Event Listeners
 //
-const containerDiv = document.querySelector("#container");
-const numPointsSlider = new MDCSlider(container.querySelector("#num-points"));
-numPointsSlider.listen("MDCSlider:change", () => {
+const containerDiv = document.querySelector('#container');
+const numPointsSlider = new MDCSlider(container.querySelector('#num-points'));
+numPointsSlider.listen('MDCSlider:change', () => {
   CONFIG.numPoints = numPointsSlider.value;
 });
-const numEdgesSlider = new MDCSlider(container.querySelector("#num-edges"));
-numEdgesSlider.listen("MDCSlider:change", () => {
+const numEdgesSlider = new MDCSlider(container.querySelector('#num-edges'));
+numEdgesSlider.listen('MDCSlider:change', () => {
   CONFIG.numEdges = numEdgesSlider.value;
 });

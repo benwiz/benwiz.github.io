@@ -895,7 +895,7 @@ var updatePoint = function updatePoint(point, cursorRadius) {
     } else if (a <= 0 && o > 0) {
       angle = radiansToDeg(Math.acos(a / h)) + 180;
     } else {
-      //if (a <= 0 && o <= 0) {
+      // if (a <= 0 && o <= 0) {
       angle = radiansToDeg(Math.asin(-o / h));
     }
 
@@ -1129,13 +1129,13 @@ window.draw = function () {
 //
 // JS Event Listeners
 //
-var containerDiv = document.querySelector("#container");
-var numPointsSlider = new _index.MDCSlider(container.querySelector("#num-points"));
-numPointsSlider.listen("MDCSlider:change", function () {
+var containerDiv = document.querySelector('#container');
+var numPointsSlider = new _index.MDCSlider(container.querySelector('#num-points'));
+numPointsSlider.listen('MDCSlider:change', function () {
   CONFIG.numPoints = numPointsSlider.value;
 });
-var numEdgesSlider = new _index.MDCSlider(container.querySelector("#num-edges"));
-numEdgesSlider.listen("MDCSlider:change", function () {
+var numEdgesSlider = new _index.MDCSlider(container.querySelector('#num-edges'));
+numEdgesSlider.listen('MDCSlider:change', function () {
   CONFIG.numEdges = numEdgesSlider.value;
 });
 

@@ -12,6 +12,7 @@
     "radix": ["error", "as-needed"],
     "no-new": "off",
     "no-mixed-operators": "off",
-    "no-plusplus": false
+    "no-plusplus": 0,
+    "quotes": ["error", "single"]
   }
 }
