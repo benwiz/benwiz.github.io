@@ -53,7 +53,7 @@ module.exports = [
           test: /\.js$/,
           loader: 'babel-loader',
           query: {
-            presets: ['es2015'],
+            presets: [require.resolve('babel-preset-es2015')], // ['es2015'],
           },
         },
       ],

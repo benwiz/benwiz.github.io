@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -734,15 +734,16 @@ exports.default = MDCSliderAdapter;
 /* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _index = __webpack_require__(11);
+var _index = __webpack_require__(12);
 
-__webpack_require__(14);
+__webpack_require__(15);
 
 // Config as a global
 var CONFIG = {
@@ -900,7 +901,6 @@ var updatePoint = function updatePoint(point, cursorRadius) {
       angle = radiansToDeg(Math.asin(-o / h));
     }
 
-    console.log(angle);
     point.velocity.angle = angle;
 
     // Increment the runAwayMultiplier (look into using inverse square of distance)
@@ -1141,7 +1141,7 @@ numEdgesSlider.listen('MDCSlider:change', function () {
 });
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1164,7 +1164,7 @@ var _adapter = __webpack_require__(5);
 
 var _adapter2 = _interopRequireDefault(_adapter);
 
-var _foundation = __webpack_require__(12);
+var _foundation = __webpack_require__(13);
 
 var _foundation2 = _interopRequireDefault(_foundation);
 
@@ -1465,7 +1465,7 @@ exports.MDCSliderFoundation = _foundation2.default;
 exports.MDCSlider = MDCSlider;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1483,7 +1483,7 @@ var _adapter = __webpack_require__(5);
 
 var _adapter2 = _interopRequireDefault(_adapter);
 
-var _index = __webpack_require__(13);
+var _index = __webpack_require__(14);
 
 var _foundation = __webpack_require__(0);
 
@@ -2223,7 +2223,7 @@ var MDCSliderFoundation = function (_MDCFoundation) {
 exports.default = MDCSliderFoundation;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2383,7 +2383,7 @@ exports.getCorrectEventName = getCorrectEventName;
 exports.getCorrectPropertyName = getCorrectPropertyName;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9944,10 +9944,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       };
     }, { "../core/constants": 18, "../core/main": 24, "./p5.RendererGL": 74, "./p5.Shader": 75 }] }, {}, [13])(13);
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
