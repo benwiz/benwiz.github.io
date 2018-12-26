@@ -753,10 +753,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 // import '../../dist/js/drawing.js';
 
-// Add ripples
+// Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(_index.MDCRipple.attachTo);
-
-console.log(Boba.sum(1, 3));
 
 /***/ }),
 /* 7 */
