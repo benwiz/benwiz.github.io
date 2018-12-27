@@ -1,6 +1,5 @@
 import { MDCRipple } from '@material/ripple/index';
 import * as Boba from '@benwiz/boba.js';
-// import '../../dist/js/drawing.js';
 
 // Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(MDCRipple.attachTo);
@@ -11,7 +10,7 @@ const bobaOptions = {
   y: 0,
   width: document.documentElement.scrollWidth,
   height: document.documentElement.scrollHeight,
-  numPoints: 5,
+  numVertices: 30,
   numNeighbors: 2,
   numSides: 3,
 };

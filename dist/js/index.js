@@ -751,8 +751,6 @@ var Boba = _interopRequireWildcard(_boba);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-// import '../../dist/js/drawing.js';
-
 // Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(_index.MDCRipple.attachTo);
 
@@ -762,7 +760,7 @@ var bobaOptions = {
   y: 0,
   width: document.documentElement.scrollWidth,
   height: document.documentElement.scrollHeight,
-  numPoints: 5,
+  numVertices: 30,
   numNeighbors: 2,
   numSides: 3
 };
@@ -1913,18 +1911,18 @@ var Draw = __webpack_require__(11);
 var Update = __webpack_require__(12);
 // Global variables a necessary evil for the game loop. There is probably another way.
 var CTX = void 0;
-var POINTS = void 0;
-var LINES = void 0;
+var VERTICES = void 0;
+var EDGES = void 0;
 var SHAPES = void 0;
 var LAST_RENDER = void 0;
 var OPTIONS = void 0;
 var loop = function loop(timestamp) {
     var progress = timestamp - LAST_RENDER;
-    var result = Update.update(progress, CTX, OPTIONS, POINTS, LINES, SHAPES);
-    POINTS = result.points;
-    LINES = result.lines;
+    var result = Update.update(progress, CTX, OPTIONS, VERTICES, EDGES, SHAPES);
+    VERTICES = result.vertices;
+    EDGES = result.edges;
     SHAPES = result.shapes;
-    Draw.draw(CTX, POINTS, LINES, SHAPES);
+    Draw.draw(CTX, VERTICES, EDGES, SHAPES);
     LAST_RENDER = timestamp;
     window.requestAnimationFrame(loop);
 };
@@ -1945,17 +1943,17 @@ exports.start = function (options) {
     // Now that we know `ctx` exists, assign it globally
     CTX = ctx;
     // Initialize data in three step
-    // 1. Create points
-    POINTS = Setup.createPoints(options.numPoints, width - 1, height - 1);
-    // 2. Initialize lines list as an empty array
-    LINES = [];
+    // 1. Create vertices
+    VERTICES = Setup.createVertices(options.numVertices, width - 1, height - 1);
+    // 2. Initialize edges list as an empty array
+    EDGES = [];
     // Initialize shapes list as an empty array, I think
     SHAPES = [];
     // Game loop
     LAST_RENDER = 0;
     window.requestAnimationFrame(loop);
 };
-// // Use this to help with mouse effects on the points
+// // Use this to help with mouse effects on the vertices
 // document.addEventListener('mousemove', (event: MouseEvent) => {
 //   const mousePos = Util.getMousePos(canvas, event);
 // });
@@ -1976,42 +1974,46 @@ exports.start = function (options) {
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var drawPoint = function drawPoint(ctx, point) {
-    ctx.strokeStyle = "rgba(" + point.color.r + ", " + point.color.g + ", " + point.color.b + ", " + point.color.a + ")";
-    ctx.fillStyle = "rgba(" + point.color.r + ", " + point.color.g + ", " + point.color.b + ", " + point.color.a / 2 + ")";
+var drawVertex = function drawVertex(ctx, vertex) {
+    ctx.strokeStyle = "rgba(" + vertex.color.r + ", " + vertex.color.g + ", " + vertex.color.b + ", " + vertex.color.a + ")";
+    ctx.fillStyle = "rgba(" + vertex.color.r + ", " + vertex.color.g + ", " + vertex.color.b + ", " + vertex.color.a / 2 + ")";
     ctx.beginPath();
-    ctx.arc(point.x, point.y, point.radius, 0, 2 * Math.PI, false);
+    ctx.arc(vertex.x, vertex.y, vertex.radius, 0, 2 * Math.PI, false);
     ctx.stroke();
     ctx.fill();
+    // ctx.font = '12px Arial black';
+    // ctx.fillStyle = 'black';
+    // ctx.textAlign = 'center';
+    // ctx.fillText(String(vertex.id), vertex.x, vertex.y);
 };
-var drawLine = function drawLine(ctx, line) {
-    ctx.strokeStyle = "rgba(" + line.point1.color.r + ", " + line.point1.color.g + ", " + line.point1.color.b + ", " + line.point1.color.a + ")";
+var drawEdge = function drawEdge(ctx, edge) {
+    ctx.strokeStyle = "rgba(" + edge.vertex1.color.r + ", " + edge.vertex1.color.g + ", " + edge.vertex1.color.b + ", " + edge.vertex1.color.a + ")";
     ctx.beginPath();
-    ctx.moveTo(line.point1.x, line.point1.y);
-    ctx.lineTo(line.point2.x, line.point2.y);
+    ctx.moveTo(edge.vertex1.x, edge.vertex1.y);
+    ctx.lineTo(edge.vertex2.x, edge.vertex2.y);
     ctx.stroke();
 };
 var drawShape = function drawShape(ctx, shape) {
-    ctx.fillStyle = "rgba(" + shape.points[0].color.r + ", " + shape.points[0].color.g + ", " + shape.points[0].color.b + ", " + shape.points[0].color.a / 2 + ")";
+    ctx.fillStyle = "rgba(" + shape.vertices[0].color.r + ", " + shape.vertices[0].color.g + ", " + shape.vertices[0].color.b + ", " + shape.vertices[0].color.a / 2 + ")";
     ctx.beginPath();
-    ctx.moveTo(shape.points[0].x, shape.points[0].y);
-    for (var i = 1; i < shape.numSides; i++) {
-        var point = shape.points[i];
-        ctx.lineTo(point.x, point.y);
+    ctx.moveTo(shape.vertices[0].x, shape.vertices[0].y);
+    for (var i = 1; i < shape.vertices.length; i++) {
+        var vertex = shape.vertices[i];
+        ctx.lineTo(vertex.x, vertex.y);
     }
     ctx.fill();
 };
-exports.draw = function (ctx, points, lines, shapes) {
+exports.draw = function (ctx, vertices, edges, shapes) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var point = _step.value;
+        for (var _iterator = vertices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var vertex = _step.value;
 
-            drawPoint(ctx, point);
+            drawVertex(ctx, vertex);
         }
     } catch (err) {
         _didIteratorError = true;
@@ -2033,10 +2035,10 @@ exports.draw = function (ctx, points, lines, shapes) {
     var _iteratorError2 = undefined;
 
     try {
-        for (var _iterator2 = lines[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var line = _step2.value;
+        for (var _iterator2 = edges[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var edge = _step2.value;
 
-            drawLine(ctx, line);
+            drawEdge(ctx, edge);
         }
     } catch (err) {
         _didIteratorError2 = true;
@@ -2053,7 +2055,6 @@ exports.draw = function (ctx, points, lines, shapes) {
         }
     }
 
-    console.log(shapes);
     var _iteratorNormalCompletion3 = true;
     var _didIteratorError3 = false;
     var _iteratorError3 = undefined;
@@ -2089,75 +2090,75 @@ exports.draw = function (ctx, points, lines, shapes) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var Util = __webpack_require__(13);
-var updatePoint = function updatePoint(ctx, point) {
+var updateVertex = function updateVertex(ctx, vertex) {
     // Update location
-    point.x += point.speed * Math.cos(Util.degToRadians(point.angle)) * point.runAwayMultiplier;
-    point.y += point.speed * Math.sin(Util.degToRadians(point.angle)) * point.runAwayMultiplier;
-    // Constrain the point to within the borders
-    if (point.x < 0 + point.radius) {
-        point.x = 0 + point.radius;
+    vertex.x += vertex.speed * Math.cos(Util.degToRadians(vertex.angle)) * vertex.runAwayMultiplier;
+    vertex.y += vertex.speed * Math.sin(Util.degToRadians(vertex.angle)) * vertex.runAwayMultiplier;
+    // Constrain the vertex to within the borders
+    if (vertex.x < 0 + vertex.radius) {
+        vertex.x = 0 + vertex.radius;
     }
-    if (point.x > ctx.canvas.width - point.radius) {
-        point.x = ctx.canvas.width - point.radius;
+    if (vertex.x > ctx.canvas.width - vertex.radius) {
+        vertex.x = ctx.canvas.width - vertex.radius;
     }
-    if (point.y < 0 + point.radius) {
-        point.y = 0 + point.radius;
+    if (vertex.y < 0 + vertex.radius) {
+        vertex.y = 0 + vertex.radius;
     }
-    if (point.y > ctx.canvas.height - point.radius) {
-        point.y = ctx.canvas.height - point.radius;
+    if (vertex.y > ctx.canvas.height - vertex.radius) {
+        vertex.y = ctx.canvas.height - vertex.radius;
     }
-    // Keep the point's angle reasonable
-    if (point.angle >= 360) {
-        point.angle -= 360;
-    } else if (point.angle <= -360) {
-        point.angle += 360;
+    // Keep the vertex's angle reasonable
+    if (vertex.angle >= 360) {
+        vertex.angle -= 360;
+    } else if (vertex.angle <= -360) {
+        vertex.angle += 360;
     }
     // Update angle if hit wall. Account for radius.
-    if (point.x <= 0 + point.radius || ctx.canvas.width - point.radius <= point.x) {
-        point.angle = 180 - point.angle;
-    } else if (point.y <= 0 + point.radius || ctx.canvas.height - point.radius <= point.y) {
-        point.angle = 0 - point.angle;
+    if (vertex.x <= 0 + vertex.radius || ctx.canvas.width - vertex.radius <= vertex.x) {
+        vertex.angle = 180 - vertex.angle;
+    } else if (vertex.y <= 0 + vertex.radius || ctx.canvas.height - vertex.radius <= vertex.y) {
+        vertex.angle = 0 - vertex.angle;
     }
-    return point;
+    return vertex;
 };
-var createLines = function createLines(points, numNeighbors) {
-    var lines = [];
-    // For each point
+var createEdges = function createEdges(vertices, numNeighbors) {
+    var edges = [];
+    // For each vertex
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var point1 = _step.value;
+        for (var _iterator = vertices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var vertex1 = _step.value;
 
             // TODO: This (i.e. these steps to get the k-nearest-neighbors) can be more efficient
-            // Create a line to all points other than itself
-            var linesForPoint = [];
+            // Create a edge to all vertices other than itself
+            var edgesForVertex = [];
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
             var _iteratorError2 = undefined;
 
             try {
-                for (var _iterator2 = points[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var point2 = _step2.value;
+                for (var _iterator2 = vertices[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var vertex2 = _step2.value;
 
-                    if (point1 === point2) continue;
-                    // Create the line so that point1 has the lower id
-                    var pointA = void 0;
-                    var pointB = void 0;
-                    if (point1.id <= point2.id) {
-                        pointA = point1;
-                        pointB = point2;
+                    if (vertex1 === vertex2) continue;
+                    // Create the edge so that vertex1 has the lower id
+                    var vertexA = void 0;
+                    var vertexB = void 0;
+                    if (vertex1.id <= vertex2.id) {
+                        vertexA = vertex1;
+                        vertexB = vertex2;
                     } else {
-                        pointA = point2;
-                        pointB = point1;
+                        vertexA = vertex2;
+                        vertexB = vertex1;
                     }
-                    // Record the formatted line
-                    var line = { point1: pointA, point2: pointB };
-                    linesForPoint.push(line);
+                    // Record the formatted edge
+                    var edge = { vertex1: vertexA, vertex2: vertexB };
+                    edgesForVertex.push(edge);
                 }
-                // Sort the lines by distance
+                // Sort the edges by distance
             } catch (err) {
                 _didIteratorError2 = true;
                 _iteratorError2 = err;
@@ -2173,31 +2174,31 @@ var createLines = function createLines(points, numNeighbors) {
                 }
             }
 
-            linesForPoint.sort(function (lineA, lineB) {
-                var distA = Util.distance(lineA.point1, lineA.point2);
-                var distB = Util.distance(lineB.point1, lineB.point2);
+            edgesForVertex.sort(function (edgeA, edgeB) {
+                var distA = Util.distance(edgeA.vertex1, edgeA.vertex2);
+                var distB = Util.distance(edgeB.vertex1, edgeB.vertex2);
                 return distA - distB;
             });
-            // Keep the first `numNeighbors` lines
-            linesForPoint.splice(numNeighbors);
-            // Add those lines to the main lines array as long as the line is not already in the list
+            // Keep the first `numNeighbors` edges
+            edgesForVertex.splice(numNeighbors);
+            // Add those edges to the main edges array as long as the edge is not already in the list
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
             var _iteratorError3 = undefined;
 
             try {
                 var _loop = function _loop() {
-                    var line = _step3.value;
+                    var edge = _step3.value;
 
-                    var matches = lines.filter(function (l) {
-                        return l.point1.id === line.point1.id && l.point2.id === line.point2.id;
+                    var matches = edges.filter(function (l) {
+                        return l.vertex1.id === edge.vertex1.id && l.vertex2.id === edge.vertex2.id;
                     });
                     if (matches.length === 0) {
-                        lines.push(line);
+                        edges.push(edge);
                     }
                 };
 
-                for (var _iterator3 = linesForPoint[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                for (var _iterator3 = edgesForVertex[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                     _loop();
                 }
             } catch (err) {
@@ -2230,25 +2231,21 @@ var createLines = function createLines(points, numNeighbors) {
         }
     }
 
-    return lines;
+    return edges;
 };
-var createShapes = function createShapes(lines, numSides) {
-    var shapes = [];
-    return shapes;
-};
-exports.update = function (progress, ctx, options, points, lines, shapes) {
-    // Move points
+var findEdgeInEdges = function findEdgeInEdges(testEdge, edges) {
     var _iteratorNormalCompletion4 = true;
     var _didIteratorError4 = false;
     var _iteratorError4 = undefined;
 
     try {
-        for (var _iterator4 = points[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-            var point = _step4.value;
+        for (var _iterator4 = edges[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var edge = _step4.value;
 
-            updatePoint(ctx, point);
+            if (testEdge.vertex1.id === edge.vertex1.id && testEdge.vertex2.id === edge.vertex2.id) {
+                return true;
+            }
         }
-        // Create/find the new set of lines
     } catch (err) {
         _didIteratorError4 = true;
         _iteratorError4 = err;
@@ -2264,10 +2261,114 @@ exports.update = function (progress, ctx, options, points, lines, shapes) {
         }
     }
 
-    lines = createLines(points, options.numNeighbors);
+    return false;
+};
+var createTriangles = function createTriangles(vertices, edges) {
+    var triangles = [];
+    var _iteratorNormalCompletion5 = true;
+    var _didIteratorError5 = false;
+    var _iteratorError5 = undefined;
+
+    try {
+        for (var _iterator5 = edges[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+            var edge = _step5.value;
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
+
+            try {
+                for (var _iterator6 = vertices[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var vertex = _step6.value;
+
+                    // If vertex is part of the edge, skip
+                    if (edge.vertex1 === vertex || edge.vertex2 === vertex) continue;
+                    // If (edge.vertex1, vertex) && (vertex, edge.vertex2) are edges that exist. Create the test
+                    // edges here.
+                    var testEdge1 = void 0;
+                    if (vertex.id < edge.vertex1.id) {
+                        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1 };
+                    } else {
+                        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex };
+                    }
+                    var testEdge2 = void 0;
+                    if (vertex.id < edge.vertex2.id) {
+                        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2 };
+                    } else {
+                        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex };
+                    }
+                    // Find if there are matching edges
+                    var test1 = findEdgeInEdges(testEdge1, edges);
+                    var test2 = findEdgeInEdges(testEdge2, edges);
+                    // Run the test
+                    if (test1 && test2) {
+                        var triangle = { vertices: [vertex, edge.vertex1, edge.vertex2] };
+                        triangles.push(triangle);
+                    }
+                }
+            } catch (err) {
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
+                    }
+                } finally {
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
+                    }
+                }
+            }
+        }
+    } catch (err) {
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                _iterator5.return();
+            }
+        } finally {
+            if (_didIteratorError5) {
+                throw _iteratorError5;
+            }
+        }
+    }
+
+    return triangles;
+};
+exports.update = function (progress, ctx, options, vertices, edges, shapes) {
+    // Move vertices
+    var _iteratorNormalCompletion7 = true;
+    var _didIteratorError7 = false;
+    var _iteratorError7 = undefined;
+
+    try {
+        for (var _iterator7 = vertices[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+            var vertex = _step7.value;
+
+            updateVertex(ctx, vertex);
+        }
+        // Create/find the new set of edges
+    } catch (err) {
+        _didIteratorError7 = true;
+        _iteratorError7 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                _iterator7.return();
+            }
+        } finally {
+            if (_didIteratorError7) {
+                throw _iteratorError7;
+            }
+        }
+    }
+
+    edges = createEdges(vertices, options.numNeighbors);
     // Create/find the new set of shapes
-    shapes = createShapes(lines, options.numSides);
-    return { points: points, lines: lines, shapes: shapes };
+    shapes = createTriangles(vertices, edges);
+    return { vertices: vertices, edges: edges, shapes: shapes };
 };
 
 /***/ }),
@@ -2290,12 +2391,12 @@ exports.degToRadians = function (angle) {
 exports.radiansToDeg = function (angle) {
     return angle * (180 / Math.PI);
 };
-exports.distance = function (point1, point2) {
+exports.distance = function (vertex1, vertex2) {
     // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
-    var x1 = point1.x;
-    var y1 = point1.y;
-    var x2 = point2.x;
-    var y2 = point2.y;
+    var x1 = vertex1.x;
+    var y1 = vertex1.y;
+    var x2 = vertex2.x;
+    var y2 = vertex2.y;
     var dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     return dist;
 };
@@ -2329,12 +2430,12 @@ exports.createCanvas = function (x, y, width, height) {
     document.body.appendChild(canvas);
     return canvas;
 };
-exports.createPoints = function (numPoints, maxX, maxY) {
-    var points = [];
-    for (var i = 0; i < numPoints; i++) {
+exports.createVertices = function (numVertices, maxX, maxY) {
+    var vertices = [];
+    for (var i = 0; i < numVertices; i++) {
         // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
         // lists rather than just single values
-        var point = {
+        var vertex = {
             id: i,
             x: Util.getRandomInt(0, maxX),
             y: Util.getRandomInt(0, maxY),
@@ -2346,12 +2447,12 @@ exports.createPoints = function (numPoints, maxX, maxY) {
                 r: 30,
                 g: 144,
                 b: 255,
-                a: 1
+                a: 0.1
             }
         };
-        points.push(point);
+        vertices.push(vertex);
     }
-    return points;
+    return vertices;
 };
 
 /***/ })
