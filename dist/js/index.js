@@ -756,6 +756,18 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(_index.MDCRipple.attachTo);
 
+// Initialize boba.js
+var bobaOptions = {
+  x: 0,
+  y: 0,
+  width: document.documentElement.scrollWidth,
+  height: document.documentElement.scrollHeight,
+  numPoints: 5,
+  numNeighbors: 2,
+  numSides: 3
+};
+Boba.start(bobaOptions);
+
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1896,10 +1908,451 @@ exports.numbers = numbers;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function sum(a, b) {
-    return a + 3 * b;
-}
-exports.sum = sum;
+var Setup = __webpack_require__(20);
+var Draw = __webpack_require__(11);
+var Update = __webpack_require__(12);
+// Global variables a necessary evil for the game loop. There is probably another way.
+var CTX = void 0;
+var POINTS = void 0;
+var LINES = void 0;
+var SHAPES = void 0;
+var LAST_RENDER = void 0;
+var OPTIONS = void 0;
+var loop = function loop(timestamp) {
+    var progress = timestamp - LAST_RENDER;
+    var result = Update.update(progress, CTX, OPTIONS, POINTS, LINES, SHAPES);
+    POINTS = result.points;
+    LINES = result.lines;
+    SHAPES = result.shapes;
+    Draw.draw(CTX, POINTS, LINES, SHAPES);
+    LAST_RENDER = timestamp;
+    window.requestAnimationFrame(loop);
+};
+exports.start = function (options) {
+    // Make options available globally
+    OPTIONS = options;
+    // Create canvas and get context
+    var x = options.x;
+    var y = options.y;
+    var width = options.width;
+    var height = options.height;
+    var canvas = Setup.createCanvas(x, y, width, height);
+    var ctx = canvas.getContext('2d');
+    // Check that context was found, if not exit with an error. TODO: Make this proper.
+    if (ctx === null) {
+        throw new Error('Oh no! `ctx` is null!');
+    }
+    // Now that we know `ctx` exists, assign it globally
+    CTX = ctx;
+    // Initialize data in three step
+    // 1. Create points
+    POINTS = Setup.createPoints(options.numPoints, width - 1, height - 1);
+    // 2. Initialize lines list as an empty array
+    LINES = [];
+    // Initialize shapes list as an empty array, I think
+    SHAPES = [];
+    // Game loop
+    LAST_RENDER = 0;
+    window.requestAnimationFrame(loop);
+};
+// // Use this to help with mouse effects on the points
+// document.addEventListener('mousemove', (event: MouseEvent) => {
+//   const mousePos = Util.getMousePos(canvas, event);
+// });
+// util.js
+// export const getMousePos = (canvas: HTMLCanvasElement, event: MouseEvent) => {
+//   const rect: ClientRect = canvas.getBoundingClientRect();
+//   return {
+//     x: event.clientX - rect.left,
+//     y: event.clientY - rect.top,
+//   };
+// };
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var drawPoint = function drawPoint(ctx, point) {
+    ctx.strokeStyle = "rgba(" + point.color.r + ", " + point.color.g + ", " + point.color.b + ", " + point.color.a + ")";
+    ctx.fillStyle = "rgba(" + point.color.r + ", " + point.color.g + ", " + point.color.b + ", " + point.color.a / 2 + ")";
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, point.radius, 0, 2 * Math.PI, false);
+    ctx.stroke();
+    ctx.fill();
+};
+var drawLine = function drawLine(ctx, line) {
+    ctx.strokeStyle = "rgba(" + line.point1.color.r + ", " + line.point1.color.g + ", " + line.point1.color.b + ", " + line.point1.color.a + ")";
+    ctx.beginPath();
+    ctx.moveTo(line.point1.x, line.point1.y);
+    ctx.lineTo(line.point2.x, line.point2.y);
+    ctx.stroke();
+};
+var drawShape = function drawShape(ctx, shape) {
+    ctx.fillStyle = "rgba(" + shape.points[0].color.r + ", " + shape.points[0].color.g + ", " + shape.points[0].color.b + ", " + shape.points[0].color.a / 2 + ")";
+    ctx.beginPath();
+    ctx.moveTo(shape.points[0].x, shape.points[0].y);
+    for (var i = 1; i < shape.numSides; i++) {
+        var point = shape.points[i];
+        ctx.lineTo(point.x, point.y);
+    }
+    ctx.fill();
+};
+exports.draw = function (ctx, points, lines, shapes) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var point = _step.value;
+
+            drawPoint(ctx, point);
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = lines[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var line = _step2.value;
+
+            drawLine(ctx, line);
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
+
+    console.log(shapes);
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+        for (var _iterator3 = shapes[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var shape = _step3.value;
+
+            drawShape(ctx, shape);
+        }
+    } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+            }
+        } finally {
+            if (_didIteratorError3) {
+                throw _iteratorError3;
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Util = __webpack_require__(13);
+var updatePoint = function updatePoint(ctx, point) {
+    // Update location
+    point.x += point.speed * Math.cos(Util.degToRadians(point.angle)) * point.runAwayMultiplier;
+    point.y += point.speed * Math.sin(Util.degToRadians(point.angle)) * point.runAwayMultiplier;
+    // Constrain the point to within the borders
+    if (point.x < 0 + point.radius) {
+        point.x = 0 + point.radius;
+    }
+    if (point.x > ctx.canvas.width - point.radius) {
+        point.x = ctx.canvas.width - point.radius;
+    }
+    if (point.y < 0 + point.radius) {
+        point.y = 0 + point.radius;
+    }
+    if (point.y > ctx.canvas.height - point.radius) {
+        point.y = ctx.canvas.height - point.radius;
+    }
+    // Keep the point's angle reasonable
+    if (point.angle >= 360) {
+        point.angle -= 360;
+    } else if (point.angle <= -360) {
+        point.angle += 360;
+    }
+    // Update angle if hit wall. Account for radius.
+    if (point.x <= 0 + point.radius || ctx.canvas.width - point.radius <= point.x) {
+        point.angle = 180 - point.angle;
+    } else if (point.y <= 0 + point.radius || ctx.canvas.height - point.radius <= point.y) {
+        point.angle = 0 - point.angle;
+    }
+    return point;
+};
+var createLines = function createLines(points, numNeighbors) {
+    var lines = [];
+    // For each point
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var point1 = _step.value;
+
+            // TODO: This (i.e. these steps to get the k-nearest-neighbors) can be more efficient
+            // Create a line to all points other than itself
+            var linesForPoint = [];
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = points[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var point2 = _step2.value;
+
+                    if (point1 === point2) continue;
+                    // Create the line so that point1 has the lower id
+                    var pointA = void 0;
+                    var pointB = void 0;
+                    if (point1.id <= point2.id) {
+                        pointA = point1;
+                        pointB = point2;
+                    } else {
+                        pointA = point2;
+                        pointB = point1;
+                    }
+                    // Record the formatted line
+                    var line = { point1: pointA, point2: pointB };
+                    linesForPoint.push(line);
+                }
+                // Sort the lines by distance
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            linesForPoint.sort(function (lineA, lineB) {
+                var distA = Util.distance(lineA.point1, lineA.point2);
+                var distB = Util.distance(lineB.point1, lineB.point2);
+                return distA - distB;
+            });
+            // Keep the first `numNeighbors` lines
+            linesForPoint.splice(numNeighbors);
+            // Add those lines to the main lines array as long as the line is not already in the list
+            var _iteratorNormalCompletion3 = true;
+            var _didIteratorError3 = false;
+            var _iteratorError3 = undefined;
+
+            try {
+                var _loop = function _loop() {
+                    var line = _step3.value;
+
+                    var matches = lines.filter(function (l) {
+                        return l.point1.id === line.point1.id && l.point2.id === line.point2.id;
+                    });
+                    if (matches.length === 0) {
+                        lines.push(line);
+                    }
+                };
+
+                for (var _iterator3 = linesForPoint[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    _loop();
+                }
+            } catch (err) {
+                _didIteratorError3 = true;
+                _iteratorError3 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                        _iterator3.return();
+                    }
+                } finally {
+                    if (_didIteratorError3) {
+                        throw _iteratorError3;
+                    }
+                }
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return lines;
+};
+var createShapes = function createShapes(lines, numSides) {
+    var shapes = [];
+    return shapes;
+};
+exports.update = function (progress, ctx, options, points, lines, shapes) {
+    // Move points
+    var _iteratorNormalCompletion4 = true;
+    var _didIteratorError4 = false;
+    var _iteratorError4 = undefined;
+
+    try {
+        for (var _iterator4 = points[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var point = _step4.value;
+
+            updatePoint(ctx, point);
+        }
+        // Create/find the new set of lines
+    } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                _iterator4.return();
+            }
+        } finally {
+            if (_didIteratorError4) {
+                throw _iteratorError4;
+            }
+        }
+    }
+
+    lines = createLines(points, options.numNeighbors);
+    // Create/find the new set of shapes
+    shapes = createShapes(lines, options.numSides);
+    return { points: points, lines: lines, shapes: shapes };
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getRandomFloat = function (min, max) {
+    return Math.random() * (max - min) + min;
+};
+exports.getRandomInt = function (min, max) {
+    return Math.floor(exports.getRandomFloat(min, max));
+};
+exports.degToRadians = function (angle) {
+    return angle * (Math.PI / 180);
+};
+exports.radiansToDeg = function (angle) {
+    return angle * (180 / Math.PI);
+};
+exports.distance = function (point1, point2) {
+    // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
+    var x1 = point1.x;
+    var y1 = point1.y;
+    var x2 = point2.x;
+    var y2 = point2.y;
+    var dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    return dist;
+};
+
+/***/ }),
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Util = __webpack_require__(13);
+exports.createCanvas = function (x, y, width, height) {
+    // Create canvas
+    var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    // Set css-based location
+    canvas.style.position = 'absolute';
+    canvas.style.left = String(x);
+    canvas.style.top = String(y);
+    canvas.style.zIndex = '-1';
+    // Append canvas to dom and return canvas
+    document.body.appendChild(canvas);
+    return canvas;
+};
+exports.createPoints = function (numPoints, maxX, maxY) {
+    var points = [];
+    for (var i = 0; i < numPoints; i++) {
+        // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
+        // lists rather than just single values
+        var point = {
+            id: i,
+            x: Util.getRandomInt(0, maxX),
+            y: Util.getRandomInt(0, maxY),
+            speed: Util.getRandomFloat(0.5, 2),
+            angle: Util.getRandomFloat(0, 360),
+            runAwayMultiplier: 1,
+            radius: Util.getRandomFloat(8, 16),
+            color: {
+                r: 30,
+                g: 144,
+                b: 255,
+                a: 1
+            }
+        };
+        points.push(point);
+    }
+    return points;
+};
 
 /***/ })
 /******/ ]);
