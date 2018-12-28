@@ -41,7 +41,6 @@ module.exports = [
   {
     entry: {
       index: './src/js/index.js',
-      drawing: './src/js/drawing.js',
     },
     output: {
       filename: './dist/js/[name].js',
