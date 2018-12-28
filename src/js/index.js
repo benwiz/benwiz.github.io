@@ -14,13 +14,37 @@ bobaOptions.vertexMinSize = 8;
 bobaOptions.vertexMaxSize = 16;
 bobaOptions.vertexMinSpeed = 0.5;
 bobaOptions.vertexMaxSpeed = 2;
+bobaOptions.vertexColors = [
+  {
+    r: 30,
+    g: 144,
+    b: 255,
+    a: 0.1,
+  },
+];
 
 // Edge configs
 bobaOptions.numNeighbors = 2;
 bobaOptions.drawEdges = false;
+bobaOptions.edgeColors = [
+  {
+    r: 30,
+    g: 144,
+    b: 255,
+    a: 0.1,
+  },
+];
 
 // Shape configs
 bobaOptions.drawShapes = true;
+bobaOptions.shapeColors = [
+  {
+    r: 30,
+    g: 144,
+    b: 255,
+    a: 0.05,
+  },
+];
 
 // Start the animation
 Boba.start(bobaOptions);

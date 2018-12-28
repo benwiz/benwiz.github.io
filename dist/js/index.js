@@ -608,13 +608,31 @@ bobaOptions.vertexMinSize = 8;
 bobaOptions.vertexMaxSize = 16;
 bobaOptions.vertexMinSpeed = 0.5;
 bobaOptions.vertexMaxSpeed = 2;
+bobaOptions.vertexColors = [{
+  r: 30,
+  g: 144,
+  b: 255,
+  a: 0.1
+}];
 
 // Edge configs
 bobaOptions.numNeighbors = 2;
 bobaOptions.drawEdges = false;
+bobaOptions.edgeColors = [{
+  r: 30,
+  g: 144,
+  b: 255,
+  a: 0.1
+}];
 
 // Shape configs
 bobaOptions.drawShapes = true;
+bobaOptions.shapeColors = [{
+  r: 30,
+  g: 144,
+  b: 255,
+  a: 0.05
+}];
 
 // Start the animation
 Boba.start(bobaOptions);
@@ -2004,11 +2022,29 @@ exports.getDefaultOptions = function () {
         vertexMaxSize: 16,
         vertexMinSpeed: 0.5,
         vertexMaxSpeed: 2,
+        vertexColors: [{
+            r: 30,
+            g: 144,
+            b: 255,
+            a: 0.1
+        }],
         // Edges configurations
         numNeighbors: 2,
         drawEdges: true,
+        edgeColors: [{
+            r: 30,
+            g: 144,
+            b: 255,
+            a: 0.1
+        }],
         // Shapes configurations
-        drawShapes: true
+        drawShapes: true,
+        shapeColors: [{
+            r: 30,
+            g: 144,
+            b: 255,
+            a: 0.05
+        }]
     };
     return options;
 };
@@ -2049,12 +2085,7 @@ exports.createVertices = function (options) {
             angle: Util.getRandomFloat(0, 360),
             runAwayMultiplier: 1,
             radius: Util.getRandomFloat(8, 16),
-            color: {
-                r: 30,
-                g: 144,
-                b: 255,
-                a: 0.1
-            }
+            color: options.vertexColors[Util.getRandomInt(0, options.vertexColors.length)]
         };
         vertices.push(vertex);
     }
@@ -2082,14 +2113,14 @@ var drawVertex = function drawVertex(ctx, vertex) {
     // ctx.fillText(String(vertex.id), vertex.x, vertex.y);
 };
 var drawEdge = function drawEdge(ctx, edge) {
-    ctx.strokeStyle = "rgba(" + edge.vertex1.color.r + ", " + edge.vertex1.color.g + ", " + edge.vertex1.color.b + ", " + edge.vertex1.color.a + ")";
+    ctx.strokeStyle = "rgba(" + edge.color.r + ", " + edge.color.g + ", " + edge.color.b + ", " + edge.color.a + ")";
     ctx.beginPath();
     ctx.moveTo(edge.vertex1.x, edge.vertex1.y);
     ctx.lineTo(edge.vertex2.x, edge.vertex2.y);
     ctx.stroke();
 };
 var drawShape = function drawShape(ctx, shape) {
-    ctx.fillStyle = "rgba(" + shape.vertices[0].color.r + ", " + shape.vertices[0].color.g + ", " + shape.vertices[0].color.b + ", " + shape.vertices[0].color.a / 2 + ")";
+    ctx.fillStyle = "rgba(" + shape.color.r + ", " + shape.color.g + ", " + shape.color.b + ", " + shape.color.a + ")";
     ctx.beginPath();
     ctx.moveTo(shape.vertices[0].x, shape.vertices[0].y);
     for (var i = 1; i < shape.vertices.length; i++) {
@@ -2220,7 +2251,7 @@ var updateVertex = function updateVertex(ctx, vertex) {
     }
     return vertex;
 };
-var createEdges = function createEdges(vertices, numNeighbors) {
+var createEdges = function createEdges(options, vertices, numNeighbors) {
     var edges = [];
     // For each vertex
     var _iteratorNormalCompletion = true;
@@ -2254,7 +2285,11 @@ var createEdges = function createEdges(vertices, numNeighbors) {
                         vertexB = vertex1;
                     }
                     // Record the formatted edge
-                    var edge = { vertex1: vertexA, vertex2: vertexB };
+                    var edge = {
+                        vertex1: vertexA,
+                        vertex2: vertexB,
+                        color: options.edgeColors[Util.getRandomInt(0, options.edgeColors.length)]
+                    };
                     edgesForVertex.push(edge);
                 }
                 // Sort the edges by distance
@@ -2362,7 +2397,7 @@ var findEdgeInEdges = function findEdgeInEdges(testEdge, edges) {
 
     return false;
 };
-var createTriangles = function createTriangles(vertices, edges) {
+var createTriangles = function createTriangles(options, vertices, edges) {
     var triangles = [];
     var _iteratorNormalCompletion5 = true;
     var _didIteratorError5 = false;
@@ -2382,25 +2417,29 @@ var createTriangles = function createTriangles(vertices, edges) {
                     // If vertex is part of the edge, skip
                     if (edge.vertex1 === vertex || edge.vertex2 === vertex) continue;
                     // If (edge.vertex1, vertex) && (vertex, edge.vertex2) are edges that exist. Create the test
-                    // edges here.
+                    // edges here. Color doesn't actually matter since comparisons are done against id.
                     var testEdge1 = void 0;
+                    var color = { r: 0, g: 0, b: 0, a: 0 };
                     if (vertex.id < edge.vertex1.id) {
-                        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1 };
+                        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1, color: color };
                     } else {
-                        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex };
+                        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex, color: color };
                     }
                     var testEdge2 = void 0;
                     if (vertex.id < edge.vertex2.id) {
-                        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2 };
+                        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2, color: color };
                     } else {
-                        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex };
+                        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex, color: color };
                     }
                     // Find if there are matching edges
                     var test1 = findEdgeInEdges(testEdge1, edges);
                     var test2 = findEdgeInEdges(testEdge2, edges);
                     // Run the test
                     if (test1 && test2) {
-                        var triangle = { vertices: [vertex, edge.vertex1, edge.vertex2] };
+                        var triangle = {
+                            vertices: [vertex, edge.vertex1, edge.vertex2],
+                            color: options.shapeColors[Util.getRandomInt(0, options.shapeColors.length)]
+                        };
                         triangles.push(triangle);
                     }
                 }
@@ -2464,9 +2503,9 @@ exports.update = function (progress, ctx, options, vertices, edges, shapes) {
         }
     }
 
-    edges = createEdges(vertices, options.numNeighbors);
+    edges = createEdges(options, vertices, options.numNeighbors);
     // Create/find the new set of shapes
-    shapes = createTriangles(vertices, edges);
+    shapes = createTriangles(options, vertices, edges);
     return { vertices: vertices, edges: edges, shapes: shapes };
 };
 
