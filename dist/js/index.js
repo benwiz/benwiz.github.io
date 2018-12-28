@@ -1981,7 +1981,18 @@ var loop = function loop(timestamp) {
     LAST_RENDER = timestamp;
     window.requestAnimationFrame(loop);
 };
+var constrainOptions = function constrainOptions(options) {
+    if (options.edgeColors.length > 1) {
+        console.log('Boba.js: `edgeColors` currently only supports one color. Keeping only the first color.');
+    }
+    if (options.shapeColors.length > 1) {
+        console.log('Boba.js: `shapeColors` currently only supports one color. Keeping only the first color.');
+    }
+    return options;
+};
 exports.start = function (options) {
+    // Handle option constraings
+    options = constrainOptions(options);
     // Make options available globally
     OPTIONS = options;
     // Create canvas and get context
