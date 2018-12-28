@@ -754,16 +754,25 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(_index.MDCRipple.attachTo);
 
-// Initialize boba.js
-var bobaOptions = {
-  x: 0,
-  y: 0,
-  width: document.documentElement.scrollWidth,
-  height: document.documentElement.scrollHeight,
-  numVertices: 30,
-  numNeighbors: 2,
-  numSides: 3
-};
+// Initialize boba.js options by grabbing the defaults
+var bobaOptions = Boba.getDefaultOptions();
+
+// Vertex configs
+bobaOptions.numVertices = 40;
+bobaOptions.drawVertices = true;
+bobaOptions.vertexMinSize = 8;
+bobaOptions.vertexMaxSize = 16;
+bobaOptions.vertexMinSpeed = 0.5;
+bobaOptions.vertexMaxSpeed = 2;
+
+// Edge configs
+bobaOptions.numNeighbors = 2;
+bobaOptions.drawEdges = false;
+
+// Shape configs
+bobaOptions.drawShapes = true;
+
+// Start the animation
 Boba.start(bobaOptions);
 
 /***/ }),
@@ -1922,7 +1931,7 @@ var loop = function loop(timestamp) {
     VERTICES = result.vertices;
     EDGES = result.edges;
     SHAPES = result.shapes;
-    Draw.draw(CTX, VERTICES, EDGES, SHAPES);
+    Draw.draw(CTX, OPTIONS, VERTICES, EDGES, SHAPES);
     LAST_RENDER = timestamp;
     window.requestAnimationFrame(loop);
 };
@@ -1944,7 +1953,7 @@ exports.start = function (options) {
     CTX = ctx;
     // Initialize data in three step
     // 1. Create vertices
-    VERTICES = Setup.createVertices(options.numVertices, width - 1, height - 1);
+    VERTICES = Setup.createVertices(options);
     // 2. Initialize edges list as an empty array
     EDGES = [];
     // Initialize shapes list as an empty array, I think
@@ -1953,18 +1962,28 @@ exports.start = function (options) {
     LAST_RENDER = 0;
     window.requestAnimationFrame(loop);
 };
-// // Use this to help with mouse effects on the vertices
-// document.addEventListener('mousemove', (event: MouseEvent) => {
-//   const mousePos = Util.getMousePos(canvas, event);
-// });
-// util.js
-// export const getMousePos = (canvas: HTMLCanvasElement, event: MouseEvent) => {
-//   const rect: ClientRect = canvas.getBoundingClientRect();
-//   return {
-//     x: event.clientX - rect.left,
-//     y: event.clientY - rect.top,
-//   };
-// };
+exports.getDefaultOptions = function () {
+    var options = {
+        // Location and size of canvas
+        x: 0,
+        y: 0,
+        width: document.documentElement.scrollWidth,
+        height: document.documentElement.scrollHeight,
+        // Vertices configurations
+        numVertices: 30,
+        drawVertices: true,
+        vertexMinSize: 8,
+        vertexMaxSize: 16,
+        vertexMinSpeed: 0.5,
+        vertexMaxSpeed: 2,
+        // Edges configurations
+        numNeighbors: 2,
+        drawEdges: true,
+        // Shapes configurations
+        drawShapes: true
+    };
+    return options;
+};
 
 /***/ }),
 /* 11 */
@@ -2003,79 +2022,83 @@ var drawShape = function drawShape(ctx, shape) {
     }
     ctx.fill();
 };
-exports.draw = function (ctx, vertices, edges, shapes) {
+exports.draw = function (ctx, options, vertices, edges, shapes) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    if (options.drawVertices) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
-    try {
-        for (var _iterator = vertices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var vertex = _step.value;
-
-            drawVertex(ctx, vertex);
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
         try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
+            for (var _iterator = vertices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var vertex = _step.value;
+
+                drawVertex(ctx, vertex);
             }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
         } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
             }
         }
     }
+    if (options.drawEdges) {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-        for (var _iterator2 = edges[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var edge = _step2.value;
-
-            drawEdge(ctx, edge);
-        }
-    } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-    } finally {
         try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
+            for (var _iterator2 = edges[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var edge = _step2.value;
+
+                drawEdge(ctx, edge);
             }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
         } finally {
-            if (_didIteratorError2) {
-                throw _iteratorError2;
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                    _iterator2.return();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
             }
         }
     }
+    if (options.drawShapes) {
+        var _iteratorNormalCompletion3 = true;
+        var _didIteratorError3 = false;
+        var _iteratorError3 = undefined;
 
-    var _iteratorNormalCompletion3 = true;
-    var _didIteratorError3 = false;
-    var _iteratorError3 = undefined;
-
-    try {
-        for (var _iterator3 = shapes[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var shape = _step3.value;
-
-            drawShape(ctx, shape);
-        }
-    } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
-    } finally {
         try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                _iterator3.return();
+            for (var _iterator3 = shapes[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                var shape = _step3.value;
+
+                drawShape(ctx, shape);
             }
+        } catch (err) {
+            _didIteratorError3 = true;
+            _iteratorError3 = err;
         } finally {
-            if (_didIteratorError3) {
-                throw _iteratorError3;
+            try {
+                if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                    _iterator3.return();
+                }
+            } finally {
+                if (_didIteratorError3) {
+                    throw _iteratorError3;
+                }
             }
         }
     }
@@ -2430,15 +2453,15 @@ exports.createCanvas = function (x, y, width, height) {
     document.body.appendChild(canvas);
     return canvas;
 };
-exports.createVertices = function (numVertices, maxX, maxY) {
+exports.createVertices = function (options) {
     var vertices = [];
-    for (var i = 0; i < numVertices; i++) {
+    for (var i = 0; i < options.numVertices; i++) {
         // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
         // lists rather than just single values
         var vertex = {
             id: i,
-            x: Util.getRandomInt(0, maxX),
-            y: Util.getRandomInt(0, maxY),
+            x: Util.getRandomInt(0, options.width - 1),
+            y: Util.getRandomInt(0, options.height - 1),
             speed: Util.getRandomFloat(0.5, 2),
             angle: Util.getRandomFloat(0, 360),
             runAwayMultiplier: 1,
