@@ -7,7 +7,7 @@ My personal website
 ## To Do
 
 - Build UI components for boba.js configs
-  - Color slider (slide a hue then convert hsv to rgb, also need to update theme color)
+  - Color slider, maybe have separate hue, saturation, value sliders
   - No configs for speed or vertex size
 
 - Upgrade to webpack 4
