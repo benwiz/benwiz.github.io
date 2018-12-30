@@ -7,7 +7,8 @@ My personal website
 ## To Do
 
 - Build UI components for boba.js configs
-  - Color configs will either need to be non-configurable or will need to change material design colors
+  - The three drawing toggles
+  - Color slider (slide a hue then convert hsv to rgb, also need to update theme color)
+  - No configs for speed or vertex size
 
 - Upgrade to webpack 4
-- Consider if `target="_blank"` for external links (plus files) and `target=""` for internal links is the right choice
