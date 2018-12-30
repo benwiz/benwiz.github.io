@@ -1223,6 +1223,7 @@ numNeighborsSlider.listen('MDCSlider:change', function () {
 // const showVerticesCheckbox = new MDCCheckbox(container.querySelector('#vertex-checkbox'));
 // const showVerticesFormField = new MDCFormField(container.querySelector('#vertex-form-field'));
 // showVerticesFormField.input = showVerticesCheckbox;
+
 var showVerticesCheckboxInput = container.querySelector('#vertex-checkbox input');
 showVerticesCheckboxInput.addEventListener('change', function (e) {
   bobaOptions.drawVertices = e.target.checked;
@@ -1240,6 +1241,10 @@ showShapesCheckboxInput.addEventListener('change', function (e) {
   bobaOptions.drawShapes = e.target.checked;
   restartBoba(bobaOptions);
 });
+
+// TODO: Use the following as a starting point for the hue slider
+// document.documentElement.style.setProperty('--mdc-theme-primary', '#ff0000');
+// document.documentElement.style.setProperty('--mdc-theme-secondary', '#ff0000');
 
 /***/ }),
 /* 8 */
