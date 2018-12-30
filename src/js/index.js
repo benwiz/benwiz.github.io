@@ -1,8 +1,13 @@
 import { MDCRipple } from '@material/ripple/index';
+import { MDCSlider } from '@material/slider/index';
 import * as Boba from '@benwiz/boba.js';
 
 // Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(MDCRipple.attachTo);
+
+//
+// Boba.js
+//
 
 // Initialize boba.js options by grabbing the defaults
 const bobaOptions = Boba.getDefaultOptions();
@@ -48,3 +53,25 @@ bobaOptions.shapeColors = [
 
 // Start the animation
 Boba.start(bobaOptions);
+
+//
+// Event Listeners
+//
+const restartBoba = (options) => {
+  Boba.stop();
+  Boba.start(options);
+};
+
+const container = document.querySelector('#container');
+
+// Vertex options
+const numVerticesSlider = new MDCSlider(container.querySelector('#num-vertices'));
+numVerticesSlider.listen('MDCSlider:change', () => {
+  bobaOptions.numVertices = numVerticesSlider.value;
+  restartBoba(bobaOptions);
+});
+const numNeighborsSlider = new MDCSlider(container.querySelector('#num-neighbors'));
+numNeighborsSlider.listen('MDCSlider:change', () => {
+  bobaOptions.numNeighbors = numNeighborsSlider.value;
+  restartBoba(bobaOptions);
+});
