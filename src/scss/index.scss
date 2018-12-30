@@ -3,6 +3,8 @@
 @import "@material/button/mdc-button";
 @import "@material/ripple/mdc-ripple";
 @import "@material/slider/mdc-slider";
+@import "@material/form-field/mdc-form-field";
+@import "@material/checkbox/mdc-checkbox";
 
 body {
   font-family: "Dosis", sans-serif;
@@ -45,6 +47,15 @@ body {
 
     .right-button {
       float: right;
+    }
+  }
+
+  #boba-configs {
+    margin: 16px;
+
+    #boba-toggles {
+      display: flex;
+      justify-content: space-evenly;
     }
   }
 }

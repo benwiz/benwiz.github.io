@@ -1,5 +1,7 @@
 import { MDCRipple } from '@material/ripple/index';
 import { MDCSlider } from '@material/slider/index';
+import { MDCFormField } from '@material/form-field';
+import { MDCCheckbox } from '@material/checkbox';
 import * as Boba from '@benwiz/boba.js';
 
 // Add ripples to buttons
@@ -64,14 +66,36 @@ const restartBoba = (options) => {
 
 const container = document.querySelector('#container');
 
-// Vertex options
 const numVerticesSlider = new MDCSlider(container.querySelector('#num-vertices'));
 numVerticesSlider.listen('MDCSlider:change', () => {
   bobaOptions.numVertices = numVerticesSlider.value;
   restartBoba(bobaOptions);
 });
+
 const numNeighborsSlider = new MDCSlider(container.querySelector('#num-neighbors'));
 numNeighborsSlider.listen('MDCSlider:change', () => {
   bobaOptions.numNeighbors = numNeighborsSlider.value;
+  restartBoba(bobaOptions);
+});
+
+// This commented out code supposedly sets up the ripple, but it's not working
+// const showVerticesCheckbox = new MDCCheckbox(container.querySelector('#vertex-checkbox'));
+// const showVerticesFormField = new MDCFormField(container.querySelector('#vertex-form-field'));
+// showVerticesFormField.input = showVerticesCheckbox;
+const showVerticesCheckboxInput = container.querySelector('#vertex-checkbox input');
+showVerticesCheckboxInput.addEventListener('change', (e) => {
+  bobaOptions.drawVertices = e.target.checked;
+  restartBoba(bobaOptions);
+});
+
+const showEdgesCheckboxInput = container.querySelector('#edge-checkbox input');
+showEdgesCheckboxInput.addEventListener('change', (e) => {
+  bobaOptions.drawEdges = e.target.checked;
+  restartBoba(bobaOptions);
+});
+
+const showShapesCheckboxInput = container.querySelector('#shape-checkbox input');
+showShapesCheckboxInput.addEventListener('change', (e) => {
+  bobaOptions.drawShapes = e.target.checked;
   restartBoba(bobaOptions);
 });

@@ -87,41 +87,94 @@
     </div>
 
     <!-- boba.js configs -->
-    <div id="boba-toggles">
+    <div id="boba-configs">
 
-    </div>
-
-    <div id="num-vertices" class="mdc-slider mdc-slider--discrete mdc-slider--display-markers" tabindex="0" role="slider"
-      aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" aria-label="Select Value">
-      <div class="mdc-slider__track-container">
-        <div class="mdc-slider__track"></div>
-        <div class="mdc-slider__track-marker-container"></div>
-      </div>
-      <div class="mdc-slider__thumb-container">
-        <div class="mdc-slider__pin">
-          <span class="mdc-slider__pin-value-marker"></span>
+      <div id="num-vertices" class="mdc-slider mdc-slider--discrete mdc-slider--display-markers" tabindex="0" role="slider"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" aria-label="Select Value">
+        <div class="mdc-slider__track-container">
+          <div class="mdc-slider__track"></div>
+          <div class="mdc-slider__track-marker-container"></div>
         </div>
-        <svg class="mdc-slider__thumb" width="21" height="21">
-          <circle cx="10.5" cy="10.5" r="7.875"></circle>
-        </svg>
-        <div class="mdc-slider__focus-ring"></div>
-      </div>
-    </div>
-
-    <div id="num-neighbors" class="mdc-slider mdc-slider--discrete mdc-slider--display-markers" tabindex="0" role="slider"
-      aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" aria-label="Select Value">
-      <div class="mdc-slider__track-container">
-        <div class="mdc-slider__track"></div>
-        <div class="mdc-slider__track-marker-container"></div>
-      </div>
-      <div class="mdc-slider__thumb-container">
-        <div class="mdc-slider__pin">
-          <span class="mdc-slider__pin-value-marker"></span>
+        <div class="mdc-slider__thumb-container">
+          <div class="mdc-slider__pin">
+            <span class="mdc-slider__pin-value-marker"></span>
+          </div>
+          <svg class="mdc-slider__thumb" width="21" height="21">
+            <circle cx="10.5" cy="10.5" r="7.875"></circle>
+          </svg>
+          <div class="mdc-slider__focus-ring"></div>
         </div>
-        <svg class="mdc-slider__thumb" width="21" height="21">
-          <circle cx="10.5" cy="10.5" r="7.875"></circle>
-        </svg>
-        <div class="mdc-slider__focus-ring"></div>
+      </div>
+
+      <div id="num-neighbors" class="mdc-slider mdc-slider--discrete mdc-slider--display-markers" tabindex="0" role="slider"
+        aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" aria-label="Select Value">
+        <div class="mdc-slider__track-container">
+          <div class="mdc-slider__track"></div>
+          <div class="mdc-slider__track-marker-container"></div>
+        </div>
+        <div class="mdc-slider__thumb-container">
+          <div class="mdc-slider__pin">
+            <span class="mdc-slider__pin-value-marker"></span>
+          </div>
+          <svg class="mdc-slider__thumb" width="21" height="21">
+            <circle cx="10.5" cy="10.5" r="7.875"></circle>
+          </svg>
+          <div class="mdc-slider__focus-ring"></div>
+        </div>
+      </div>
+
+      <div id="boba-toggles">
+        <div id="vertex-form-field" class="mdc-form-field">
+          <div id="vertex-checkbox" class="mdc-checkbox">
+            <input type="checkbox"
+                  class="mdc-checkbox__native-control"
+                  checked/>
+            <div class="mdc-checkbox__background">
+              <svg class="mdc-checkbox__checkmark"
+                  viewBox="0 0 24 24">
+                <path class="mdc-checkbox__checkmark-path"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+              </svg>
+              <div class="mdc-checkbox__mixedmark"></div>
+            </div>
+          </div>
+          <label for="vertex-checkbox"></label>
+        </div>
+        <div id="edge-form-field" class="mdc-form-field">
+          <div id="edge-checkbox" class="mdc-checkbox">
+            <input type="checkbox"
+                    class="mdc-checkbox__native-control"
+                    checked/>
+            <div class="mdc-checkbox__background">
+              <svg class="mdc-checkbox__checkmark"
+                    viewBox="0 0 24 24">
+                <path class="mdc-checkbox__checkmark-path"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+              </svg>
+              <div class="mdc-checkbox__mixedmark"></div>
+            </div>
+          </div>
+          <label for="edge-checkbox"></label>
+        </div>
+        <div id="shape-form-field" class="mdc-form-field">
+          <div id="shape-checkbox" class="mdc-checkbox">
+            <input type="checkbox"
+                    class="mdc-checkbox__native-control"
+                    checked/>
+            <div class="mdc-checkbox__background">
+              <svg class="mdc-checkbox__checkmark"
+                    viewBox="0 0 24 24">
+                <path class="mdc-checkbox__checkmark-path"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+              </svg>
+              <div class="mdc-checkbox__mixedmark"></div>
+            </div>
+          </div>
+          <label for="shape-checkbox"></label>
+        </div>
       </div>
     </div>
 
