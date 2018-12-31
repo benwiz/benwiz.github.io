@@ -31,6 +31,7 @@
     "eslint-plugin-import": "^2.11.0",
     "extract-loader": "^1.0.2",
     "file-loader": "^1.1.11",
+    "http-server": "^0.11.1",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
     "webpack": "^3.11.0"

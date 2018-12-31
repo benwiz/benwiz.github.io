@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1106,148 +1106,150 @@ exports.default = MDCSliderAdapter;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRandomFloat = function (min, max) {
-    return Math.random() * (max - min) + min;
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
 };
-exports.getRandomInt = function (min, max) {
-    return Math.floor(exports.getRandomFloat(min, max));
-};
-exports.degToRadians = function (angle) {
-    return angle * (Math.PI / 180);
-};
-exports.radiansToDeg = function (angle) {
-    return angle * (180 / Math.PI);
-};
-exports.distance = function (vertex1, vertex2) {
-    // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
-    var x1 = vertex1.x;
-    var y1 = vertex1.y;
-    var x2 = vertex2.x;
-    var y2 = vertex2.y;
-    var dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-    return dist;
-};
-//# sourceMappingURL=util.js.map
 
 /***/ }),
-/* 7 */
+/* 7 */,
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _index = __webpack_require__(8);
+var _index = __webpack_require__(9);
 
-var _index2 = __webpack_require__(11);
+var _index2 = __webpack_require__(12);
 
-var _formField = __webpack_require__(19);
+var _formField = __webpack_require__(15);
 
-var _checkbox = __webpack_require__(20);
+var _checkbox = __webpack_require__(16);
 
-var _boba = __webpack_require__(14);
-
-var Boba = _interopRequireWildcard(_boba);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+// import * as Boba from '@benwiz/boba.js';
 
 // Add ripples to buttons
 document.querySelectorAll('.mdc-button').forEach(_index.MDCRipple.attachTo);
 
-//
-// Boba.js
-//
+// //
+// // Boba.js
+// //
 
-// Initialize boba.js options by grabbing the defaults
-var bobaOptions = Boba.getDefaultOptions();
+// // Initialize boba.js options by grabbing the defaults
+// const bobaOptions = Boba.getDefaultOptions();
 
-// Vertex configs
-bobaOptions.numVertices = 40;
-bobaOptions.drawVertices = true;
-bobaOptions.vertexMinSize = 8;
-bobaOptions.vertexMaxSize = 16;
-bobaOptions.vertexMinSpeed = 0.5;
-bobaOptions.vertexMaxSpeed = 2;
-bobaOptions.vertexColors = [{
-  r: 30,
-  g: 144,
-  b: 255,
-  a: 0.1
-}];
+// // Vertex configs
+// bobaOptions.numVertices = 40;
+// bobaOptions.drawVertices = true;
+// bobaOptions.vertexMinSize = 8;
+// bobaOptions.vertexMaxSize = 16;
+// bobaOptions.vertexMinSpeed = 0.5;
+// bobaOptions.vertexMaxSpeed = 2;
+// bobaOptions.vertexColors = [
+//   {
+//     r: 30,
+//     g: 144,
+//     b: 255,
+//     a: 0.1,
+//   },
+// ];
 
-// Edge configs
-bobaOptions.numNeighbors = 2;
-bobaOptions.drawEdges = false;
-bobaOptions.edgeColors = [{
-  r: 30,
-  g: 144,
-  b: 255,
-  a: 0.1
-}];
+// // Edge configs
+// bobaOptions.numNeighbors = 2;
+// bobaOptions.drawEdges = false;
+// bobaOptions.edgeColors = [
+//   {
+//     r: 30,
+//     g: 144,
+//     b: 255,
+//     a: 0.1,
+//   },
+// ];
 
-// Shape configs
-bobaOptions.drawShapes = true;
-bobaOptions.shapeColors = [{
-  r: 30,
-  g: 144,
-  b: 255,
-  a: 0.05
-}];
+// // Shape configs
+// bobaOptions.drawShapes = true;
+// bobaOptions.shapeColors = [
+//   {
+//     r: 30,
+//     g: 144,
+//     b: 255,
+//     a: 0.05,
+//   },
+// ];
 
-// Start the animation
-Boba.start(bobaOptions);
+// // Start the animation
+// Boba.start(bobaOptions);
 
-//
-// Event Listeners
-//
-var restartBoba = function restartBoba(options) {
-  Boba.stop();
-  Boba.start(options);
-};
+// //
+// // Event Listeners
+// //
+// const restartBoba = (options) => {
+//   Boba.stop();
+//   Boba.start(options);
+// };
 
-var container = document.querySelector('#container');
+// const container = document.querySelector('#container');
 
-var numVerticesSlider = new _index2.MDCSlider(container.querySelector('#num-vertices'));
-numVerticesSlider.listen('MDCSlider:change', function () {
-  bobaOptions.numVertices = numVerticesSlider.value;
-  restartBoba(bobaOptions);
-});
+// const numVerticesSlider = new MDCSlider(container.querySelector('#num-vertices'));
+// numVerticesSlider.listen('MDCSlider:change', () => {
+//   bobaOptions.numVertices = numVerticesSlider.value;
+//   restartBoba(bobaOptions);
+// });
 
-var numNeighborsSlider = new _index2.MDCSlider(container.querySelector('#num-neighbors'));
-numNeighborsSlider.listen('MDCSlider:change', function () {
-  bobaOptions.numNeighbors = numNeighborsSlider.value;
-  restartBoba(bobaOptions);
-});
+// const numNeighborsSlider = new MDCSlider(container.querySelector('#num-neighbors'));
+// numNeighborsSlider.listen('MDCSlider:change', () => {
+//   bobaOptions.numNeighbors = numNeighborsSlider.value;
+//   restartBoba(bobaOptions);
+// });
 
-// This commented out code supposedly sets up the ripple, but it's not working
-// const showVerticesCheckbox = new MDCCheckbox(container.querySelector('#vertex-checkbox'));
-// const showVerticesFormField = new MDCFormField(container.querySelector('#vertex-form-field'));
-// showVerticesFormField.input = showVerticesCheckbox;
+// // This commented out code supposedly sets up the ripple, but it's not working
+// // const showVerticesCheckbox = new MDCCheckbox(container.querySelector('#vertex-checkbox'));
+// // const showVerticesFormField = new MDCFormField(container.querySelector('#vertex-form-field'));
+// // showVerticesFormField.input = showVerticesCheckbox;
 
-var showVerticesCheckboxInput = container.querySelector('#vertex-checkbox input');
-showVerticesCheckboxInput.addEventListener('change', function (e) {
-  bobaOptions.drawVertices = e.target.checked;
-  restartBoba(bobaOptions);
-});
+// const showVerticesCheckboxInput = container.querySelector('#vertex-checkbox input');
+// showVerticesCheckboxInput.addEventListener('change', (e) => {
+//   bobaOptions.drawVertices = e.target.checked;
+//   restartBoba(bobaOptions);
+// });
 
-var showEdgesCheckboxInput = container.querySelector('#edge-checkbox input');
-showEdgesCheckboxInput.addEventListener('change', function (e) {
-  bobaOptions.drawEdges = e.target.checked;
-  restartBoba(bobaOptions);
-});
+// const showEdgesCheckboxInput = container.querySelector('#edge-checkbox input');
+// showEdgesCheckboxInput.addEventListener('change', (e) => {
+//   bobaOptions.drawEdges = e.target.checked;
+//   restartBoba(bobaOptions);
+// });
 
-var showShapesCheckboxInput = container.querySelector('#shape-checkbox input');
-showShapesCheckboxInput.addEventListener('change', function (e) {
-  bobaOptions.drawShapes = e.target.checked;
-  restartBoba(bobaOptions);
-});
+// const showShapesCheckboxInput = container.querySelector('#shape-checkbox input');
+// showShapesCheckboxInput.addEventListener('change', (e) => {
+//   bobaOptions.drawShapes = e.target.checked;
+//   restartBoba(bobaOptions);
+// });
 
-// TODO: Use the following as a starting point for the hue slider
-// document.documentElement.style.setProperty('--mdc-theme-primary', '#ff0000');
-// document.documentElement.style.setProperty('--mdc-theme-secondary', '#ff0000');
+// // TODO: Use the following as a starting point for the hue slider
+// // document.documentElement.style.setProperty('--mdc-theme-primary', '#ff0000');
+// // document.documentElement.style.setProperty('--mdc-theme-secondary', '#ff0000');
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1268,7 +1270,7 @@ var _adapter = __webpack_require__(2);
 
 var _adapter2 = _interopRequireDefault(_adapter);
 
-var _foundation = __webpack_require__(9);
+var _foundation = __webpack_require__(10);
 
 var _foundation2 = _interopRequireDefault(_foundation);
 
@@ -1518,7 +1520,7 @@ exports.RippleCapableSurface = RippleCapableSurface;
 exports.util = util;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1538,7 +1540,7 @@ var _adapter = __webpack_require__(2);
 
 var _adapter2 = _interopRequireDefault(_adapter);
 
-var _constants = __webpack_require__(10);
+var _constants = __webpack_require__(11);
 
 var _util = __webpack_require__(3);
 
@@ -2314,7 +2316,7 @@ var MDCRippleFoundation = function (_MDCFoundation) {
 exports.default = MDCRippleFoundation;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2379,7 +2381,7 @@ exports.strings = strings;
 exports.numbers = numbers;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2402,7 +2404,7 @@ var _adapter = __webpack_require__(5);
 
 var _adapter2 = _interopRequireDefault(_adapter);
 
-var _foundation = __webpack_require__(12);
+var _foundation = __webpack_require__(13);
 
 var _foundation2 = _interopRequireDefault(_foundation);
 
@@ -2703,7 +2705,7 @@ exports.MDCSliderFoundation = _foundation2.default;
 exports.MDCSlider = MDCSlider;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2721,7 +2723,7 @@ var _adapter = __webpack_require__(5);
 
 var _adapter2 = _interopRequireDefault(_adapter);
 
-var _index = __webpack_require__(13);
+var _index = __webpack_require__(14);
 
 var _foundation = __webpack_require__(0);
 
@@ -3461,7 +3463,7 @@ var MDCSliderFoundation = function (_MDCFoundation) {
 exports.default = MDCSliderFoundation;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3621,624 +3623,7 @@ exports.getCorrectEventName = getCorrectEventName;
 exports.getCorrectPropertyName = getCorrectPropertyName;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Setup = __webpack_require__(15);
-var Draw = __webpack_require__(16);
-var Update = __webpack_require__(17);
-// Global variables a necessary evil for the game loop. There is probably another way.
-var CTX = void 0;
-var VERTICES = void 0;
-var EDGES = void 0;
-var SHAPES = void 0;
-var LAST_RENDER = void 0;
-var OPTIONS = void 0;
-var ANIMATION_REQUEST_ID = void 0;
-var loop = function loop(timestamp) {
-    var progress = timestamp - LAST_RENDER;
-    var result = Update.update(progress, CTX, OPTIONS, VERTICES, EDGES, SHAPES);
-    VERTICES = result.vertices;
-    EDGES = result.edges;
-    SHAPES = result.shapes;
-    Draw.draw(CTX, OPTIONS, VERTICES, EDGES, SHAPES);
-    LAST_RENDER = timestamp;
-    ANIMATION_REQUEST_ID = window.requestAnimationFrame(loop);
-};
-var constrainOptions = function constrainOptions(options) {
-    if (options.edgeColors.length > 1) {
-        console.log('Boba.js: `edgeColors` currently only supports one color. Keeping only the first color.');
-    }
-    if (options.shapeColors.length > 1) {
-        console.log('Boba.js: `shapeColors` currently only supports one color. Keeping only the first color.');
-    }
-    return options;
-};
-exports.start = function (options) {
-    // Handle option constraings
-    options = constrainOptions(options);
-    // Make options available globally
-    OPTIONS = options;
-    // Create canvas and get context if the context is not already set (meaning the canvas already
-    // exists). The reason we do this is to allow `start` to be called to override the setup with
-    // new options. It's not the most elegant workflow but it is simple and it works well enough,
-    // for now.
-    var x = options.x;
-    var y = options.y;
-    var width = options.width;
-    var height = options.height;
-    var canvas = Setup.createCanvas(x, y, width, height);
-    var ctx = canvas.getContext('2d');
-    // Check that context was found, if not exit with an error. TODO: Make this proper.
-    if (ctx === null) {
-        throw new Error('Oh no! `ctx` is null!');
-    }
-    // Now that we know `ctx` exists, assign it globally
-    CTX = ctx;
-    // Initialize data in three step
-    // 1. Create vertices
-    VERTICES = Setup.createVertices(options);
-    // 2. Initialize edges list as an empty array
-    EDGES = [];
-    // Initialize shapes list as an empty array, I think
-    SHAPES = [];
-    // Game loop
-    LAST_RENDER = 0;
-    ANIMATION_REQUEST_ID = window.requestAnimationFrame(loop);
-};
-exports.stop = function () {
-    // Cancel the animation requests
-    window.cancelAnimationFrame(ANIMATION_REQUEST_ID);
-    // Remove the canvas from the DOM
-    CTX.canvas.remove();
-    // Reset all global variables (except CTX because it can't be undefined), probably not necessary
-    VERTICES = [];
-    EDGES = [];
-    SHAPES = [];
-    LAST_RENDER = 0;
-    OPTIONS = exports.getDefaultOptions();
-};
-exports.getDefaultOptions = function () {
-    var options = {
-        // Location and size of canvas
-        x: 0,
-        y: 0,
-        width: document.documentElement.scrollWidth,
-        height: document.documentElement.scrollHeight,
-        // Vertices configurations
-        numVertices: 30,
-        drawVertices: true,
-        vertexMinSize: 8,
-        vertexMaxSize: 16,
-        vertexMinSpeed: 0.5,
-        vertexMaxSpeed: 2,
-        vertexColors: [{
-            r: 30,
-            g: 144,
-            b: 255,
-            a: 0.1
-        }],
-        // Edges configurations
-        numNeighbors: 2,
-        drawEdges: true,
-        edgeColors: [{
-            r: 30,
-            g: 144,
-            b: 255,
-            a: 0.1
-        }],
-        // Shapes configurations
-        drawShapes: true,
-        shapeColors: [{
-            r: 30,
-            g: 144,
-            b: 255,
-            a: 0.05
-        }]
-    };
-    return options;
-};
-//# sourceMappingURL=index.js.map
-
-/***/ }),
 /* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Util = __webpack_require__(6);
-exports.createCanvas = function (x, y, width, height) {
-    // Create canvas
-    var canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    // Set css-based location
-    canvas.style.position = 'absolute';
-    canvas.style.left = String(x);
-    canvas.style.top = String(y);
-    canvas.style.zIndex = '-1';
-    // Append canvas to dom and return canvas
-    document.body.appendChild(canvas);
-    return canvas;
-};
-exports.createVertices = function (options) {
-    var vertices = [];
-    for (var i = 0; i < options.numVertices; i++) {
-        // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
-        // lists rather than just single values
-        var vertex = {
-            id: i,
-            x: Util.getRandomInt(0, options.width - 1),
-            y: Util.getRandomInt(0, options.height - 1),
-            speed: Util.getRandomFloat(options.vertexMinSpeed, options.vertexMaxSpeed),
-            angle: Util.getRandomFloat(0, 360),
-            runAwayMultiplier: 1,
-            radius: Util.getRandomFloat(8, 16),
-            color: options.vertexColors[Util.getRandomInt(0, options.vertexColors.length)]
-        };
-        vertices.push(vertex);
-    }
-    return vertices;
-};
-//# sourceMappingURL=setup.js.map
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var drawVertex = function drawVertex(ctx, vertex) {
-    ctx.strokeStyle = "rgba(" + vertex.color.r + ", " + vertex.color.g + ", " + vertex.color.b + ", " + vertex.color.a + ")";
-    ctx.fillStyle = "rgba(" + vertex.color.r + ", " + vertex.color.g + ", " + vertex.color.b + ", " + vertex.color.a / 2 + ")";
-    ctx.beginPath();
-    ctx.arc(vertex.x, vertex.y, vertex.radius, 0, 2 * Math.PI, false);
-    ctx.stroke();
-    ctx.fill();
-    // ctx.font = '12px Arial black';
-    // ctx.fillStyle = 'black';
-    // ctx.textAlign = 'center';
-    // ctx.fillText(String(vertex.id), vertex.x, vertex.y);
-};
-var drawEdge = function drawEdge(ctx, edge) {
-    ctx.strokeStyle = "rgba(" + edge.color.r + ", " + edge.color.g + ", " + edge.color.b + ", " + edge.color.a + ")";
-    ctx.beginPath();
-    ctx.moveTo(edge.vertex1.x, edge.vertex1.y);
-    ctx.lineTo(edge.vertex2.x, edge.vertex2.y);
-    ctx.stroke();
-};
-var drawShape = function drawShape(ctx, shape) {
-    ctx.fillStyle = "rgba(" + shape.color.r + ", " + shape.color.g + ", " + shape.color.b + ", " + shape.color.a + ")";
-    ctx.beginPath();
-    ctx.moveTo(shape.vertices[0].x, shape.vertices[0].y);
-    for (var i = 1; i < shape.vertices.length; i++) {
-        var vertex = shape.vertices[i];
-        ctx.lineTo(vertex.x, vertex.y);
-    }
-    ctx.fill();
-};
-exports.draw = function (ctx, options, vertices, edges, shapes) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    if (options.drawVertices) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = vertices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var vertex = _step.value;
-
-                drawVertex(ctx, vertex);
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-    }
-    if (options.drawEdges) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-            for (var _iterator2 = edges[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var edge = _step2.value;
-
-                drawEdge(ctx, edge);
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
-                }
-            }
-        }
-    }
-    if (options.drawShapes) {
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
-
-        try {
-            for (var _iterator3 = shapes[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                var shape = _step3.value;
-
-                drawShape(ctx, shape);
-            }
-        } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                    _iterator3.return();
-                }
-            } finally {
-                if (_didIteratorError3) {
-                    throw _iteratorError3;
-                }
-            }
-        }
-    }
-};
-//# sourceMappingURL=draw.js.map
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Util = __webpack_require__(6);
-var updateVertex = function updateVertex(ctx, vertex) {
-    // Update location
-    vertex.x += vertex.speed * Math.cos(Util.degToRadians(vertex.angle)) * vertex.runAwayMultiplier;
-    vertex.y += vertex.speed * Math.sin(Util.degToRadians(vertex.angle)) * vertex.runAwayMultiplier;
-    // Constrain the vertex to within the borders
-    if (vertex.x < 0 + vertex.radius) {
-        vertex.x = 0 + vertex.radius;
-    }
-    if (vertex.x > ctx.canvas.width - vertex.radius) {
-        vertex.x = ctx.canvas.width - vertex.radius;
-    }
-    if (vertex.y < 0 + vertex.radius) {
-        vertex.y = 0 + vertex.radius;
-    }
-    if (vertex.y > ctx.canvas.height - vertex.radius) {
-        vertex.y = ctx.canvas.height - vertex.radius;
-    }
-    // Keep the vertex's angle reasonable
-    if (vertex.angle >= 360) {
-        vertex.angle -= 360;
-    } else if (vertex.angle <= -360) {
-        vertex.angle += 360;
-    }
-    // Update angle if hit wall. Account for radius.
-    if (vertex.x <= 0 + vertex.radius || ctx.canvas.width - vertex.radius <= vertex.x) {
-        vertex.angle = 180 - vertex.angle;
-    } else if (vertex.y <= 0 + vertex.radius || ctx.canvas.height - vertex.radius <= vertex.y) {
-        vertex.angle = 0 - vertex.angle;
-    }
-    return vertex;
-};
-var createEdges = function createEdges(options, vertices, numNeighbors) {
-    var edges = [];
-    // For each vertex
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = vertices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var vertex1 = _step.value;
-
-            // TODO: This (i.e. these steps to get the k-nearest-neighbors) can be more efficient
-            // Create a edge to all vertices other than itself
-            var edgesForVertex = [];
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-                for (var _iterator2 = vertices[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var vertex2 = _step2.value;
-
-                    if (vertex1 === vertex2) continue;
-                    // Create the edge so that vertex1 has the lower id
-                    var vertexA = void 0;
-                    var vertexB = void 0;
-                    if (vertex1.id <= vertex2.id) {
-                        vertexA = vertex1;
-                        vertexB = vertex2;
-                    } else {
-                        vertexA = vertex2;
-                        vertexB = vertex1;
-                    }
-                    // Record the formatted edge
-                    var edge = {
-                        vertex1: vertexA,
-                        vertex2: vertexB,
-                        color: options.edgeColors[Util.getRandomInt(0, options.edgeColors.length)]
-                    };
-                    edgesForVertex.push(edge);
-                }
-                // Sort the edges by distance
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
-            }
-
-            edgesForVertex.sort(function (edgeA, edgeB) {
-                var distA = Util.distance(edgeA.vertex1, edgeA.vertex2);
-                var distB = Util.distance(edgeB.vertex1, edgeB.vertex2);
-                return distA - distB;
-            });
-            // Keep the first `numNeighbors` edges
-            edgesForVertex.splice(numNeighbors);
-            // Add those edges to the main edges array as long as the edge is not already in the list
-            var _iteratorNormalCompletion3 = true;
-            var _didIteratorError3 = false;
-            var _iteratorError3 = undefined;
-
-            try {
-                var _loop = function _loop() {
-                    var edge = _step3.value;
-
-                    var matches = edges.filter(function (l) {
-                        return l.vertex1.id === edge.vertex1.id && l.vertex2.id === edge.vertex2.id;
-                    });
-                    if (matches.length === 0) {
-                        edges.push(edge);
-                    }
-                };
-
-                for (var _iterator3 = edgesForVertex[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                    _loop();
-                }
-            } catch (err) {
-                _didIteratorError3 = true;
-                _iteratorError3 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                        _iterator3.return();
-                    }
-                } finally {
-                    if (_didIteratorError3) {
-                        throw _iteratorError3;
-                    }
-                }
-            }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    return edges;
-};
-var findEdgeInEdges = function findEdgeInEdges(testEdge, edges) {
-    var _iteratorNormalCompletion4 = true;
-    var _didIteratorError4 = false;
-    var _iteratorError4 = undefined;
-
-    try {
-        for (var _iterator4 = edges[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-            var edge = _step4.value;
-
-            if (testEdge.vertex1.id === edge.vertex1.id && testEdge.vertex2.id === edge.vertex2.id) {
-                return true;
-            }
-        }
-    } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                _iterator4.return();
-            }
-        } finally {
-            if (_didIteratorError4) {
-                throw _iteratorError4;
-            }
-        }
-    }
-
-    return false;
-};
-var createTriangles = function createTriangles(options, vertices, edges) {
-    var triangles = [];
-    var _iteratorNormalCompletion5 = true;
-    var _didIteratorError5 = false;
-    var _iteratorError5 = undefined;
-
-    try {
-        for (var _iterator5 = edges[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-            var edge = _step5.value;
-            var _iteratorNormalCompletion6 = true;
-            var _didIteratorError6 = false;
-            var _iteratorError6 = undefined;
-
-            try {
-                for (var _iterator6 = vertices[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                    var vertex = _step6.value;
-
-                    // If vertex is part of the edge, skip
-                    if (edge.vertex1 === vertex || edge.vertex2 === vertex) continue;
-                    // If (edge.vertex1, vertex) && (vertex, edge.vertex2) are edges that exist. Create the test
-                    // edges here. Color doesn't actually matter since comparisons are done against id.
-                    var testEdge1 = void 0;
-                    var color = { r: 0, g: 0, b: 0, a: 0 };
-                    if (vertex.id < edge.vertex1.id) {
-                        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1, color: color };
-                    } else {
-                        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex, color: color };
-                    }
-                    var testEdge2 = void 0;
-                    if (vertex.id < edge.vertex2.id) {
-                        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2, color: color };
-                    } else {
-                        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex, color: color };
-                    }
-                    // Find if there are matching edges
-                    var test1 = findEdgeInEdges(testEdge1, edges);
-                    var test2 = findEdgeInEdges(testEdge2, edges);
-                    // Run the test
-                    if (test1 && test2) {
-                        var triangle = {
-                            vertices: [vertex, edge.vertex1, edge.vertex2],
-                            color: options.shapeColors[Util.getRandomInt(0, options.shapeColors.length)]
-                        };
-                        triangles.push(triangle);
-                    }
-                }
-            } catch (err) {
-                _didIteratorError6 = true;
-                _iteratorError6 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                        _iterator6.return();
-                    }
-                } finally {
-                    if (_didIteratorError6) {
-                        throw _iteratorError6;
-                    }
-                }
-            }
-        }
-    } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                _iterator5.return();
-            }
-        } finally {
-            if (_didIteratorError5) {
-                throw _iteratorError5;
-            }
-        }
-    }
-
-    return triangles;
-};
-exports.update = function (progress, ctx, options, vertices, edges, shapes) {
-    // Move vertices
-    var _iteratorNormalCompletion7 = true;
-    var _didIteratorError7 = false;
-    var _iteratorError7 = undefined;
-
-    try {
-        for (var _iterator7 = vertices[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-            var vertex = _step7.value;
-
-            updateVertex(ctx, vertex);
-        }
-        // Create/find the new set of edges
-    } catch (err) {
-        _didIteratorError7 = true;
-        _iteratorError7 = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                _iterator7.return();
-            }
-        } finally {
-            if (_didIteratorError7) {
-                throw _iteratorError7;
-            }
-        }
-    }
-
-    edges = createEdges(options, vertices, options.numNeighbors);
-    // Create/find the new set of shapes
-    shapes = createTriangles(options, vertices, edges);
-    return { vertices: vertices, edges: edges, shapes: shapes };
-};
-//# sourceMappingURL=update.js.map
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6743,10 +6128,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   );
 });
 //# sourceMappingURL=mdc.formField.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
 
 /***/ }),
-/* 20 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9862,7 +9247,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   );
 });
 //# sourceMappingURL=mdc.checkbox.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
 
 /***/ })
 /******/ ]);
