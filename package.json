@@ -37,7 +37,6 @@
     "webpack": "^3.11.0"
   },
   "dependencies": {
-    "@benwiz/boba.js": "^1.0.16",
     "@material/button": "^0.42.0",
     "@material/checkbox": "^0.42.0",
     "@material/form-field": "^0.42.0",

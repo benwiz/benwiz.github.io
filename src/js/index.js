@@ -3,9 +3,7 @@ import { MDCSlider } from '@material/slider/index';
 import { MDCFormField } from '@material/form-field';
 import { MDCCheckbox } from '@material/checkbox';
 // import * as Boba from '@benwiz/boba.js';
-
-// Add ripples to buttons
-document.querySelectorAll('.mdc-button').forEach(MDCRipple.attachTo);
+import * as Boba from '@benwiz/boba.wasm';
 
 // //
 // // Boba.js
