@@ -5,6 +5,43 @@ import { MDCCheckbox } from '@material/checkbox';
 // import * as Boba from '@benwiz/boba.js';
 import * as Boba from '@benwiz/boba.wasm';
 
+const options = {
+  // Canvas
+  x: 0,
+  y: 0,
+  width: document.documentElement.scrollWidth,
+  height: document.documentElement.scrollHeight,
+  // Vertices
+  drawVertices: true,
+  vertexMinRadius: 8,
+  vertexMaxRadius: 16,
+  vertexMinSpeed: 0.5,
+  vertexMaxSpeed: 0.8,
+  vertexColor: {
+    r: 30,
+    g: 144,
+    b: 255,
+    a: 0.2,
+  },
+  // Edges
+  drawEdges: true,
+  edgeColor: {
+    r: 30,
+    g: 144,
+    b: 255,
+    a: 0.2,
+  },
+  // Triangles
+  drawTriangles: true,
+  triangleColor: {
+    r: 30,
+    g: 144,
+    b: 255,
+    a: 0.2,
+  },
+};
+Boba.start(options);
+
 // //
 // // Boba.js
 // //
