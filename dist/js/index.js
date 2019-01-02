@@ -9362,7 +9362,7 @@ var Boba =
             width: document.documentElement.scrollWidth,
             height: document.documentElement.scrollHeight,
             // Vertices
-            numVertices: 10,
+            numVertices: 30,
             drawVertices: true,
             vertexMinRadius: 8,
             vertexMaxRadius: 16,
@@ -9399,7 +9399,7 @@ var Boba =
 
         // Start the wasm module
         var wasmModule = await loadWasm(ctx, options.vertexColor, options.edgeColor, options.triangleColor);
-        wasmModule.exports.start(options.width, options.height, options.numVertices, options.numNeighbors, options.vertexMinRadius, options.vertexMaxRadius, options.vertexMinSpeed, options.vertexMaxSpeed, options.drawVertices, options.drawEdges, options.drawTriangles);
+        wasmModule.exports.start(options.width, options.height, options.vertexMinRadius, options.vertexMaxRadius, options.vertexMinSpeed, options.vertexMaxSpeed, options.numNeighbors, options.drawVertices, options.drawEdges, options.drawTriangles);
     };
 
     main();
