@@ -32,7 +32,7 @@ bobaOptions.vertexColors = [
 
 // Edge configs
 bobaOptions.numNeighbors = 2;
-bobaOptions.drawEdges = false;
+bobaOptions.drawEdges = true;
 bobaOptions.edgeColors = [
   {
     r: 30,
