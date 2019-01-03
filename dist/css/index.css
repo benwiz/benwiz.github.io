@@ -994,7 +994,8 @@ body {
     #container .projects .right-button {
       float: right; }
   #container #boba-configs {
-    margin: 16px; }
+    margin: 16px;
+    margin-bottom: 48px; }
     #container #boba-configs #boba-toggles {
       display: flex;
       justify-content: space-evenly; }
