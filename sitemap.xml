@@ -20,7 +20,16 @@
         <loc>https://benwiz.io/fragment/</loc>
     </url>
     <url>
+        <loc>https://benwiz.io/boba.js/</loc>
+    </url>
+    <url>
+        <loc>https://benwiz.io/boba.wasm/</loc>
+    </url>
+    <url>
         <loc>https://benwiz.io/burn/</loc>
+    </url>
+    <url>
+        <loc>https://benwiz.io/rock-paper-scissors-ai/</loc>
     </url>
 
 </urlset4
