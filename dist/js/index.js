@@ -1202,7 +1202,7 @@ bobaOptions.vertexColors = [{
   r: 30,
   g: 144,
   b: 255,
-  a: 0.8
+  a: 0.08
 }];
 
 // Edge configs
