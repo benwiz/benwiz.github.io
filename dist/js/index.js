@@ -1193,7 +1193,7 @@ var bobaOptions = Boba.getDefaultOptions();
 
 // Vertex configs
 bobaOptions.numVertices = 40;
-bobaOptions.drawVertices = true;
+bobaOptions.drawVertices = false;
 bobaOptions.vertexMinSize = 8;
 bobaOptions.vertexMaxSize = 16;
 bobaOptions.vertexMinSpeed = 0.5;
