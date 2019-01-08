@@ -1202,7 +1202,7 @@ bobaOptions.vertexColors = [{
   r: 30,
   g: 144,
   b: 255,
-  a: 0.1
+  a: 0.8
 }];
 
 // Edge configs
@@ -1221,7 +1221,7 @@ bobaOptions.shapeColors = [{
   r: 30,
   g: 144,
   b: 255,
-  a: 0.05
+  a: 0.03
 }];
 
 // Start the animation
