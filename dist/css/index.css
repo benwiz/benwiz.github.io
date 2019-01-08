@@ -993,6 +993,8 @@ body {
       float: left; }
     #container .projects .right-button {
       float: right; }
+    #container .projects .large-icon {
+      font-size: large; }
   #container #boba-configs {
     margin: 16px;
     margin-bottom: 48px; }
