@@ -4,6 +4,19 @@ My personal website
 
 ## Notes
 
+Use:
+
+```sh
+npm run webpack
+npm start
+```
+
+Don't use:
+
+```sh
+bundle exec jekyll serve
+```
+
 ## To Do
 
 - Resume and website should use same font. Consider switching to Raleway + Lato. I really like Lato. Website currently uses Merriweather

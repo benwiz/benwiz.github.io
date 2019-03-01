@@ -972,7 +972,7 @@ body {
   text-align: center; }
 
 #container {
-  max-width: 300px;
+  width: 345px;
   margin: 0 auto; }
   #container .mdc-button,
   #container .mdc-slider,
