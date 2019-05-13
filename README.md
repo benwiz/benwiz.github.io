@@ -4,7 +4,7 @@ My personal website
 
 ## Notes
 
-Use:
+Use in two shells:
 
 ```sh
 npm run webpack
@@ -16,6 +16,8 @@ Don't use:
 ```sh
 bundle exec jekyll serve
 ```
+
+Push to master to publish.
 
 ## To Do
 

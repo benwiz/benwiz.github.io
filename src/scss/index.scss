@@ -71,3 +71,9 @@ canvas {
   left: 0;
   z-index: -3; // If this stops working, remember to try "!important"
 }
+
+// Hide project buttons and boba configs
+#container > .projects,
+#boba-configs {
+  display: none;
+}

@@ -1007,3 +1007,7 @@ canvas {
   top: 0;
   left: 0;
   z-index: -3; }
+
+#container > .projects,
+#boba-configs {
+  display: none; }
