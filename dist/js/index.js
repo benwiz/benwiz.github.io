@@ -1212,7 +1212,7 @@ bobaOptions.edgeColors = [{
   r: 30,
   g: 144,
   b: 255,
-  a: 0.15
+  a: 0.08
 }];
 
 // Shape configs
@@ -1221,7 +1221,7 @@ bobaOptions.shapeColors = [{
   r: 30,
   g: 144,
   b: 255,
-  a: 0.03
+  a: 0.02
 }];
 
 // Start the animation
