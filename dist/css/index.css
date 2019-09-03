@@ -963,6 +963,9 @@
   transform: scaleX(1) rotate(0deg);
   opacity: 1; }
 
+html {
+  min-height: 100%; }
+
 body {
   font-family: "Dosis", sans-serif;
   font-weight: 300;

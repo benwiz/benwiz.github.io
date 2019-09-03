@@ -6,6 +6,11 @@
 @import "@material/form-field/mdc-form-field";
 @import "@material/checkbox/mdc-checkbox";
 
+
+html {
+    min-height: 100%;
+}
+
 body {
   font-family: "Dosis", sans-serif;
   font-weight: 300;
