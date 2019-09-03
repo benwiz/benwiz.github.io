@@ -976,10 +976,11 @@ body {
   margin: 0 auto; }
   #container .mdc-button,
   #container .mdc-slider,
-  #container p,
   #container .projects {
-    width: 100%;
+    width: 80%;
     margin: 8px; }
+  #container p {
+    width: 100%; }
   #container p {
     margin-bottom: 20px; }
   #container .projects {

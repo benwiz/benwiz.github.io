@@ -21,10 +21,13 @@ body {
 
   .mdc-button,
   .mdc-slider,
-  p,
   .projects {
-    width: 100%;
+    width: 80%;
     margin: 8px;
+  }
+
+  p {
+      width: 100%;
   }
 
   p {
