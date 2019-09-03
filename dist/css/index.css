@@ -967,6 +967,7 @@ body {
   font-family: "Dosis", sans-serif;
   font-weight: 300;
   width: 100%;
+  min-height: 100%;
   display: inline-block;
   margin: 0 auto;
   text-align: center; }
