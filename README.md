@@ -20,7 +20,7 @@ bundle exec jekyll serve
 Push to master to publish.
 
 Do not try to move to ClojureScript or something without webpack. It works and is fairly simple as is. Only do a rewrite if I have a really good design.
-... Actually, ClojureScript with Crinkle and Material-UI plus a new background using Quil could be even simpler to maintain.
+... Actually, ClojureScript with Crinkle and Material-UI plus a new background using Quil could be even simpler to maintain. But I still need a good new design.
 
 ## To Do
 
