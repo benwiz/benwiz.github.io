@@ -43,11 +43,12 @@ body {
   .projects {
     display: inline-block;
     width: 100%;
+    margin-top: 33px;
     margin-bottom: 4px;
 
     .mdc-button {
-      width: calc(50% - 6px);
-      margin: 0px;
+      // width: calc(50% - 8px);
+      // margin: 8px 0px 8px 0px;
     }
 
     .left-button {
@@ -64,6 +65,7 @@ body {
   }
 
   #boba-configs {
+    display: none;
     margin: 16px;
     margin-bottom: 48px;
 
@@ -79,10 +81,4 @@ canvas {
   top: 0;
   left: 0;
   z-index: -3; // If this stops working, remember to try "!important"
-}
-
-// Hide project buttons and boba configs
-#container > .projects,
-#boba-configs {
-  display: none;
 }

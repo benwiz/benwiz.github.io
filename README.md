@@ -24,3 +24,8 @@ Do not try to move to ClojureScript or something without webpack. It works and i
 ## To Do
 
 - Buttons are not perfectly centered on mobile
+- Add links to
+  - Spyfall
+  - Codenames Trio
+  - WWOZ playlist
+  - Travel Map

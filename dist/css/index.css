@@ -990,10 +990,8 @@ body {
   #container .projects {
     display: inline-block;
     width: 100%;
+    margin-top: 33px;
     margin-bottom: 4px; }
-    #container .projects .mdc-button {
-      width: calc(50% - 6px);
-      margin: 0px; }
     #container .projects .left-button {
       float: left; }
     #container .projects .right-button {
@@ -1001,6 +999,7 @@ body {
     #container .projects .large-icon {
       font-size: large; }
   #container #boba-configs {
+    display: none;
     margin: 16px;
     margin-bottom: 48px; }
     #container #boba-configs #boba-toggles {
@@ -1012,7 +1011,3 @@ canvas {
   top: 0;
   left: 0;
   z-index: -3; }
-
-#container > .projects,
-#boba-configs {
-  display: none; }
