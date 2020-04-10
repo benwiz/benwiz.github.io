@@ -19,7 +19,8 @@ bundle exec jekyll serve
 
 Push to master to publish.
 
+Do not try to move to ClojureScript or something without webpack. It works and is fairly simple as is. Only do a rewrite if I have a really good design.
+
 ## To Do
 
-- Resume and website should use same font. Consider switching to Raleway + Lato. I really like Lato. Website currently uses Merriweather
 - Buttons are not perfectly centered on mobile
