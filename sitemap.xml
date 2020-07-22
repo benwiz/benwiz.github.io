@@ -2,22 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://benwiz.io/</loc>
+        <loc>https://benwiz.com/</loc>
     </url>
     <url>
-        <loc>https://benwiz.io/blog/</loc>
+        <loc>https://benwiz.com/blog/</loc>
     </url>
     <url>
-        <loc>https://benwiz.io/blog/sitemap.xml</loc>
+        <loc>https://benwiz.com/resume.pdf</loc>
     </url>
     <url>
-        <loc>https://benwiz.io/resume.pdf</loc>
+        <loc>https://benwiz.com/travelmap/</loc>
     </url>
     <url>
-        <loc>https://benwiz.io/travelmap/</loc>
-    </url>
-    <url>
-        <loc>https://benwiz.io/games/</loc>
+        <loc>https://benwiz.com/games/</loc>
     </url>
 
 </urlset>

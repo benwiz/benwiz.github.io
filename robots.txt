@@ -1,1 +1,1 @@
-Sitemap: https://benwiz.io/sitemap.xml
+Sitemap: https://benwiz.com/sitemap.xml
