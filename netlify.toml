@@ -1,0 +1,52 @@
+[[redirects]]
+  from = "/travelmap"
+  to = "https://benwiz-travelmap.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "https://benwiz-blog.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "/games"
+  to = "https://benwiz-games.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "/spyfall"
+  to = "https://benwiz-spyfall.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "/taboo"
+  to = "https://benwiz-taboo.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "/powerhour"
+  to = "https://benwiz-powerhour.netlify.app"
+  status = 200
+
+[[redirects]]
+  from = "/codenames-trio"
+  to = "https://benwiz-codenames-trio.netlify.app"
+  status = 200
+
+# Covering all my bases from an old config. Can remove this in not too distant future.
+
+[[redirects]]
+  from = "/games/spyfall"
+  to = "https://benwiz-spyfall.netlify.app"
+
+[[redirects]]
+  from = "/games/taboo"
+  to = "https://benwiz-taboo.netlify.app"
+
+[[redirects]]
+  from = "/games/powerhour"
+  to = "https://benwiz-powerhour.netlify.app"
+
+[[redirects]]
+  from = "/games/codenames-trio"
+  to = "https://benwiz-codenames-trio.netlify.app"
