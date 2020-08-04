@@ -14,6 +14,11 @@
   status = 200
 
 [[redirects]]
+  from = "/games/index.js"
+  to = "https://benwiz-games.netlify.app/index.js"
+  status = 200
+
+[[redirects]]
   from = "/spyfall"
   to = "https://benwiz-spyfall.netlify.app"
   status = 200
