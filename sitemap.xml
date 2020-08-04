@@ -5,9 +5,6 @@
         <loc>https://benwiz.com/</loc>
     </url>
     <url>
-        <loc>https://benwiz.com/blog/</loc>
-    </url>
-    <url>
         <loc>https://benwiz.com/resume.pdf</loc>
     </url>
     <url>
@@ -15,6 +12,55 @@
     </url>
     <url>
         <loc>https://benwiz.com/games/</loc>
+    </url>
+    <url>
+        <loc>https://benwiz.com/spyfall/</loc>
+    </url>
+    <url>
+        <loc>https://benwiz.com/taboo/</loc>
+    </url>
+    <url>
+        <loc>https://benwiz.com/powerhour/</loc>
+    </url>
+    <url>
+        <loc>https://benwiz.com/codenames-trio/</loc>
+    </url>
+
+    <url>
+        <loc>https://benwiz.com/blog</loc>
+        <lastmod>2020-08-04T14:51:41+00:00</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://benwiz.com/blog/</loc>
+        <lastmod>2020-08-04T14:51:41+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://benwiz.com/blog/tags</loc>
+        <lastmod>2020-08-04T14:51:41+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://benwiz.com/blog/create-spotify-refresh-token/
+        </loc>
+        <lastmod>2020-08-04T14:51:41+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://benwiz.com/blog/install-openframeworks-on-mac/
+        </loc>
+        <lastmod>2020-08-04T14:51:41+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://benwiz.com/blog/deploy-github-pages-with-aws-route-53-and-https/
+        </loc>
+        <lastmod>2020-08-04T14:51:41+00:00</lastmod>
+        <priority>0.80</priority>
     </url>
 
 </urlset>
