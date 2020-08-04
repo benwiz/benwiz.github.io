@@ -1,11 +1,11 @@
 [[redirects]]
   from = "/travelmap/*"
-  to = "https://benwiz-travelmap.netlify.app/:splat"
+  to = "https://benwiz-travelmap.netlify.app/:splat/"
   status = 200
 
 [[redirects]]
   from = "/blog/*"
-  to = "https://benwiz-blog.netlify.app/:splat"
+  to = "https://benwiz-blog.netlify.app/:splat/"
   status = 200
 
 [[redirects]] # an old artifact, can be removed eventually (summer 2021)
@@ -23,7 +23,7 @@
 
 [[redirects]]
   from = "/games/*"
-  to = "https://benwiz-games.netlify.app/:splat"
+  to = "https://benwiz-games.netlify.app/:splat/"
   status = 200
 
 [[redirects]]
@@ -33,15 +33,15 @@
 
 [[redirects]]
   from = "/taboo/*"
-  to = "https://benwiz-taboo.netlify.app/:splat"
+  to = "https://benwiz-taboo.netlify.app/:splat/"
   status = 200
 
 [[redirects]]
   from = "/powerhour/*"
-  to = "https://benwiz-powerhour.netlify.app/:splat"
+  to = "https://benwiz-powerhour.netlify.app/:splat/"
   status = 200
 
 [[redirects]]
   from = "/codenames-trio/*"
-  to = "https://benwiz-codenames-trio.netlify.app/:splat"
+  to = "https://benwiz-codenames-trio.netlify.app/:splat/"
   status = 200
