@@ -23,9 +23,8 @@
 
 [[redirects]]
   from = "/games"
-  to = "/games/"
+  to = "https://benwiz.com/games/"
   status = 301
-  force = true
 [[redirects]]
   from = "/games/*"
   to = "https://benwiz-games.netlify.app/:splat/"
