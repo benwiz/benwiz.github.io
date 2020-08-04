@@ -25,6 +25,7 @@
   from = "/games"
   to = "/games/"
   status = 301
+  force = true
 [[redirects]]
   from = "/games/*"
   to = "https://benwiz-games.netlify.app/:splat/"
