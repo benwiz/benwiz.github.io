@@ -32,7 +32,7 @@
   status = 200
 
 [[redirects]]
-  from = "/taboo*"
+  from = "/taboo/*"
   to = "https://benwiz-taboo.netlify.app/:splat/"
   status = 200
 
