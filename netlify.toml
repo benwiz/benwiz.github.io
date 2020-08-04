@@ -28,7 +28,7 @@
 
 [[redirects]]
   from = "/spyfall/*"
-  to = "https://benwiz-spyfall.netlify.app/:splat"
+  to = "https://benwiz-spyfall.netlify.app/:splat/"
   status = 200
 
 [[redirects]]
