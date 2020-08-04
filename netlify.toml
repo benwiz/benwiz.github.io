@@ -10,16 +10,16 @@
 
 [[redirects]] # an old artifact, can be removed eventually (summer 2021)
   from = "/games/spyfall"
-  to = "https://benwiz.com/spyfall"
+  to = "https://benwiz.com/spyfall/"
 [[redirects]] # an old artifact, can be removed eventually (summer 2021)
   from = "/games/taboo"
-  to = "https://benwiz.com/taboo"
+  to = "https://benwiz.com/taboo/"
 [[redirects]] # an old artifact, can be removed eventually (summer 2021)
   from = "/games/powerhour"
-  to = "https://benwiz.com/powerhour"
+  to = "https://benwiz.com/powerhour/"
 [[redirects]] # an old artifact, can be removed eventually (summer 2021)
   from = "/games/codenames-trio"
-  to = "https://benwiz.com/codenames-trio"
+  to = "https://benwiz.com/codenames-trio/"
 
 [[redirects]]
   from = "/games/*"
