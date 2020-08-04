@@ -9,13 +9,8 @@
   status = 200
 
 [[redirects]]
-  from = "/games"
-  to = "https://benwiz-games.netlify.app"
-  status = 200
-
-[[redirects]]
-  from = "/games/index.js"
-  to = "https://benwiz-games.netlify.app/index.js"
+  from = "/games/*"
+  to = "https://benwiz-games.netlify.app/:splat"
   status = 200
 
 [[redirects]]
