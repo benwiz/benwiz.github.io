@@ -37,16 +37,16 @@
 
 [[redirects]]
   from = "/games/spyfall"
-  to = "https://benwiz-spyfall.netlify.app"
+  to = "https://benwiz.com/spyfall"
 
 [[redirects]]
   from = "/games/taboo"
-  to = "https://benwiz-taboo.netlify.app"
+  to = "https://benwiz.com/taboo"
 
 [[redirects]]
   from = "/games/powerhour"
-  to = "https://benwiz-powerhour.netlify.app"
+  to = "https://benwiz.com/powerhour"
 
 [[redirects]]
   from = "/games/codenames-trio"
-  to = "https://benwiz-codenames-trio.netlify.app"
+  to = "https://benwiz.com/codenames-trio"
