@@ -22,10 +22,6 @@
   to = "https://benwiz.com/codenames-trio/"
 
 [[redirects]]
-  from = "/games"
-  to = "https://benwiz.com/games/"
-  status = 301
-[[redirects]]
   from = "/games/*"
   to = "https://benwiz-games.netlify.app/:splat/"
   status = 200
