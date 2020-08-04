@@ -8,41 +8,38 @@
   to = "https://benwiz-blog.netlify.app/:splat"
   status = 200
 
+[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+  from = "/games/spyfall"
+  to = "https://benwiz.com/spyfall"
+[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+  from = "/games/taboo"
+  to = "https://benwiz.com/taboo"
+[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+  from = "/games/powerhour"
+  to = "https://benwiz.com/powerhour"
+[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+  from = "/games/codenames-trio"
+  to = "https://benwiz.com/codenames-trio"
+
 [[redirects]]
   from = "/games/*"
   to = "https://benwiz-games.netlify.app/:splat"
   status = 200
-
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
-  from = "/games/spyfall"
-  to = "https://benwiz.com/spyfall"
 
 [[redirects]]
   from = "/spyfall/*"
   to = "https://benwiz-spyfall.netlify.app/:splat"
   status = 200
 
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
-  from = "/games/taboo"
-  to = "https://benwiz.com/taboo"
-
 [[redirects]]
   from = "/taboo/*"
   to = "https://benwiz-taboo.netlify.app/:splat"
   status = 200
 
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
-  from = "/games/powerhour"
-  to = "https://benwiz.com/powerhour"
-
 [[redirects]]
   from = "/powerhour/*"
   to = "https://benwiz-powerhour.netlify.app/:splat"
   status = 200
-
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
-  from = "/games/codenames-trio"
-  to = "https://benwiz.com/codenames-trio"
 
 [[redirects]]
   from = "/codenames-trio/*"
