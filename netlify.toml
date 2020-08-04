@@ -1,11 +1,11 @@
 [[redirects]]
-  from = "/travelmap"
-  to = "https://benwiz-travelmap.netlify.app"
+  from = "/travelmap/*"
+  to = "https://benwiz-travelmap.netlify.app/:splat"
   status = 200
 
 [[redirects]]
-  from = "/blog"
-  to = "https://benwiz-blog.netlify.app"
+  from = "/blog/*"
+  to = "https://benwiz-blog.netlify.app/:splat"
   status = 200
 
 [[redirects]]
@@ -14,23 +14,23 @@
   status = 200
 
 [[redirects]]
-  from = "/spyfall"
-  to = "https://benwiz-spyfall.netlify.app"
+  from = "/spyfall/*"
+  to = "https://benwiz-spyfall.netlify.app/:splat"
   status = 200
 
 [[redirects]]
-  from = "/taboo"
-  to = "https://benwiz-taboo.netlify.app"
+  from = "/taboo/*"
+  to = "https://benwiz-taboo.netlify.app/:splat"
   status = 200
 
 [[redirects]]
-  from = "/powerhour"
-  to = "https://benwiz-powerhour.netlify.app"
+  from = "/powerhour/*"
+  to = "https://benwiz-powerhour.netlify.app/:splat"
   status = 200
 
 [[redirects]]
-  from = "/codenames-trio"
-  to = "https://benwiz-codenames-trio.netlify.app"
+  from = "/codenames-trio/*"
+  to = "https://benwiz-codenames-trio.netlify.app/:splat"
   status = 200
 
 # Covering all my bases from an old config. Can remove this in not too distant future.
