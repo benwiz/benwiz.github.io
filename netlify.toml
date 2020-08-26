@@ -8,16 +8,16 @@
   to = "https://benwiz-blog.netlify.app/:splat/"
   status = 200
 
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+[[redirects]] # an old artifact, can be removed in summer 2021
   from = "/games/spyfall"
   to = "https://benwiz.com/spyfall/"
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+[[redirects]] # an old artifact, can be removed in summer 2021
   from = "/games/taboo"
   to = "https://benwiz.com/taboo/"
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+[[redirects]] # an old artifact, can be removed in summer 2021
   from = "/games/powerhour"
   to = "https://benwiz.com/powerhour/"
-[[redirects]] # an old artifact, can be removed eventually (summer 2021)
+[[redirects]] # an old artifact, can be removed in summer 2021
   from = "/games/codenames-trio"
   to = "https://benwiz.com/codenames-trio/"
 
@@ -45,3 +45,7 @@
   from = "/codenames-trio/*"
   to = "https://benwiz-codenames-trio.netlify.app/:splat/"
   status = 200
+
+[[redirects]]
+  from = "/resume/*"
+  to = "/resume.pdf"
