@@ -1,0 +1,40 @@
+body {
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+}
+
+#container {
+  width: 345px;
+  margin: 0 auto;
+}
+
+p {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+button {
+  border: 2px solid dodgerblue;
+  border-radius: 4px;
+  color: dodgerblue;
+  background-color: transparent;
+  padding: 14px 28px;
+  font-size: 14px;
+  width: 80%;
+  height: 36px;
+  margin: 8px;
+  line-height: 0; /* to vertical align text */
+}
+
+button:hover {
+  background-color: rgba(30, 144, 255, 0.1); /* dodgerblue */
+}
+
+#secondary-buttons {
+  margin-top: 33px;
+  margin-bottom: 4px;
+}
+
+.no-border {
+  border: none;
+}

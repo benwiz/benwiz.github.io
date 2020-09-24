@@ -1,186 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-site-verification" content="5bFjDwVnyNc-Hi4cyKAGG2CK6jOo47_qrorOn_DEUaI">
+    <meta name="msvalidate.01" content="69B59E949364C2E06A32E1812FE85CCF">
+    <meta name="description" content="This is the personal website and homepage of Ben Wisialowski (Ben Wiz, benwiz).">
+    <title>Ben Wiz</title>
 
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131129805-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <link ref="canonical" href="https://benwiz.com">
+    <link rel="shortcut icon" href="images/hat.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script defer src="https://unpkg.com/@benwiz/boba.js@latest/dist/bundle.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Ben Wiz</h1>
+      <p></p> <!-- Tagline, empty for now -->
 
-    gtag('config', 'UA-131129805-1');
-  </script>
-
-
-  <meta name="google-site-verification" content="5bFjDwVnyNc-Hi4cyKAGG2CK6jOo47_qrorOn_DEUaI">
-  <meta name="msvalidate.01" content="69B59E949364C2E06A32E1812FE85CCF">
-  <meta name="description" content="This is the personal website and homepage of Ben Wisialowski (Ben Wiz, benwiz). You can find links to my projects, blog, and profiles on external websites.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Ben Wiz</title>
-
-  <link ref="canonical" href="https://benwiz.com">
-  <link rel="shortcut icon" href="images/hat.png" type="image/x-icon">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-    crossorigin="anonymous">
-
-  <!-- Custom -->
-  <link rel="stylesheet" type="text/css" href="./dist/css/index.css">
-</head>
-
-<body id="body">
-  <div id="container">
-    <h1>Ben Wiz</h1>
-    <p></p> <!-- Empty tagline for now, I like the spacing leaving this in inserts, though -->
-
-    <a class="mdc-button mdc-button--outlined" href="https://www.github.com/benwiz" target="">
-      <i class="mdc-button__icon fab fa-github"></i>
-      GitHub
-    </a>
-    <br>
-    <a class="mdc-button mdc-button--outlined" href="https://www.linkedin.com/in/benwiz" target="">
-      <i class="mdc-button__icon fab fa-linkedin-in"></i>
-      LinkedIn
-    </a>
-    <br>
-    <a class="mdc-button mdc-button--outlined" href="/resume.pdf" target="">
-      <i class="mdc-button__icon far fa-file-alt"></i>
-      Resume
-    </a>
-    <br>
-
-    <!-- Project Links -->
-    <div class="projects">
-      <!-- <a class="mdc-button mdc-button--outlined left-button" href="/blog/" target=""> -->
-        <!-- <i class="mdc-button__icon fas fa-blog"></i> -->
-        <!-- Blog -->
-        <!-- </a> -->
-      <a class="mdc-button" href="/travelmap/" target="">
-        <!-- <i class="mdc-button__icon fas fa-globe-americas"></i> -->
-        Travel Map
+      <a href="https://github.com/benwiz">
+        <button>
+          <i class="fab fa-github">
+          GITHUB
+        </button>
       </a>
-      <a class="mdc-button" href="/games/" target="">
-        Games
+      <a href="https://www.linkedin.com/in/benwiz">
+        <button>
+          LINKEDIN
+        </button>
       </a>
-      <!--
-      <a class="mdc-button" href="/games/spyfall/" target="">
-        Spyfall
+      <a href="/resume.pdf">
+        <button>
+          RESUME
+        </button>
       </a>
-      <a class="mdc-button" href="/games/codenames-trio/" target="">
-        Codenames Trio
-      </a>
-      <a class="mdc-button" href="/games/taboo/" target="">
-        Taboo
-      </a>
-      <a class="mdc-button" href="/games/powerhour/" target="">
-        Power Hour
-      </a>
-     -->
-      <a class="mdc-button" href="https://open.spotify.com/playlist/5P6WEbhcUsmXB08owijHYd?si=5VPY_uwbSM2rAdjkOmk8Iw" target="">
-        <!-- <i class="mdc-button__icon fab fa-spotify"></i> -->
-        WWOZ Playlist
-      </a>
-    </div>
 
-    <!-- boba.js configs -->
-    <div id="boba-configs">
-
-      <div id="num-vertices" class="mdc-slider mdc-slider--discrete mdc-slider--display-markers" tabindex="0" role="slider"
-        aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" aria-label="Select Value">
-        <div class="mdc-slider__track-container">
-          <div class="mdc-slider__track"></div>
-          <div class="mdc-slider__track-marker-container"></div>
-        </div>
-        <div class="mdc-slider__thumb-container">
-          <div class="mdc-slider__pin">
-            <span class="mdc-slider__pin-value-marker"></span>
-          </div>
-          <svg class="mdc-slider__thumb" width="21" height="21">
-            <circle cx="10.5" cy="10.5" r="7.875"></circle>
-          </svg>
-          <div class="mdc-slider__focus-ring"></div>
-        </div>
-      </div>
-
-      <div id="num-neighbors" class="mdc-slider mdc-slider--discrete mdc-slider--display-markers" tabindex="0" role="slider"
-        aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" aria-label="Select Value">
-        <div class="mdc-slider__track-container">
-          <div class="mdc-slider__track"></div>
-          <div class="mdc-slider__track-marker-container"></div>
-        </div>
-        <div class="mdc-slider__thumb-container">
-          <div class="mdc-slider__pin">
-            <span class="mdc-slider__pin-value-marker"></span>
-          </div>
-          <svg class="mdc-slider__thumb" width="21" height="21">
-            <circle cx="10.5" cy="10.5" r="7.875"></circle>
-          </svg>
-          <div class="mdc-slider__focus-ring"></div>
-        </div>
-      </div>
-
-      <div id="boba-toggles">
-        <div id="vertex-form-field" class="mdc-form-field">
-          <div id="vertex-checkbox" class="mdc-checkbox">
-            <input type="checkbox"
-                  class="mdc-checkbox__native-control"
-                  />
-            <div class="mdc-checkbox__background">
-              <svg class="mdc-checkbox__checkmark"
-                  viewBox="0 0 24 24">
-                <path class="mdc-checkbox__checkmark-path"
-                      fill="none"
-                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-              </svg>
-              <div class="mdc-checkbox__mixedmark"></div>
-            </div>
-          </div>
-          <label for="vertex-checkbox"></label>
-        </div>
-        <div id="edge-form-field" class="mdc-form-field">
-          <div id="edge-checkbox" class="mdc-checkbox">
-            <input type="checkbox"
-                    class="mdc-checkbox__native-control"
-                    checked/>
-            <div class="mdc-checkbox__background">
-              <svg class="mdc-checkbox__checkmark"
-                    viewBox="0 0 24 24">
-                <path class="mdc-checkbox__checkmark-path"
-                      fill="none"
-                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-              </svg>
-              <div class="mdc-checkbox__mixedmark"></div>
-            </div>
-          </div>
-          <label for="edge-checkbox"></label>
-        </div>
-        <div id="shape-form-field" class="mdc-form-field">
-          <div id="shape-checkbox" class="mdc-checkbox">
-            <input type="checkbox"
-                    class="mdc-checkbox__native-control"
-                    checked/>
-            <div class="mdc-checkbox__background">
-              <svg class="mdc-checkbox__checkmark"
-                    viewBox="0 0 24 24">
-                <path class="mdc-checkbox__checkmark-path"
-                      fill="none"
-                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-              </svg>
-              <div class="mdc-checkbox__mixedmark"></div>
-            </div>
-          </div>
-          <label for="shape-checkbox"></label>
-        </div>
+      <div id="secondary-buttons">
+        <a href="/travelmap/">
+          <button class="no-border">TRAVEL MAP</button>
+        </a>
+        <a href="/games/">
+          <button class="no-border">GAMES</button>
+        </a>
+        <a href="https://open.spotify.com/playlist/5P6WEbhcUsmXB08owijHYd?si=5VPY_uwbSM2rAdjkOmk8Iw">
+          <button class="no-border">WWOZ PLAYLIST</button>
+        </a>
       </div>
     </div>
 
-  </div>
-
-  <!-- Custom JS -->
-  <script src="./dist/js/index.js"></script>
-</body>
-
+    <script defer type="text/javascript" src="js/boba.js"></script>
+  </body>
 </html>
