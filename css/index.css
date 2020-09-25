@@ -29,6 +29,12 @@ button:hover {
   background-color: rgba(30, 144, 255, 0.1); /* dodgerblue */
 }
 
+button:active {
+  /* background-color: green; */
+  width: 79%;
+  /* height: 32px; */
+}
+
 #secondary-buttons {
   margin-top: 33px;
   margin-bottom: 4px;
