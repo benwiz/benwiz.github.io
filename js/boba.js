@@ -12,7 +12,7 @@ bobaOptions.vertexColors = [
     r: 30,
     g: 144,
     b: 255,
-    a: 0.04,
+    a: 0.06,
   },
 ];
 
@@ -24,7 +24,7 @@ bobaOptions.edgeColors = [
     r: 30,
     g: 144,
     b: 255,
-    a: 0.04,
+    a: 0.08,
   },
 ];
 
@@ -35,7 +35,7 @@ bobaOptions.shapeColors = [
     r: 30,
     g: 144,
     b: 255,
-    a: 0.015,
+    a: 0.005,
   },
 ];
 
