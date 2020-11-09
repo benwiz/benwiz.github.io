@@ -49,3 +49,6 @@
 [[redirects]]
   from = "/resume/*"
   to = "/resume.pdf"
+
+[[plugins]]
+  package = "netlify-plugin-inline-critical-css"
