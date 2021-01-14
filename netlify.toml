@@ -47,6 +47,11 @@
   status = 200
 
 [[redirects]]
+  from = "/emacs/*"
+  to = "https://benwiz-emacs.netlify.app/settings.html"
+  status = 200
+
+[[redirects]]
   from = "/resume/*"
   to = "/resume.pdf"
 
