@@ -52,6 +52,11 @@
   status = 200
 
 [[redirects]]
+  from = "/scubahostels/*"
+  to = "https://benwiz-scubahostels.netlify.app/:splat/"
+  status = 200
+
+[[redirects]]
   from = "/resume/*"
   to = "/resume.pdf"
 
