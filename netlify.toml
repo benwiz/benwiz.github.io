@@ -14,7 +14,7 @@
   status = 200
 
 [[redirects]]
-  from = "/games/*"
+  from = "/games/drinking/*"
   to = "https://benwiz-games.netlify.app/drinking/:splat/"
   status = 200
 
