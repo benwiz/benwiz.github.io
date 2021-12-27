@@ -1,9 +1,4 @@
 [[redirects]]
-  from = "/*"
-  to = "https://benwiz.netlify.app/:splat/"
-  status = 200
-
-[[redirects]]
   from = "/travelmap/*"
   to = "https://benwiz-travelmap.netlify.app/:splat/"
   status = 200
