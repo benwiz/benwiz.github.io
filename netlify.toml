@@ -1,12 +1,6 @@
-# [[redirects]]
-#   from = "/assets/*"
-#   to = "/static/:splat"
-#   status = 200
-#   force = true
-
 [[redirects]]
-  from = ""
-  to = "https://benwiz.netlify.app/:splat"
+  from = "/*"
+  to = "https://benwiz.netlify.app/:splat/"
   status = 200
 
 [[redirects]]
