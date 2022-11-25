@@ -1,7 +1,5 @@
 const bobaOptions = Boba.getDefaultOptions();
 
-console.log(window.innerWidth);
-
 // Vertex configs
 bobaOptions.numVertices = Math.ceil(0.02 * window.innerWidth);
 bobaOptions.drawVertices = true;
