@@ -1,12 +1,14 @@
 const bobaOptions = Boba.getDefaultOptions();
 
+console.log(window.innerWidth);
+
 // Vertex configs
-bobaOptions.numVertices = 40;
+bobaOptions.numVertices = Math.ceil(0.02 * window.innerWidth);
 bobaOptions.drawVertices = true;
 bobaOptions.vertexMinSize = 8;
 bobaOptions.vertexMaxSize = 16;
-bobaOptions.vertexMinSpeed = 0.2;
-bobaOptions.vertexMaxSpeed = 1.5;
+bobaOptions.vertexMinSpeed = 0.0001  * window.innerHeight;
+bobaOptions.vertexMaxSpeed = 0.001 * window.innerHeight;
 bobaOptions.vertexColors = [
   {
     r: 30,
@@ -24,7 +26,7 @@ bobaOptions.edgeColors = [
     r: 30,
     g: 144,
     b: 255,
-    a: 0.08,
+    a: 0.06,
   },
 ];
 
