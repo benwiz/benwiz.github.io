@@ -49,8 +49,8 @@
   status = 200
 
 [[redirects]]
-  from = "/scubahostels/*"
-  to = "https://benwiz-scubahostels.netlify.app/:splat"
+  from = "/spotify/*"
+  to = "https://benwiz-spotify-tools.netlify.app/:splat"
   status = 200
 
 [[redirects]]
