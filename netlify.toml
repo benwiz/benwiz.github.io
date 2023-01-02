@@ -49,6 +49,11 @@
   status = 200
 
 [[redirects]]
+  from = "/spotify"
+  to = "/spotify/index.html"
+  status = 301
+
+[[redirects]]
   from = "/spotify/*"
   to = "https://benwiz-spotify-tools.netlify.app/:splat"
   status = 200
