@@ -62,5 +62,5 @@
   from = "/resume/*"
   to = "/resume.pdf"
 
-[[plugins]]
-  package = "netlify-plugin-inline-critical-css"
+# [[plugins]]
+#   package = "netlify-plugin-inline-critical-css"
