@@ -5,7 +5,7 @@
 
 [[redirects]]
   from = "/travelmap/*"
-  to = "https://benwiz-travelmap.netlify.app/:splat"
+  to = "https://www.arcgis.com/apps/instant/basic/index.html?appid=14f2f6bce05a4eacbb242c359bd7b8ea" # "https://benwiz-travelmap.netlify.app/:splat"
   status = 200
 
 [[redirects]]
