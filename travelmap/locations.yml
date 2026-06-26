@@ -1,0 +1,1103 @@
+# if using google maps, the coords from the url represent the center of the viewport not the selected pin on the map
+# TODO missing: costa rica
+locations:
+  # USA
+  - name: San Francisco
+    lat: 37.803036
+    lng: -122.427451
+  - name: Hillsborough
+    lat: 37.562976
+    lng: -122.361452
+  - name: Needles
+    lat: 34.8481
+    lng: -114.6141
+  - name: San Diego
+    lat: 32.7157
+    lng: -117.1611
+  - name: Palm Desert
+    lat: 33.7222
+    lng: -116.3745
+  - name: Death Valley
+    lat: 36.5323
+    lng: -116.9325
+  - name: Disneyland
+    lat: 33.8121
+    lng: -117.9190
+  - name: Manhattan Beach
+    lat: 33.8847
+    lng: -118.4109
+  - name: Santa Barbara
+    lat: 34.4208
+    lng: -119.6982
+  - name: Cambria
+    lat: 35.5641
+    lng: -121.0807
+  - name: Yosemite National Park
+    lat: 37.8651
+    lng: -119.5383
+  - name: Monterey
+    lat: 36.6002
+    lng: -121.8947
+  - name: Santa Cruz
+    lat: 36.9741
+    lng: -122.0308
+  - name: San Jose
+    lat: 37.3382
+    lng: -121.8863
+  - name: Pescadero
+    lat: 37.2552
+    lng: -122.3830
+  - name: Half Moon Bay
+    lat: 37.4636
+    lng: -122.4286
+  - name: Pacifica
+    lat: 37.6138
+    lng: -122.4869
+  - name: Berkeley
+    lat: 37.8716
+    lng: -122.2727
+  - name: Palo Alto
+    lat: 37.4419
+    lng: -122.1430
+  - name: Concord
+    lat: 37.9780
+    lng: -122.0311
+  - name: Sacramento
+    lat: 38.5816
+    lng: -121.4944
+  - name: Novato
+    lat: 38.1074
+    lng: -122.5697
+  - name: Sonoma
+    lat: 38.2919
+    lng: -122.4580
+  - name: Napa
+    lat: 38.2975
+    lng: -122.2869
+  - name: Yountville
+    lat: 38.4016
+    lng: -122.3608
+  - name: St. Helena
+    lat: 38.5052
+    lng: -122.4704
+  - name: Drake's Bay
+    lat: 38.0138
+    lng: -122.9550
+  - name: Stinson Beach
+    lat: 37.9005
+    lng: -122.6444
+  - name: Redding
+    lat: 40.5865
+    lng: -122.3917
+  - name: Mount Shasta
+    lat: 41.4099
+    lng: -122.1949
+  - name: Lake Tahoe
+    lat: 39.0968
+    lng: -120.0324
+  - name: Sugar Bowl
+    lat: 39.2982344
+    lng: -120.3509872
+  - name: Kirkwood
+    lat: 38.6908656
+    lng: -120.0702721
+  - name: Heavenly
+    lat: 38.9568563
+    lng: -119.9448475
+  - name: Northstar
+    lat: 39.2745678
+    lng: -120.1232821
+  - name: Big Sur
+    lat: 36.3615
+    lng: -121.8563
+  - name: Sierra National Forest
+    lat: 37.3427
+    lng: -119.2244
+  - name: New Orleans
+    lat: 29.938749
+    lng: -90.118958
+  - name: Tickfaw State Park
+    lat: 30.383412
+    lng: -90.650631
+  - name: Maui
+    lat: 20.7984
+    lng: -156.3319
+  - name: Big Island
+    lat: 19.5429
+    lng: -155.6659
+  - name: Atlanta
+    lat: 33.7490
+    lng: -84.3880
+  - name: Nashville
+    lat: 36.1627
+    lng: -86.7816
+  - name: Columbia
+    lat: 34.0007
+    lng: -81.0348
+  - name: Charleston
+    lat: 32.7765
+    lng: -79.9311
+  - name: Hilton Head Island
+    lat: 32.2163
+    lng: -80.7526
+  - name: Savannah
+    lat: 32.0809
+    lng: -81.0912
+  - name: Kiln
+    lat: 30.4091
+    lng: -89.4351
+  - name: Gulf Shores
+    lat: 30.2460
+    lng: -87.7008
+  - name: Pensacola
+    lat: 30.4067396
+    lng: -87.2161747
+  - name: Tallahassee
+    lat: 30.4275846
+    lng: -84.2709257
+  - name: Destin
+    lat: 30.3935
+    lng: -86.4958
+  - name: Panama City Beach
+    lat: 30.2099316
+    lng: -85.8688339
+  - name: Key West
+    lat: 24.5551
+    lng: -81.7800
+  - name: Miami
+    lat: 25.8145363
+    lng: -80.1954426
+  - name: Asheville
+    lat: 35.5951
+    lng: -82.5515
+  - name: Washington, D.C.
+    lat: 38.9072
+    lng: -77.0369
+  - name: Philadelphia
+    lat: 39.9526
+    lng: -75.1652
+  - name: New York City
+    lat: 40.7128
+    lng: -74.0060
+  - name: Garden City
+    lat: 40.7268
+    lng: -73.6343
+  - name: Port Jefferson
+    lat: 40.9465
+    lng: -73.0693
+  - name: Babylon
+    lat: 40.6432
+    lng: -73.3473
+  - name: Moorestown
+    lat: 39.9689
+    lng: -74.9489
+  - name: Strathmere
+    lat: 39.1952
+    lng: -74.6590
+  - name: Jersey City
+    lat: 40.7178
+    lng: -74.0431
+  - name: Princeton
+    lat: 40.3573
+    lng: -74.6672
+  - name: Boston
+    lat: 42.3601
+    lng: -71.0589
+  - name: Edgartown
+    lat: 41.3890
+    lng: -70.5134
+  - name: Milwaukee
+    lat: 43.0389
+    lng: -87.9065
+  - name: Chicago
+    lat: 41.8781
+    lng: -87.6298
+  - name: Kalamazoo
+    lat: 42.2917
+    lng: -85.5872
+  - name: Ann Arbor
+    lat: 42.2808
+    lng: -83.7430
+  - name: Camp Michigania
+    lat: 45.2860
+    lng: -85.0389
+  - name: Cedar Point
+    lat: 41.4822
+    lng: -82.6835
+  - name: Mackinac Island
+    lat: 45.8492
+    lng: -84.6189
+  - name: Portland
+    lat: 45.5122
+    lng: -122.6587
+  - name: Bend
+    lat: 44.0582
+    lng: -121.3153
+  - name: Livingston
+    lat: 45.6614
+    lng: -110.5600
+  - name: Jackson Hole
+    lat: 43.4799
+    lng: -110.7624
+  - name: Deer Valley
+    lat: 40.6374
+    lng: -111.4783
+  - name: Arches National Park
+    lat: 38.7331
+    lng: -109.5925
+  - name: Zion National Park
+    lat: 37.2982
+    lng: -113.0263
+  - name: Las Vegas
+    lat: 36.1699
+    lng: -115.1398
+  - name: Four Corners
+    lat: 36.9991
+    lng: -109.0452
+  - name: Denver
+    lat: 39.7392
+    lng: -104.9903
+  - name: Boulder
+    lat: 40.0150
+    lng: -105.2705
+  - name: Breckenridge
+    lat: 39.4817
+    lng: -106.0384
+  - name: Beaver Creek
+    lat: 39.6042
+    lng: -106.5165
+  - name: Vail
+    lat: 39.6130444
+    lng: -106.3677136
+  - name: Keystone
+    lat: 39.5783877
+    lng: -105.9413878
+  - name: Arapahoe Basin
+    lat: 39.6341278
+    lng: -105.8731853
+  - name: Telluride
+    lat: 37.9375
+    lng: -107.8123
+  - name: Mesa Verde
+    lat: 37.226382
+    lng: -108.4743508
+  - name: Park City
+    lat: 40.640372
+    lng: -111.5235577
+  - name: Phoenix
+    lat: 33.4513119
+    lng: -112.0707415
+  - name: Santa Fe
+    lat: 35.6870
+    lng: -105.9378
+  - name: Austin
+    lat: 30.2672
+    lng: -97.7431
+  - name: Petrified Forest National Park
+    lat: 34.9100
+    lng: -109.8068
+  - name: Boise
+    lat: 43.6178216
+    lng: -116.2017072
+  - name: Bogus Basin
+    lat: 43.764056
+    lng: -116.1113716
+  - name: Burlington # TODO location is just a tiny bit off
+    lat: 44.5071802
+    lng: -73.2914628
+  - name: Stowe
+    lat: 44.4650589
+    lng: -72.6872007
+  - name: White Mountains National Forest
+    lat: 44.1471841
+    lng: -71.4613182
+  - name: Acadia National Park
+    lat: 44.3193593
+    lng: -68.3668492
+  # MEXICO
+  - name: Cabo San Lucas
+    lat: 22.8905
+    lng: -109.9167
+  - name: San Jose del Cabo
+    lat: 23.0637
+    lng: -109.7024
+  - name: Playa del Carmen
+    lat: 20.6296
+    lng: -87.0739
+  - name: Tulum Ruins
+    lat: 20.2150862
+    lng: -87.4316555
+  - name: Coba
+    lat: 20.4906294
+    lng: -87.7267574
+  - name: Mexico City
+    lat: 19.4361782
+    lng: -99.1311225
+  - name: Mérida
+    lat: 20.9727191
+    lng: -89.6231908
+  - name: Progreso
+    lat: 21.3064673
+    lng: -89.7045794
+  - name: Valladolid
+    lat: 20.6900828
+    lng: -88.2022517
+  - name: Holbox
+    lat: 21.5230348
+    lng: -87.3805604
+  - name: Chichén Itzá
+    lat: 20.6777187
+    lng: -88.5673126
+  # USVI
+  - name: St. Thomas
+    lat: 18.3381
+    lng: -64.8941
+  # BAHAMAS
+  - name: Atlantis Resort
+    lat: 25.0847
+    lng: -77.3235
+  # PANAMA
+  - name: Panama City
+    lat: 8.9824
+    lng: -79.5199
+  # BELIZE
+  - name: Belize City
+    lat: 17.5046
+    lng: -88.1962
+  - name: Blue Hole
+    lat: 17.3160
+    lng: -87.5351
+  # COSTA RICA
+  # I'm missing a lot of Costa Rica.
+  - name: San Jose
+    lat: 37.3382
+    lng: -121.8863
+  # HONDURAS
+  - name: Utila
+    lat: 16.097053
+    lng: -86.897018
+  # ENGLAND
+  - name: London
+    lat: 51.5074
+    lng: -0.1278
+  - name: Brighton
+    lat: 50.8225
+    lng: -0.1372
+  - name: Oxford
+    lat: 51.751727
+    lng: -1.253653
+  - name: Bath
+    lat: 51.3792838
+    lng: -2.3597957
+  - name: Manchester
+    lat: 53.4811402
+    lng: -2.2410562
+  - name: Lake District
+    lat: 54.4431175
+    lng: -2.9966498
+  - name: Birmingham
+    lat: 52.4862
+    lng: -1.8904
+  # SCOTLAND
+  - name: Edinburgh
+    lat: 55.9533
+    lng: -3.1883
+  - name: St Andrews
+    lat: 56.3398
+    lng: -2.7967
+  - name: Islay
+    lat: 55.7363
+    lng: -6.1771
+  - name: Glasgow
+    lat: 55.8642
+    lng: -4.2518
+  - name: Stirling
+    lat: 56.1165
+    lng: -3.9369
+  # NORWAY
+  - name: Karmøy
+    lat: 59.3913026
+    lng: 5.2654673
+  - name: Bergen
+    lat: 60.3943055
+    lng: 5.3259192
+  - name: Hardangervidda
+    lat: 60.0405565
+    lng: 7.0686837
+  - name: Haslum
+    lat: 59.9229467
+    lng: 10.5686211
+  - name: Oslo
+    lat: 59.9123104
+    lng: 10.7458116
+  # SWEDEN
+  - name: Gothenburg
+    lat: 57.7089
+    lng: 11.9746
+  # DENMARK
+  - name: Copenhagen
+    lat: 55.6761
+    lng: 12.5683
+  - name: Bjerringbro
+    lat: 56.3775371
+    lng: 9.6392774
+  - name: Fyrkatvej
+    lat: 56.6232274
+    lng: 9.7682779
+  - name: Hjerl Hede
+    lat: 56.4841356
+    lng: 8.8697678
+  - name: Moesgaard Museum
+    lat: 56.0887188
+    lng: 10.221313
+  - name: Aarhus
+    lat: 56.1781797
+    lng: 10.1119353
+  - name: Jelling
+    lat: 55.7817973
+    lng: 9.3481958
+  - name: LegoLand
+    lat: 55.7309668
+    lng: 9.0105699
+  - name: Holbæk
+    lat: 55.7160572
+    lng: 11.5768499
+  - name: Frederikssun
+    lat: 55.8366357
+    lng: 12.0201495
+  - name: Skibby
+    lat: 55.762771
+    lng: 11.8681557
+  - name: Roskilde
+    lat: 55.6702573
+    lng: 11.9412246
+  # NETHERLANDS
+  - name: Amsterdam
+    lat: 52.3680
+    lng: 4.9036
+  - name: Utrecht
+    lat: 52.0907
+    lng: 5.1214
+  - name: Scheveningen Beach
+    lat: 52.1145
+    lng: 4.2790
+  # BELGIUM
+  - name: Brussels
+    lat: 50.8503
+    lng: 4.3517
+  # GERMANY
+  - name: Oldenburg
+    lat: 53.1435
+    lng: 8.2146
+  - name: Bremen
+    lat: 53.0793
+    lng: 8.8017
+  - name: Munich
+    lat: 48.1351
+    lng: 11.5820
+  - name: Berlin
+    lat: 52.5200
+    lng: 13.4050
+  # VIENNA
+  - name: Vienna
+    lat: 48.2040899
+    lng: 16.3471946
+  # SWITZERLAND
+  - name: Zurich
+    lat: 47.3769
+    lng: 8.5417
+  - name: Bern
+    lat: 46.9480
+    lng: 7.4474
+  # ROMANIA
+  - name: Bucharest
+    lat: 44.4268
+    lng: 26.1025
+  # MOLDOVA
+  - name: Chişinău
+    lat: 47.025691
+    lng: 28.8341654
+  - name: Old Orhei
+    lat: 47.3126853
+    lng: 28.9712762
+  - name: Tiraspol
+    lat: 46.8388433
+    lng: 29.6117722
+  - name: Saharna
+    lat: 47.6959459
+    lng: 28.961779
+  # BOSNIA & HERZEGOVINA
+  - name: Sarajevo
+    lat: 43.8519774
+    lng: 18.3866868
+  # CROATIA
+  - name: Dubrovnik
+    lat: 42.6409191
+    lng: 18.1086337
+  # MONTENEGRO
+  - name: Kotor
+    lat: 42.4223875
+    lng: 18.7700934
+  # ALBANIA
+  - name: Tirana
+    lat: 41.3333813
+    lng: 19.8184871
+  - name: Berat
+    lat: 40.7099475
+    lng: 19.9461447
+  - name: Korçë
+    lat: 40.6154823
+    lng: 20.7791856
+  - name: Gjirokastër
+    lat: 40.0819243
+    lng: 20.1421084
+  - name: Përmet
+    lat: 40.2342528
+    lng: 20.3566496
+  - name: Himarë
+    lat: 40.0925399
+    lng: 19.7561099
+  - name: Gjipe
+    lat: 40.1272873
+    lng: 19.6708073
+  # NORTH MACEDONIA
+  - name: Ohrid
+    lat: 41.1140083
+    lng: 20.7947315
+  - name: Skopje
+    lat: 41.99587
+    lng: 21.4311834
+  # FRANCE
+  - name: Paris
+    lat: 48.8566
+    lng: 2.3522
+  - name: Normandy
+    lat: 48.8799
+    lng: 0.1713
+  - name: Biarritz
+    lat: 43.4832
+    lng: -1.5586
+  - name: Montauban
+    lat: 44.0221
+    lng: 1.3530
+  - name: Aix-en-Provence
+    lat: 43.5297
+    lng: 5.4474
+  - name: Avignon
+    lat: 43.9493
+    lng: 4.8055
+  - name: Marseille
+    lat: 43.2965
+    lng: 5.3698
+  - name: Mont Saint-Michel
+    lat: 48.6361
+    lng: -1.5115
+  - name: Loire Valley # This is a general placeholder for a couple specific places
+    lat: 47.5680563
+    lng: 0.1345284
+  # ITALY
+  - name: Rome
+    lat: 41.9028
+    lng: 12.4964
+  - name: Siena
+    lat: 43.3188
+    lng: 11.3308
+  - name: Florence
+    lat: 43.7696
+    lng: 11.2558
+  - name: Milan
+    lat: 45.4642
+    lng: 9.1900
+  - name: Venice
+    lat: 45.4408
+    lng: 12.3155
+  - name: Pisa
+    lat: 43.7228
+    lng: 10.4017
+  - name: Cagliari
+    lat: 39.2163176
+    lng: 9.1142342
+  - name: Alghero
+    lat: 40.5580531
+    lng: 8.3136803
+  - name: San Pietro a Mare
+    lat: 40.9295128
+    lng: 8.8044959
+  # THE VATICAN
+  - name: The Vatican
+    lat: 41.902246
+    lng: 12.456016
+  # SPAIN
+  - name: Barcelona
+    lat: 41.3851
+    lng: 2.1734
+  - name: Madrid
+    lat: 40.4168
+    lng: -3.7038
+  - name: Granada
+    lat: 37.1734995
+    lng: -3.5995337
+  - name: Córdoba
+    lat: 37.8804343
+    lng: -4.7784921
+  - name: Sevilla
+    lat: 37.3926323
+    lng: -5.9985444
+  - name: Madrid
+    lat: 40.4147882
+    lng: -3.7067452
+  - name: Rondaa
+    lat: 36.7461498
+    lng: -5.1611482
+  - name: Granollers
+    lat: 41.6061185
+    lng: 2.2854625
+  - name: Roses
+    lat: 42.262970
+    lng: 3.174800
+    dates: [2021-10-02]
+  - name: Blanes
+    lat: 41.674270
+    lng: 2.792100
+    dates: [2021-09-19]
+  - name: Cadaques
+    lat: 42.2871458
+    lng: 3.2837249
+    dates: [2021-10-03]
+  - name: Castello d'Empuries
+    lat: 42.1584305
+    lng: 2.9425204
+    dates: [2021-10-03]
+  - name: Figueres
+    lat: 42.267502
+    lng: 2.960840
+    dates: [2021-10-23]
+  - name: Sant Feliu de Guíxols
+    lat: 41.7812297
+    lng: 3.0306895
+  - name: Sitges
+    lat: 41.2364765
+    lng: 1.8071488
+  - name: Girona
+    lat: 41.9710537
+    lng: 2.8087866
+  - name: Tarragona
+    lat: 41.118881
+    lng: 1.244491
+    dates: [2021-11-06]
+  - name: Santes Creus
+    lat: 41.347120
+    lng: 1.363090
+    dates: [2021-11-06]
+  - name: Siurana
+    lat: 41.2580509
+    lng: 0.9301405
+    dates: [2021-11-06]
+  - name: Falset
+    lat: 41.1455986
+    lng: 0.8175205
+    dates: [2021-11-07]
+  - name: Gratallops
+    lat: 41.1929273
+    lng: 0.7762284
+    dates: [2021-11-07]
+  - name: Lleida
+    lat: 41.6191179
+    lng: 0.6183784
+    dates: [2021-11-07]
+  - name: Vallbona de les Monges
+    lat: 41.525641
+    lng: 1.0876169
+    dates: [2021-11-08]
+  - name: Montblanc
+    lat: 41.3743551
+    lng: 1.1615659
+    dates: [2021-11-08]
+  - name: Valls
+    lat: 41.284862
+    lng: 1.2462684
+  - name: Mont-rebei
+    lat: 42.0825308
+    lng: 0.682148
+  - name: Solsona
+    lat: 41.9935049
+    lng: 1.515721
+  - name: Castissent
+    lat: 42.1250865
+    lng: 0.7308124
+  - name: Pamplona
+    lat: 42.8143521
+    lng: -1.6471309
+  - name: Donostia-San Sebastian
+    lat: 43.3224219
+    lng: -1.9838889
+  - name: Bilbao
+    lat: 43.2630018
+    lng: -2.9350039
+  - name: Suances
+    lat: 43.4307202
+    lng: -4.0375128
+  - name: Gijón
+    lat: 43.5437683
+    lng: -5.6630768
+  - name: Oviedo
+    lat: 43.3622024
+    lng: -5.8523012
+  - name: LLuarca
+    lat: 43.5449603
+    lng: -6.5344611
+  - name: Santa Gadea
+    lat: 43.552997
+    lng: -6.9877161
+  - name: Ribadeo
+    lat: 43.5339029
+    lng: -7.0405306
+  - name: Taramundi
+    lat: 43.3567156
+    lng: -7.106235
+  - name: Lugo
+    lat: 43.011038
+    lng: -7.5565033
+  - name: Santiago de Compostela
+    lat: 42.8799362
+    lng: -8.5422342
+  - name: Finisterra
+    lat: 42.8812719
+    lng: -9.2716444
+  - name: Los Abrigos
+    lat: 28.0305129
+    lng: -16.5942557
+  - name: Costa Adeje
+    lat: 28.0922037
+    lng: -16.7339083
+  - name: Montana Guama
+    lat: 28.2699284
+    lng: -16.8269096
+  - name: Puerto de la Cruz
+    lat: 28.410758
+    lng: -16.5647119
+  - name: La Laguna
+    lat: 28.4866804
+    lng: -16.3165136
+  - name: Santa Cruz de Tenerife
+    lat: 28.4633601
+    lng: -16.2502511
+  # ANDORRA
+  - name: Encamp
+    lat: 42.5347264
+    lng: 1.5804958
+  - name: El Tarter
+    lat: 42.5796536
+    lng: 1.6518258
+  # GREECE
+  - name: Athens
+    lat: 37.9838
+    lng: 23.7275
+  - name: Aegina
+    lat: 37.7409
+    lng: 23.5014
+  # AUSTRALIA
+  - name: Sydney
+    lat: -33.8688
+    lng: 151.2093
+  - name: Melbourne
+    lat: -37.8136
+    lng: 144.9631
+  - name: Byron Bay
+    lat: -28.6474
+    lng: 153.6020
+  - name: Coles Bay
+    lat: -42.0811
+    lng: 148.2332
+  - name: Hobart
+    lat: -42.8821
+    lng: 147.3272
+  - name: Cairns
+    lat: -16.9186
+    lng: 145.7781
+  - name: Airlie Beach
+    lat: -20.2675
+    lng: 148.7169
+  - name: Nimbin
+    lat: -28.5958
+    lng: 153.2231
+  - name: Jervis Bay
+    lat: -35.0481
+    lng: 150.7447
+  - name: Blue Mountains
+    lat: -33.4100
+    lng: 150.3037
+  # NEW ZEALAND
+  - name: Christchurch
+    lat: -43.5321
+    lng: 172.6362
+  - name: Aoraki (Mount Cook)
+    lat: -43.5950
+    lng: 170.1418
+  - name: Wanaka
+    lat: -44.7032
+    lng: 169.1321
+  - name: Queenstown
+    lat: -45.0312
+    lng: 168.6626
+  - name: Te Anau
+    lat: -45.4145
+    lng: 167.7181
+  - name: Hobbiton
+    lat: -37.8723
+    lng: 175.6834
+  - name: Aukland
+    lat: -36.8485
+    lng: 174.7633
+  - name: Waitomo Caves
+    lat: -38.2615
+    lng: 175.1145
+  # TURKEY
+  - name: Istanbul
+    lat: 41.0076514
+    lng: 28.9767881
+  - name: Antalya
+    lat: 36.8851549
+    lng: 30.7049699
+  - name: Olympos
+    lat: 36.391102
+    lng: 30.4688805
+  - name: Kaş
+    lat: 36.1933921
+    lng: 29.5939342
+  - name: Butterfly Valley
+    lat: 36.4973114
+    lng: 29.1271497
+  - name: Fethiye
+    lat: 36.6217857
+    lng: 29.1085011
+  # ISRAEL
+  - name: Tel Aviv
+    lat: 32.0853
+    lng: 34.7818
+  - name: Golan Heights
+    lat: 33.149390
+    lng: 35.583166
+  - name: Jerusalem
+    lat: 31.7683
+    lng: 35.2137
+  - name: Be'er Sheva
+    lat: 31.2530
+    lng: 34.7915
+  - name: Dead Sea
+    lat: 31.5590
+    lng: 35.4732
+  - name: Masada
+    lat: 31.3158
+    lng: 35.3556
+  # CHINA
+  - name: Beijing
+    lat: 39.9042
+    lng: 116.4074
+  - name: Qingdao
+    lat: 36.0671
+    lng: 120.3826
+  - name: Suzhou
+    lat: 31.2990
+    lng: 120.5853
+  - name: Shanghai
+    lat: 31.2304
+    lng: 121.4737
+  - name: Xi An
+    lat: 34.3416
+    lng: 108.9398
+  - name: Hong Kong
+    lat: 22.3964
+    lng: 114.1095
+  # SOUTH KOREA
+  - name: Seoul
+    lat: 37.5665
+    lng: 126.9780
+  # INDONESIA
+  - name: Kuta
+    lat: -8.7224
+    lng: 115.1767
+  - name: Canggu
+    lat: -8.6478
+    lng: 115.1385
+  - name: Uluwatu
+    lat: -8.8291
+    lng: 115.0849
+  - name: Ubud
+    lat: -8.5069
+    lng: 115.2625
+  - name: Gili Trawangan
+    lat: -8.3483
+    lng: 116.0384
+  - name: Komodo
+    lat: -8.5850
+    lng: 119.4411
+  - name: Rinca
+    lat: -8.7329
+    lng: 119.6615
+  - name: Padar
+    lat: -8.6490
+    lng: 119.5833
+  - name: Labuan Bajo
+    lat: -8.4538
+    lng: 119.8728
+  - name: Bajawa
+    lat: -8.8033
+    lng: 120.9647
+  - name: Riung
+    lat: -8.4856
+    lng: 121.0564
+  - name: Kelimutu
+    lat: -8.7689
+    lng: 121.8221
+  - name: Maumere
+    lat: -8.6246
+    lng: 122.2147
+  - name: Kupang
+    lat: -10.1772
+    lng: 123.6070
+  - name: Surabaya
+    lat: -7.2575
+    lng: 112.7521
+  - name: Yogyakarta
+    lat: -7.7956
+    lng: 110.3695
+  - name: Probolinggo
+    lat: -7.7764
+    lng: 113.2037
+  - name: Ijen
+    lat: -8.0584
+    lng: 114.2433
+  # MYANMAR
+  - name: Yangon
+    lat: 16.8661
+    lng: 96.1951
+  - name: Bagan
+    lat: 21.1717
+    lng: 94.8585
+  - name: Shwenyaung
+    lat: 20.7644
+    lng: 96.9410
+  # LAOS
+  - name: Luang Prabang
+    lat: 20.0656
+    lng: 102.6216
+  - name: Nong Khiaw
+    lat: 20.5710
+    lng: 102.6116
+  - name: Vang Vieng
+    lat: 18.9501
+    lng: 102.4438
+  - name: Vientiane
+    lat: 17.9757
+    lng: 102.6331
+  - name: Phonsavan
+    lat: 19.4521
+    lng: 103.1856
+  - name: Thakhek
+    lat: 17.4030
+    lng: 104.8338
+  - name: Thalang
+    lat: 17.844515
+    lng: 105.053160
+  - name: Kong Lor
+    lat: 17.9590
+    lng: 104.7549
+  # THAILAND
+  - name: Bangkok
+    lat: 13.7563
+    lng: 100.5018
+  - name: Sukhothai
+    lat: 17.0056
+    lng: 99.8264
+  - name: Chiang Mai
+    lat: 18.7061
+    lng: 98.9817
+  - name: Pai
+    lat: 19.3582
+    lng: 98.4405
+  # CAMBODIA
+  - name: Phnom Penh
+    lat: 11.5564
+    lng: 104.9282
+  - name: Siem Reap
+    lat: 13.3550
+    lng: 103.8552
+  - name: Koh Rong
+    lat: 10.7291
+    lng: 103.2317
+  # SINGAPORE
+  - name: Singapore
+    lat: 1.3521
+    lng: 103.8198
+  # VIETNAM
+  - name: Ho Chi Minh City
+    lat: 10.8231
+    lng: 106.6297
+  - name: Hoi An
+    lat: 15.8801
+    lng: 108.3380
+  - name: Phong Nha
+    lat: 17.5908
+    lng: 106.2834
+  - name: Sa Pa
+    lat: 22.3364
+    lng: 103.8438
+  - name: Ha Long Bay
+    lat: 20.857795
+    lng: 107.079010
+  - name: Hanoi
+    lat: 21.0278
+    lng: 105.8342
+  # COLOMBIA
+  - name: Cartagena
+    lat: 10.420719
+    lng: -75.545398
+  - name: Santa Marta
+    lat: 11.243569
+    lng: -74.211394
+  - name: Minca
+    lat: 11.141788
+    lng: -74.115481
+  - name: Palomino
+    lat: 11.248897
+    lng: -73.559257
+  - name: Calabazo
+    lat: 11.284739
+    lng: -73.990637
+  - name: Barranquilla
+    lat: 11.016570
+    lng: -74.821064
+  - name: Medellin
+    lat: 6.249780
+    lng: -75.587447
+  - name: Jardin
+    lat: 5.592830
+    lng: -75.815834
+  - name: Salento
+    lat: 4.637274
+    lng: -75.569813
+  - name: Bogota
+    lat: 4.597140
+    lng: -74.069691
+  # BULGARIA
+  - name: Sofia
+    lat: 42.6977
+    lng: 23.3219
+  # CHILE
+  - name: Santiago
+    lat: -33.4489
+    lng: -70.6693
+  - name: San Pedro de Atacama
+    lat: -22.9087
+    lng: -68.1997
+  - name: El Paraíso
+    lat: -33.0458
+    lng: -71.3722
+  - name: Matetic Vineyards
+    lat: -33.8647
+    lng: -71.4853
+  # ARGENTINA
+  - name: Ushuaia
+    lat: -54.8019
+    lng: -68.303

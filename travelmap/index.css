@@ -1,0 +1,101 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #12131a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Brand — top left, unobtrusive */
+#brand {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: color 0.2s;
+}
+
+#brand:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Place count — bottom left */
+#stat {
+  position: fixed;
+  bottom: 28px;
+  left: 16px;
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+/* Toast — bottom center, slides up on show */
+#toast {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  z-index: 20;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(18, 19, 26, 0.88);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  white-space: nowrap;
+  max-width: calc(100vw - 48px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tighten MapLibre attribution */
+.maplibregl-ctrl-attrib {
+  font-size: 9px !important;
+  opacity: 0.35 !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: inherit !important;
+}
+
+.maplibregl-ctrl-logo {
+  display: none !important;
+}
+
+/* Nav controls — hide zoom buttons on mobile, they're unnecessary */
+@media (max-width: 640px) {
+  .maplibregl-ctrl-top-right {
+    display: none;
+  }
+}
