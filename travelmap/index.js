@@ -1,24 +1,48 @@
 (async () => {
-  // --- Map setup ---
-  const map = new maplibregl.Map({
-    container: 'map',
-    style: {
+  // --- Color schemes ---
+  const DARK = {
+    tiles: [
+      'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+      'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+      'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+    ],
+    dotColor: '#ff6b35',
+    strokeColor: 'rgba(255, 255, 255, 0.35)',
+  };
+
+  const LIGHT = {
+    tiles: [
+      'https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      'https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+    ],
+    dotColor: '#2563eb',
+    strokeColor: 'rgba(255, 255, 255, 0.7)',
+  };
+
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const scheme = () => (mq.matches ? DARK : LIGHT);
+
+  function buildStyle(s) {
+    return {
       version: 8,
       sources: {
         carto: {
           type: 'raster',
-          tiles: [
-            'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-            'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-            'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-          ],
+          tiles: s.tiles,
           tileSize: 256,
           attribution:
             '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
         },
       },
       layers: [{ id: 'basemap', type: 'raster', source: 'carto' }],
-    },
+    };
+  }
+
+  // --- Map setup ---
+  const map = new maplibregl.Map({
+    container: 'map',
+    style: buildStyle(scheme()),
     center: [15, 25],
     zoom: 2,
     minZoom: 1,
@@ -27,7 +51,6 @@
     dragRotate: false,
   });
 
-  // Disable map rotation via touch
   map.touchZoomRotate.disableRotation();
 
   // --- Load data in parallel with map ---
@@ -47,68 +70,67 @@
     })),
   };
 
-  document.getElementById('stat').textContent =
-    `${locations.length} places`;
+  document.getElementById('stat').textContent = `${locations.length} places`;
 
-  // --- Source ---
-  map.addSource('places', {
-    type: 'geojson',
-    data: geojson,
-  });
+  // --- Layer management ---
+  let handlers = null;
 
-  // --- Layers ---
+  function addLayers(s) {
+    // Clean up old layer handlers before style swap
+    if (handlers) {
+      map.off('click', 'dots', handlers.click);
+      map.off('mouseenter', 'dots', handlers.enter);
+      map.off('mouseleave', 'dots', handlers.leave);
+    }
 
-  // Dot glow
-  map.addLayer({
-    id: 'dot-glow',
-    type: 'circle',
-    source: 'places',
-    paint: {
-      'circle-color': '#ff6b35',
-      'circle-radius': [
-        'interpolate', ['linear'], ['zoom'],
-        2, 10,
-        8, 14,
-        12, 18,
-      ],
-      'circle-opacity': 0.1,
-      'circle-blur': 0.8,
-    },
-  });
+    map.addSource('places', { type: 'geojson', data: geojson });
 
-  // Dots
-  map.addLayer({
-    id: 'dots',
-    type: 'circle',
-    source: 'places',
-    paint: {
-      'circle-color': '#ff6b35',
-      'circle-radius': [
-        'interpolate', ['linear'], ['zoom'],
-        2, 3.5,
-        8, 5,
-        12, 7,
-      ],
-      'circle-stroke-width': 1.5,
-      'circle-stroke-color': 'rgba(255, 255, 255, 0.35)',
-      'circle-opacity': 0.92,
-    },
-  });
+    map.addLayer({
+      id: 'dot-glow',
+      type: 'circle',
+      source: 'places',
+      paint: {
+        'circle-color': s.dotColor,
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 2, 10, 8, 14, 12, 18],
+        'circle-opacity': 0.1,
+        'circle-blur': 0.8,
+      },
+    });
 
-  // --- Interactions ---
+    map.addLayer({
+      id: 'dots',
+      type: 'circle',
+      source: 'places',
+      paint: {
+        'circle-color': s.dotColor,
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 2, 3.5, 8, 5, 12, 7],
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': s.strokeColor,
+        'circle-opacity': 0.92,
+      },
+    });
 
-  // Tap/click point → toast
-  map.on('click', 'dots', (e) => {
-    showToast(e.features[0].properties.name);
-  });
+    handlers = {
+      click: (e) => showToast(e.features[0].properties.name),
+      enter: (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+        showToast(e.features[0].properties.name);
+      },
+      leave: () => { map.getCanvas().style.cursor = ''; },
+    };
 
-  // Desktop hover
-  map.on('mouseenter', 'dots', (e) => {
-    map.getCanvas().style.cursor = 'pointer';
-    showToast(e.features[0].properties.name);
-  });
-  map.on('mouseleave', 'dots', () => {
-    map.getCanvas().style.cursor = '';
+    map.on('click', 'dots', handlers.click);
+    map.on('mouseenter', 'dots', handlers.enter);
+    map.on('mouseleave', 'dots', handlers.leave);
+  }
+
+  addLayers(scheme());
+
+  // --- Swap on system preference change ---
+  mq.addEventListener('change', () => {
+    const s = scheme();
+    map.setStyle(buildStyle(s));
+    map.once('styledata', () => addLayers(s));
   });
 
   // --- Toast ---

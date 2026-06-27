@@ -17,7 +17,7 @@ html, body {
   height: 100%;
 }
 
-/* Brand — top left, unobtrusive */
+/* Brand — top left */
 #brand {
   position: fixed;
   top: 16px;
@@ -49,7 +49,7 @@ html, body {
   pointer-events: none;
 }
 
-/* Toast — bottom center, slides up on show */
+/* Toast */
 #toast {
   position: fixed;
   bottom: 36px;
@@ -79,7 +79,32 @@ html, body {
   transform: translateX(-50%) translateY(0);
 }
 
-/* Tighten MapLibre attribution */
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+  html, body {
+    background: #f0f4f8;
+  }
+
+  #brand {
+    color: rgba(30, 40, 80, 0.5);
+  }
+
+  #brand:hover {
+    color: rgba(30, 40, 80, 0.9);
+  }
+
+  #stat {
+    color: rgba(30, 40, 80, 0.35);
+  }
+
+  #toast {
+    background: rgba(255, 255, 255, 0.92);
+    color: #1e2850;
+    border-color: rgba(37, 99, 235, 0.25);
+  }
+}
+
+/* MapLibre attribution */
 .maplibregl-ctrl-attrib {
   font-size: 9px !important;
   opacity: 0.35 !important;
@@ -93,7 +118,6 @@ html, body {
   display: none !important;
 }
 
-/* Nav controls — hide zoom buttons on mobile, they're unnecessary */
 @media (max-width: 640px) {
   .maplibregl-ctrl-top-right {
     display: none;
