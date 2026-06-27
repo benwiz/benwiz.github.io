@@ -54,48 +54,15 @@
   map.addSource('places', {
     type: 'geojson',
     data: geojson,
-    cluster: true,
-    clusterMaxZoom: 10,
-    clusterRadius: 48,
   });
 
   // --- Layers ---
 
-  // Cluster glow (soft halo behind cluster circle)
+  // Dot glow
   map.addLayer({
-    id: 'cluster-glow',
+    id: 'dot-glow',
     type: 'circle',
     source: 'places',
-    filter: ['has', 'point_count'],
-    paint: {
-      'circle-color': '#ff6b35',
-      'circle-radius': ['step', ['get', 'point_count'], 28, 20, 36, 100, 46],
-      'circle-opacity': 0.1,
-      'circle-blur': 0.6,
-    },
-  });
-
-  // Cluster circles
-  map.addLayer({
-    id: 'clusters',
-    type: 'circle',
-    source: 'places',
-    filter: ['has', 'point_count'],
-    paint: {
-      'circle-color': '#ff6b35',
-      'circle-radius': ['step', ['get', 'point_count'], 14, 20, 19, 100, 26],
-      'circle-opacity': 0.82,
-      'circle-stroke-width': 1.5,
-      'circle-stroke-color': 'rgba(255, 255, 255, 0.2)',
-    },
-  });
-
-  // Individual dot glow
-  map.addLayer({
-    id: 'unclustered-glow',
-    type: 'circle',
-    source: 'places',
-    filter: ['!', ['has', 'point_count']],
     paint: {
       'circle-color': '#ff6b35',
       'circle-radius': [
@@ -109,12 +76,11 @@
     },
   });
 
-  // Individual dots
+  // Dots
   map.addLayer({
-    id: 'unclustered',
+    id: 'dots',
     type: 'circle',
     source: 'places',
-    filter: ['!', ['has', 'point_count']],
     paint: {
       'circle-color': '#ff6b35',
       'circle-radius': [
@@ -131,38 +97,17 @@
 
   // --- Interactions ---
 
-  // Click cluster → zoom in
-  map.on('click', 'clusters', async (e) => {
-    const [feature] = e.features;
-    const clusterId = feature.properties.cluster_id;
-    try {
-      const zoom = await map.getSource('places').getClusterExpansionZoom(clusterId);
-      map.easeTo({
-        center: feature.geometry.coordinates,
-        zoom: zoom + 0.5,
-        duration: 400,
-      });
-    } catch (_) {
-      map.easeTo({ center: feature.geometry.coordinates, zoom: map.getZoom() + 2 });
-    }
-  });
-
-  // Tap/click individual point → toast
-  map.on('click', 'unclustered', (e) => {
+  // Tap/click point → toast
+  map.on('click', 'dots', (e) => {
     showToast(e.features[0].properties.name);
   });
 
-  // Desktop hover cursors
-  ['clusters', 'cluster-glow'].forEach((layer) => {
-    map.on('mouseenter', layer, () => (map.getCanvas().style.cursor = 'pointer'));
-    map.on('mouseleave', layer, () => (map.getCanvas().style.cursor = ''));
-  });
-
-  map.on('mouseenter', 'unclustered', (e) => {
+  // Desktop hover
+  map.on('mouseenter', 'dots', (e) => {
     map.getCanvas().style.cursor = 'pointer';
     showToast(e.features[0].properties.name);
   });
-  map.on('mouseleave', 'unclustered', () => {
+  map.on('mouseleave', 'dots', () => {
     map.getCanvas().style.cursor = '';
   });
 
