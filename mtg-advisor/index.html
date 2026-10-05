@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#171e1b">
+<title>Magic collection · Ben Wiz</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body data-screen="entry">
+<header>
+  <a class="back-link" href="/" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a>
+  <h1>Magic collection</h1>
+  <label class="algorithm-picker" for="capture-algorithm">Reader<select id="capture-algorithm"><option value="ocr">OCR · light</option><option value="vision">Vision · 357 MB</option></select></label>
+  <button id="settings-toggle" popovertarget="capture-options" aria-label="More capture options">More</button>
+  <button id="view-toggle" aria-controls="collection" aria-expanded="false">Cards <span id="count">0</span></button>
+</header>
+<div class="toast-area"><p id="acknowledgment" role="status" aria-live="polite" aria-atomic="true"></p></div>
+<aside id="frame-history-popover" popover="auto" aria-labelledby="frame-history-title">
+  <div class="frame-history-title"><h2 id="frame-history-title">Captured frames</h2><button popovertarget="frame-history-popover" popovertargetaction="hide" aria-label="Close captured frames">Close</button></div>
+  <p>Recent automatic and manual captures. Cards remain saved when processing stops.</p>
+  <ol id="frame-history-list"></ol>
+</aside>
+<aside id="capture-options" popover="auto" aria-label="More capture options">
+  <h2>Capture options</h2>
+  <button id="frame-history-toggle">Recent frames <span id="frame-history-count">0</span></button>
+  <button id="nav-open-video">Upload recording</button>
+  <button id="native-photo">Use native camera</button>
+  <button id="sensor-photo" disabled><span id="sensor-support">Sensor unavailable</span></button>
+  <button id="frame-photo" disabled>Photo with markup</button>
+  <button id="close-video">Stop camera</button>
+  <button id="copy-runtime-diagnostics">Copy troubleshooting details</button>
+  <p id="runtime-diagnostics-status" role="status"></p>
+</aside>
+<main>
+  <section id="scan" aria-label="Card collection scanner">
+    <div id="video-stage" hidden>
+      <canvas id="camera-still" aria-label="Captured camera photo" hidden></canvas>
+      <p id="capture-acknowledgment" role="status" aria-live="polite" hidden></p>
+      <div id="capture-flash" aria-hidden="true"></div>
+      <video id="video" autoplay muted playsinline aria-label="Live card camera"></video>
+      <svg preserveAspectRatio="xMidYMid slice" id="video-boxes" aria-label="Areas to check and recognized card names"></svg>
+      <progress hidden id="steady-progress" max="1" value="0" aria-label="Automatic capture processing"></progress>
+      <button id="switch-camera" class="camera-icon camera-switch" aria-label="Switch camera" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg></button>
+      <div class="camera-controls">
+        <button id="pause-video" class="camera-icon" aria-label="Pause camera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg></button>
+        <label class="auto-scan-control" for="auto-scan"><input id="auto-scan" type="checkbox" checked> Auto scan</label>
+        <button id="quick-frame" class="primary" disabled>Capture<span id="quick-count" class="queue-count" aria-label="Frames pending" hidden></span></button>
+      </div>
+    </div>
+    <div class="scan-bottom">
+      <p id="capture-source" hidden></p>
+      <p id="camera-legend" hidden><span class="candidate-key">Red: area to check</span> · <span class="captured-key">Solid: captured · move on</span> · <span class="recognized-key">Green: name recognized</span></p>
+      <p id="capture-algorithm-note" class="hint">OCR reads names without a labeling model.</p>
+      <section id="capture-preparation" hidden aria-label="Reader download">
+        <p id="capture-preparation-status" role="status"></p>
+        <progress id="capture-preparation-progress" aria-label="Reader download progress"></progress>
+        <button id="capture-preparation-cancel">Use OCR instead</button>
+        <button id="capture-preparation-retry" hidden>Retry Vision</button>
+      </section>
+      <p id="scan-status">Photos stay on this device. Card names are looked up on Scryfall.</p>
+      <div class="actions"><button class="primary" id="start-video">Resume camera</button><button id="native-fallback">Take camera photo</button></div>
+      <input id="camera-file" type="file" accept="image/*" capture="environment" hidden>
+    </div>
+  </section>
+  <section id="collection" aria-label="Collected cards" hidden>
+    <div id="list-view">
+      <div class="collection-heading"><div><h2>Your cards</h2><p id="collection-total"></p></div><div class="collection-toolbar"><button id="import-collection">Import JSON</button><input id="collection-file" type="file" accept="application/json,.json" hidden><button id="edit-list" aria-pressed="false" aria-controls="card-list">Edit list</button><button id="export" disabled>Export JSON</button></div></div>
+      <p id="import-status" role="status"></p>
+      <p class="hint">Moving from Friends? Export JSON there, then import it here. Existing cards and quantities are kept.</p>
+      <section id="capture-recovery" hidden aria-label="Saved unfinished captures"><p id="capture-recovery-status" role="status"></p><button id="retry-captures">Retry saved captures</button><button id="discard-captures">Discard saved captures</button></section>
+      <details class="processing-disclosure">
+        <summary>Process your cards <span>Optional local AI</span></summary>
+        <label for="processing-model">Processing model<select id="processing-model"><option value="qwen25">Qwen 2.5 · roles &amp; deck review</option><option value="semif">OpenJev · roles</option></select></label>
+        <p id="processing-model-note"></p>
+        <p>Nothing downloads until you start processing. Your cards remain saved if you stop.</p>
+        <div class="actions"><button id="label-roles" disabled>Start processing</button><button id="stop-roles" hidden>Cancel processing</button></div>
+        <p id="role-status" role="status" aria-live="polite">Start processing when ready. Model files download only then.</p>
+        <progress id="processing-progress" hidden aria-label="Processing model download"></progress>
+      <details class="review-disclosure">
+        <summary><span>Review for your deck</span><span class="review-description">Colors, strategy &amp; AI suggestions</span></summary>
+      <form id="deck-review">
+        <p>After collecting cards, let a local AI choose a strategy, add category tags, and recommend yes or no for each card. These are suggestions for individual cards, not a finished deck.</p>
+        <label class="color-mode-label" for="deck-color-mode">Deck colors<select id="deck-color-mode"><option value="manual">I’ll choose the colors</option><option value="auto">Choose for me</option></select></label>
+        <fieldset id="deck-colors"><legend>Selected colors</legend>
+          <label><input type="checkbox" value="W"> White</label><label><input type="checkbox" value="U"> Blue</label><label><input type="checkbox" value="B"> Black</label><label><input type="checkbox" value="R"> Red</label><label><input type="checkbox" value="G"> Green</label>
+        </fieldset>
+        <div class="deck-fields"><label for="deck-format">Format<select id="deck-format"><option value="limited">Limited · 40 cards</option><option value="standard">Standard · 60 cards</option><option value="commander">Commander · 100 cards</option></select></label>
+        <label for="deck-strategy">Strategy<select id="deck-strategy"><option value="auto">Choose the best strategy for me</option></select></label></div>
+        <p id="review-model-note" class="hint"></p>
+        <div class="actions"><button class="primary" id="review" type="submit" disabled>Start deck review</button><button id="stop-review" type="button" hidden>Stop review</button></div>
+        <p id="review-status" role="status" aria-live="polite">Collect cards to start a review.</p>
+        <p id="colors-result" hidden></p>
+        <p id="strategy-result" hidden></p>
+      </form>
+      </details>
+      </details>
+      <label class="search-label" for="search">Find a collected card</label><input id="search" type="search" placeholder="Search name, rules, or tags" autocomplete="off">
+      <div class="collection-display" role="group" aria-label="Card image view">
+        <button id="view-strips" aria-pressed="true" aria-controls="card-list">Title strips</button><button id="view-full" aria-pressed="false" aria-controls="card-list">Full cards</button>
+      </div>
+      <details id="collection-filters"><summary id="filter-summary">Filters</summary>
+        <fieldset id="filter-colors"><legend>Color identity · match any selected color</legend>
+          <label><input type="checkbox" value="W"><span class="identity-mark identity-W" aria-hidden="true">W</span>White</label>
+          <label><input type="checkbox" value="U"><span class="identity-mark identity-U" aria-hidden="true">U</span>Blue</label>
+          <label><input type="checkbox" value="B"><span class="identity-mark identity-B" aria-hidden="true">B</span>Black</label>
+          <label><input type="checkbox" value="R"><span class="identity-mark identity-R" aria-hidden="true">R</span>Red</label>
+          <label><input type="checkbox" value="G"><span class="identity-mark identity-G" aria-hidden="true">G</span>Green</label>
+          <label><input type="checkbox" value="C"><span class="identity-mark identity-C" aria-hidden="true">C</span>Colorless</label>
+        </fieldset>
+        <div class="filter-fields">
+          <label for="filter-type">Card type<select id="filter-type"><option value="">All types</option><option>Creature</option><option>Instant</option><option>Sorcery</option><option>Artifact</option><option>Enchantment</option><option>Planeswalker</option><option>Battle</option><option>Land</option></select></label>
+          <label for="filter-mana">Mana value<select id="filter-mana"><option value="">Any mana value</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option value="6+">6 or more</option></select></label>
+          <label for="filter-tag">Feature tag<select id="filter-tag"><option value="">All tags</option><option value="untagged">Not tagged</option></select></label>
+          <label for="filter-review">Deck recommendation<select id="filter-review"><option value="">Any recommendation</option><option value="include">Include in deck</option><option value="exclude">Leave out of deck</option><option value="not-reviewed">Not reviewed</option><option value="stale">Review outdated</option></select></label>
+        </div>
+        <button id="clear-filters" type="button">Clear filters &amp; search</button>
+      </details>
+      <p id="search-results" role="status" aria-live="polite" hidden></p>
+      <p id="empty">Your collection is empty. Point the camera at your cards.</p>
+      <ul id="card-list" data-image-view="strips"></ul>
+      <p id="collection-note">One entry per card identity. Recognition may miss cards; review your collection and use Edit list to enter quantities from 1 to 999. Repeated scans never change quantities.</p>
+    </div>
+    <div id="detail" hidden tabindex="-1"><button id="detail-back">Back to cards</button><div id="detail-content"></div></div>
+  </section>
+  <section id="video-upload-screen" aria-labelledby="video-upload-title" hidden>
+    <div class="video-upload-heading"><h2 id="video-upload-title">Analyze a recording</h2><button id="video-analysis-back">Back to camera</button></div>
+    <p>Choose an existing iPhone or Android video. Analysis runs here on this device.</p>
+    <label class="video-file-label" for="video-file-input">Choose video<input id="video-file-input" type="file" accept="video/*"></label>
+    <video id="upload-video" controls playsinline preload="metadata" aria-label="Uploaded recording"></video>
+    <p id="video-analysis-metadata"></p>
+    <p id="video-analysis-status" role="status" aria-live="polite">Choose a recording to begin.</p>
+    <progress id="video-analysis-progress" max="1" value="0" aria-label="Video analysis progress"></progress>
+    <div class="video-analysis-actions"><button id="video-analysis-start" disabled>Start analysis</button><button id="video-analysis-stop" disabled>Stop</button></div>
+  </section>
+</main>
+<section id="title-editor" aria-label="Photo recognition and markup" hidden><div class="editor-image"><canvas id="edit-photo" aria-label="Camera photo"></canvas><svg id="edit-feedback" aria-label="Recognized card names"></svg><svg id="edit-boxes" aria-label="Areas marked for reading"></svg></div><div class="editor-controls"><p id="edit-source"></p><p id="edit-status" role="status" aria-live="polite">Reading photo…</p><p id="edit-hint">Optional: draw a box around a missed card name. Pinch to zoom.</p><div><button id="edit-cancel">Back to camera</button><button id="edit-undo" disabled>Undo mark</button></div></div></section>
+<noscript>This scanner needs JavaScript to read photos and look up cards.</noscript>
+</body>
+</html>
