@@ -609,7 +609,9 @@ function setListEditing(editing) {
   renderList();
 }
 $('edit-list').addEventListener('click', () => setListEditing(!editingList));
+let resumeAfterCollection = false;
 $('view-toggle').addEventListener('click', () => {
+  if (!showingList) resumeAfterCollection = Boolean($('video').srcObject);
   if (showingUploadedVideo) { uploadedVideo.stop(); showingUploadedVideo = false; $('video-upload-screen').hidden = true; }
   if (showingList) setListEditing(false);
   stopReview(); capturePreparation?.abort();
@@ -624,7 +626,7 @@ $('view-toggle').addEventListener('click', () => {
   $('view-toggle').firstChild.textContent = showingList ? 'Collect ' : 'Cards ';
   $('count').hidden = showingList;
   window.scrollTo(0, showingList ? collectionScroll : photoScroll);
-  if (!showingList) safeStartCamera();
+  if (!showingList && resumeAfterCollection) safeStartCamera();
 });
 $('detail-back').addEventListener('click', () => {
   const name = $('detail-content').querySelector('h2')?.textContent;
