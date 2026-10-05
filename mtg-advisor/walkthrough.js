@@ -1,4 +1,3 @@
-import { detectTitleRegions } from './perception.js';
 import { takeSensorExposure } from './sensor-photo.js';
 import { titleBoxes } from './camera-boxes.js';
 
@@ -60,9 +59,9 @@ export function autoCaptureDue({ enabled = true, pendingQuick = 0, pendingAuto =
 
 export function autoCaptureFeedback({ enabled = true, pendingQuick = 0, pendingAuto = 0 } = {}) {
   if (pendingQuick || pendingAuto) return { state: 'processing', progress: 0,
-    message: 'Analyzing captured frame. Tap Capture, or wait for the next automatic capture.' };
-  if (!enabled) return { state: 'off', progress: 0, message: 'Auto scan off. Tap Capture or take a photo.' };
-  return { state: 'ready', progress: 0, message: 'Capturing the next frame…' };
+    message: 'Saving frame. Keep the camera open.' };
+  if (!enabled) return { state: 'off', progress: 0, message: 'Tap Capture frame. Read saved frames when you’re ready.' };
+  return { state: 'ready', progress: 0, message: 'Auto capture saves a frame every 3 seconds.' };
 }
 
 export function scaleLiveRegions(regions, width, height, fullWidth, fullHeight) {
@@ -109,7 +108,7 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
     overlay.captured(regions, canvas.width, canvas.height);
     stage.dataset.captureOutline = regions.length ? 'titles' : 'full-frame';
     stage.dataset.capturedFrameId = String(id);
-    stage.dataset.captureAcknowledgment = 'Captured. You can move on. Analyzing in background.';
+    stage.dataset.captureAcknowledgment = 'Captured. You can move on. Read it later in Frames.';
     stage.dataset.captureAckUntil = String(capturedView.at + 1500);
     if (acknowledgment) { acknowledgment.textContent = 'Captured. You can move on.'; acknowledgment.hidden = false; }
     stage.dataset.autoState = 'captured'; steady.value = 0; onStatus(stage.dataset.captureAcknowledgment);
@@ -165,7 +164,7 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
     still.hidden = true; sourceLabel.hidden = true; phase('aiming'); feedback();
   }
   function queueAutomatic(token, signal, canvas) {
-    if (token !== generation || signal.aborted || !autoCaptureDue({ enabled: automatic(), pendingQuick, pendingAuto }) || stage.dataset.phase !== 'aiming' || video.readyState < 2) return false;
+    if (token !== generation || signal.aborted || !autoCaptureDue({ enabled: automatic(), pendingQuick, pendingAuto }) || stage.dataset.phase !== 'aiming' || video.readyState < 2 || !queueAvailable()) return false;
     autoGeneration = token;
     const id = queueAutoFrame(canvas);
     if (!id) { autoGeneration = null; return true; }
@@ -193,7 +192,7 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
     try {
       const image = new Image(); image.src = url; await image.decode();
       signal.throwIfAborted(); if (token !== generation) return;
-      return frame(image, image.naturalWidth, image.naturalHeight, 2200);
+      return frame(image, image.naturalWidth, image.naturalHeight, Infinity);
     } finally { URL.revokeObjectURL(url); }
   }
   async function captureInPage(kind) {
@@ -207,7 +206,7 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
       if (kind === 'sensor-photo') {
         canvas = await sensorPhoto(token, signal);
       } else {
-        canvas = frame(video, video.videoWidth, video.videoHeight, 1920);
+        canvas = frame(video, video.videoWidth, video.videoHeight, Infinity);
       }
       signal.throwIfAborted(); if (token !== generation || !canvas) return;
       video.pause(); overlay.clear(); phase('photo');
@@ -218,7 +217,7 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
       if (signal.aborted || token !== generation) return;
       foreground = false;
       if (kind === 'sensor-photo') { sensorIssue = `${error.name || 'Error'}: ${error.message}`; stage.dataset.sensorError = sensorIssue; }
-      onStatus(kind === 'sensor-photo' ? `Sensor photo failed (${error.name || 'Error'}): ${error.message}. You can retry or use Native camera.` : 'Frame could not be read. Try another shot.', true);
+      onStatus(kind === 'sensor-photo' ? `Sensor photo failed (${error.name || 'Error'}): ${error.message}. You can retry or use Native camera.` : 'Frame could not be saved. Try another shot.', true);
       // Keep the error visible; sensor remains available for an explicit retry.
       timer = setTimeout(async () => {
         if (token !== generation || signal.aborted) return;
@@ -254,14 +253,14 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
     quickCount.hidden = !count;
     stage.dataset.quickPending = count;
     phase(stage.dataset.phase);
-    if (!count && !autoCount && run && stage.dataset.phase === 'aiming') { clearTimeout(timer); const token = generation, signal = run.signal; timer = setTimeout(() => sample(token, signal), 1000); }
+    if (!count && !autoCount && run && stage.dataset.phase === 'aiming') { clearTimeout(timer); const token = generation, signal = run.signal; timer = setTimeout(() => sample(token, signal), 3000); }
   }
   function openNative() {
     // Release the web camera before iOS opens its camera. Keep the file click
     // synchronous with the tap so Safari retains the required user activation.
     stop(true); stage.hidden = false; onEntering(); phase('native');
     run = new AbortController(); sourceLabel.hidden = true; still.hidden = true;
-    onStatus('Take a photo. Reading starts when you return.');
+    onStatus('Take a photo. It will be saved in Frames.');
     file.value = ''; file.click();
   }
   async function nativeReturned() {
@@ -275,12 +274,12 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
       if (photo.size > 30 * 1024 * 1024) throw new Error('Photo too large');
       url = URL.createObjectURL(photo);
       const image = new Image(); image.src = url; await image.decode(); signal.throwIfAborted();
-      canvas = frame(image, image.naturalWidth, image.naturalHeight, 2200);
+      canvas = frame(image, image.naturalWidth, image.naturalHeight, Infinity);
       stage.dataset.captureKind = 'native-photo'; stage.dataset.captureWidth = canvas.width; stage.dataset.captureHeight = canvas.height;
       await readPhoto(canvas, signal, 'native-photo'); signal.throwIfAborted();
     } catch (error) {
       if (signal.aborted) return;
-      onStatus('That photo couldn’t be read. Try another shot.', true);
+      onStatus('That photo couldn’t be saved. Try another shot.', true);
       await new Promise(resolve => {
         const done = () => { signal.removeEventListener('abort', done); resolve(); };
         timer = setTimeout(done, 2000); signal.addEventListener('abort', done, { once: true });
@@ -305,18 +304,12 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
       checkCapturedView();
       if (pendingQuick || pendingAuto) { feedback(); return; }
       if (automatic()) {
-        canvas = frame(video, video.videoWidth, video.videoHeight, 1920);
-        stage.dataset.triggerReason = 'processor-idle';
+        canvas = frame(video, video.videoWidth, video.videoHeight, Infinity);
+        stage.dataset.triggerReason = 'capture-interval';
         if (queueAutomatic(token, signal, canvas)) canvas = null; // Queue owns the snapshot.
         return;
       }
-      // Preview geometry is useful with Auto off, but never delays an Auto capture.
-      canvas = frame(video, video.videoWidth, video.videoHeight, 1280);
-      let regions = [];
-      try { regions = await detectTitleRegions(canvas, signal); } catch { signal.throwIfAborted(); }
-      if (token !== generation || stage.dataset.phase !== 'aiming') return;
-      liveGeometry = { regions: regions.map(region => ({ ...region })), sourceWidth: canvas.width, sourceHeight: canvas.height };
-      if (performance.now() >= greenUntil) overlay.candidates(regions, canvas.width, canvas.height);
+      // Capture preview never invokes CV or OCR.
       feedback();
     } catch (error) {
       if (!signal.aborted) onStatus('Keep card names visible, or take a camera photo.');
@@ -324,7 +317,7 @@ export function walkthrough({ video, still, stage, start, pause, close, flip, na
       if (canvas) canvas.width = canvas.height = 0;
       if (busyToken === token) busyToken = null;
       if (!signal.aborted && token === generation && stage.dataset.phase === 'aiming')
-        timer = setTimeout(() => sample(token, signal), 1000);
+        timer = setTimeout(() => sample(token, signal), 3000);
     }
   }
   async function begin(selectedDevice) {
