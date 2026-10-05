@@ -17,10 +17,9 @@ import { prepareReviewModel } from './model-preparation.js';
 import { prepareSemIf, disposeSemIf, releaseSemIf } from './sem-if-reader.js';
 import { releaseModelWorker } from './model-lifecycle.js';
 import { recordRuntimeEvent, exportRuntimeDiagnostics } from './runtime-diagnostics.js';
-import { createFrameHistory } from './frame-history.js';
+import { savedFramesView } from './saved-frames.js';
 import { initVideoUpload } from './video-upload.js';
 import { pendingRoleCards, runLabelBatch } from './labeling-batch.js';
-import { titleEditor } from './title-editor.js';
 
 const $ = id => document.getElementById(id);
 recordRuntimeEvent('page-start');
@@ -54,7 +53,6 @@ let roleRun, reviewRun, modelWorker, detailCardId, editingList = false, modelRel
 let catalogPromise, workerPromise, showingList = false;
 let roleJob = Promise.resolve(), cameraStartSequence = 0;
 let readingQueue = Promise.resolve(), showingUploadedVideo = false, backgroundReadStatus;
-const editTitles = titleEditor({ root: $('title-editor'), canvas: $('edit-photo'), svg: $('edit-boxes'), feedback: $('edit-feedback'), status: $('edit-status'), undo: $('edit-undo'), cancel: $('edit-cancel') });
 let collectionScroll = 0, photoScroll = 0, detailScroll = 0;
 const element = (tag, text, className) => {
   const node = document.createElement(tag);
@@ -196,8 +194,8 @@ async function safeStartCamera() {
   $('start-video').disabled = true;
   try {
     // A role batch has its own cleanup even after the visible request is aborted.
-    // Normal recognition reads do not need to delay preview restoration.
-    if (!await ensureCaptureReady()) return;
+    // Release the previous reader before restoring a capture-only preview.
+    await quickFrames.idle(); await readingQueue; await releaseOCR();
     await roleJob; await modelRelease;
     await releaseRuntime(waitForFlorenceRelease); await releaseRuntime(() => releaseSemIf());
     if (sequence !== cameraStartSequence || showingList || showingUploadedVideo || document.hidden) return;
@@ -611,6 +609,7 @@ function setListEditing(editing) {
 $('edit-list').addEventListener('click', () => setListEditing(!editingList));
 let resumeAfterCollection = false;
 $('view-toggle').addEventListener('click', () => {
+  if (showingFrames) closeFrames(false);
   if (!showingList) resumeAfterCollection = Boolean($('video').srcObject);
   if (showingUploadedVideo) { uploadedVideo.stop(); showingUploadedVideo = false; $('video-upload-screen').hidden = true; }
   if (showingList) setListEditing(false);
@@ -619,7 +618,7 @@ $('view-toggle').addEventListener('click', () => {
   cancelAcquisition();
   showingList = !showingList;
   document.body.dataset.screen = showingList ? 'collection' : 'entry';
-  $('capture-algorithm').closest('label').hidden = showingList;
+  $('capture-algorithm').closest('label').hidden = false;
   $('scan').hidden = showingList;
   $('collection').hidden = !showingList;
   $('view-toggle').setAttribute('aria-expanded', String(showingList));
@@ -756,7 +755,7 @@ async function processCapture(canvas, signal, feedback, manualRegions) {
     onLoading: progress => { if (progress) feedback.onProgress?.(progress.message || 'Preparing saved Florence files…'); },
     onProgress: (index, total) => feedback.onProgress?.(typeof index === 'string' ? index : `Checking area ${index} / ${total}…`),
     onMatch: async match => {
-      signal.throwIfAborted(); feedback.onMatch(match);
+      signal.throwIfAborted(); feedback.onMatch?.(match);
       const previous = new Set(cards.keys());
       const card = await acceptance.accept(match, { signal, source: feedback.source });
       if (card && !previous.has(card.id)) { collected.push(card.name); feedback.onCollected?.(card); }
@@ -776,13 +775,19 @@ function onFrameQueued({ source }) {
   captureFlashTimer = setTimeout(() => flash.classList.remove('captured'), 240);
 }
 const journal = createCaptureJournal();
+let showingFrames = false, savingFrames = 0, savedFrameCount = 0, frameReadRun, captureSequence = 0;
 const captureSaves = new Map();
 let retryingCaptures = false;
 async function refreshRecovery() {
   try {
-    const saved = await journal.list();
+    const records = await journal.list();
+    savedFrameCount = records.length;
+    framesView.render(records, retryingCaptures || quickFrames.count > 0);
+    $('read-frames').disabled = retryingCaptures || !records.some(frame => frame.state !== 'done');
+    $('stop-frame-reading').hidden = !retryingCaptures;
+    const saved = records.filter(frame => frame.state !== 'done');
     $('capture-recovery').hidden = !saved.length;
-    $('capture-recovery-status').textContent = `${saved.length} unfinished ${saved.length === 1 ? 'capture' : 'captures'} saved on this device. Retry with your current reader.`;
+    $('capture-recovery-status').textContent = `${saved.length} unread ${saved.length === 1 ? 'capture' : 'captures'} saved on this device. Open Frames to review and read them.`;
   } catch { /* Collection remains available when storage is disabled. */ }
 }
 function saveCapture(canvas, metadata) {
@@ -790,54 +795,64 @@ function saveCapture(canvas, metadata) {
   saved.ready = saved.ready.catch(error => { status(`${error.message} This capture cannot be recovered after reload.`, true); return null; });
   return saved;
 }
-async function finishSavedCapture(saved) {
-  const key = await saved?.ready;
-  if (key) await journal.remove(key);
-  refreshRecovery();
+const framesView = savedFramesView({ list: $('frame-history-list'), count: $('frame-history-count'), read: key => readSavedFrames(key), remove: async key => {
+  try { await journal.remove(key); await refreshRecovery(); }
+  catch (error) { $('frames-status').textContent = error.message; }
+} });
+async function updateFrameState(id, changes) {
+  const saved = captureSaves.get(id); const key = await saved?.ready;
+  try { if (key) await journal.update(key, changes); }
+  catch (error) { $('frames-status').textContent = `Could not save reading status. ${error.message}`; }
 }
-const frameHistory = createFrameHistory({ list: $('frame-history-list'), toggle: $('frame-history-toggle'), popover: $('frame-history-popover'), count: $('frame-history-count') });
 const quickFrames = quickFrameQueue({
   capacity: 2,
   process: async (canvas, signal, { id }) => {
-    const names = new Set(), collected = new Set();
-    await captureSaves.get(id)?.ready; signal.throwIfAborted();
+    const key = await captureSaves.get(id)?.ready; signal.throwIfAborted();
+    const saved = (await journal.list()).find(frame => frame.key === key);
     backgroundReadStatus = 'Reading captured frame…';
-    try { return await processCapture(canvas, signal, { source: 'video-still', background: true, onCandidates: regions => videoCapture.frameCandidates(regions, { id, width: canvas.width, height: canvas.height }),
-    onProgress: message => { backgroundReadStatus = message; status(message); frameHistory.update(id, { message }); },
-    onPhase: state => frameHistory.update(id, { state }),
-    onCollected: card => { collected.add(card.name); frameHistory.update(id, { collected: [...collected] }); },
-    onMatch: match => { names.add(match.name); frameHistory.update(id, { names: [...names] }); videoCapture.frameMatch?.(match, { id }); },
-    onTiming: timing => { $('video-stage').dataset.analysisTiming = JSON.stringify(timing); },
-  }); } finally { backgroundReadStatus = null; }
+    try { return await processCapture(canvas, signal, { source: saved?.source || 'video-still', background: true,
+      onProgress: message => { backgroundReadStatus = message; $('frames-status').textContent = message; },
+      onTiming: timing => { $('video-stage').dataset.analysisTiming = JSON.stringify(timing); },
+    }); } finally { backgroundReadStatus = null; }
   },
   onChange: (_count, { manualCount, autoCount }) => videoCapture.updateQuick(manualCount, autoCount),
-  onCancelled: ({ kind, id }) => { captureSaves.get(id)?.ready.finally(refreshRecovery); captureSaves.delete(id); frameHistory.update(id, { state: 'canceled', message: 'Processing stopped. Previously collected cards are saved.' }); videoCapture.frameCompleted?.({ kind, cancelled: true }); },
-  onStarted: ({ id }) => frameHistory.update(id, { state: 'reading', message: 'Reading captured frame…' }),
-  onQueued: ({ id, kind, canvas, recoveryKey }) => {
-    captureSaves.set(id, recoveryKey ? { key: recoveryKey, ready: Promise.resolve(recoveryKey) } : saveCapture(canvas, { kind, algorithm: selectedRecognitionPipeline }));
-    frameHistory.queue({ id, kind, canvas, pipeline: activePipeline().name });
-    if (kind === 'manual') videoCapture.frameQueued({ id, kind, canvas });
-    onFrameQueued({ source: kind === 'auto' ? 'video-still' : 'quick-frame' });
+  onCancelled: ({ kind, id }) => { updateFrameState(id, { state: 'captured', message: '' }).finally(() => { captureSaves.delete(id); refreshRecovery(); }); videoCapture.frameCompleted?.({ kind, cancelled: true }); },
+  onStarted: ({ id }) => updateFrameState(id, { state: 'reading', message: 'Reading captured frame…' }),
+  onQueued: ({ id, recoveryKey }) => {
+    captureSaves.set(id, { key: recoveryKey, ready: Promise.resolve(recoveryKey) });
   },
   onResult: (matches, id, { kind }) => {
-    finishSavedCapture(captureSaves.get(id)).catch(() => {}); captureSaves.delete(id);
     const names = [...new Set(matches.map(match => match.name))], collected = matches.collected || [];
-    frameHistory.update(id, { state: 'done', message: '', names, collected });
-    // Automatic retries stay quiet unless they add something to the collection.
+    updateFrameState(id, { state: 'done', message: '', names, collected }).finally(() => { captureSaves.delete(id); refreshRecovery(); });
     if (kind === 'manual' || collected.length) notices.push(frameNotification({ names, collected, kind, id }));
     videoCapture.frameCompleted?.({ kind, matches });
   },
   onError: (error, id, { kind }) => {
-    captureSaves.delete(id); refreshRecovery();
-    frameHistory.update(id, { state: 'error', message: error?.message || 'Try another frame.' });
+    updateFrameState(id, { state: 'error', message: error?.message || 'Try another frame.' }).finally(() => { captureSaves.delete(id); refreshRecovery(); });
     toast(`${kind === 'auto' ? 'Auto frame' : `Quick Frame ${id}`} couldn’t be read. ${error?.message || 'Try another frame.'}`, true, kind === 'auto' ? { key: 'auto-error', cooldown: 30000 } : {});
     videoCapture.frameCompleted?.({ kind, matches: [], error });
-    if (kind === 'auto') { autoScan.checked = false; autoScan.dispatchEvent(new Event('change')); status('Auto scan stopped after a processing error. Tap Capture to retry or choose another reader.'); }
   },
 });
 function queueCapturedFrame(canvas, options) { return quickFrames.enqueue(canvas, options); }
+function captureOnly(canvas, { kind = 'manual', source = 'video-still' } = {}) {
+  const id = ++captureSequence; savingFrames++;
+  videoCapture.updateQuick(savingFrames);
+  const saved = journal.save(canvas, { kind, source, state: 'captured' });
+  saved.ready.then(() => {
+    videoCapture.frameQueued({ id, kind, canvas });
+    onFrameQueued({ source }); status('Frame saved. Open Frames to read card names.');
+    return refreshRecovery();
+  }).catch(error => {
+    autoScan.checked = false; autoScan.dispatchEvent(new Event('change'));
+    status(`${error.message} Frame was not saved.`, true);
+  }).finally(() => {
+    canvas.width = canvas.height = 0; savingFrames--;
+    videoCapture.updateQuick(savingFrames); videoCapture.frameCompleted({ kind });
+  });
+  return id;
+}
 const autoScan = $('auto-scan');
-try { autoScan.checked = !previousModelInterruption && localStorage.getItem('mtg-auto-scan:v1') !== 'off'; } catch { /* Camera controls work without storage. */ }
+try { autoScan.checked = false; } catch { /* Camera controls work without storage. */ }
 autoScan.addEventListener('change', () => {
   try { localStorage.setItem('mtg-auto-scan:v1', autoScan.checked ? 'on' : 'off'); } catch { /* Device preference is optional. */ }
 });
@@ -846,22 +861,15 @@ const videoCapture = walkthrough({
   close: $('close-video'), flip: $('switch-camera'), native: $('native-photo'), snapshot: $('frame-photo'), quick: $('quick-frame'), quickCount: $('quick-count'), sensor: $('sensor-photo'), sensorSupport: $('sensor-support'), fallback: $('native-fallback'), file: $('camera-file'),
   acknowledgment: $('capture-acknowledgment'), sourceLabel: $('capture-source'), steady: $('steady-progress'), boxes: $('video-boxes'),
   onStatus: status, onStart: safeStartCamera,
-  queueAvailable: () => quickFrames.manualAvailable, cancelQuick: () => quickFrames.cancel(),
-  queueFrame: canvas => queueCapturedFrame(canvas, { kind: 'manual' }),
-  queueAutoFrame: canvas => queueCapturedFrame(canvas, { kind: 'auto' }), cancelAuto: () => quickFrames.cancelAuto(),
-  onEntering: () => document.body.classList.add('walkthrough'),
+  queueAvailable: () => savingFrames < 2 && savedFrameCount + savingFrames < 60, cancelQuick: () => quickFrames.cancel(),
+  queueFrame: canvas => captureOnly(canvas, { kind: 'manual' }),
+  queueAutoFrame: canvas => captureOnly(canvas, { kind: 'auto' }), cancelAuto: () => quickFrames.cancelAuto(),
+  onEntering: () => { if (showingFrames) closeFrames(false); document.body.classList.add('walkthrough'); },
   onLeaving: () => document.body.classList.remove('walkthrough'),
   readPhoto: async (canvas, signal, source) => {
-    const saved = saveCapture(canvas, { kind: 'photo', source, algorithm: selectedRecognitionPipeline });
-    await saved.ready; signal.throwIfAborted();
-    if (!await ensureCaptureReady()) throw new Error('Reader preparation did not finish. Capture saved for retry in Cards.');
-    signal.throwIfAborted();
-    const label = { 'video-still': 'Video frame', 'sensor-photo': 'Sensor photo', 'native-photo': 'Native camera' }[source];
-    $('edit-source').textContent = `${label} · ${canvas.width} × ${canvas.height}`;
-    const matches = await editTitles(canvas, signal, (manualRegions, feedback) =>
-      processCapture(canvas, feedback.signal || signal, { ...feedback, source }, manualRegions));
-    if (!matches.interrupted && !matches.failed) await finishSavedCapture(saved); else refreshRecovery();
-    return matches;
+    const saved = journal.save(canvas, { kind: 'photo', source, state: 'captured' });
+    await saved.ready; await refreshRecovery();
+    onFrameQueued({ source }); status('Photo saved. Open Frames to read card names.');
   },
 });
 const uploadedVideo = initVideoUpload({ elements: {
@@ -909,18 +917,16 @@ async function ensureCaptureReady() {
 async function chooseCaptureAlgorithm() {
   const id = $('capture-algorithm').value;
   if (!captureAlgorithms.some(item => item.id === id)) return;
-  const resume = Boolean($('video').srcObject);
-  capturePreparation?.abort(); cancelAcquisition(); stopReview(); selectedRecognitionPipeline = id;
+  capturePreparation?.abort(); selectedRecognitionPipeline = id;
   try { localStorage.setItem(pipelineStorageKey, id); } catch { /* Optional preference. */ }
   $('capture-algorithm-note').textContent = captureAlgorithms.find(item => item.id === id).note;
   $('capture-preparation').hidden = true;
-  if (await ensureCaptureReady() && selectedRecognitionPipeline === id && resume && !showingList && !document.hidden) safeStartCamera();
 }
 $('capture-algorithm').value = selectedRecognitionPipeline;
 $('capture-algorithm-note').textContent = captureAlgorithms.find(item => item.id === selectedRecognitionPipeline).note;
 $('capture-algorithm').addEventListener('change', chooseCaptureAlgorithm);
 $('capture-preparation-cancel').addEventListener('click', () => { $('capture-algorithm').value = 'ocr'; chooseCaptureAlgorithm(); });
-$('capture-preparation-retry').addEventListener('click', async () => { if (await ensureCaptureReady()) safeStartCamera(); });
+$('capture-preparation-retry').addEventListener('click', () => readSavedFrames());
 async function ensureProcessingReady(pipeline, signal, report) {
   const descriptor = modelDescriptors[pipeline.id];
   if (preparedModels.has(descriptor.id)) return;
@@ -973,27 +979,51 @@ $('collection-file').addEventListener('change', async () => {
     $('import-status').textContent = `Imported ${result.added} cards. Kept ${result.skipped} existing cards unchanged.`;
   } catch (error) { $('import-status').textContent = error.message; }
 });
-$('retry-captures').addEventListener('click', async () => {
+async function readSavedFrames(key) {
   if (retryingCaptures || roleRun || reviewRun || quickFrames.count) return;
-  retryingCaptures = true; $('retry-captures').disabled = true;
+  cancelAcquisition(); retryingCaptures = true; const session = frameReadRun = new AbortController(); await refreshRecovery();
+  $('capture-algorithm').disabled = true; $('frames-status').textContent = 'Preparing reader…';
   try {
-    if (!await ensureCaptureReady()) return;
+    if (!await ensureCaptureReady() || session.signal.aborted) return;
     for (const saved of await journal.list()) {
-      if (!showingList || document.hidden) break;
-      if (!quickFrames.available) break;
+      if (session.signal.aborted || document.hidden) break;
+      if (key ? saved.key !== key : saved.state === 'done') continue;
       const url = URL.createObjectURL(saved.blob);
       try {
         const image = new Image(); image.src = url; await image.decode();
-        if (!showingList || document.hidden) break;
+        if (session.signal.aborted || document.hidden) break;
         const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight;
         canvas.getContext('2d').drawImage(image, 0, 0);
+        $('frames-status').textContent = 'Reading saved frame…';
         queueCapturedFrame(canvas, { kind: 'manual', recoveryKey: saved.key });
         await quickFrames.idle();
       } finally { URL.revokeObjectURL(url); }
     }
-  } catch (error) { $('capture-recovery-status').textContent = `Saved captures remain available. ${error.message}`; }
-  finally { retryingCaptures = false; $('retry-captures').disabled = false; refreshRecovery(); }
-});
+    if (!session.signal.aborted) $('frames-status').textContent = 'Reading finished. Recognized names are saved in Cards. Frames are kept until you remove them.';
+  } catch (error) { $('frames-status').textContent = `Frames remain saved. ${error.message}`; }
+  finally { frameReadRun = null; retryingCaptures = false; $('capture-algorithm').disabled = false; await refreshRecovery(); }
+}
+function stopFrameReading() { frameReadRun?.abort(); capturePreparation?.abort(); quickFrames.cancel(); $('frames-status').textContent = 'Reading stopped. Your frames are saved.'; }
+let resumeAfterFrames = false;
+function openFrames() {
+  if (showingList) { showingList = false; $('view-toggle').firstChild.textContent = 'Cards '; $('count').hidden = false; $('view-toggle').setAttribute('aria-expanded', 'false'); }
+  resumeAfterFrames = Boolean($('video').srcObject);
+  cancelAcquisition(); stopReview(); showingFrames = true;
+  $('scan').hidden = $('collection').hidden = true; $('frame-history-popover').hidden = false;
+  document.body.dataset.screen = 'frames'; $('frame-history-toggle').setAttribute('aria-pressed', 'true');
+  refreshRecovery(); window.scrollTo(0, 0);
+}
+function closeFrames(resume = true) {
+  stopFrameReading(); showingFrames = false; $('frame-history-popover').hidden = true;
+  $('scan').hidden = false; document.body.dataset.screen = 'entry'; $('frame-history-toggle').setAttribute('aria-pressed', 'false');
+  if (resume && resumeAfterFrames) safeStartCamera();
+}
+$('frame-history-toggle').addEventListener('click', () => showingFrames ? closeFrames() : openFrames());
+$('frames-back').addEventListener('click', () => closeFrames());
+$('read-frames').addEventListener('click', () => readSavedFrames());
+$('stop-frame-reading').addEventListener('click', stopFrameReading);
+$('retry-captures').addEventListener('click', openFrames); $('retry-captures').textContent = 'Open Frames';
+$('reader-preparation-slot').append($('capture-preparation'), $('capture-algorithm-note'));
 $('discard-captures').addEventListener('click', async () => {
   if (quickFrames.count || retryingCaptures) return;
   try { for (const saved of await journal.list()) await journal.remove(saved.key); refreshRecovery(); }
@@ -1001,7 +1031,7 @@ $('discard-captures').addEventListener('click', async () => {
 });
 refreshRecovery();
 updateReviewPipeline();
-function suspend() { cancelAcquisition(); stopReview(); uploadedVideo.stop(); notices.clear(); capturePreparation?.abort(); }
+function suspend() { stopFrameReading(); cancelAcquisition(); stopReview(); uploadedVideo.stop(); notices.clear(); capturePreparation?.abort(); }
 document.addEventListener('visibilitychange', () => { if (document.hidden && !videoCapture.awaitingNative()) suspend(); });
 window.addEventListener('pagehide', () => {
   recordRuntimeEvent('page-hide');
@@ -1016,9 +1046,5 @@ new ResizeObserver(() => {
   document.documentElement.style.setProperty('--header-height', `${document.querySelector('header').offsetHeight}px`);
 }).observe(document.querySelector('header'));
 
-new ResizeObserver(() => {
-  const height = document.querySelector('.editor-controls').offsetHeight;
-  if (height) document.documentElement.style.setProperty('--editor-controls-height', `${height}px`);
-}).observe(document.querySelector('.editor-controls'));
 
 if (previousModelInterruption) status('Previous processing was interrupted. Saved cards are available; capture and processing restart only when you choose.', true);

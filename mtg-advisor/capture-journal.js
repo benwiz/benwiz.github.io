@@ -25,18 +25,18 @@ function indexedStorage() {
   };
 }
 
-// Encode before inference and keep interrupted/error captures across reloads.
-// Only successful reads or an explicit discard delete the durable source.
-export function createCaptureJournal({ storage = indexedStorage(), capacity = 6 } = {}) {
+// Capture writes never invoke inference. Sources survive reads and reloads;
+// only explicit removal deletes them. Keep the legacy store for saved captures.
+export function createCaptureJournal({ storage = indexedStorage(), capacity = 60 } = {}) {
   let writes = Promise.resolve();
   return {
-    list: async () => (await storage.list()).sort((a, b) => a.at - b.at),
+    list: async () => { await writes; return (await storage.list()).sort((a, b) => a.at - b.at); },
     save(canvas, metadata = {}) {
       const key = crypto.randomUUID(), width = canvas.width, height = canvas.height;
       const encoded = new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Capture could not be saved.')), 'image/jpeg', .9));
       const ready = writes.then(async () => {
         const blob = await encoded;
-        if ((await storage.list()).length >= capacity) throw new Error('Saved capture limit reached. Retry or discard saved frames in Cards.');
+        if ((await storage.list()).length >= capacity) throw new Error('Saved capture limit reached. Read or remove saved frames in Frames.');
         await storage.put({ ...metadata, key, at: Date.now(), width, height, blob });
         return key;
       });
@@ -44,6 +44,18 @@ export function createCaptureJournal({ storage = indexedStorage(), capacity = 6 
       encoded.catch(() => {}); writes = ready.catch(() => {});
       return { key, ready };
     },
-    remove: key => storage.remove(key),
+    async update(key, changes) {
+      const ready = writes.then(async () => {
+        const record = (await storage.list()).find(item => item.key === key);
+        if (record) await storage.put({ ...record, ...changes, key });
+      });
+      writes = ready.catch(() => {});
+      return ready;
+    },
+    remove(key) {
+      const ready = writes.then(() => storage.remove(key));
+      writes = ready.catch(() => {});
+      return ready;
+    },
   };
 }

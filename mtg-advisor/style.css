@@ -210,3 +210,50 @@ body.walkthrough #scan-status{margin:0;line-height:1.4}
 body[data-screen="collection"] header { display:flex; flex-wrap:nowrap; align-items:center; }
 body[data-screen="collection"] header h1 { flex:1; }
 body[data-screen="collection"] #settings-toggle { display:none; }
+/* Capture workspace: photographic view, anchored controls, separate frame library. */
+:root{--capture-line:#435247;--capture-gap:16px;--capture-radius:8px}
+header{border-color:var(--capture-line)}
+#frame-history-toggle[aria-pressed=true]{background:var(--accent);color:var(--surface)}
+body.walkthrough header{background:var(--surface);padding:calc(8px + env(safe-area-inset-top)) 16px 8px;border-bottom:1px solid var(--capture-line);pointer-events:auto}
+body.walkthrough header h1{display:block;font-size:16px}
+body.walkthrough #video-stage{top:var(--header-height,72px);height:calc(100dvh - var(--header-height,72px));}
+body.walkthrough #video{object-fit:contain;background:#0b100d}
+body.walkthrough .camera-controls{position:absolute;inset:auto 0 0;max-width:none;padding:16px max(16px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:var(--surface);grid-template-columns:48px minmax(0,1fr) minmax(140px,1fr);gap:12px;border-top:1px solid var(--capture-line)}
+.auto-scan-control{position:static;padding:0;background:transparent;font-size:13px;width:auto;min-height:48px}
+.camera-controls #quick-frame{min-height:56px;border-radius:var(--capture-radius);white-space:normal;line-height:1.2}
+body.walkthrough .scan-bottom{bottom:calc(var(--camera-controls-height,88px) + env(safe-area-inset-bottom));left:0;right:0;padding:12px 16px;background:var(--surface);border-top:1px solid var(--capture-line);font-size:13px}
+body.walkthrough .capture-intro{display:none}
+body.walkthrough #capture-acknowledgment{top:16px;bottom:auto}
+body.walkthrough #switch-camera{top:16px;right:16px}
+body.walkthrough .toast-area{bottom:calc(var(--camera-controls-height,88px) + 64px + env(safe-area-inset-bottom))}
+body[data-screen=entry]:not(.walkthrough) #scan{justify-content:center}
+body[data-screen=entry]:not(.walkthrough) #scan .scan-bottom{width:min(100%,640px);padding:40px 24px}
+.capture-intro h2{font-family:Georgia,serif;font-size:clamp(38px,6vw,56px);line-height:1.08;margin-bottom:20px;color:var(--ink)}
+.capture-intro p{font-size:17px;line-height:1.65;max-width:42ch;margin-bottom:32px}
+body[data-screen=entry]:not(.walkthrough) #capture-algorithm-note{display:none}
+#frame-history-popover{position:static;width:min(100%,1080px);max-height:none;margin:0 auto;overflow:visible;border:0;border-radius:0;padding:40px var(--space);background:var(--surface)}
+.frame-history-title{align-items:flex-start;margin-bottom:28px;gap:24px}
+.frame-history-title h2{font-family:Georgia,serif;font-size:38px;margin-bottom:12px}
+.frame-history-title p{font-size:15px;margin:0}
+.frame-reading-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding-block:20px;border-block:1px solid var(--capture-line);margin-bottom:16px}
+.frame-reading-controls .algorithm-picker{flex:1;min-width:160px}
+.frame-reading-controls select{flex:1}
+#frames-status{font-size:14px;max-width:70ch;min-height:24px;margin-bottom:24px}
+#frame-history-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px}
+.saved-frame{min-width:0;display:flex;flex-direction:column;background:var(--panel);border-radius:var(--capture-radius);overflow:hidden}
+.saved-frame>img{display:block;width:100%;height:240px;object-fit:contain;background:#0b100d}
+.saved-frame-copy{padding:20px;flex:1;display:flex;flex-direction:column}
+.saved-frame h3{font-size:20px;font-weight:500;margin:0 0 6px;color:var(--ink)}
+.saved-frame p{font-size:14px;margin-bottom:16px;overflow-wrap:anywhere}
+.saved-frame .frame-meta{font-size:12px;font-variant-numeric:tabular-nums;margin-bottom:12px}
+.frame-result{flex:1;line-height:1.6}
+.frame-actions{display:flex;gap:12px}.frame-actions button{flex:1;font-size:14px;border-color:var(--capture-line)}
+.frame-actions button:first-child{background:var(--accent);color:var(--surface)}
+.frames-empty{grid-column:1/-1;padding:48px 0}.frames-empty h3{font:28px Georgia,serif;color:var(--ink);margin:0 0 12px}.frames-empty p{max-width:48ch}
+body[data-screen=frames] #settings-toggle{display:none}
+@media(max-width:600px){#frame-history-list{grid-template-columns:1fr}#frame-history-popover{padding-top:28px}.frame-history-title{flex-direction:column;gap:16px}.frame-reading-controls button{flex:1}.frame-reading-controls .algorithm-picker{flex-basis:100%}.saved-frame>img{height:260px}body.walkthrough header h1{display:none}body.walkthrough .camera-controls{grid-template-columns:44px minmax(0,1fr) minmax(130px,1fr);gap:8px}.auto-scan-control{font-size:12px}}
+@media(max-height:500px) and (orientation:landscape){body.walkthrough .scan-bottom{display:none}.camera-controls{padding-top:8px!important;padding-bottom:8px!important}}
+/* A saved-frame acknowledgment stays in the status strip, leaving pixels clear. */
+body.walkthrough #capture-acknowledgment{display:none}
+#video-stage[data-capture-outline=full-frame] #video-boxes{outline:none}
+@media(min-width:800px){body.walkthrough .camera-controls{grid-template-columns:48px 180px 240px;justify-content:center}}

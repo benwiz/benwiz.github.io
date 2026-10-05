@@ -12,23 +12,27 @@
 <header>
   <a class="back-link" href="/" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a>
   <h1>Magic collection</h1>
-  <label class="algorithm-picker" for="capture-algorithm">Reader<select id="capture-algorithm"><option value="ocr">OCR · light</option><option value="vision">Vision · 357 MB</option></select></label>
+  <button id="frame-history-toggle">Frames <span id="frame-history-count">0</span></button>
   <button id="settings-toggle" popovertarget="capture-options" aria-label="More capture options">More</button>
   <button id="view-toggle" aria-controls="collection" aria-expanded="false">Cards <span id="count">0</span></button>
 </header>
 <div class="toast-area"><p id="acknowledgment" role="status" aria-live="polite" aria-atomic="true"></p></div>
-<aside id="frame-history-popover" popover="auto" aria-labelledby="frame-history-title">
-  <div class="frame-history-title"><h2 id="frame-history-title">Captured frames</h2><button popovertarget="frame-history-popover" popovertargetaction="hide" aria-label="Close captured frames">Close</button></div>
-  <p>Recent automatic and manual captures. Cards remain saved when processing stops.</p>
+<section id="frame-history-popover" hidden aria-labelledby="frame-history-title">
+  <div class="frame-history-title"><div><h2 id="frame-history-title">Your frames</h2><p>Capture first. Read card names when you’re ready.</p></div><button id="frames-back">Back to camera</button></div>
+  <div class="frame-reading-controls">
+  <label class="algorithm-picker" for="capture-algorithm">Reader<select id="capture-algorithm"><option value="ocr">OCR · light</option><option value="vision">Vision · 357 MB</option></select></label>
+    <button id="read-frames" class="primary" disabled>Read unread frames</button><button id="stop-frame-reading" hidden>Stop reading</button>
+  </div>
+  <p id="frames-status" role="status" aria-live="polite">Frames stay on this device until you remove them.</p>
+  <div id="reader-preparation-slot"></div>
   <ol id="frame-history-list"></ol>
-</aside>
+</section>
 <aside id="capture-options" popover="auto" aria-label="More capture options">
   <h2>Capture options</h2>
-  <button id="frame-history-toggle">Recent frames <span id="frame-history-count">0</span></button>
   <button id="nav-open-video">Upload recording</button>
   <button id="native-photo">Use native camera</button>
   <button id="sensor-photo" disabled><span id="sensor-support">Sensor unavailable</span></button>
-  <button id="frame-photo" disabled>Photo with markup</button>
+  <button id="frame-photo" disabled>Save camera frame</button>
   <button id="close-video">Stop camera</button>
   <button id="copy-runtime-diagnostics">Copy troubleshooting details</button>
   <p id="runtime-diagnostics-status" role="status"></p>
@@ -45,11 +49,12 @@
       <button id="switch-camera" class="camera-icon camera-switch" aria-label="Switch camera" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg></button>
       <div class="camera-controls">
         <button id="pause-video" class="camera-icon" aria-label="Pause camera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg></button>
-        <label class="auto-scan-control" for="auto-scan"><input id="auto-scan" type="checkbox" checked> Auto scan</label>
-        <button id="quick-frame" class="primary" disabled>Capture<span id="quick-count" class="queue-count" aria-label="Frames pending" hidden></span></button>
+        <label class="auto-scan-control" for="auto-scan"><input id="auto-scan" type="checkbox"> Every 3 seconds</label>
+        <button id="quick-frame" class="primary" disabled>Capture frame<span id="quick-count" class="queue-count" aria-label="Frames pending" hidden></span></button>
       </div>
     </div>
     <div class="scan-bottom">
+      <div class="capture-intro"><h2>Gather your cards.</h2><p>Save the frames you need, then read them together. Capture keeps working without a reader or model download.</p></div>
       <p id="capture-source" hidden></p>
       <p id="camera-legend" hidden><span class="candidate-key">Red: area to check</span> · <span class="captured-key">Solid: captured · move on</span> · <span class="recognized-key">Green: name recognized</span></p>
       <p id="capture-algorithm-note" class="hint">OCR reads names without a labeling model.</p>
@@ -60,7 +65,7 @@
         <button id="capture-preparation-retry" hidden>Retry Vision</button>
       </section>
       <p id="scan-status">Photos stay on this device. Card names are looked up on Scryfall.</p>
-      <div class="actions"><button class="primary" id="start-video">Resume camera</button><button id="native-fallback">Take camera photo</button></div>
+      <div class="actions"><button class="primary" id="start-video">Open camera</button><button id="native-fallback">Take camera photo</button></div>
       <input id="camera-file" type="file" accept="image/*" capture="environment" hidden>
     </div>
   </section>
@@ -118,7 +123,7 @@
         <button id="clear-filters" type="button">Clear filters &amp; search</button>
       </details>
       <p id="search-results" role="status" aria-live="polite" hidden></p>
-      <p id="empty">Your collection is empty. Point the camera at your cards.</p>
+      <p id="empty">Your collection is empty. Capture frames, then read their card names in Frames.</p>
       <ul id="card-list" data-image-view="strips"></ul>
       <p id="collection-note">One entry per card identity. Recognition may miss cards; review your collection and use Edit list to enter quantities from 1 to 999. Repeated scans never change quantities.</p>
     </div>
@@ -135,7 +140,6 @@
     <div class="video-analysis-actions"><button id="video-analysis-start" disabled>Start analysis</button><button id="video-analysis-stop" disabled>Stop</button></div>
   </section>
 </main>
-<section id="title-editor" aria-label="Photo recognition and markup" hidden><div class="editor-image"><canvas id="edit-photo" aria-label="Camera photo"></canvas><svg id="edit-feedback" aria-label="Recognized card names"></svg><svg id="edit-boxes" aria-label="Areas marked for reading"></svg></div><div class="editor-controls"><p id="edit-source"></p><p id="edit-status" role="status" aria-live="polite">Reading photo…</p><p id="edit-hint">Optional: draw a box around a missed card name. Pinch to zoom.</p><div><button id="edit-cancel">Back to camera</button><button id="edit-undo" disabled>Undo mark</button></div></div></section>
 <noscript>This scanner needs JavaScript to read photos and look up cards.</noscript>
 </body>
 </html>
