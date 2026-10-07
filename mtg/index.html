@@ -52,6 +52,25 @@
 @media print{.next-step,.reference{display:none!important}}
 
 .term{scroll-margin-top:24px}.term:target{background:var(--paper2)}.term-link{color:inherit;text-decoration-style:dotted;text-decoration-thickness:1px;text-underline-offset:3px}.term-link:hover{text-decoration-style:solid;color:var(--accent)}.term h3 a{color:inherit;text-decoration:none}.term h3 a:hover{text-decoration:underline}
+
+/* Recommendation examples inherit the atlas paper, ink, typography and controls. */
+.examples-open{margin:4px 0 16px;min-height:44px;border:1px solid var(--accent);border-radius:var(--radius);background:var(--panel);padding:9px 16px;font-weight:600;cursor:pointer}
+.examples-open:hover{background:var(--paper2)}
+.examples-dialog{width:min(760px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:24px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--panel);color:var(--ink);overflow:auto;overscroll-behavior:contain}
+.examples-dialog::backdrop{background:rgb(20 29 20 / .65)}
+.examples-header{position:sticky;top:-24px;z-index:1;background:var(--panel);padding:8px 0;display:flex;align-items:flex-start;gap:16px;justify-content:space-between}
+.examples-header h2{margin:0;font-size:28px}.examples-dialog p{margin:12px 0}.examples-dialog .small{font-size:14px}
+.examples-dialog button{min-height:44px;padding:8px 14px;cursor:pointer;border:1px solid var(--rule);border-radius:var(--radius);background:var(--paper)}
+.examples-dialog button:hover{background:var(--paper2)}.examples-close{flex-shrink:0}
+.examples-body{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:30px;align-items:center;margin:24px 0 16px}
+.example-stack{position:relative;width:100%;max-width:244px;aspect-ratio:488 / 680;margin:8px auto 12px;background:var(--paper2);border-radius:12px;isolation:isolate}
+.example-stack:before,.example-stack:after{content:'';position:absolute;inset:0;border:1px solid var(--rule);border-radius:12px;background:var(--paper2);z-index:-1;transform:rotate(3deg) translate(5px,0)}
+.example-stack:after{transform:rotate(-3deg) translate(-5px,0);z-index:-2}
+.example-stack img[hidden]{display:none}.example-stack img{display:block;width:100%;height:100%;object-fit:contain;border-radius:12px}.example-image-status{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font-size:14px}
+.examples-copy h3{margin:0;font-size:24px}.example-rules{white-space:pre-line;font-size:14px}.examples-copy details{margin-top:16px}.examples-copy summary{cursor:pointer;min-height:44px;padding:8px 0}
+.examples-controls{display:flex;align-items:center;justify-content:center;gap:16px}.examples-controls p{min-width:72px;text-align:center;font-variant-numeric:tabular-nums}
+@media(max-width:540px){.examples-dialog{padding:16px}.examples-header{position:sticky;top:-16px;z-index:1;background:var(--panel);padding:8px 0}.examples-header h2{font-size:24px}.examples-body{grid-template-columns:1fr;gap:16px;margin-top:18px}.example-stack{max-width:190px}.examples-copy h3{font-size:22px}.examples-controls{position:sticky;bottom:-16px;padding:8px 0;background:var(--panel)}}
+@media print{.examples-dialog,.examples-open{display:none!important}}
 </style>
 </head>
 <body>
@@ -95,6 +114,14 @@
 <details class="sources" id="sources"><summary>Scope, sources &amp; what depends on your pool</summary><p class="small">“Pauper draft” is treated here as commons-focused Limited, often a cube. Official constructed Pauper uses 60-card decks; normal draft uses a 40-card minimum. This guide assumes normal Limited deckbuilding and passing. Your exact list and house rules are unknown. One-on-one is the initial match context, and six drafters is an adjustable illustration within your 4 to 8 range.</p><p class="small">Color tools draw on Wizards’ color pie. The pair plans, support checks, three-color overlaps, practice picks, and multiplayer advice are examples. They may not match the archetypes or strongest decks in your pool. Some themes such as counters, auras, artifacts, lifegain, mill, and tribal decks only work when enough suitable cards are included.</p><ol><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/keyword-glossary">Official keyword glossary</a>: printed card abilities</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/making-magic/mechanical-color-pie-2021">Mechanical Color Pie (2021 snapshot)</a>: color tools</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/building-your-first-cube-2016-05-19">Building Your First Cube</a>: the designer chooses pair themes</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/signals-booster-draft-2015-01-19">Signals in Booster Draft</a>: finding an open lane</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/building-mana-base-2014-11-24">Building a Mana Base</a>: castability and colored costs</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/booster-draft-part-3-2015-02-02">Booster Draft, Part 3</a>: construction baselines</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/how-booster-draft-2016-04-05">How to Booster Draft</a>: passing and deck size</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/aggro-decks-2014-09-29">Aggro Decks</a>: early pressure</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/tempo-2015-07-20">Tempo</a>: converting time into advantage</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/midrange-decks-2014-10-27">Midrange Decks</a>: changing roles</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/feature/control-decks-2014-10-06">Control Decks</a>: defending and winning late</li><li><a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/formats/pauper">Official Pauper format</a>: constructed format distinction</li></ol></details>
 <footer class="footer"><span>Color plans and drafting advice</span><span>Independent learning guide · Magic: The Gathering belongs to Wizards of the Coast.</span></footer>
 </div>
+<dialog id="card-examples" class="examples-dialog" aria-labelledby="examples-title" aria-describedby="examples-scope">
+<div class="examples-header"><h2 id="examples-title">Card examples</h2><button type="button" class="examples-close" autofocus>Close</button></div>
+<p id="examples-scope" class="small muted">Illustrative commons from different sets, not cards in your draft pool or a set ranking. Check your cube list and house rules.</p>
+<p id="examples-context" class="small"></p>
+<div class="examples-body"><div class="example-stack" id="example-art"></div><div class="examples-copy" id="example-copy"></div></div>
+<div class="examples-controls"><button type="button" id="example-prev" aria-label="Previous example card">Previous</button><p id="example-position" class="small" role="status" aria-live="polite" aria-atomic="true"></p><button type="button" id="example-next" aria-label="Next example card">Next</button></div>
+<p class="small muted">Use Previous / Next or the left and right arrow keys. Escape, Close, or browser Back returns to the guide. Card images and rules: Scryfall.</p>
+</dialog>
 <noscript><p style="padding:24px">This interactive guide needs JavaScript. Enable it to explore color plans and drafting exercises.</p></noscript>
 <script>
 (()=>{'use strict';
@@ -121,6 +148,1205 @@ const scenarios=[
 {q:'You are white-blue tempo late in the draft, with no fixing. You see these choices. Which is the safest fit for the deck as described?',choices:[['Off-color double-black removal','Very strong, but requires two black mana.'],['On-color three-mana flyer','Supports your plan and existing lands.'],['Red aggressive two-drop','Must be cast early to matter.']],correct:1,why:'The flyer helps you keep attacking and uses the lands already in your deck. Two black symbols are hard to splash, and the red two-drop needs red mana early. Fixing or an exceptionally strong card could change the choice.'},
 {q:'Early in pack one: your first two picks are white. For several picks, good green creatures arrive while the white cards are weak. What does this evidence suggest?',choices:[['White is locked in','Never abandon the first picks.'],['Explore green','Take useful cards and watch whether the supply continues.'],['Force a third color','Collect every strong card regardless of mana.']],correct:1,why:'Several good green cards suggest green may be available. Taking them leaves room for white-green or a later change of colors. One leftover card would tell you less, and you still do not know what everyone is drafting.'}
 ];
+
+// Common printings and Oracle text verified against Scryfall on 2026-10-07. Embedded rules keep examples usable offline;
+// only card art uses the same Scryfall image source as the Magic scanner.
+const exampleCards = {
+  "Akroan Skyguard": {
+    "name": "Akroan Skyguard",
+    "mana_cost": "{1}{W}",
+    "type_line": "Creature — Human Soldier",
+    "oracle_text": "Flying\nHeroic — Whenever you cast a spell that targets this creature, put a +1/+1 counter on this creature.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "bng",
+    "collector_number": "3",
+    "scryfall_uri": "https://scryfall.com/card/bng/3/akroan-skyguard?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/d/5/d55e85c3-234e-49c4-a307-96fb4497eea8.jpg?1783939586"
+  },
+  "Archaeomancer": {
+    "name": "Archaeomancer",
+    "mana_cost": "{2}{U}{U}",
+    "type_line": "Creature — Human Wizard",
+    "oracle_text": "When this creature enters, return target instant or sorcery card from your graveyard to your hand.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "m13",
+    "collector_number": "41",
+    "scryfall_uri": "https://scryfall.com/card/m13/41/archaeomancer?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/7/3/73c6d1be-55ad-4ee4-b044-88438e9b78cc.jpg?1783940513"
+  },
+  "Burning-Tree Emissary": {
+    "name": "Burning-Tree Emissary",
+    "mana_cost": "{R/G}{R/G}",
+    "type_line": "Creature — Human Shaman",
+    "oracle_text": "When this creature enters, add {R}{G}.",
+    "colors": [
+      "G",
+      "R"
+    ],
+    "rarity": "common",
+    "set": "mm3",
+    "collector_number": "207",
+    "scryfall_uri": "https://scryfall.com/card/mm3/207/burning-tree-emissary?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/4/8/48335a70-151d-4d92-8365-e2ad9ac153ac.jpg?1783936601"
+  },
+  "Carrion Feeder": {
+    "name": "Carrion Feeder",
+    "mana_cost": "{B}",
+    "type_line": "Creature — Zombie",
+    "oracle_text": "This creature can't block.\nSacrifice a creature: Put a +1/+1 counter on this creature.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "scg",
+    "collector_number": "59",
+    "scryfall_uri": "https://scryfall.com/card/scg/59/carrion-feeder?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/8/88042031-64af-4f84-85d5-95992b43aa6c.jpg?1783944881"
+  },
+  "Cartouche of Solidarity": {
+    "name": "Cartouche of Solidarity",
+    "mana_cost": "{W}",
+    "type_line": "Enchantment — Aura Cartouche",
+    "oracle_text": "Enchant creature you control\nWhen this Aura enters, create a 1/1 white Warrior creature token with vigilance.\nEnchanted creature gets +1/+1 and has first strike. (It deals combat damage before creatures without first strike.)",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "akh",
+    "collector_number": "7",
+    "scryfall_uri": "https://scryfall.com/card/akh/7/cartouche-of-solidarity?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/9/0/90eaf94e-85a7-4958-aa58-8e2fe44db58d.jpg?1783936543"
+  },
+  "Colossal Dreadmaw": {
+    "name": "Colossal Dreadmaw",
+    "mana_cost": "{4}{G}{G}",
+    "type_line": "Creature — Dinosaur",
+    "oracle_text": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "xln",
+    "collector_number": "180",
+    "scryfall_uri": "https://scryfall.com/card/xln/180/colossal-dreadmaw?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/7/6/76ac5b70-47db-4cdb-91e7-e5c18c42e516.jpg?1783935730"
+  },
+  "Counterspell": {
+    "name": "Counterspell",
+    "mana_cost": "{U}{U}",
+    "type_line": "Instant",
+    "oracle_text": "Counter target spell.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "ice",
+    "collector_number": "64",
+    "scryfall_uri": "https://scryfall.com/card/ice/64/counterspell?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/a/e/aedbcbaa-40f0-485f-8427-778edc2d2ec0.jpg?1783947516"
+  },
+  "Doom Blade": {
+    "name": "Doom Blade",
+    "mana_cost": "{1}{B}",
+    "type_line": "Instant",
+    "oracle_text": "Destroy target nonblack creature.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "m10",
+    "collector_number": "93",
+    "scryfall_uri": "https://scryfall.com/card/m10/93/doom-blade?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/6/e/6e19acff-f3dd-417a-a9ab-ea3e36c1ba61.jpg?1783942383"
+  },
+  "Doomed Traveler": {
+    "name": "Doomed Traveler",
+    "mana_cost": "{W}",
+    "type_line": "Creature — Human Soldier",
+    "oracle_text": "When this creature dies, create a 1/1 white Spirit creature token with flying.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "isd",
+    "collector_number": "11",
+    "scryfall_uri": "https://scryfall.com/card/isd/11/doomed-traveler?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/6/5/652c3bbb-cac8-47ad-81de-41e954e17a29.jpg?1783940996"
+  },
+  "Ephemerate": {
+    "name": "Ephemerate",
+    "mana_cost": "{W}",
+    "type_line": "Instant",
+    "oracle_text": "Exile target creature you control, then return it to the battlefield under its owner's control.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "mh1",
+    "collector_number": "7",
+    "scryfall_uri": "https://scryfall.com/card/mh1/7/ephemerate?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/2/d/2da5f3f8-5eef-498f-ba2c-2f3fbc3745aa.jpg?1783933164"
+  },
+  "Falkenrath Noble": {
+    "name": "Falkenrath Noble",
+    "mana_cost": "{3}{B}",
+    "type_line": "Creature — Vampire Noble",
+    "oracle_text": "Flying\nWhenever this creature or another creature dies, target player loses 1 life and you gain 1 life.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "mm3",
+    "collector_number": "70",
+    "scryfall_uri": "https://scryfall.com/card/mm3/70/falkenrath-noble?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/2/8/28f6e33d-9258-4bad-8f39-31afff272415.jpg?1783936656"
+  },
+  "Fortify": {
+    "name": "Fortify",
+    "mana_cost": "{2}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Choose one —\n• Creatures you control get +2/+0 until end of turn.\n• Creatures you control get +0/+2 until end of turn.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "tsp",
+    "collector_number": "19",
+    "scryfall_uri": "https://scryfall.com/card/tsp/19/fortify?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/f/d/fd063dc7-a35c-44c9-9f8d-b7bb2dc95bec.jpg?1783943254"
+  },
+  "Ghostly Flicker": {
+    "name": "Ghostly Flicker",
+    "mana_cost": "{2}{U}",
+    "type_line": "Instant",
+    "oracle_text": "Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "avr",
+    "collector_number": "57",
+    "scryfall_uri": "https://scryfall.com/card/avr/57/ghostly-flicker?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/f/0/f0a44373-0c50-4e14-a7c6-0de66796b81e.jpg?1783940717"
+  },
+  "Goblin Bushwhacker": {
+    "name": "Goblin Bushwhacker",
+    "mana_cost": "{R}",
+    "type_line": "Creature — Goblin Warrior",
+    "oracle_text": "Kicker {R} (You may pay an additional {R} as you cast this spell.)\nWhen this creature enters, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "zen",
+    "collector_number": "125",
+    "scryfall_uri": "https://scryfall.com/card/zen/125/goblin-bushwhacker?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/4/0/4085a5bf-a71b-4c73-9b39-0dcc328fe11b.jpg?1783942145"
+  },
+  "Gods Willing": {
+    "name": "Gods Willing",
+    "mana_cost": "{W}",
+    "type_line": "Instant",
+    "oracle_text": "Target creature you control gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)\nScry 1.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "ths",
+    "collector_number": "16",
+    "scryfall_uri": "https://scryfall.com/card/ths/16/gods-willing?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/a/b/abafabb3-b2e7-4d78-b4b7-d8f701d3ee8b.jpg?1783939814"
+  },
+  "Gore-House Chainwalker": {
+    "name": "Gore-House Chainwalker",
+    "mana_cost": "{1}{R}",
+    "type_line": "Creature — Human Warrior",
+    "oracle_text": "Unleash (You may have this creature enter with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "rtr",
+    "collector_number": "96",
+    "scryfall_uri": "https://scryfall.com/card/rtr/96/gore-house-chainwalker?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/5/6/56ba132f-95fc-4b99-a1dc-ebe6f622bb41.jpg?1783940355"
+  },
+  "Gravedigger": {
+    "name": "Gravedigger",
+    "mana_cost": "{3}{B}",
+    "type_line": "Creature — Zombie",
+    "oracle_text": "When this creature enters, you may return target creature card from your graveyard to your hand.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "tmp",
+    "collector_number": "137",
+    "scryfall_uri": "https://scryfall.com/card/tmp/137/gravedigger?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/7/872f3328-c65d-49eb-a1bb-ca40e9c05627.jpg?1783946639"
+  },
+  "Gurmag Angler": {
+    "name": "Gurmag Angler",
+    "mana_cost": "{6}{B}",
+    "type_line": "Creature — Zombie Fish",
+    "oracle_text": "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "frf",
+    "collector_number": "72",
+    "scryfall_uri": "https://scryfall.com/card/frf/72/gurmag-angler?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/c/6/c60a8cf1-a8c7-4f45-bbd3-188fab2652f9.jpg?1783938696"
+  },
+  "Hunger of the Howlpack": {
+    "name": "Hunger of the Howlpack",
+    "mana_cost": "{G}",
+    "type_line": "Instant",
+    "oracle_text": "Put a +1/+1 counter on target creature.\nMorbid — Put three +1/+1 counters on that creature instead if a creature died this turn.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "dka",
+    "collector_number": "119",
+    "scryfall_uri": "https://scryfall.com/card/dka/119/hunger-of-the-howlpack?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/b/3/b38a0dbc-3ebd-4f87-a5fb-bc2ee8a48a8d.jpg?1783940804"
+  },
+  "Kiln Fiend": {
+    "name": "Kiln Fiend",
+    "mana_cost": "{1}{R}",
+    "type_line": "Creature — Elemental Beast",
+    "oracle_text": "Whenever you cast an instant or sorcery spell, this creature gets +3/+0 until end of turn.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "roe",
+    "collector_number": "153",
+    "scryfall_uri": "https://scryfall.com/card/roe/153/kiln-fiend?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/0/c/0c584268-67c3-411b-a26c-aee3adf23872.jpg?1783941974"
+  },
+  "Kor Skyfisher": {
+    "name": "Kor Skyfisher",
+    "mana_cost": "{1}{W}",
+    "type_line": "Creature — Kor Soldier",
+    "oracle_text": "Flying\nWhen this creature enters, return a permanent you control to its owner's hand.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "zen",
+    "collector_number": "23",
+    "scryfall_uri": "https://scryfall.com/card/zen/23/kor-skyfisher?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/b/b/bb2e9465-f5ba-4c7b-9f03-d40dc8394acd.jpg?1783942172"
+  },
+  "Krenko's Command": {
+    "name": "Krenko's Command",
+    "mana_cost": "{1}{R}",
+    "type_line": "Sorcery",
+    "oracle_text": "Create two 1/1 red Goblin creature tokens.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "m13",
+    "collector_number": "139",
+    "scryfall_uri": "https://scryfall.com/card/m13/139/krenkos-command?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/4/84df41e9-e973-4441-b17f-434517134d46.jpg?1783940481"
+  },
+  "Kuldotha Rebirth": {
+    "name": "Kuldotha Rebirth",
+    "mana_cost": "{R}",
+    "type_line": "Sorcery",
+    "oracle_text": "As an additional cost to cast this spell, sacrifice an artifact.\nCreate three 1/1 red Goblin creature tokens.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "som",
+    "collector_number": "96",
+    "scryfall_uri": "https://scryfall.com/card/som/96/kuldotha-rebirth?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/7/e/7ee07266-a95d-4cd8-9863-1664922e9490.jpg?1783941723"
+  },
+  "Lightning Bolt": {
+    "name": "Lightning Bolt",
+    "mana_cost": "{R}",
+    "type_line": "Instant",
+    "oracle_text": "Lightning Bolt deals 3 damage to any target.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "lea",
+    "collector_number": "161",
+    "scryfall_uri": "https://scryfall.com/card/lea/161/lightning-bolt?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/d/5/d573ef03-4730-45aa-93dd-e45ac1dbaf4a.jpg?1783948684"
+  },
+  "Llanowar Elves": {
+    "name": "Llanowar Elves",
+    "mana_cost": "{G}",
+    "type_line": "Creature — Elf Druid",
+    "oracle_text": "{T}: Add {G}.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "lea",
+    "collector_number": "210",
+    "scryfall_uri": "https://scryfall.com/card/lea/210/llanowar-elves?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/d/4/d4f1cc9e-4f99-4c26-ac1b-8ef069fa8ceb.jpg?1783948674"
+  },
+  "Lone Missionary": {
+    "name": "Lone Missionary",
+    "mana_cost": "{1}{W}",
+    "type_line": "Creature — Kor Monk",
+    "oracle_text": "When this creature enters, you gain 4 life.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "roe",
+    "collector_number": "34",
+    "scryfall_uri": "https://scryfall.com/card/roe/34/lone-missionary?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/f/d/fdc00f4b-ca9a-468a-91e1-c81fe6585765.jpg?1783942004"
+  },
+  "Man-o'-War": {
+    "name": "Man-o'-War",
+    "mana_cost": "{2}{U}",
+    "type_line": "Creature — Jellyfish",
+    "oracle_text": "When this creature enters, return target creature to its owner's hand.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "vis",
+    "collector_number": "37",
+    "scryfall_uri": "https://scryfall.com/card/vis/37/man-o-war?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/4/d/4dbf9bf9-75cd-4b25-a3a1-43b7e029700b.jpg?1783946999"
+  },
+  "Mogg War Marshal": {
+    "name": "Mogg War Marshal",
+    "mana_cost": "{1}{R}",
+    "type_line": "Creature — Goblin Warrior",
+    "oracle_text": "Echo {1}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen this creature enters or dies, create a 1/1 red Goblin creature token.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "tsp",
+    "collector_number": "170",
+    "scryfall_uri": "https://scryfall.com/card/tsp/170/mogg-war-marshal?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/b/8b9e0bdb-b615-447a-b80d-d7244c25c56e.jpg?1783943219"
+  },
+  "Mulldrifter": {
+    "name": "Mulldrifter",
+    "mana_cost": "{4}{U}",
+    "type_line": "Creature — Elemental",
+    "oracle_text": "Flying\nWhen this creature enters, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "lrw",
+    "collector_number": "76",
+    "scryfall_uri": "https://scryfall.com/card/lrw/76/mulldrifter?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/a/9/a97cfefa-ade7-49f6-b2aa-1118b9db4935.jpg?1783942900"
+  },
+  "Nest Invader": {
+    "name": "Nest Invader",
+    "mana_cost": "{1}{G}",
+    "type_line": "Creature — Eldrazi Drone",
+    "oracle_text": "When this creature enters, create a 0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this token: Add {C}.\"",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "roe",
+    "collector_number": "201",
+    "scryfall_uri": "https://scryfall.com/card/roe/201/nest-invader?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/2/4/24517d9c-6cde-41e8-9e82-ee73f069379a.jpg?1783941961"
+  },
+  "Perilous Myr": {
+    "name": "Perilous Myr",
+    "mana_cost": "{2}",
+    "type_line": "Artifact Creature — Phyrexian Myr",
+    "oracle_text": "When this creature dies, it deals 2 damage to any target.",
+    "colors": [],
+    "rarity": "common",
+    "set": "som",
+    "collector_number": "192",
+    "scryfall_uri": "https://scryfall.com/card/som/192/perilous-myr?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/4/b/4b942605-eb4a-452d-9b07-a4f912f96958.jpg?1783941699"
+  },
+  "Ponder": {
+    "name": "Ponder",
+    "mana_cost": "{U}",
+    "type_line": "Sorcery",
+    "oracle_text": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "lrw",
+    "collector_number": "79",
+    "scryfall_uri": "https://scryfall.com/card/lrw/79/ponder?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/b/a/ba6b6fc5-5077-4812-b8e9-906783dbaf67.jpg?1783942899"
+  },
+  "Raise the Alarm": {
+    "name": "Raise the Alarm",
+    "mana_cost": "{1}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Create two 1/1 white Soldier creature tokens.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "mrd",
+    "collector_number": "16",
+    "scryfall_uri": "https://scryfall.com/card/mrd/16/raise-the-alarm?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/4/b/4be510c8-fc01-4374-ac04-7968d24480fe.jpg?1783944560"
+  },
+  "Rally the Peasants": {
+    "name": "Rally the Peasants",
+    "mana_cost": "{2}{W}",
+    "type_line": "Instant",
+    "oracle_text": "Creatures you control get +2/+0 until end of turn.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "ema",
+    "collector_number": "25",
+    "scryfall_uri": "https://scryfall.com/card/ema/25/rally-the-peasants?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/b/9/b9f3eab5-89fb-440a-b56a-b35e2dca44f0.jpg?1783937628"
+  },
+  "Rancor": {
+    "name": "Rancor",
+    "mana_cost": "{G}",
+    "type_line": "Enchantment — Aura",
+    "oracle_text": "Enchant creature\nEnchanted creature gets +2/+0 and has trample.\nWhen this Aura is put into a graveyard from the battlefield, return it to its owner's hand.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "ulg",
+    "collector_number": "110",
+    "scryfall_uri": "https://scryfall.com/card/ulg/110/rancor?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/5/9/59e256c2-38df-4012-9308-ce17dd889e5f.jpg?1783946229"
+  },
+  "Satyr Wayfinder": {
+    "name": "Satyr Wayfinder",
+    "mana_cost": "{1}{G}",
+    "type_line": "Creature — Satyr",
+    "oracle_text": "When this creature enters, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "bng",
+    "collector_number": "136",
+    "scryfall_uri": "https://scryfall.com/card/bng/136/satyr-wayfinder?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/1/3/13c5a1ce-932a-4b3d-8b86-ed920e646afc.jpg?1783939529"
+  },
+  "Thought Scour": {
+    "name": "Thought Scour",
+    "mana_cost": "{U}",
+    "type_line": "Instant",
+    "oracle_text": "Target player mills two cards.\nDraw a card.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "dka",
+    "collector_number": "52",
+    "scryfall_uri": "https://scryfall.com/card/dka/52/thought-scour?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/8/88bf1ebb-9d85-4b9b-a614-c7f965c0893d.jpg?1783940835"
+  },
+  "Thraben Inspector": {
+    "name": "Thraben Inspector",
+    "mana_cost": "{W}",
+    "type_line": "Creature — Human Soldier",
+    "oracle_text": "When this creature enters, investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "soi",
+    "collector_number": "44",
+    "scryfall_uri": "https://scryfall.com/card/soi/44/thraben-inspector?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/d/1/d140c3b7-ca78-483d-baeb-307b624fea8b.jpg?1783937806"
+  },
+  "Travel Preparations": {
+    "name": "Travel Preparations",
+    "mana_cost": "{1}{G}",
+    "type_line": "Sorcery",
+    "oracle_text": "Put a +1/+1 counter on each of up to two target creatures.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "isd",
+    "collector_number": "206",
+    "scryfall_uri": "https://scryfall.com/card/isd/206/travel-preparations?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/e/9/e9654ae7-af2c-4956-be3a-68befa33f523.jpg?1783940907"
+  },
+  "Unsummon": {
+    "name": "Unsummon",
+    "mana_cost": "{U}",
+    "type_line": "Instant",
+    "oracle_text": "Return target creature to its owner's hand.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "lea",
+    "collector_number": "86",
+    "scryfall_uri": "https://scryfall.com/card/lea/86/unsummon?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/8/5/8512f2c1-6361-4b79-843f-80b6bceeeb99.jpg?1783948699"
+  },
+  "Wind Drake": {
+    "name": "Wind Drake",
+    "mana_cost": "{2}{U}",
+    "type_line": "Creature — Drake",
+    "oracle_text": "Flying",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "por",
+    "collector_number": "77",
+    "scryfall_uri": "https://scryfall.com/card/por/77/wind-drake?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/5/4/5486d2dc-9a5d-4f58-a5ec-d94de54b852f.jpg?1783946832"
+  },
+  "Young Wolf": {
+    "name": "Young Wolf",
+    "mana_cost": "{G}",
+    "type_line": "Creature — Wolf",
+    "oracle_text": "Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "dka",
+    "collector_number": "134",
+    "scryfall_uri": "https://scryfall.com/card/dka/134/young-wolf?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/0/c/0c39aa40-ef5f-40f1-a6dd-fbce91172c50.jpg?1783940798"
+  }
+};
+const planExamples = {
+  "WU": [
+    [
+      [
+        "Wind Drake",
+        "A three-mana flyer starts the airborne clock while ground blockers defend."
+      ],
+      [
+        "Unsummon",
+        "Returning a blocker buys an attack; the opponent can replay it, so keep pressure on."
+      ],
+      [
+        "Gods Willing",
+        "Protection can save a white threat from targeted removal or help it pass a blocker."
+      ]
+    ],
+    [
+      [
+        "Thraben Inspector",
+        "Its enter-the-battlefield ability makes a Clue, giving blink a useful target."
+      ],
+      [
+        "Ephemerate",
+        "Exile and return your creature to trigger its ability again; rebound can repeat this next turn."
+      ],
+      [
+        "Mulldrifter",
+        "Drawing two cards on entry supplies value to reuse and a flyer to finish with."
+      ]
+    ]
+  ],
+  "WB": [
+    [
+      [
+        "Doomed Traveler",
+        "When this body dies it leaves a flying Spirit, supplying another creature for the engine."
+      ],
+      [
+        "Carrion Feeder",
+        "A free sacrifice outlet turns expendable creatures into counters; it cannot block."
+      ],
+      [
+        "Falkenrath Noble",
+        "Each creature death drains a target player. In multiplayer this targets one opponent, not all opponents."
+      ]
+    ],
+    [
+      [
+        "Lone Missionary",
+        "A body plus four life buys time and remains useful to trade or recover."
+      ],
+      [
+        "Doom Blade",
+        "Answer a key nonblack creature instead of spending removal on every threat."
+      ],
+      [
+        "Gravedigger",
+        "Return a useful creature from your graveyard to your hand to rebuild after trades."
+      ]
+    ]
+  ],
+  "WR": [
+    [
+      [
+        "Raise the Alarm",
+        "Two bodies for two mana build the early board that a wide attack needs."
+      ],
+      [
+        "Rally the Peasants",
+        "Giving your creatures +2/+0 rewards a broad board; red mana enables its flashback."
+      ],
+      [
+        "Lightning Bolt",
+        "Three damage can clear a small blocker or finish a damaged opponent."
+      ]
+    ],
+    [
+      [
+        "Akroan Skyguard",
+        "Targeting it with your spell adds a +1/+1 counter, building an evasive threat."
+      ],
+      [
+        "Cartouche of Solidarity",
+        "Targeting your creature supplies an aura and a backup token; losing the enchanted creature can still cost you value."
+      ],
+      [
+        "Gods Willing",
+        "Protection helps preserve your invested threat; a protection color matching your aura will also make that aura fall off."
+      ]
+    ]
+  ],
+  "WG": [
+    [
+      [
+        "Raise the Alarm",
+        "Two tokens add the board width needed before spending a card on a team boost."
+      ],
+      [
+        "Nest Invader",
+        "One card supplies a creature and an Eldrazi Spawn; keeping the Spawn adds an attacker for a boost."
+      ],
+      [
+        "Fortify",
+        "Giving all your creatures +2/+0 rewards a broad attacking board; its defensive mode can instead help them survive combat."
+      ]
+    ],
+    [
+      [
+        "Young Wolf",
+        "Undying returns it with a counter if it died with no +1/+1 counters, making a resilient early body."
+      ],
+      [
+        "Travel Preparations",
+        "Counters on up to two creatures grow your board; white mana pays its flashback."
+      ],
+      [
+        "Rancor",
+        "Trample helps a large creature push through small blockers, and the aura can return to your hand."
+      ]
+    ]
+  ],
+  "UB": [
+    [
+      [
+        "Doom Blade",
+        "Cheap removal answers a nonblack threat so you can survive to your late game."
+      ],
+      [
+        "Counterspell",
+        "Two blue mana answers a spell before it resolves; it cannot remove a creature already in play."
+      ],
+      [
+        "Mulldrifter",
+        "Two cards on entry refill your hand, then the flying body supplies a win condition."
+      ]
+    ],
+    [
+      [
+        "Thought Scour",
+        "Draw a card while milling yourself for two cards, potentially stocking useful recursion targets."
+      ],
+      [
+        "Gravedigger",
+        "Recover a useful creature to your hand after it was milled or traded."
+      ],
+      [
+        "Mulldrifter",
+        "A target worth recovering: its entry draws two cards, and its flying body can finish the game."
+      ]
+    ]
+  ],
+  "UR": [
+    [
+      [
+        "Kiln Fiend",
+        "Casting an instant or sorcery gives it +3/+0 this turn; creatures and other spell types do not trigger it."
+      ],
+      [
+        "Ponder",
+        "A cheap sorcery selects your next draws while triggering Kiln Fiend."
+      ],
+      [
+        "Lightning Bolt",
+        "An instant clears a small blocker and triggers your spell threat in the same play."
+      ]
+    ],
+    [
+      [
+        "Lightning Bolt",
+        "Cheap burn buys time against small threats; it will not answer every large creature."
+      ],
+      [
+        "Archaeomancer",
+        "Its entry returns an instant or sorcery from your graveyard to your hand for another use."
+      ],
+      [
+        "Mulldrifter",
+        "Drawing cards and leaving a flyer provides the resources and finisher for a longer game."
+      ]
+    ]
+  ],
+  "UG": [
+    [
+      [
+        "Llanowar Elves",
+        "One mana invested early supplies extra green mana for threats on later turns."
+      ],
+      [
+        "Colossal Dreadmaw",
+        "A six-mana 6/6 with trample gives acceleration a worthwhile destination."
+      ],
+      [
+        "Mulldrifter",
+        "Draw two cards to reload after spending cards on mana; its flyer also pressures the opponent."
+      ]
+    ],
+    [
+      [
+        "Young Wolf",
+        "A cheap resilient body starts pressure while leaving mana for interaction."
+      ],
+      [
+        "Unsummon",
+        "Temporarily move a blocker out of the way while your creature attacks."
+      ],
+      [
+        "Rancor",
+        "Power and trample make a small threat relevant; keep a creature available to carry the aura."
+      ]
+    ]
+  ],
+  "BR": [
+    [
+      [
+        "Gore-House Chainwalker",
+        "Unleash makes this two-drop a 3/2 attacker, at the cost of being unable to block."
+      ],
+      [
+        "Doom Blade",
+        "Remove a nonblack blocker so early attackers can keep dealing damage."
+      ],
+      [
+        "Lightning Bolt",
+        "Burn can clear another small blocker or close the game after combat damage."
+      ]
+    ],
+    [
+      [
+        "Mogg War Marshal",
+        "Entry and death each make a Goblin token, supplying multiple expendable bodies."
+      ],
+      [
+        "Carrion Feeder",
+        "Sacrifice a creature for a counter whenever you need an outlet; it cannot block."
+      ],
+      [
+        "Falkenrath Noble",
+        "Creature deaths drain a target player, so sacrificing fodder adds damage and life."
+      ]
+    ]
+  ],
+  "BG": [
+    [
+      [
+        "Satyr Wayfinder",
+        "Its entry finds a land among the top four cards and puts the rest in your graveyard, supplying potential recursion targets."
+      ],
+      [
+        "Gravedigger",
+        "Return a creature from your graveyard to your hand, recovering value after a trade or self-mill."
+      ],
+      [
+        "Gurmag Angler",
+        "Delve can use graveyard cards to pay generic mana for a 5/5; leave important recursion targets unexiled."
+      ]
+    ],
+    [
+      [
+        "Young Wolf",
+        "An early body with undying can trade and return, helping you develop before expensive threats."
+      ],
+      [
+        "Doom Blade",
+        "Clear a key nonblack creature that would stop your board from attacking."
+      ],
+      [
+        "Colossal Dreadmaw",
+        "A large trampling finisher helps break stalls; keep enough early plays to reach six mana."
+      ]
+    ]
+  ],
+  "RG": [
+    [
+      [
+        "Burning-Tree Emissary",
+        "Its entry adds red and green mana, letting you develop another play that turn."
+      ],
+      [
+        "Lightning Bolt",
+        "Clear a small blocker; larger blockers may need combat damage as well."
+      ],
+      [
+        "Rancor",
+        "Extra power and trample turn efficient bodies into attacks that push damage through."
+      ]
+    ],
+    [
+      [
+        "Llanowar Elves",
+        "Early acceleration helps cast your top end before normal land drops would allow."
+      ],
+      [
+        "Colossal Dreadmaw",
+        "A 6/6 with trample turns extra mana into a threat that can attack through small blockers."
+      ],
+      [
+        "Lightning Bolt",
+        "Cheap burn handles a small attacker while you set up, or adds reach after a large attack."
+      ]
+    ]
+  ],
+  "W": [
+    [
+      [
+        "Raise the Alarm",
+        "Two bodies for two mana establish a wide board."
+      ],
+      [
+        "Fortify",
+        "Boost every attacker after developing enough bodies to reward a team spell."
+      ],
+      [
+        "Thraben Inspector",
+        "An early body plus a Clue helps build the board and refill later."
+      ]
+    ],
+    [
+      [
+        "Akroan Skyguard",
+        "A cheap flying threat can attack over ground blockers."
+      ],
+      [
+        "Gods Willing",
+        "Protect a creature from targeted interaction or help it attack through a blocker."
+      ],
+      [
+        "Lone Missionary",
+        "A ground blocker and four life help win the race while flyers attack."
+      ]
+    ],
+    [
+      [
+        "Thraben Inspector",
+        "Its entry makes a Clue, so replaying it supplies more value."
+      ],
+      [
+        "Kor Skyfisher",
+        "Its entry returns a permanent you control to your hand; return Inspector to cast it again."
+      ],
+      [
+        "Lone Missionary",
+        "Replaying a creature with a useful entry effect can buy more time with four life."
+      ]
+    ]
+  ],
+  "U": [
+    [
+      [
+        "Wind Drake",
+        "A flying threat establishes a clock."
+      ],
+      [
+        "Unsummon",
+        "Returning a blocker buys time to attack, but the opponent can replay it."
+      ],
+      [
+        "Ponder",
+        "A cheap selection spell helps find the next threat or tempo play."
+      ]
+    ],
+    [
+      [
+        "Counterspell",
+        "Stop an important spell before it resolves; keep two blue mana available."
+      ],
+      [
+        "Mulldrifter",
+        "Draw two cards to gain resources and leave a flying finisher."
+      ],
+      [
+        "Unsummon",
+        "Cheap temporary interaction can buy a turn, but cannot replace a lasting answer."
+      ]
+    ],
+    [
+      [
+        "Man-o'-War",
+        "Its entry returns a creature to its owner’s hand, providing an effect worth reusing."
+      ],
+      [
+        "Ghostly Flicker",
+        "Exile and return two of your artifacts, creatures, or lands to reuse entry abilities."
+      ],
+      [
+        "Mulldrifter",
+        "Drawing two cards on entry makes it a profitable blink target and an evasive finisher."
+      ]
+    ]
+  ],
+  "B": [
+    [
+      [
+        "Doom Blade",
+        "Remove a key nonblack creature so your bodies can trade profitably."
+      ],
+      [
+        "Gravedigger",
+        "Recover a creature from your graveyard to your hand after a trade."
+      ],
+      [
+        "Gurmag Angler",
+        "A 5/5 can finish after resources run low; delve must not exile the targets you want to recover."
+      ]
+    ],
+    [
+      [
+        "Gravedigger",
+        "Recover a spent creature to your hand, providing more bodies to cast and use as sacrifice fodder."
+      ],
+      [
+        "Carrion Feeder",
+        "Sacrifice an expendable creature for a counter whenever you need an outlet."
+      ],
+      [
+        "Falkenrath Noble",
+        "Creature deaths drain a target player, rewarding sacrifices and combat trades."
+      ]
+    ],
+    [
+      [
+        "Carrion Feeder",
+        "A one-mana attacker can grow when another creature is expendable; it cannot block."
+      ],
+      [
+        "Doom Blade",
+        "Remove a nonblack blocker to keep attacks profitable."
+      ],
+      [
+        "Gurmag Angler",
+        "Delve can make a 5/5 cheaper after early trades, adding a larger threat."
+      ]
+    ]
+  ],
+  "R": [
+    [
+      [
+        "Gore-House Chainwalker",
+        "Unleash makes a two-mana 3/2 attacker that cannot block."
+      ],
+      [
+        "Lightning Bolt",
+        "Clear a small blocker or finish an opponent after combat damage."
+      ],
+      [
+        "Goblin Bushwhacker",
+        "Paying kicker gives your team +1/+0 and haste for a burst of pressure."
+      ]
+    ],
+    [
+      [
+        "Kiln Fiend",
+        "Casting an instant or sorcery gives it +3/+0 this turn; creatures and other spell types do not trigger it."
+      ],
+      [
+        "Krenko's Command",
+        "A two-mana sorcery makes two Goblins while triggering Kiln Fiend."
+      ],
+      [
+        "Lightning Bolt",
+        "An instant clears a small blocker while triggering your spell threat."
+      ]
+    ],
+    [
+      [
+        "Perilous Myr",
+        "A colorless artifact body deals two damage to any target when it dies."
+      ],
+      [
+        "Kuldotha Rebirth",
+        "Sacrifice an artifact such as Perilous Myr to make three Goblin tokens."
+      ],
+      [
+        "Goblin Bushwhacker",
+        "With kicker, give the tokens +1/+0 and haste to turn the setup into an attack."
+      ]
+    ]
+  ],
+  "G": [
+    [
+      [
+        "Young Wolf",
+        "A cheap resilient creature develops the board before tricks."
+      ],
+      [
+        "Hunger of the Howlpack",
+        "A counter grows a creature; morbid gives three counters if a creature died this turn."
+      ],
+      [
+        "Rancor",
+        "Power and trample help damage get through small blockers."
+      ]
+    ],
+    [
+      [
+        "Llanowar Elves",
+        "Early acceleration produces extra green mana on later turns."
+      ],
+      [
+        "Colossal Dreadmaw",
+        "A six-mana 6/6 with trample gives the extra mana a useful destination."
+      ],
+      [
+        "Nest Invader",
+        "An early body and a Spawn defend; sacrificing the Spawn supplies one colorless mana once."
+      ]
+    ],
+    [
+      [
+        "Young Wolf",
+        "Undying returns it with a counter only if it died without +1/+1 counters."
+      ],
+      [
+        "Hunger of the Howlpack",
+        "Permanent counters grow a body; adding a counter to Young Wolf turns off its undying until it has no counters."
+      ],
+      [
+        "Satyr Wayfinder",
+        "Its entry selects a land and fills the graveyard; draft this role only if your pool rewards the setup."
+      ]
+    ]
+  ]
+};
+const practiceExamples = [
+  [
+    [
+      "Gore-House Chainwalker",
+      "This on-color two-drop fills the scenario’s early attacker gap; unleash trades blocking for more power."
+    ]
+  ],
+  [
+    [
+      "Carrion Feeder",
+      "A one-mana, repeatable sacrifice outlet supplies the missing link between tokens and death payoffs."
+    ]
+  ],
+  [
+    [
+      "Wind Drake",
+      "This three-mana flyer matches white-blue tempo and can be cast with the deck’s existing blue lands."
+    ]
+  ],
+  [
+    [
+      "Nest Invader",
+      "An example of a useful early green creature to explore when green keeps arriving. The actual signal comes from repeated good cards, not this illustration."
+    ]
+  ]
+];
+const examplesButton='<button type="button" class="examples-open" data-examples="plan" aria-haspopup="dialog" aria-controls="card-examples">See example cards</button>';
+const exampleDialog=document.getElementById('card-examples');
+let activeExamples=[],exampleIndex=0,exampleTrigger=null,imageTimer=null,oldOverflow='',closingExamples=false;
+function renderExample(){
+  clearTimeout(imageTimer);
+  const [name,reason]=activeExamples[exampleIndex],card=exampleCards[name];
+  const art=document.getElementById('example-art'),copy=document.getElementById('example-copy');
+  copy.innerHTML=`<h3>${escape(card.name)}</h3><p>${escape(reason)}</p><details><summary>Card text &amp; printing</summary><p class="small">${escape(card.mana_cost)} · ${escape(card.type_line)}</p><p class="example-rules">${escape(card.oracle_text)}</p><p class="small">Common · ${escape(card.set.toUpperCase())} #${escape(card.collector_number)} · <a href="${escape(card.scryfall_uri)}" target="_blank" rel="noopener noreferrer">View on Scryfall (new tab)</a></p></details>`;
+  art.replaceChildren();
+  const status=document.createElement('span');status.className='example-image-status';status.textContent='Loading card image…';
+  const img=document.createElement('img');img.alt=card.name+' — card illustration; rules available under Card text & printing';img.hidden=true;img.width=488;img.height=680;
+  const unavailable=()=>{if(art.contains(img)&&img.hidden)status.textContent='Card image unavailable. The explanation and card text are still available.';};
+  img.addEventListener('load',()=>{if(!art.contains(img))return;clearTimeout(imageTimer);img.hidden=false;status.remove();});
+  img.addEventListener('error',()=>{if(!art.contains(img))return;clearTimeout(imageTimer);unavailable();});
+  art.append(img,status);img.src=card.image;imageTimer=setTimeout(unavailable,8000);
+  document.getElementById('example-position').textContent=`${exampleIndex+1} of ${activeExamples.length}: ${name}`;
+}
+function moveExample(step){exampleIndex=(exampleIndex+step+activeExamples.length)%activeExamples.length;renderExample();}
+function openExamples(trigger){
+  if(exampleDialog.open||closingExamples)return;
+  const practice=trigger.dataset.examples==='practice',scenario=scenarios[Number($('scenario').value)];
+  activeExamples=practice?practiceExamples[Number($('scenario').value)]:planExamples[selected][strategy];
+  exampleIndex=0;exampleTrigger=trigger;
+  const label=practice?'Draft pick: '+scenario.choices[scenario.correct][0]:codeLabel(selected)+' · '+(selected.length===1?colors[selected].plans[strategy][0]:pairs[selected].plans[strategy].name);
+  document.getElementById('examples-title').textContent=label+' — examples';
+  document.getElementById('examples-context').textContent=$('match').value==='multi'?'Multiplayer context: check exact targets. Damage or drain aimed at one player does not affect the whole table.':'One-on-one context: examples show this plan’s card roles.';
+  document.getElementById('example-prev').hidden=activeExamples.length===1;document.getElementById('example-next').hidden=activeExamples.length===1;
+  renderExample();oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
+  history.pushState({...history.state,draftAtlasExamples:true},'',location.href);
+  exampleDialog.showModal();exampleDialog.querySelector('.examples-close').focus();
+}
+function finishExamples(){
+  if(!exampleDialog.open)return;
+  clearTimeout(imageTimer);exampleDialog.close();document.body.style.overflow=oldOverflow;closingExamples=false;
+  if(exampleTrigger?.isConnected)exampleTrigger.focus({preventScroll:true});
+}
+function closeExamples(){
+  if(!exampleDialog.open||closingExamples)return;
+  closingExamples=true;
+  if(history.state?.draftAtlasExamples)history.back();else finishExamples();
+}
+window.addEventListener('popstate',()=>{finishExamples();if(history.state?.draftAtlasExamples){const state={...history.state};delete state.draftAtlasExamples;history.replaceState(state,'');}});
+exampleDialog.querySelector('.examples-close').addEventListener('click',closeExamples);
+exampleDialog.addEventListener('cancel',e=>{e.preventDefault();closeExamples();});
+let backdropPressed=false;
+const outsideDialog=e=>{const r=exampleDialog.getBoundingClientRect();return e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom;};
+exampleDialog.addEventListener('pointerdown',e=>{backdropPressed=e.target===exampleDialog&&outsideDialog(e);});
+exampleDialog.addEventListener('click',e=>{if(backdropPressed&&e.target===exampleDialog&&outsideDialog(e))closeExamples();backdropPressed=false;});
+exampleDialog.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){
+    const stops=[...exampleDialog.querySelectorAll('button,a[href],summary')].filter(el=>!el.hidden&&el.getClientRects().length);
+    const first=stops[0],last=stops.at(-1),active=document.activeElement;
+    if((e.shiftKey&&active===first)||(!e.shiftKey&&active===last)||!exampleDialog.contains(active)){e.preventDefault();(e.shiftKey?last:first).focus();}
+  }
+  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();moveExample(e.key==='ArrowLeft'?-1:1);}});
+document.getElementById('example-prev').addEventListener('click',()=>moveExample(-1));
+document.getElementById('example-next').addEventListener('click',()=>moveExample(1));
+root.addEventListener('click',e=>{const trigger=e.target.closest('[data-examples]');if(trigger)openExamples(trigger);});
+
 function mobileEngine(steps){return `<svg class="engine engine-mobile" viewBox="0 0 320 260" role="img" aria-labelledby="atlas-mobile-engine-title atlas-mobile-engine-desc"><title id="atlas-mobile-engine-title">How this plan comes together</title><desc id="atlas-mobile-engine-desc">${escape(steps.join(', then '))}.</desc><defs><marker id="atlas-mobile-engine-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L8 4 L0 8" fill="var(--muted)"/></marker></defs><path class="edge" d="M160 76 V96" marker-end="url(#atlas-mobile-engine-arrow)"/><path class="edge" d="M160 164 V184" marker-end="url(#atlas-mobile-engine-arrow)"/>${steps.map((s,i)=>`<rect class="step ${i===2?'focal':''}" x="8" y="${8+i*88}" width="304" height="68" rx="6"/><text class="sub" x="24" y="${32+i*88}">${['Setup','Connection','Reward'][i]}</text><text x="24" y="${56+i*88}">${escape(s)}</text>`).join('')}</svg>`;}
 let selected='WR',strategy=0,triple='WUB';
 const codeLabel=k=>k.split('').join(' / ');
@@ -131,13 +1357,13 @@ const engine=steps=>`<div class="diagram-scroll"><svg class="engine engine-wide"
 function renderMatrix(){const keys=Object.keys(colors);$('matrix').innerHTML='<thead><tr><th scope="col"><span class="sr-only">First color</span></th>'+keys.map(k=>`<th scope="col">${mana(k)}<div>${colors[k].name}</div></th>`).join('')+'</tr></thead><tbody>'+keys.map((a,i)=>'<tr><th scope="row">'+mana(a)+'</th>'+keys.map((b,j)=>j<i?'<td class="blank" aria-label="Pair shown above the diagonal"></td>':(()=>{const k=a===b?a:pairKey(a,b);return `<td><button type="button" class="${a===b?'diagonal':''}" data-pair="${k}" aria-controls="detail" aria-pressed="${selected===k}" aria-label="${a===b?colors[a].name+' toolkit':colors[a].name+' plus '+colors[b].name+': '+pairs[k].label}"><span class="letters">${codeLabel(k)}</span><span>${a===b?colors[a].tool:pairs[k].label}</span></button></td>`})()).join('')+'</tr>').join('')+'</tbody>';}
 function selectPair(k){selected=k;strategy=0;$('plan-picker').value=k;renderMatrix();renderDetail();$('selection-status').textContent=(k.length===1?colors[k].name:pairs[k].guild)+' selected';}
 const monoEngines={W:[['Cheap bodies','Team boost','Wide attack'],['Flyers + defense','Protect / delay','Repeat attacks'],['Useful creature','Reuse / life payoff','Gain value']],U:[['Evasive threat','Bounce / tap','Keep attacking'],['Early defense','Draw + answer','Safe finisher'],['Useful ETB body','Blink / reuse','Gain value']],B:[['Trade / remove','Return creatures','Outlast'],['Expendable bodies','Sacrifice outlet','Cards / damage'],['Early attackers','Remove blockers','Keep attacking']],R:[['Early attackers','Clear blockers','Attack + burn'],['Spell payoff','Cheap spells','Trigger + attack'],['Expendable pieces','Supported payoff','Gain value']],G:[['Efficient creatures','Pump / trample','Win combat'],['Ramp + defense','Large threat','Push damage'],['Useful creatures','Grow / recover','Win with value']]};
-function renderDetail(){if(selected.length===1){const c=colors[selected],p=c.plans[strategy];$('detail').innerHTML=`<div class="detail-head">${mana(selected)}<h2>${c.name}</h2></div><p class="small muted">${c.tools}</p><div class="strategy-buttons" role="group" aria-label="Possible strategies for this color">${c.plans.map((p,i)=>`<button type="button" data-strategy="${i}" aria-pressed="${strategy===i}">${p[0]}</button>`).join('')}</div><p class="thesis">${p[1]}</p>${engine(monoEngines[selected][strategy])}<h3 class="priority-heading">Draft first</h3><p>${c.need}</p><details class="support"><summary>Support &amp; common traps</summary><p class="small"><strong>Watch out:</strong> ${c.trap}</p><p class="small"><strong>Partners add:</strong> ${c.partner}</p></details>${$('match').value==='multi'?`<p class="table-adjust"><strong>Multiplayer adjustment:</strong> ${c.multi}</p>`:''}<p class="breadth"><a href="#legend">Atlas legend</a> · <a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/making-magic/mechanical-color-pie-2021">Wizards’ color tools</a></p>`;return;}
+function renderDetail(){if(selected.length===1){const c=colors[selected],p=c.plans[strategy];$('detail').innerHTML=`<div class="detail-head">${mana(selected)}<h2>${c.name}</h2></div><p class="small muted">${c.tools}</p><div class="strategy-buttons" role="group" aria-label="Possible strategies for this color">${c.plans.map((p,i)=>`<button type="button" data-strategy="${i}" aria-pressed="${strategy===i}">${p[0]}</button>`).join('')}</div><p class="thesis">${p[1]}</p>${examplesButton}${engine(monoEngines[selected][strategy])}<h3 class="priority-heading">Draft first</h3><p>${c.need}</p><details class="support"><summary>Support &amp; common traps</summary><p class="small"><strong>Watch out:</strong> ${c.trap}</p><p class="small"><strong>Partners add:</strong> ${c.partner}</p></details>${$('match').value==='multi'?`<p class="table-adjust"><strong>Multiplayer adjustment:</strong> ${c.multi}</p>`:''}<p class="breadth"><a href="#legend">Atlas legend</a> · <a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/making-magic/mechanical-color-pie-2021">Wizards’ color tools</a></p>`;return;}
 
-const p=pairs[selected],s=p.plans[strategy];$('detail').innerHTML=`<div class="detail-head"><div class="mana-row">${selected.split('').map(mana).join('')}</div><h2>${selected.split('').map(k=>colors[k].name).join(' + ')}</h2><span class="guild">${p.guild}</span></div><p class="small muted">${p.contrib.join(' · ')}</p><div class="strategy-buttons" role="group" aria-label="Possible strategies for this pair">${p.plans.map((a,i)=>`<button type="button" data-strategy="${i}" aria-pressed="${strategy===i}">${a.name}</button>`).join('')}</div><p class="thesis">${s.win}</p>${engine(s.engine)}<div class="columns"><div><h3>Draft priorities</h3><ol>${s.picks.map(a=>`<li>${a}</li>`).join('')}</ol></div><details class="support"><summary>Support &amp; common traps</summary><ul>${s.support.map(a=>`<li>${a}</li>`).join('')}</ul><p class="small muted">The plan needs several useful pieces so it can work across different draws.</p><p class="trap"><strong>Watch out:</strong> ${s.trap}</p></details></div>${$('match').value==='multi'?`<p class="table-adjust"><strong>Multiplayer adjustment:</strong> ${p.multi}</p>`:''}<p class="breadth"><a href="#legend">Atlas legend</a> · <a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/making-magic/mechanical-color-pie-2021">Wizards’ color tools</a></p>`;}
+const p=pairs[selected],s=p.plans[strategy];$('detail').innerHTML=`<div class="detail-head"><div class="mana-row">${selected.split('').map(mana).join('')}</div><h2>${selected.split('').map(k=>colors[k].name).join(' + ')}</h2><span class="guild">${p.guild}</span></div><p class="small muted">${p.contrib.join(' · ')}</p><div class="strategy-buttons" role="group" aria-label="Possible strategies for this pair">${p.plans.map((a,i)=>`<button type="button" data-strategy="${i}" aria-pressed="${strategy===i}">${a.name}</button>`).join('')}</div><p class="thesis">${s.win}</p>${examplesButton}${engine(s.engine)}<div class="columns"><div><h3>Draft priorities</h3><ol>${s.picks.map(a=>`<li>${a}</li>`).join('')}</ol></div><details class="support"><summary>Support &amp; common traps</summary><ul>${s.support.map(a=>`<li>${a}</li>`).join('')}</ul><p class="small muted">The plan needs several useful pieces so it can work across different draws.</p><p class="trap"><strong>Watch out:</strong> ${s.trap}</p></details></div>${$('match').value==='multi'?`<p class="table-adjust"><strong>Multiplayer adjustment:</strong> ${p.multi}</p>`:''}<p class="breadth"><a href="#legend">Atlas legend</a> · <a target="_blank" rel="noopener noreferrer" href="https://magic.wizards.com/en/news/making-magic/mechanical-color-pie-2021">Wizards’ color tools</a></p>`;}
 function renderTriple(){const t=triples.find(t=>t[0]===triple);$('triple-list').innerHTML=triples.map(t=>`<button type="button" data-triple="${t[0]}" aria-pressed="${triple===t[0]}" aria-controls="triple-detail"><span class="mana-row">${t[0].split('').map(mana).join('')}</span><span>${t[1]}<span class="small" style="display:block">${codeLabel(t[0])}</span></span></button>`).join('');const k=t[0].split(''),ps=[pairKey(k[0],k[1]),pairKey(k[0],k[2]),pairKey(k[1],k[2])];$('triple-detail').innerHTML=`<div class="mana-row">${k.map(mana).join('')}</div><h2>${t[1]} · ${codeLabel(t[0])}</h2><p class="thesis">${t[2]}</p><p>${t[3]}</p><h3>Choose a base pair</h3><div class="base-pairs">${ps.map(p=>`<button type="button" data-base="${p}">Explore ${codeLabel(p)}</button>`).join('')}</div><p class="small muted">These are alternatives. Pick a base that your cards support; the third color can be a small splash.</p><div class="trap"><strong>Check your mana.</strong><p>Your land mix depends on which cards you need to cast early and whether your fixing can cover the added costs. A three-color name alone is no reason to split your lands evenly.</p></div><p class="small">Without fixing, stick to two colors. A full three-color deck can work with strong fixing in a pool designed to support it.</p>`;}
 function renderGroup(){const n=Number($('players').value),names={4:'four',5:'five',6:'six',7:'seven',8:'eight'};$('group-title').textContent=`Your ${names[n]}-person table`;$('group-info').innerHTML=`<p class="wheel-readout">First wheel: pick ${n+1}</p><p class="small">With one pick per player and packs larger than the pod, your original pack first returns after the other ${n-1} players pick. Later picks may be cards you have already seen; they are not all fresh signals.</p>`;const dealt=n*45;$('cube-bars').innerHTML=`<span class="seen" style="width:${dealt/360*100}%"></span><span class="unseen" style="width:${(360-dealt)/360*100}%"></span>`;$('cube-bars').setAttribute('aria-label',`${dealt} of 360 cards enter the draft; ${360-dealt} stay out`);$('cube-info').textContent=`${n} drafters × 45 cards = ${dealt} of 360 cards dealt (${Math.round(dealt/360*100)}%). ${360-dealt} cards stay out. All cards dealt does not guarantee any one drafter receives the needed pieces.`;$('multiplayer-draft').innerHTML=$('match').value==='multi'?'<strong>Multiplayer free-for-all:</strong> Favor endurance, repeatable value, and effects that explicitly hit each opponent. Trading one card for one opponent’s threat leaves other players ahead on resources. Protect yourself early; table politics and attack incentives still matter.':'<strong>One-on-one matches:</strong> A low curve and a focused clock are valuable. Learn whether your deck should attack or defend in each matchup; the role can change during a game.';}
 function renderScenario(){const s=scenarios[Number($('scenario').value)];$('scenario-question').textContent=s.q;$('choices').innerHTML=s.choices.map((c,i)=>`<button type="button" data-choice="${i}" aria-pressed="false"><strong>${c[0]}</strong><span>${c[1]}</span></button>`).join('');$('feedback').textContent='Choose a card to see why it fits. These examples use card roles; the best pick in a real pack depends on the cards available.';}
-function answer(i){const s=scenarios[Number($('scenario').value)];root.querySelectorAll('[data-choice]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.choice)===i));$('feedback').innerHTML=`<strong>${i===s.correct?'Best fit for this situation.':'A different role matters more here.'}</strong> ${s.why}`;}
+function answer(i){const s=scenarios[Number($('scenario').value)];root.querySelectorAll('[data-choice]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.choice)===i));$('feedback').innerHTML=`<strong>${i===s.correct?'Best fit for this situation.':'A different role matters more here.'}</strong> ${s.why}<p><button type="button" class="examples-open" data-examples="practice" aria-haspopup="dialog" aria-controls="card-examples">See example for the best fit</button></p>`;}
 const curves={aggro:[3,8,6,4,2,0],mid:[1,6,7,5,3,1],ramp:[1,5,5,4,4,4]};
 function renderCurve(){const vals=curves[$('curve-type').value],labels=['1','2','3','4','5','6+'];$('curve').innerHTML=`<svg viewBox="0 0 440 220" role="img" aria-labelledby="atlas-curve-title atlas-curve-desc"><title id="atlas-curve-title">Illustrative ${$('curve-type').selectedOptions[0].text} mana curve</title><desc id="atlas-curve-desc">Twenty-three nonland cards, grouped by mana value: ${vals.map((v,i)=>labels[i]+': '+v).join('; ')}.</desc><g font-family="Atlas Sans, Arial, sans-serif" font-size="12" fill="var(--ink)"><text x="12" y="18">Nonland cards (count)</text>${[0,4,8].map(v=>`<text x="30" y="${174-v*16}" text-anchor="end">${v}</text><line x1="40" y1="${170-v*16}" x2="428" y2="${170-v*16}" stroke="var(--rule)"/>`).join('')}${vals.map((v,i)=>`<rect x="${54+i*62}" y="${170-v*16}" width="36" height="${v*16}" fill="var(--accent)"/><text x="${72+i*62}" y="${158-v*16}" text-anchor="middle">${v}</text><text x="${72+i*62}" y="192" text-anchor="middle">${labels[i]}</text>`).join('')}<text x="238" y="216" text-anchor="middle">Mana value (mana)</text></g></svg>`;}
 function setTab(id,focus=false){root.querySelectorAll('[role=tab]').forEach(b=>{const on=b.getAttribute('aria-controls')===id;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;$(b.getAttribute('aria-controls')).hidden=!on;if(on&&focus)b.focus();});}
