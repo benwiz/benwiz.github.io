@@ -56,20 +56,29 @@
 /* Recommendation examples inherit the atlas paper, ink, typography and controls. */
 .examples-open{margin:4px 0 16px;min-height:44px;border:1px solid var(--accent);border-radius:var(--radius);background:var(--panel);padding:9px 16px;font-weight:600;cursor:pointer}
 .examples-open:hover{background:var(--paper2)}
-.examples-dialog{width:min(760px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:24px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--panel);color:var(--ink);overflow:auto;overscroll-behavior:contain}
+.examples-dialog{width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:24px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--panel);color:var(--ink);overflow:auto;overscroll-behavior:contain}
 .examples-dialog::backdrop{background:rgb(20 29 20 / .65)}
-.examples-header{position:sticky;top:-24px;z-index:1;background:var(--panel);padding:8px 0;display:flex;align-items:flex-start;gap:16px;justify-content:space-between}
+.examples-header{position:sticky;top:-24px;z-index:5;background:var(--panel);padding:8px 0;display:flex;align-items:flex-start;gap:16px;justify-content:space-between}
 .examples-header h2{margin:0;font-size:28px}.examples-dialog p{margin:12px 0}.examples-dialog .small{font-size:14px}
 .examples-dialog button{min-height:44px;padding:8px 14px;cursor:pointer;border:1px solid var(--rule);border-radius:var(--radius);background:var(--paper)}
 .examples-dialog button:hover{background:var(--paper2)}.examples-close{flex-shrink:0}
-.examples-body{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:30px;align-items:center;margin:24px 0 16px}
-.example-stack{position:relative;width:100%;max-width:244px;aspect-ratio:488 / 680;margin:8px auto 12px;background:var(--paper2);border-radius:12px;isolation:isolate}
-.example-stack:before,.example-stack:after{content:'';position:absolute;inset:0;border:1px solid var(--rule);border-radius:12px;background:var(--paper2);z-index:-1;transform:rotate(3deg) translate(5px,0)}
-.example-stack:after{transform:rotate(-3deg) translate(-5px,0);z-index:-2}
-.example-stack img[hidden]{display:none}.example-stack img{display:block;width:100%;height:100%;object-fit:contain;border-radius:12px}.example-image-status{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font-size:14px}
-.examples-copy h3{margin:0;font-size:24px}.example-rules{white-space:pre-line;font-size:14px}.examples-copy details{margin-top:16px}.examples-copy summary{cursor:pointer;min-height:44px;padding:8px 0}
-.examples-controls{display:flex;align-items:center;justify-content:center;gap:16px}.examples-controls p{min-width:72px;text-align:center;font-variant-numeric:tabular-nums}
-@media(max-width:540px){.examples-dialog{padding:16px}.examples-header{position:sticky;top:-16px;z-index:1;background:var(--panel);padding:8px 0}.examples-header h2{font-size:24px}.examples-body{grid-template-columns:1fr;gap:16px;margin-top:18px}.example-stack{max-width:190px}.examples-copy h3{font-size:22px}.examples-controls{position:sticky;bottom:-16px;padding:8px 0;background:var(--panel)}}
+.examples-body{display:flex;flex-direction:column;gap:20px;margin:20px 0 16px}
+.example-stack{position:relative;width:min(220px,28dvh);aspect-ratio:488 / 680;margin:8px auto 4px;isolation:isolate;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.example-face{position:absolute;inset:0;border-radius:12px;background:var(--paper2);overflow:hidden}
+.example-front{z-index:3;transition:transform 180ms cubic-bezier(.2,.8,.2,1);transform-origin:center 80%}
+.example-front.is-dragging{transition:none;cursor:grabbing}
+.example-preview{pointer-events:none;border:1px solid var(--rule)}
+.example-preview[data-depth="1"]{z-index:2;transform:translate(11px,-3px) rotate(5deg)}
+.example-preview[data-depth="2"]{z-index:1;transform:translate(-11px,-5px) rotate(-5deg)}
+.example-face img[hidden]{display:none}.example-face img{display:block;width:100%;height:100%;object-fit:contain;border-radius:12px;pointer-events:none}
+.example-image-status{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;font-size:14px}
+.examples-copy{width:100%;max-width:42ch}.examples-copy h3{margin:0;font-size:24px}.example-rules{white-space:pre-line;font-size:14px}.examples-copy details{margin-top:12px}.examples-copy summary{cursor:pointer;min-height:44px;padding:8px 0}
+.examples-controls{position:sticky;bottom:-24px;z-index:4;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 0;background:var(--panel)}.examples-controls p{min-width:60px;text-align:center;font-variant-numeric:tabular-nums}
+.example-front.enter-next{animation:example-next 180ms cubic-bezier(.2,.8,.2,1)}.example-front.enter-prev{animation:example-prev 180ms cubic-bezier(.2,.8,.2,1)}
+@keyframes example-next{from{transform:translateX(18px);opacity:.7}to{transform:none;opacity:1}}@keyframes example-prev{from{transform:translateX(-18px);opacity:.7}to{transform:none;opacity:1}}
+@media(max-width:540px){.examples-dialog{padding:16px}.examples-header{top:-16px}.examples-header h2{font-size:24px}.examples-body{gap:16px;margin-top:16px}.example-stack{width:min(190px,28dvh)}.examples-copy h3{font-size:22px}.examples-controls{bottom:-16px}}
+@media(max-height:460px){.example-stack{width:140px}}
+@media(prefers-reduced-motion:reduce){.example-front{transition:none}.example-front.enter-next,.example-front.enter-prev{animation:none}}
 @media print{.examples-dialog,.examples-open{display:none!important}}
 </style>
 </head>
@@ -118,9 +127,9 @@
 <div class="examples-header"><h2 id="examples-title">Card examples</h2><button type="button" class="examples-close" autofocus>Close</button></div>
 <p id="examples-scope" class="small muted">Illustrative commons from different sets, not cards in your draft pool or a set ranking. Check your cube list and house rules.</p>
 <p id="examples-context" class="small"></p>
-<div class="examples-body"><div class="example-stack" id="example-art"></div><div class="examples-copy" id="example-copy"></div></div>
+<div class="examples-body"><div class="example-stack" id="example-art" role="group" tabindex="0" aria-label="Card stack" aria-describedby="examples-help example-position"></div><div class="examples-copy" id="example-copy"></div></div>
 <div class="examples-controls"><button type="button" id="example-prev" aria-label="Previous example card">Previous</button><p id="example-position" class="small" role="status" aria-live="polite" aria-atomic="true"></p><button type="button" id="example-next" aria-label="Next example card">Next</button></div>
-<p class="small muted">Use Previous / Next or the left and right arrow keys. Escape, Close, or browser Back returns to the guide. Card images and rules: Scryfall.</p>
+<p id="examples-help" class="small muted">Swipe left for the next card or right for the previous one. Buttons and left / right arrow keys work too. Escape, Close, or browser Back returns to the guide. Card images and rules: Scryfall.</p>
 </dialog>
 <noscript><p style="padding:24px">This interactive guide needs JavaScript. Enable it to explore color plans and drafting exercises.</p></noscript>
 <script>
@@ -738,6 +747,271 @@ const exampleCards = {
     "collector_number": "134",
     "scryfall_uri": "https://scryfall.com/card/dka/134/young-wolf?utm_source=api",
     "image": "https://cards.scryfall.io/normal/front/0/c/0c39aa40-ef5f-40f1-a6dd-fbce91172c50.jpg?1783940798"
+  },
+  "Stormfront Pegasus": {
+    "name": "Stormfront Pegasus",
+    "mana_cost": "{1}{W}",
+    "type_line": "Creature — Pegasus",
+    "oracle_text": "Flying",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "m10",
+    "collector_number": "35",
+    "scryfall_uri": "https://scryfall.com/card/m10/35/stormfront-pegasus?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/d/2/d2429a15-ccbe-463c-9218-968709d9e878.jpg?1783942397"
+  },
+  "Doomed Dissenter": {
+    "name": "Doomed Dissenter",
+    "mana_cost": "{1}{B}",
+    "type_line": "Creature — Human",
+    "oracle_text": "When this creature dies, create a 2/2 black Zombie creature token.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "akh",
+    "collector_number": "87",
+    "scryfall_uri": "https://scryfall.com/card/akh/87/doomed-dissenter?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/a/1/a1c0b645-de43-46d0-84c1-03f295def217.jpg?1783936508"
+  },
+  "Satyr Hoplite": {
+    "name": "Satyr Hoplite",
+    "mana_cost": "{R}",
+    "type_line": "Creature — Satyr Soldier",
+    "oracle_text": "Heroic — Whenever you cast a spell that targets this creature, put a +1/+1 counter on this creature.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "jou",
+    "collector_number": "110",
+    "scryfall_uri": "https://scryfall.com/card/jou/110/satyr-hoplite?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/b/8/b8754d66-facb-432e-a6c2-91430a6dec94.jpg?1783939420"
+  },
+  "Lagonna-Band Trailblazer": {
+    "name": "Lagonna-Band Trailblazer",
+    "mana_cost": "{W}",
+    "type_line": "Creature — Centaur Scout",
+    "oracle_text": "Heroic — Whenever you cast a spell that targets this creature, put a +1/+1 counter on it.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "jou",
+    "collector_number": "14",
+    "scryfall_uri": "https://scryfall.com/card/jou/14/lagonna-band-trailblazer?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/3/8/38a6f533-6acb-4c24-ae9d-fe4977230156.jpg?1783939457"
+  },
+  "Monastery Swiftspear": {
+    "name": "Monastery Swiftspear",
+    "mana_cost": "{R}",
+    "type_line": "Creature — Human Monk",
+    "oracle_text": "Haste\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "2x2",
+    "collector_number": "119",
+    "scryfall_uri": "https://scryfall.com/card/2x2/119/monastery-swiftspear?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/e/8/e8b9d59d-bac9-4092-901e-2b861c186868.jpg?1783921886"
+  },
+  "Nivix Cyclops": {
+    "name": "Nivix Cyclops",
+    "mana_cost": "{1}{U}{R}",
+    "type_line": "Creature — Cyclops",
+    "oracle_text": "Defender\nWhenever you cast an instant or sorcery spell, this creature gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.",
+    "colors": [
+      "R",
+      "U"
+    ],
+    "rarity": "common",
+    "set": "dgm",
+    "collector_number": "87",
+    "scryfall_uri": "https://scryfall.com/card/dgm/87/nivix-cyclops?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/5/d/5d7a0e26-8cd4-4f53-8922-93ca28b1879b.jpg?1783940025"
+  },
+  "Vampire Lacerator": {
+    "name": "Vampire Lacerator",
+    "mana_cost": "{B}",
+    "type_line": "Creature — Vampire Warrior",
+    "oracle_text": "At the beginning of your upkeep, you lose 1 life unless an opponent has 10 or less life.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "zen",
+    "collector_number": "115",
+    "scryfall_uri": "https://scryfall.com/card/zen/115/vampire-lacerator?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/1/1/114eca6c-76de-4b87-8174-78e2d17ad0e3.jpg?1783942148"
+  },
+  "Grim Harvest": {
+    "name": "Grim Harvest",
+    "mana_cost": "{1}{B}",
+    "type_line": "Instant",
+    "oracle_text": "Return target creature card from your graveyard to your hand.\nRecover {2}{B} (When a creature is put into your graveyard from the battlefield, you may pay {2}{B}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "csp",
+    "collector_number": "58",
+    "scryfall_uri": "https://scryfall.com/card/csp/58/grim-harvest?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/b/d/bdb1972f-2ef7-4fe2-8c8e-ab07f48a3176.jpg?1783943350"
+  },
+  "Captain's Call": {
+    "name": "Captain's Call",
+    "mana_cost": "{3}{W}",
+    "type_line": "Sorcery",
+    "oracle_text": "Create three 1/1 white Soldier creature tokens.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "m13",
+    "collector_number": "9",
+    "scryfall_uri": "https://scryfall.com/card/m13/9/captains-call?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/7/9/79258432-ea35-4f2a-9e4a-4abb53f335c6.jpg?1783940520"
+  },
+  "Attended Knight": {
+    "name": "Attended Knight",
+    "mana_cost": "{2}{W}",
+    "type_line": "Creature — Human Knight",
+    "oracle_text": "First strike\nWhen this creature enters, create a 1/1 white Soldier creature token.",
+    "colors": [
+      "W"
+    ],
+    "rarity": "common",
+    "set": "m13",
+    "collector_number": "5",
+    "scryfall_uri": "https://scryfall.com/card/m13/5/attended-knight?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/c/0/c0f5cb3f-c27d-4b35-930f-00d806393796.jpg?1783940521"
+  },
+  "Cloudfin Raptor": {
+    "name": "Cloudfin Raptor",
+    "mana_cost": "{U}",
+    "type_line": "Creature — Bird Mutant",
+    "oracle_text": "Flying\nEvolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "gtc",
+    "collector_number": "32",
+    "scryfall_uri": "https://scryfall.com/card/gtc/32/cloudfin-raptor?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/e/2/e2931f27-43f9-4e52-aab3-967c26739e43.jpg?1783940138"
+  },
+  "Mnemonic Wall": {
+    "name": "Mnemonic Wall",
+    "mana_cost": "{4}{U}",
+    "type_line": "Creature — Wall",
+    "oracle_text": "Defender\nWhen this creature enters, you may return target instant or sorcery card from your graveyard to your hand.",
+    "colors": [
+      "U"
+    ],
+    "rarity": "common",
+    "set": "roe",
+    "collector_number": "78",
+    "scryfall_uri": "https://scryfall.com/card/roe/78/mnemonic-wall?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/f/f/ffaebb4a-cb9b-4ac8-b661-3e63d9d984f4.jpg?1783941994"
+  },
+  "Village Rites": {
+    "name": "Village Rites",
+    "mana_cost": "{B}",
+    "type_line": "Instant",
+    "oracle_text": "As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "m21",
+    "collector_number": "126",
+    "scryfall_uri": "https://scryfall.com/card/m21/126/village-rites?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/9/c/9c0f60a6-b5c8-4704-8b61-94e8fc463e5d.jpg?1783930699"
+  },
+  "Mortician Beetle": {
+    "name": "Mortician Beetle",
+    "mana_cost": "{B}",
+    "type_line": "Creature — Insect",
+    "oracle_text": "Whenever a player sacrifices a creature, you may put a +1/+1 counter on this creature.",
+    "colors": [
+      "B"
+    ],
+    "rarity": "common",
+    "set": "mm3",
+    "collector_number": "78",
+    "scryfall_uri": "https://scryfall.com/card/mm3/78/mortician-beetle?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/9/7/978f2a31-1c89-43cb-92f2-195026c9311a.jpg?1783936653"
+  },
+  "Crash Through": {
+    "name": "Crash Through",
+    "mana_cost": "{R}",
+    "type_line": "Sorcery",
+    "oracle_text": "Creatures you control gain trample until end of turn. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nDraw a card.",
+    "colors": [
+      "R"
+    ],
+    "rarity": "common",
+    "set": "hou",
+    "collector_number": "88",
+    "scryfall_uri": "https://scryfall.com/card/hou/88/crash-through?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/4/b/4bdaba76-b98d-4699-9a5f-e59285b09552.jpg?1783936031"
+  },
+  "Ichor Wellspring": {
+    "name": "Ichor Wellspring",
+    "mana_cost": "{2}",
+    "type_line": "Artifact",
+    "oracle_text": "When this artifact enters or is put into a graveyard from the battlefield, draw a card.",
+    "colors": [],
+    "rarity": "common",
+    "set": "mbs",
+    "collector_number": "110",
+    "scryfall_uri": "https://scryfall.com/card/mbs/110/ichor-wellspring?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/2/d/2d1ea522-a0f6-45a8-8985-6fcca95d60cc.jpg?1783941368"
+  },
+  "Werebear": {
+    "name": "Werebear",
+    "mana_cost": "{1}{G}",
+    "type_line": "Creature — Human Bear Druid",
+    "oracle_text": "{T}: Add {G}.\nThreshold — This creature gets +3/+3 as long as there are seven or more cards in your graveyard.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "ody",
+    "collector_number": "282",
+    "scryfall_uri": "https://scryfall.com/card/ody/282/werebear?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/9/6/964cf7e3-932d-432f-8ad4-9bd651aada96.jpg?1783945208"
+  },
+  "Pulse of Murasa": {
+    "name": "Pulse of Murasa",
+    "mana_cost": "{2}{G}",
+    "type_line": "Instant",
+    "oracle_text": "Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "ogw",
+    "collector_number": "141",
+    "scryfall_uri": "https://scryfall.com/card/ogw/141/pulse-of-murasa?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/c/0/c0c8057f-b45b-4f67-90cd-c808b5e9cbfa.jpg?1783937899"
+  },
+  "Skarrgan Pit-Skulk": {
+    "name": "Skarrgan Pit-Skulk",
+    "mana_cost": "{G}",
+    "type_line": "Creature — Human Warrior",
+    "oracle_text": "Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters with a +1/+1 counter on it.)\nCreatures with power less than this creature's power can't block it.",
+    "colors": [
+      "G"
+    ],
+    "rarity": "common",
+    "set": "gpt",
+    "collector_number": "96",
+    "scryfall_uri": "https://scryfall.com/card/gpt/96/skarrgan-pit-skulk?utm_source=api",
+    "image": "https://cards.scryfall.io/normal/front/c/c/cc65d7ea-e8f4-4be9-94e4-2fa2e4d83177.jpg?1783943487"
   }
 };
 const planExamples = {
@@ -754,6 +1028,14 @@ const planExamples = {
       [
         "Gods Willing",
         "Protection can save a white threat from targeted removal or help it pass a blocker."
+      ],
+      [
+        "Stormfront Pegasus",
+        "A two-mana 2/1 flyer starts attacking early while your ground creatures hold back attackers."
+      ],
+      [
+        "Man-o'-War",
+        "A creature plus a bounced blocker develops your board and buys time for airborne attacks."
       ]
     ],
     [
@@ -768,6 +1050,14 @@ const planExamples = {
       [
         "Mulldrifter",
         "Drawing two cards on entry supplies value to reuse and a flyer to finish with."
+      ],
+      [
+        "Kor Skyfisher",
+        "Return an entry-value creature such as Thraben Inspector to your hand, then cast it again; the flyer also provides a clock."
+      ],
+      [
+        "Archaeomancer",
+        "Recover a spent blink spell from your graveyard to your hand, supporting repeated entry effects when you can afford the mana."
       ]
     ]
   ],
@@ -784,6 +1074,14 @@ const planExamples = {
       [
         "Falkenrath Noble",
         "Each creature death drains a target player. In multiplayer this targets one opponent, not all opponents."
+      ],
+      [
+        "Raise the Alarm",
+        "Two tokens from one cheap spell give your sacrifice outlet more bodies to work with."
+      ],
+      [
+        "Doomed Dissenter",
+        "Its death leaves a Zombie token, replacing the body you spent on a sacrifice."
       ]
     ],
     [
@@ -798,6 +1096,14 @@ const planExamples = {
       [
         "Gravedigger",
         "Return a useful creature from your graveyard to your hand to rebuild after trades."
+      ],
+      [
+        "Thraben Inspector",
+        "An early body that makes a Clue supplies defense now and an extra card later."
+      ],
+      [
+        "Falkenrath Noble",
+        "A flying finisher rewards creature trades with drain, helping attrition become a way to win."
       ]
     ]
   ],
@@ -814,6 +1120,14 @@ const planExamples = {
       [
         "Lightning Bolt",
         "Three damage can clear a small blocker or finish a damaged opponent."
+      ],
+      [
+        "Mogg War Marshal",
+        "A creature and an entry token build board width; when it dies it leaves another Goblin."
+      ],
+      [
+        "Goblin Bushwhacker",
+        "With kicker, give the whole team +1/+0 and haste, turning a broad board into an immediate attack."
       ]
     ],
     [
@@ -828,6 +1142,14 @@ const planExamples = {
       [
         "Gods Willing",
         "Protection helps preserve your invested threat; a protection color matching your aura will also make that aura fall off."
+      ],
+      [
+        "Satyr Hoplite",
+        "A one-mana heroic creature grows when you target it with your spells, rewarding cheap targeting support."
+      ],
+      [
+        "Lagonna-Band Trailblazer",
+        "Its large starting toughness makes an early blocker, and heroic counters can grow it into an attacker."
       ]
     ]
   ],
@@ -844,6 +1166,14 @@ const planExamples = {
       [
         "Fortify",
         "Giving all your creatures +2/+0 rewards a broad attacking board; its defensive mode can instead help them survive combat."
+      ],
+      [
+        "Thraben Inspector",
+        "An early body adds to a wide board while its Clue gives you a way to refill later."
+      ],
+      [
+        "Travel Preparations",
+        "Spread counters over two creatures, then use white flashback to improve more of the board instead of investing in only one threat."
       ]
     ],
     [
@@ -858,6 +1188,14 @@ const planExamples = {
       [
         "Rancor",
         "Trample helps a large creature push through small blockers, and the aura can return to your hand."
+      ],
+      [
+        "Hunger of the Howlpack",
+        "Permanent counters grow a threat; if a creature died this turn, morbid supplies three counters instead of one."
+      ],
+      [
+        "Gods Willing",
+        "Protection helps your enlarged creature survive targeted removal or get through a blocker of the chosen color."
       ]
     ]
   ],
@@ -874,6 +1212,14 @@ const planExamples = {
       [
         "Mulldrifter",
         "Two cards on entry refill your hand, then the flying body supplies a win condition."
+      ],
+      [
+        "Archaeomancer",
+        "Reuse an important removal spell or counterspell by returning it to your hand; its body also helps defend."
+      ],
+      [
+        "Gurmag Angler",
+        "A 5/5 gives control an actual finisher, and delve can use spent cards to lower its generic mana cost."
       ]
     ],
     [
@@ -888,6 +1234,14 @@ const planExamples = {
       [
         "Mulldrifter",
         "A target worth recovering: its entry draws two cards, and its flying body can finish the game."
+      ],
+      [
+        "Archaeomancer",
+        "Return a spent selection or self-mill spell to your hand for another use; it recovers instants and sorceries, not creatures."
+      ],
+      [
+        "Gurmag Angler",
+        "Graveyard cards can pay its generic mana cost through delve; preserve useful creatures you still want to recover."
       ]
     ]
   ],
@@ -904,6 +1258,14 @@ const planExamples = {
       [
         "Lightning Bolt",
         "An instant clears a small blocker and triggers your spell threat in the same play."
+      ],
+      [
+        "Monastery Swiftspear",
+        "Haste starts pressure immediately, and prowess adds temporary power and toughness when you cast noncreature spells."
+      ],
+      [
+        "Nivix Cyclops",
+        "An instant or sorcery gives it +3/+0 and lets it attack despite defender that turn, turning cheap spells into a large swing."
       ]
     ],
     [
@@ -918,6 +1280,14 @@ const planExamples = {
       [
         "Mulldrifter",
         "Drawing cards and leaving a flyer provides the resources and finisher for a longer game."
+      ],
+      [
+        "Counterspell",
+        "An answer to a large threat before it resolves covers enemies that small burn cannot kill."
+      ],
+      [
+        "Ghostly Flicker",
+        "Reusing an entry effect such as Archaeomancer or Mulldrifter gives control another source of value; have useful targets before drafting it."
       ]
     ]
   ],
@@ -934,6 +1304,14 @@ const planExamples = {
       [
         "Mulldrifter",
         "Draw two cards to reload after spending cards on mana; its flyer also pressures the opponent."
+      ],
+      [
+        "Nest Invader",
+        "An early creature defends while its Spawn can be sacrificed for one colorless mana to help cast a larger threat."
+      ],
+      [
+        "Ponder",
+        "Selection helps find acceleration early or a threat later, reducing draws with only one half of the ramp plan."
       ]
     ],
     [
@@ -948,6 +1326,14 @@ const planExamples = {
       [
         "Rancor",
         "Power and trample make a small threat relevant; keep a creature available to carry the aura."
+      ],
+      [
+        "Man-o'-War",
+        "Add a creature while returning a blocker to its owner’s hand, preserving pressure on the battlefield."
+      ],
+      [
+        "Hunger of the Howlpack",
+        "Growing a cheap attacker keeps it relevant in combat; morbid is stronger after a creature died this turn."
       ]
     ]
   ],
@@ -964,6 +1350,14 @@ const planExamples = {
       [
         "Lightning Bolt",
         "Burn can clear another small blocker or close the game after combat damage."
+      ],
+      [
+        "Goblin Bushwhacker",
+        "With kicker, the team gains +1/+0 and haste, helping turn new bodies into damage before the opponent stabilizes."
+      ],
+      [
+        "Vampire Lacerator",
+        "A one-mana 2/2 starts the clock early; its upkeep life loss makes a quick finish more important."
       ]
     ],
     [
@@ -978,6 +1372,14 @@ const planExamples = {
       [
         "Falkenrath Noble",
         "Creature deaths drain a target player, so sacrificing fodder adds damage and life."
+      ],
+      [
+        "Perilous Myr",
+        "Sacrificing this artifact creature turns its death into two damage, giving the outlet a useful target."
+      ],
+      [
+        "Kuldotha Rebirth",
+        "Sacrifice an artifact to make three Goblins, feeding later sacrifice effects; ordinary creature tokens are not artifacts."
       ]
     ]
   ],
@@ -994,6 +1396,14 @@ const planExamples = {
       [
         "Gurmag Angler",
         "Delve can use graveyard cards to pay generic mana for a 5/5; leave important recursion targets unexiled."
+      ],
+      [
+        "Young Wolf",
+        "Undying lets an early body trade and return with a counter, getting more value from one creature card."
+      ],
+      [
+        "Grim Harvest",
+        "Return a creature to your hand; recover can bring the spell back after your creature dies if you pay its cost, otherwise the spell is exiled."
       ]
     ],
     [
@@ -1008,6 +1418,14 @@ const planExamples = {
       [
         "Colossal Dreadmaw",
         "A large trampling finisher helps break stalls; keep enough early plays to reach six mana."
+      ],
+      [
+        "Nest Invader",
+        "Two bodies from an early play develop the board, and the Spawn can later supply one colorless mana for a finisher."
+      ],
+      [
+        "Gurmag Angler",
+        "After early trades, delve can make a 5/5 affordable; do not exile creatures you still plan to recover."
       ]
     ]
   ],
@@ -1024,6 +1442,14 @@ const planExamples = {
       [
         "Rancor",
         "Extra power and trample turn efficient bodies into attacks that push damage through."
+      ],
+      [
+        "Gore-House Chainwalker",
+        "Unleash gives this two-drop enough power to pressure early, at the cost of losing its ability to block."
+      ],
+      [
+        "Hunger of the Howlpack",
+        "Counters help an efficient body win combat; morbid gives three counters when a creature died this turn."
       ]
     ],
     [
@@ -1038,6 +1464,14 @@ const planExamples = {
       [
         "Lightning Bolt",
         "Cheap burn handles a small attacker while you set up, or adds reach after a large attack."
+      ],
+      [
+        "Nest Invader",
+        "An early blocker and a Spawn help you survive setup; the Spawn supplies a single burst of colorless mana."
+      ],
+      [
+        "Goblin Bushwhacker",
+        "With kicker, it gives a newly cast large threat haste and extra power, helping ramp convert into damage immediately."
       ]
     ]
   ],
@@ -1054,6 +1488,14 @@ const planExamples = {
       [
         "Thraben Inspector",
         "An early body plus a Clue helps build the board and refill later."
+      ],
+      [
+        "Doomed Traveler",
+        "Its death leaves a flying Spirit, keeping another body on the board for later team boosts."
+      ],
+      [
+        "Captain's Call",
+        "Three tokens from one card add board width before a team attack, though four mana makes it a follow-up rather than an early play."
       ]
     ],
     [
@@ -1068,6 +1510,14 @@ const planExamples = {
       [
         "Lone Missionary",
         "A ground blocker and four life help win the race while flyers attack."
+      ],
+      [
+        "Kor Skyfisher",
+        "A two-mana 2/3 flyer attacks over ground blockers; returning one of your permanents is a real tempo cost to plan around."
+      ],
+      [
+        "Raise the Alarm",
+        "Two ground bodies help defend against attackers while your flyers win the race."
       ]
     ],
     [
@@ -1082,6 +1532,14 @@ const planExamples = {
       [
         "Lone Missionary",
         "Replaying a creature with a useful entry effect can buy more time with four life."
+      ],
+      [
+        "Ephemerate",
+        "Blink a creature with a useful entry ability to get that effect again; rebound can repeat it on the next turn."
+      ],
+      [
+        "Attended Knight",
+        "Its entry brings a Soldier token, supplying useful board value that another entry can repeat."
       ]
     ]
   ],
@@ -1098,6 +1556,14 @@ const planExamples = {
       [
         "Ponder",
         "A cheap selection spell helps find the next threat or tempo play."
+      ],
+      [
+        "Man-o'-War",
+        "A body and a bounced blocker develop pressure while buying another attack."
+      ],
+      [
+        "Cloudfin Raptor",
+        "A one-mana flyer can grow through evolve when later creatures have higher power or toughness; it needs suitable follow-up bodies."
       ]
     ],
     [
@@ -1112,6 +1578,14 @@ const planExamples = {
       [
         "Unsummon",
         "Cheap temporary interaction can buy a turn, but cannot replace a lasting answer."
+      ],
+      [
+        "Ponder",
+        "Early selection helps find defense, while later selection can locate your finisher or another answer."
+      ],
+      [
+        "Archaeomancer",
+        "Return a spent counterspell or draw spell to your hand, gaining another use after a resource trade."
       ]
     ],
     [
@@ -1126,6 +1600,14 @@ const planExamples = {
       [
         "Mulldrifter",
         "Drawing two cards on entry makes it a profitable blink target and an evasive finisher."
+      ],
+      [
+        "Archaeomancer",
+        "Its entry recovers an instant or sorcery, making it a useful target when your blink spells can reuse that ability."
+      ],
+      [
+        "Mnemonic Wall",
+        "An entry effect recovers an instant or sorcery, while its large defensive body helps you survive to repeat that value."
       ]
     ]
   ],
@@ -1142,12 +1624,20 @@ const planExamples = {
       [
         "Gurmag Angler",
         "A 5/5 can finish after resources run low; delve must not exile the targets you want to recover."
+      ],
+      [
+        "Grim Harvest",
+        "Recover a useful creature to your hand, with a recover option that can let you repeat the recursion after a later creature death."
+      ],
+      [
+        "Falkenrath Noble",
+        "A flying threat turns creature trades into life loss for a target player and life gain for you."
       ]
     ],
     [
       [
-        "Gravedigger",
-        "Recover a spent creature to your hand, providing more bodies to cast and use as sacrifice fodder."
+        "Doomed Dissenter",
+        "Its death leaves a Zombie token, giving your sacrifice outlet another body to use."
       ],
       [
         "Carrion Feeder",
@@ -1156,6 +1646,14 @@ const planExamples = {
       [
         "Falkenrath Noble",
         "Creature deaths drain a target player, rewarding sacrifices and combat trades."
+      ],
+      [
+        "Village Rites",
+        "Sacrifice a creature as an additional cost to draw two cards, converting expendable bodies into resources and death triggers."
+      ],
+      [
+        "Mortician Beetle",
+        "It gains a counter whenever a player sacrifices a creature, rewarding a sacrifice engine with a growing threat."
       ]
     ],
     [
@@ -1170,6 +1668,14 @@ const planExamples = {
       [
         "Gurmag Angler",
         "Delve can make a 5/5 cheaper after early trades, adding a larger threat."
+      ],
+      [
+        "Vampire Lacerator",
+        "An early 2/2 starts pressure for one mana; the upkeep life loss rewards an aggressive clock."
+      ],
+      [
+        "Gravedigger",
+        "After an attacker trades, return it to your hand while adding a new body, helping the deck reload."
       ]
     ]
   ],
@@ -1186,6 +1692,14 @@ const planExamples = {
       [
         "Goblin Bushwhacker",
         "Paying kicker gives your team +1/+0 and haste for a burst of pressure."
+      ],
+      [
+        "Mogg War Marshal",
+        "Several Goblin bodies from its entry and death help keep attacks going through creature trades."
+      ],
+      [
+        "Krenko's Command",
+        "Two cheap Goblin tokens widen the board for team pressure such as a kicked Goblin Bushwhacker."
       ]
     ],
     [
@@ -1200,6 +1714,14 @@ const planExamples = {
       [
         "Lightning Bolt",
         "An instant clears a small blocker while triggering your spell threat."
+      ],
+      [
+        "Monastery Swiftspear",
+        "Haste establishes a clock, and prowess rewards noncreature spells with a temporary boost."
+      ],
+      [
+        "Crash Through",
+        "A cheap sorcery triggers instant-or-sorcery payoffs, draws a replacement card, and gives your creatures trample for the turn."
       ]
     ],
     [
@@ -1214,6 +1736,14 @@ const planExamples = {
       [
         "Goblin Bushwhacker",
         "With kicker, give the tokens +1/+0 and haste to turn the setup into an attack."
+      ],
+      [
+        "Ichor Wellspring",
+        "This artifact draws on entry and when it goes from the battlefield to a graveyard, giving Kuldotha Rebirth a value-bearing sacrifice target."
+      ],
+      [
+        "Lightning Bolt",
+        "Cheap removal clears a small blocker after your expendable permanents have built the attacking board."
       ]
     ]
   ],
@@ -1230,6 +1760,14 @@ const planExamples = {
       [
         "Rancor",
         "Power and trample help damage get through small blockers."
+      ],
+      [
+        "Nest Invader",
+        "Two bodies develop an early board; the Spawn can also be spent for one colorless mana when a larger play matters more."
+      ],
+      [
+        "Skarrgan Pit-Skulk",
+        "Bloodthirst can add a counter if an opponent took damage this turn; smaller-power creatures cannot block it."
       ]
     ],
     [
@@ -1244,6 +1782,14 @@ const planExamples = {
       [
         "Nest Invader",
         "An early body and a Spawn defend; sacrificing the Spawn supplies one colorless mana once."
+      ],
+      [
+        "Werebear",
+        "It can tap for green mana early and becomes a larger creature with seven or more cards in your graveyard through threshold."
+      ],
+      [
+        "Rancor",
+        "Giving a large creature extra power and trample helps your ramp payoff push damage through small blockers."
       ]
     ],
     [
@@ -1258,6 +1804,14 @@ const planExamples = {
       [
         "Satyr Wayfinder",
         "Its entry selects a land and fills the graveyard; draft this role only if your pool rewards the setup."
+      ],
+      [
+        "Travel Preparations",
+        "The green front half spreads counters across two creatures; its white flashback is outside this color without a supported splash."
+      ],
+      [
+        "Pulse of Murasa",
+        "Recover a creature or land to your hand and gain six life, giving the graveyard setup a concrete use."
       ]
     ]
   ]
@@ -1290,22 +1844,71 @@ const practiceExamples = [
 ];
 const examplesButton='<button type="button" class="examples-open" data-examples="plan" aria-haspopup="dialog" aria-controls="card-examples">See example cards</button>';
 const exampleDialog=document.getElementById('card-examples');
-let activeExamples=[],exampleIndex=0,exampleTrigger=null,imageTimer=null,oldOverflow='',closingExamples=false;
-function renderExample(){
+let activeExamples=[],exampleIndex=0,exampleTrigger=null,imageTimer=null,oldOverflow='',closingExamples=false,cardGesture=null;
+const cardStage=document.getElementById('example-art');
+const reducedCardMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+function renderExample(direction=0){
   clearTimeout(imageTimer);
   const [name,reason]=activeExamples[exampleIndex],card=exampleCards[name];
-  const art=document.getElementById('example-art'),copy=document.getElementById('example-copy');
+  const copy=document.getElementById('example-copy');
   copy.innerHTML=`<h3>${escape(card.name)}</h3><p>${escape(reason)}</p><details><summary>Card text &amp; printing</summary><p class="small">${escape(card.mana_cost)} · ${escape(card.type_line)}</p><p class="example-rules">${escape(card.oracle_text)}</p><p class="small">Common · ${escape(card.set.toUpperCase())} #${escape(card.collector_number)} · <a href="${escape(card.scryfall_uri)}" target="_blank" rel="noopener noreferrer">View on Scryfall (new tab)</a></p></details>`;
-  art.replaceChildren();
+  cardStage.replaceChildren();
+  // Upcoming real cards make the stack visible; decorative copies stay out of
+  // the accessibility tree so the active card and its bio are read only once.
+  for(let depth=Math.min(2,activeExamples.length-1);depth>0;depth--){
+    const preview=document.createElement('div');preview.className='example-face example-preview';preview.dataset.depth=depth;preview.setAttribute('aria-hidden','true');
+    const upcoming=exampleCards[activeExamples[(exampleIndex+depth)%activeExamples.length][0]];
+    const image=document.createElement('img');image.alt='';image.draggable=false;image.width=488;image.height=680;
+    image.addEventListener('error',()=>image.remove());preview.append(image);cardStage.append(preview);image.src=upcoming.image;
+  }
+  const front=document.createElement('div');front.className='example-face example-front';
+  if(direction&&!reducedCardMotion.matches)front.classList.add(direction>0?'enter-next':'enter-prev');
   const status=document.createElement('span');status.className='example-image-status';status.textContent='Loading card image…';
-  const img=document.createElement('img');img.alt=card.name+' — card illustration; rules available under Card text & printing';img.hidden=true;img.width=488;img.height=680;
-  const unavailable=()=>{if(art.contains(img)&&img.hidden)status.textContent='Card image unavailable. The explanation and card text are still available.';};
-  img.addEventListener('load',()=>{if(!art.contains(img))return;clearTimeout(imageTimer);img.hidden=false;status.remove();});
-  img.addEventListener('error',()=>{if(!art.contains(img))return;clearTimeout(imageTimer);unavailable();});
-  art.append(img,status);img.src=card.image;imageTimer=setTimeout(unavailable,8000);
-  document.getElementById('example-position').textContent=`${exampleIndex+1} of ${activeExamples.length}: ${name}`;
+  const img=document.createElement('img');img.alt=card.name+' — card illustration; bio and rules below';img.draggable=false;img.hidden=true;img.width=488;img.height=680;
+  const unavailable=()=>{if(cardStage.contains(front)&&img.hidden)status.textContent='Card image unavailable. The explanation and card text are still available.';};
+  img.addEventListener('load',()=>{if(!cardStage.contains(front))return;clearTimeout(imageTimer);img.hidden=false;status.remove();});
+  img.addEventListener('error',()=>{if(!cardStage.contains(front))return;clearTimeout(imageTimer);unavailable();});
+  front.append(img,status);cardStage.append(front);img.src=card.image;imageTimer=setTimeout(unavailable,8000);
+  document.getElementById('example-position').innerHTML=`${exampleIndex+1} of ${activeExamples.length}<span class="sr-only">: ${escape(name)}</span>`;
 }
-function moveExample(step){exampleIndex=(exampleIndex+step+activeExamples.length)%activeExamples.length;renderExample();}
+function cancelCardGesture(){
+  if(!cardGesture)return;
+  const {id,front}=cardGesture;cardGesture=null;
+  front.classList.remove('is-dragging');front.style.transform='';
+  if(cardStage.hasPointerCapture(id))cardStage.releasePointerCapture(id);
+}
+function moveExample(step){
+  cancelCardGesture();exampleIndex=(exampleIndex+step+activeExamples.length)%activeExamples.length;renderExample(step);
+}
+cardStage.addEventListener('pointerdown',e=>{
+  if(cardGesture||!e.isPrimary||e.button!==0||activeExamples.length<2||!e.target.closest('.example-front'))return;
+  const front=cardStage.querySelector('.example-front');front.classList.remove('enter-next','enter-prev');
+  cardGesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,axis:null,front};
+  cardStage.setPointerCapture(e.pointerId);
+});
+cardStage.addEventListener('pointermove',e=>{
+  if(!cardGesture||cardGesture.id!==e.pointerId)return;
+  const dx=e.clientX-cardGesture.x,dy=e.clientY-cardGesture.y;
+  if(!cardGesture.axis&&Math.max(Math.abs(dx),Math.abs(dy))>8){
+    if(Math.abs(dx)<=Math.abs(dy)*1.25){cancelCardGesture();return;}
+    cardGesture.axis='horizontal';cardGesture.front.classList.add('is-dragging');
+  }
+  if(cardGesture?.axis==='horizontal'){
+    e.preventDefault();cardGesture.dx=dx;
+    const offset=Math.max(-cardStage.clientWidth,Math.min(cardStage.clientWidth,dx));
+    cardGesture.front.style.transform=`translateX(${offset}px) rotate(${reducedCardMotion.matches?0:offset/cardStage.clientWidth*7}deg)`;
+  }
+},{passive:false});
+cardStage.addEventListener('pointerup',e=>{
+  if(!cardGesture||cardGesture.id!==e.pointerId)return;
+  const {axis,dx}=cardGesture,threshold=Math.max(40,cardStage.clientWidth*.22);
+  cancelCardGesture();
+  if(axis==='horizontal'&&Math.abs(dx)>=threshold)moveExample(dx<0?1:-1);
+});
+cardStage.addEventListener('pointercancel',cancelCardGesture);
+cardStage.addEventListener('lostpointercapture',cancelCardGesture);
+window.addEventListener('blur',cancelCardGesture);
+document.addEventListener('pointerdown',e=>{if(cardGesture&&!e.isPrimary)cancelCardGesture();});
 function openExamples(trigger){
   if(exampleDialog.open||closingExamples)return;
   const practice=trigger.dataset.examples==='practice',scenario=scenarios[Number($('scenario').value)];
@@ -1317,11 +1920,11 @@ function openExamples(trigger){
   document.getElementById('example-prev').hidden=activeExamples.length===1;document.getElementById('example-next').hidden=activeExamples.length===1;
   renderExample();oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
   history.pushState({...history.state,draftAtlasExamples:true},'',location.href);
-  exampleDialog.showModal();exampleDialog.querySelector('.examples-close').focus();
+  exampleDialog.showModal();exampleDialog.scrollTop=0;exampleDialog.querySelector('.examples-close').focus();
 }
 function finishExamples(){
   if(!exampleDialog.open)return;
-  clearTimeout(imageTimer);exampleDialog.close();document.body.style.overflow=oldOverflow;closingExamples=false;
+  clearTimeout(imageTimer);cancelCardGesture();exampleDialog.close();document.body.style.overflow=oldOverflow;closingExamples=false;
   if(exampleTrigger?.isConnected)exampleTrigger.focus({preventScroll:true});
 }
 function closeExamples(){
@@ -1338,7 +1941,7 @@ exampleDialog.addEventListener('pointerdown',e=>{backdropPressed=e.target===exam
 exampleDialog.addEventListener('click',e=>{if(backdropPressed&&e.target===exampleDialog&&outsideDialog(e))closeExamples();backdropPressed=false;});
 exampleDialog.addEventListener('keydown',e=>{
   if(e.key==='Tab'){
-    const stops=[...exampleDialog.querySelectorAll('button,a[href],summary')].filter(el=>!el.hidden&&el.getClientRects().length);
+    const stops=[...exampleDialog.querySelectorAll('button,a[href],summary,[tabindex="0"]')].filter(el=>!el.hidden&&el.getClientRects().length);
     const first=stops[0],last=stops.at(-1),active=document.activeElement;
     if((e.shiftKey&&active===first)||(!e.shiftKey&&active===last)||!exampleDialog.contains(active)){e.preventDefault();(e.shiftKey?last:first).focus();}
   }
