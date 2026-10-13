@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#171e1b">
 <title>Magic collection · Ben Wiz</title>
+<link rel="icon" type="image/png" sizes="512x512" href="https://app.benwiz.com/_friends/favicon-green-v1.png">
+<link rel="shortcut icon" href="https://app.benwiz.com/favicon.ico?v=green1">
 <link rel="stylesheet" href="style.css">
 <script type="module" src="app.js"></script>
 </head>
 <body data-screen="entry">
 <header>
-  <a class="back-link" href="/" aria-label="Back to home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a>
+  <a class="back-link" href="https://benwiz.com/mtg/" aria-label="Back to Magic tools"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></a>
   <h1>Magic collection</h1>
   <label class="algorithm-picker" for="capture-algorithm">Reader<select id="capture-algorithm"><option value="ocr">OCR · light</option><option value="vision">Vision · 357 MB</option></select></label>
   <button id="settings-toggle" popovertarget="capture-options" aria-label="More capture options">More</button>
@@ -68,7 +70,7 @@
     <div id="list-view">
       <div class="collection-heading"><div><h2>Your cards</h2><p id="collection-total"></p></div><div class="collection-toolbar"><button id="import-collection">Import JSON</button><input id="collection-file" type="file" accept="application/json,.json" hidden><button id="edit-list" aria-pressed="false" aria-controls="card-list">Edit list</button><button id="export" disabled>Export JSON</button></div></div>
       <p id="import-status" role="status"></p>
-      <p class="hint">Moving from Friends? Export JSON there, then import it here. Existing cards and quantities are kept.</p>
+      <p class="hint">Collections are saved in this browser on this site. Moving from <a href="https://app.benwiz.com/mtg-advisor/">the older app scanner</a>? Export JSON there, then import it here. Existing cards and quantities are kept. Old benwiz.com scanner collections are already available here.</p>
       <section id="capture-recovery" hidden aria-label="Saved unfinished captures"><p id="capture-recovery-status" role="status"></p><button id="retry-captures">Retry saved captures</button><button id="discard-captures">Discard saved captures</button></section>
       <details class="processing-disclosure">
         <summary>Process your cards <span>Optional local AI</span></summary>
@@ -120,6 +122,7 @@
       <p id="search-results" role="status" aria-live="polite" hidden></p>
       <p id="empty">Your collection is empty. Point the camera at your cards.</p>
       <ul id="card-list" data-image-view="strips"></ul>
+      <div class="collection-delete"><button id="delete-collection" class="danger" disabled>Delete entire collection</button><p id="delete-status" role="status" aria-live="polite"></p></div>
       <p id="collection-note">One entry per card identity. Recognition may miss cards; review your collection and use Edit list to enter quantities from 1 to 999. Repeated scans never change quantities.</p>
     </div>
     <div id="detail" hidden tabindex="-1"><button id="detail-back">Back to cards</button><div id="detail-content"></div></div>
@@ -136,6 +139,7 @@
   </section>
 </main>
 <section id="title-editor" aria-label="Photo recognition and markup" hidden><div class="editor-image"><canvas id="edit-photo" aria-label="Camera photo"></canvas><svg id="edit-feedback" aria-label="Recognized card names"></svg><svg id="edit-boxes" aria-label="Areas marked for reading"></svg></div><div class="editor-controls"><p id="edit-source"></p><p id="edit-status" role="status" aria-live="polite">Reading photo…</p><p id="edit-hint">Optional: draw a box around a missed card name. Pinch to zoom.</p><div><button id="edit-cancel">Back to camera</button><button id="edit-undo" disabled>Undo mark</button></div></div></section>
+<dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-scope"><h2 id="delete-title">Delete entire collection?</h2><p id="delete-scope"></p><p>This cannot be undone here. Export JSON first if you want a backup. Deck settings, unfinished captures, downloaded files and collections on other sites or devices stay intact. Retrying saved captures can add cards again.</p><p id="delete-error" role="alert"></p><div class="actions"><button id="delete-cancel" type="button" autofocus>Cancel</button><button id="delete-confirm" type="button" class="danger">Delete collection</button></div></dialog>
 <noscript>This scanner needs JavaScript to read photos and look up cards.</noscript>
 </body>
 </html>
