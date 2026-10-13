@@ -28,6 +28,7 @@ window.addEventListener('error', () => recordRuntimeEvent('page-error'));
 window.addEventListener('unhandledrejection', () => recordRuntimeEvent('unhandled-rejection'));
 const storageKey = 'mtg-collection:v1';
 const cards = new Map();
+let savedCollection, storageConflict = false, importingCollection = false, collectionVersion = 0, deleteRequest;
 const preparedModels = new Set();
 const modelActivityKey = 'mtg-model-inference:v1';
 let previousModelInterruption, activeModelJobs = 0;
@@ -72,12 +73,20 @@ function status(message, error = false) {
 }
 
 function persist() {
-  try { localStorage.setItem(storageKey, JSON.stringify([...cards.values()])); }
-  catch { status('Cards are available for this visit. This browser couldn’t save them; export names to keep a copy.', true); }
+  try {
+    if (storageConflict || localStorage.getItem(storageKey) !== savedCollection) {
+      storageConflict = true;
+      throw new Error('Collection changed in another tab.');
+    }
+    const text = JSON.stringify([...cards.values()]);
+    localStorage.setItem(storageKey, text); savedCollection = text;
+  }
+  catch { status(storageConflict ? 'Your collection changed in another tab. Reload before editing; this tab will not overwrite it.' : 'Cards are available for this visit. This browser couldn’t save them; export JSON to keep a copy.', true); }
 }
 
 try {
-  const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+  savedCollection = localStorage.getItem(storageKey);
+  const saved = JSON.parse(savedCollection || '[]');
   if (Array.isArray(saved)) for (const card of saved) {
     if (typeof card.id === 'string' && typeof card.name === 'string' && Array.isArray(card.faces)) {
       card.quantity = Number.isInteger(card.quantity) ? Math.max(1, Math.min(999, card.quantity)) : 1;
@@ -240,6 +249,7 @@ function renderList() {
   $('deck-colors').disabled = Boolean(reviewRun || roleRun) || $('deck-color-mode').value === 'auto';
 
   $('export').disabled = cards.size === 0;
+  $('delete-collection').disabled = cards.size === 0 || storageConflict || importingCollection || Boolean(reviewRun || roleRun) || retryingCaptures;
   $('edit-list').disabled = Boolean(reviewRun || roleRun);
   const pendingRoles = pendingRoleCards(cards.values(), activePipeline()).length;
   $('label-roles').disabled = !pendingRoles || Boolean(reviewRun || roleRun);
@@ -658,6 +668,53 @@ $('export').addEventListener('click', () => {
   const link = element('a'); link.href = url; link.download = 'magic-collection.json'; link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
+const deleteDialog = $('delete-dialog');
+$('delete-collection').addEventListener('click', () => {
+  if ($('delete-collection').disabled || deleteDialog.open || retryingCaptures || importingCollection || roleRun || reviewRun || storageConflict) return;
+  cancelAcquisition();
+  const copies = [...cards.values()].reduce((total, card) => total + card.quantity, 0);
+  deleteRequest = { version: collectionVersion, count: cards.size, copies, saved: savedCollection };
+  $('delete-scope').textContent = `Delete all ${cards.size} unique ${cards.size === 1 ? 'card' : 'cards'} (${copies} ${copies === 1 ? 'copy' : 'copies'}), including saved analysis and cards hidden by filters, from this browser on ${location.origin}?`;
+  $('delete-error').textContent = '';
+  $('delete-confirm').disabled = false;
+  deleteDialog.showModal();
+  $('delete-cancel').focus();
+});
+$('delete-cancel').addEventListener('click', () => deleteDialog.close());
+deleteDialog.addEventListener('close', () => { deleteRequest = null; });
+$('delete-confirm').addEventListener('click', () => {
+  const request = deleteRequest;
+  if (!request || !deleteDialog.open || $('delete-confirm').disabled) return;
+  $('delete-confirm').disabled = true;
+  try {
+    if (storageConflict || request.version !== collectionVersion || request.saved !== localStorage.getItem(storageKey))
+      throw new Error('Your collection changed. Reload and check it before deleting. Nothing was deleted.');
+    // Persist first: if storage fails, every card remains available in memory.
+    localStorage.setItem(storageKey, '[]'); savedCollection = '[]';
+    collectionVersion++; acceptance.clear();
+    stopReview(); cancelAcquisition();
+    editingList = false;
+    $('edit-list').setAttribute('aria-pressed', 'false'); $('edit-list').textContent = 'Edit list';
+    $('detail').hidden = true; $('list-view').hidden = false;
+    $('delete-status').textContent = `Deleted ${request.count} unique ${request.count === 1 ? 'card' : 'cards'} (${request.copies} ${request.copies === 1 ? 'copy' : 'copies'}) from this browser’s collection. Other sites and devices were unchanged.`;
+    $('import-status').textContent = '';
+    $('review-status').textContent = 'Collect cards to start a review.';
+    $('colors-result').hidden = true; $('strategy-result').hidden = true;
+    deleteRequest = null; renderList(); deleteDialog.close();
+    $('import-collection').focus();
+  } catch (error) {
+    $('delete-error').textContent = error.message.includes('Nothing was deleted') ? error.message : 'This browser could not save the deletion. Nothing was deleted. Cancel, export a backup, and try again.';
+  }
+});
+window.addEventListener('storage', event => {
+  if ((event.key === storageKey || event.key === null) && event.storageArea === localStorage) {
+    // A stale tab must never recreate another tab’s deleted collection.
+    storageConflict = true; collectionVersion++;
+    cancelAcquisition(); stopReview(); deleteDialog.close(); deleteRequest = null;
+    $('delete-status').textContent = 'Your collection changed in another tab. Reload to use the saved collection. This tab will not overwrite it.';
+    renderList();
+  }
+});
 async function labelCollectedCard(card, pipeline, signal, onProgress, { keepWarm = false } = {}) {
   await modelRelease; signal.throwIfAborted();
   if (!pendingRoleCards([card], pipeline).length) return;
@@ -965,26 +1022,30 @@ $('capture-options').addEventListener('click', event => {
 });
 $('import-collection').addEventListener('click', () => { $('collection-file').value = ''; $('collection-file').click(); });
 $('collection-file').addEventListener('change', async () => {
-  const file = $('collection-file').files[0]; if (!file || roleRun || reviewRun) return;
+  const file = $('collection-file').files[0]; if (!file || roleRun || reviewRun || importingCollection || storageConflict) return;
+  const version = collectionVersion; importingCollection = true; renderList();
   try {
     if (file.size > 20 * 1024 * 1024) throw new Error('Collection file is too large (20 MB maximum).');
     const imported = parseCollectionImport(await file.text());
+    if (version !== collectionVersion || storageConflict) throw new Error('Collection changed. Reload before importing. Nothing was imported.');
     const result = mergeCollectionImport(cards, imported); acceptance.rememberAll(); persist(); renderList();
     $('import-status').textContent = `Imported ${result.added} cards. Kept ${result.skipped} existing cards unchanged.`;
   } catch (error) { $('import-status').textContent = error.message; }
+  finally { importingCollection = false; renderList(); }
 });
 $('retry-captures').addEventListener('click', async () => {
   if (retryingCaptures || roleRun || reviewRun || quickFrames.count) return;
-  retryingCaptures = true; $('retry-captures').disabled = true;
+  retryingCaptures = true; $('retry-captures').disabled = true; renderList();
+  const version = collectionVersion;
   try {
     if (!await ensureCaptureReady()) return;
     for (const saved of await journal.list()) {
-      if (!showingList || document.hidden) break;
+      if (!showingList || document.hidden || version !== collectionVersion || storageConflict) break;
       if (!quickFrames.available) break;
       const url = URL.createObjectURL(saved.blob);
       try {
         const image = new Image(); image.src = url; await image.decode();
-        if (!showingList || document.hidden) break;
+        if (!showingList || document.hidden || version !== collectionVersion || storageConflict) break;
         const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight;
         canvas.getContext('2d').drawImage(image, 0, 0);
         queueCapturedFrame(canvas, { kind: 'manual', recoveryKey: saved.key });
@@ -992,7 +1053,7 @@ $('retry-captures').addEventListener('click', async () => {
       } finally { URL.revokeObjectURL(url); }
     }
   } catch (error) { $('capture-recovery-status').textContent = `Saved captures remain available. ${error.message}`; }
-  finally { retryingCaptures = false; $('retry-captures').disabled = false; refreshRecovery(); }
+  finally { retryingCaptures = false; $('retry-captures').disabled = false; refreshRecovery(); renderList(); }
 });
 $('discard-captures').addEventListener('click', async () => {
   if (quickFrames.count || retryingCaptures) return;

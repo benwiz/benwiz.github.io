@@ -4,12 +4,17 @@ import { cardRecord } from './recognition.js';
 export function collectionAcceptor({ cards, lookup, onAdded, spacing = 150 }) {
   const identities = new Map();
   const excluded = new Set();
-  let queue = Promise.resolve();
+  let queue = Promise.resolve(), generation = 0;
   const remember = card => {
     for (const name of [card.name, ...card.faces.map(face => face.name)]) identities.set(name, card.id);
   };
   for (const card of cards.values()) remember(card);
   return {
+    clear() {
+      // Invalidate queued and in-flight lookups before allowing a fresh scan.
+      generation++;
+      cards.clear(); identities.clear(); excluded.clear();
+    },
     rememberAll() { for (const card of cards.values()) remember(card); },
     remove(card) {
       cards.delete(card.id);
@@ -17,8 +22,10 @@ export function collectionAcceptor({ cards, lookup, onAdded, spacing = 150 }) {
       for (const name of [card.name, ...card.faces.map(face => face.name)]) excluded.add(name);
     },
     accept(match, { signal, source }) {
+      const started = generation;
       const work = queue.then(async () => {
         signal.throwIfAborted();
+        if (started !== generation) return null;
         if (excluded.has(match.name)) return null;
         const known = identities.get(match.name);
         if (known) return excluded.has(known) ? null : cards.get(known) || null;
@@ -30,6 +37,7 @@ export function collectionAcceptor({ cards, lookup, onAdded, spacing = 150 }) {
           await new Promise(resolve => setTimeout(resolve, spacing));
         }
         signal.throwIfAborted();
+        if (started !== generation) return null;
         remember(card);
         if (excluded.has(card.id) || excluded.has(card.name) || excluded.has(match.name)) return null;
         if (cards.has(card.id)) return cards.get(card.id);

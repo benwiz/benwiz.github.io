@@ -210,3 +210,5 @@ body.walkthrough #scan-status{margin:0;line-height:1.4}
 body[data-screen="collection"] header { display:flex; flex-wrap:nowrap; align-items:center; }
 body[data-screen="collection"] header h1 { flex:1; }
 body[data-screen="collection"] #settings-toggle { display:none; }
+
+.collection-delete{border-top:1px solid var(--collection-rule);margin-top:28px;padding-top:24px}.danger{color:var(--danger);border-color:var(--danger)}#delete-dialog{width:min(560px,calc(100% - 32px));max-height:calc(100svh - 32px);padding:24px;border:1px solid var(--rule);border-radius:12px;background:var(--surface);color:var(--ink)}#delete-dialog::backdrop{background:#000b}#delete-dialog h2{font-size:28px}#delete-error{color:var(--danger)}#delete-error:empty,#delete-status:empty{display:none}#delete-dialog .actions{margin-top:24px}
